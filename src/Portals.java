@@ -303,7 +303,7 @@ public class Portals {
 	          primeStage.show();		       
 	        
 	          //DEBUG PRINT
-	          System.out.println("WTFFFFF");
+	          //System.out.println("WTFFFFF");
 		  //=====================================================================
 
 		}

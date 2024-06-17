@@ -70,7 +70,7 @@ public class Main extends Application{
     	  driver.runProgram();
          
         	  
-    	  //DEBUG!
+    	  //DEBUG Print
     	  System.out.println("Program Done!");
     	  
     }
