@@ -1,9 +1,25 @@
-/*[Description]:
-	This file contains code for creating/displaying the necessary Scenes/Pages
-	for the GUI. The code also perfo
+/*
+ 	//[Contributors]:
+ 	  - John Bostater
+ 	  
+ 	  - <Name here>
+ 	  
+ 	  - ...
+ 	  
+ 	  - <Name here>
+ 	  
+ 	
+ 	//[Description]:
+	  This file contains code for creating/displaying the necessary Scenes/Pages
+	  for the GUI. The code also perfo
 	
 	
-	//Files Created/Used within the program for storing/loading data
+	//[Aspect Ratio/Dimension of Graphical User Interface]: 
+
+	  - [4:3]	-->   [1024, 768]
+	 
+	
+	//[Files Created/Used within the program for storing/loading data]:
 	  
 	  - PatientAccounts.txt 	{Contains: FirstName, LastName, DOB  of any existing patient accounts}
 	  
@@ -13,13 +29,14 @@
 	  
 	  - Messages.txt     {Used for communication between parties}
 						  [New chats are added linearly (by nextLine();)]
-
 //*/
+
 
 
 /* [Usage within Main]
   	 
- */
+*/
+
 
 
 //Relevant Java & JavaFX Libraries
@@ -32,7 +49,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+//File I/O
+import java.io.*;
+import java.util.*;
 //----------------------------------
+
 
 
 //Object/Class containing: WelcomePage, PatientPortal, NursePortal, DoctorPortal, PatientLogin, StaffLogin
@@ -89,10 +111,10 @@ public class Portals {
 		  //Header(s)/Label(s): 
 	      //================================================================
 	        Label header0 = new Label("Welcome");
-	        header0.setStyle("-fx-font-size: 38px; -fx-font-weight: bold;");
+	        header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
 	         
 	        Label header1 = new Label("Select Login");
-	        header1.setStyle("-fx-font-size: 24px;");
+	        header1.setStyle("-fx-font-size: 26px;");
 	      //================================================================
 	        
 	         
@@ -143,14 +165,15 @@ public class Portals {
 		          staffLogin.setMaxSize(100, 50);
 		          staffLogin.setMinSize(100, 50);
 		        //[Width x Height]
-			  	  exitProg.setPrefSize(100, 50);  
-		          exitProg.setMaxSize(100, 50);
-		          exitProg.setMinSize(100, 50);
+			  	  exitProg.setPrefSize(60, 50);  
+		          exitProg.setMaxSize(60, 50);
+		          exitProg.setMinSize(60, 50);
 		          
 		          
             //Set text Size within buttons
-              patientLogin.setStyle("-fx-font-size: 16px;");
-              staffLogin.setStyle("-fx-font-size: 16px;");
+              patientLogin.setStyle("-fx-font-size: 20px;");
+              staffLogin.setStyle("-fx-font-size: 20px;");
+              exitProg.setStyle("-fx-font-size: 18px;");
               
             //Set padding
               buttonsSection.setAlignment(Pos.CENTER);
@@ -201,8 +224,8 @@ public class Portals {
 		  //-----------------------------------------------------------------------------------------------------------
 	    
 		        
-	      //Create the welcomePage Scene  //ORIGINALL 800 X 600
-	        welcomePage = new Scene(mainLayout, 800, 600);          
+	      //Create the welcomePage Scene	//[4x3] aspect ratio
+	        welcomePage = new Scene(mainLayout, 1024, 768);          
 	    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	    //*/
 	        
@@ -237,15 +260,36 @@ public class Portals {
 		  //Buttons
           //==========================================================
 			//Relevant Buttons for the Login/New Account Page 
-	 	 	  Button goBack = new Button("Go back");
-			  Button newPatient = new Button("Create Account");
+			
+			//Log in
 			  Button patientLogin = new Button("Log in");
-			  
-			//Set the alignment of the button
-			  goBack.setAlignment(Pos.CENTER);
-			    
-			//HBox for the Buttons 
-			  VBox box0 =  new VBox(20, goBack, newPatient, patientLogin);          
+	  			//Set the dimensions of the Buttons
+		        //[Width x Height]
+			  	  patientLogin.setPrefSize(75, 40);  
+		          patientLogin.setMaxSize(75, 40);
+		          patientLogin.setMinSize(75, 40);
+	            //Set the Font of the Button's text
+		          patientLogin.setStyle("-fx-font-size: 18px;");
+			
+		    //Create Account
+			  Button newPatient = new Button("Create Account");
+	  			//Set the dimensions of the Buttons
+		        //[Width x Height]
+			  	  newPatient.setPrefSize(160, 40);  
+		          newPatient.setMaxSize(160, 40);
+		          newPatient.setMinSize(160, 40);
+		        //Set the Font of the Button's text
+		          newPatient.setStyle("-fx-font-size: 18px;");
+		    
+		    //Go Back      
+		      Button goBack = new Button("Go back");
+		  			//Set the dimensions of the Buttons
+			        //[Width x Height]
+				  	  goBack.setPrefSize(100, 40);  
+			          goBack.setMaxSize(100, 40);
+			          goBack.setMinSize(100, 40);
+			        //Set the Font of the Button's text
+			          goBack.setStyle("-fx-font-size: 16px;");      
 		  //==========================================================
 	 	    
 			  
@@ -312,33 +356,33 @@ public class Portals {
 	          //First Name
 	            Label firstNameLbl = new Label("First Name:");
 	            //Set Font
-	            firstNameLbl.setStyle("-fx-font-size: 18px;");          
+	              firstNameLbl.setStyle("-fx-font-size: 20px;");          
 	              
 	          //Last Name
 	            Label lastNameLbl = new Label("Last Name:");
 	            //Set Font
-	              lastNameLbl.setStyle("-fx-font-size: 18px;");
+	              lastNameLbl.setStyle("-fx-font-size: 20px;");
 	          
 	          		
 	          //Date of Birth 
 	            Label dobLbl = new Label("Date of Birth:");
 	            //Set Font
-	          	  dobLbl.setStyle("-fx-font-size: 18px;");
+	          	  dobLbl.setStyle("-fx-font-size: 20px;");
 
 		        //Separate: DD / MM / YY
 	 	          Label dobSep0 = new Label("/");
 		          Label dobSep1 = new Label("/");
 		          //Set Font
-		            dobSep0.setStyle("-fx-font-size: 18px;");
-		            dobSep1.setStyle("-fx-font-size: 18px;");
+		            dobSep0.setStyle("-fx-font-size: 20px;");
+		            dobSep1.setStyle("-fx-font-size: 20px;");
 			  
 		            
 		      //New account Text
 		        Label accText = new Label("New Patient?");
-		        accText.setStyle("-fx-font-size: 18px;");
+		        accText.setStyle("-fx-font-size: 24px;");
 
 		        //Note text??
-		        	Label noteTxt0 = new Label("Credentials entered will be used to create a new account");
+		          Label noteTxt0 = new Label("Credentials entered will be used to create a new account");
 		            
 		        	
 		        //DOB format guide for user
@@ -372,7 +416,7 @@ public class Portals {
 	    
 	        	
 	        	//Compile into one string to be passed into PatientPortal Constructor 
-	        	  String patientCredentials = firstNameTxt.getText().replaceAll("\\s", "") + "," 
+	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
 	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
 	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
 	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
@@ -403,8 +447,7 @@ public class Portals {
 		 
 	        
 	      //VBox & HBox Alignments the main Layout of the program
-	      //=====================================================================
-	        
+	      //===================================================================================================
 	        //Credentials Section
 	        //-------------------------------------------------------------------------
 	          //Alignment HBox(s) for the Text Box entries
@@ -414,10 +457,11 @@ public class Portals {
 		        
         	  //This will encapsulate all of the HBoxs for Patient Credentials 
         		VBox credContainer = new VBox(5, firstNameBox, lastNameBox, DOBbox, dobFrmtLbl);
-		        //Sets the position to the center of the page/Stage
-		        //credContainer.setAlignment(Pos.CENTER);
-		        //credContainer.setMaxWidth(100);
-          		  credContainer.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10;");  
+        		//Set the dimensions & create a border around the credential container VBox
+        		  credContainer.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10;");  
+          		  credContainer.setPrefSize(300,150);
+          		  credContainer.setMaxSize(300,150);
+          		  credContainer.setMinSize(300,150);
 		          
           	  //This will position the Vbox correctly 
           		HBox credSection = new HBox(credContainer);
@@ -434,7 +478,7 @@ public class Portals {
           	    //Alignment
           	      buttonContainer.setAlignment(Pos.CENTER);
 	        //-------------------------------------------------------------------------
-         //=====================================================================
+          //===================================================================================================
 
 
 	     //Compile the Main Layout of the loginPage
@@ -442,7 +486,7 @@ public class Portals {
            mainLayout.setAlignment(Pos.CENTER);
        	  
          //Create the Scene that displays the "Patient Login/New Account Page"
-           Scene loginPage = new Scene(mainLayout, 800, 600);
+           Scene loginPage = new Scene(mainLayout, 1024, 768);
 		          
          //Display the Login/Create account page
            primeStage.setScene(loginPage);
@@ -451,25 +495,23 @@ public class Portals {
 		}
 			
 		
-		
 		//[Methods to include]
-		  //Check Credentials (returns true if entered credentials match a real Patient account from .txt)
-		  private boolean checkCredentials(String firstName, String lastName, String dateOfBirth) {
-			  //Open the file Containing all of the patient names  {PatientAccounts.txt}
+		//Check Credentials (returns true if entered credentials match a real Patient account from .txt)
+		private boolean checkCredentials(String firstName, String lastName, String dateOfBirth) {
+			//Open the file Containing all of the patient names  {PatientAccounts.txt}
 			  
 			  
 			  
-			  //Else, return false
-			  return false;
-		  }
+			//Else, return false
+			return false;
+		}
 		
 		
-		  //Create Account(String patientCredentials)
-		  private void createAccount(String firstName, String lastName, String dateOfBirth) {
+	    //Create Account(String patientCredentials)
+		private void createAccount(String firstName, String lastName, String dateOfBirth) {
 			  
-		  }
-		  
-		  
+		}
+	    
 	}
 	
 	
