@@ -1,4 +1,24 @@
-//This file contains the S
+/*[Description]:
+	This file contains code for creating/displaying the necessary Scenes/Pages
+	for the GUI. The code also perfo
+	
+	
+	//Files Created/Used within the program for storing/loading data
+	  
+	  - PatientAccounts.txt 	{Contains: FirstName, LastName, DOB  of any existing patient accounts}
+	  
+	  - PatientData.txt  		{Used for saving the patients data: [Insurance], [Contact], [etc.]}
+	  
+	  - PatientVisits			{Saved Patient Visit Information??}
+	  
+	  - Messages.txt     {Used for communication between parties}
+						  [New chats are added linearly (by nextLine();)]
+
+	  - 
+ 
+ 
+//*/
+
 
 
 /* [Usage within Main]
@@ -156,10 +176,10 @@ public class Portals {
 			      PatientLogin patientLog = new PatientLogin();
 			        	
 			      
-	          	  //Load the Page/Scene
-	          	  //For login, the correct credentials must be entered in order to proceed to the actual 'Patient Portal'
-	          	    patientLog.patientLogin();
-		        });
+		        //Load the Page/Scene	
+			      //For login, the correct credentials must be entered in order to proceed to the actual 'Patient Portal'
+          	      patientLog.patientLogin();
+		      });
 		          
 		  
 		        
@@ -202,7 +222,7 @@ public class Portals {
 		
 		//Login Page to proceed to the Patient Portal
 		//The user can also create a new Accoutn from here!!! (That will load a new Scene)
-		void patientLogin(){
+		public void patientLogin(){
 	  	  //"patientCredentials" String will be constructed from the textBoxes(0-n) next to the labels: 
 			//	[firstName]: {textBox0}, 
 			//	[lastName]:  {textBox1} 
@@ -316,6 +336,8 @@ public class Portals {
 		            
 		      //New account Text
 		        Label accText = new Label("New Patient?");
+		        accText.setStyle("-fx-font-size: 18px;");
+
 		        //Note text??
 		        	Label noteTxt0 = new Label("Credentials entered will be used to create a new account");
 		            
@@ -348,11 +370,24 @@ public class Portals {
 	    	  //Call upon the "Check Credentials" Method to compare the users credentials to
 	          //That in the .txt file  "Patients.txt"
 	          //{THE USER CANNOT PROCEED IF CREDENTIALS INCORRECT [use if-branch]}
+	        
+	        	//Combine the TextBoxes to make the date Of Birth
+	        	  //String dateOfBirth = (monthTxt.getText() + "/" + dayTxt.getText() + "/" + yearTxt.getText());
 	        	
+	        	//Compile into one string to be passed into PatientPortal Constructor 
+	        	//This will conveniently load all of the corresponding data to that within the 
+	        	  String patientCredentials = firstNameTxt.getText() + "," + lastNameTxt.getText() + "," 
+	        			  					  + monthTxt.getText() + "/" + dayTxt.getText() + "/" + yearTxt.getText();
 	        	
-	          //Create and Display the patient Portal
-	        	PatientPortal patientPort = new PatientPortal();
-	        	patientPort.displayPortal();
+	        	//[DEBUG PRINT]
+	        	  System.out.println("Creds: " + patientCredentials);
+	        	  
+	        	//Check to see if the entered credentials exist/match that of an existing Patient Account (Loaded from .txt file) 
+	        	//if(checkCredentials()){
+		          //Create and Display the patient Portal
+		        	PatientPortal patientPort = new PatientPortal(patientCredentials);
+		        	patientPort.displayPortal();
+	            //}
 	       });
 	     
 
@@ -417,9 +452,22 @@ public class Portals {
 		
 		//[Methods to include]
 		  //Check Credentials (returns true if entered credentials match a real Patient account from .txt)
+		  private boolean checkCredentials(String firstName, String lastName, String dateOfBirth) {
+			  //Open the file 
+			  
+			  
+			  
+			  //Else, return false
+			  return false;
+		  }
+		
 		
 		  //Create Account(String patientCredentials)
-		
+		  private void createAccount(String firstName, String lastName, String dateOfBirth) {
+			  
+		  }
+		  
+		  
 	}
 	
 	
@@ -466,17 +514,19 @@ public class Portals {
 		
 		 
 	  //Methods
-		//Display the Patient Portal Scene
+		//Creates & Displays the Patient Portal Scene
 		public void displayPortal() {
-		  //DEBUG
-			Button thisBs = new Button("Debug Button");
-			VBox buttonsPage = new VBox(20, thisBs);
-			Scene someBs = new Scene(buttonsPage, 800, 600);
+		 //DEBUG
+		   Button hereHe = new Button("Debug button");
+			
+		 //Load the Patient Portal scene to be displayed
+		   Scene someBs = new Scene(hereHe, 800, 600);
+			
 			
 		  //Set the primary/main Scene and displays it
  		    primeStage.setScene(someBs);
 		    primeStage.show();
-		}
+	    }
 		
 		
 		//Change Patient Information {Scene}
@@ -495,7 +545,7 @@ public class Portals {
 		
 		
 		//Miscellanious (private functions)
-		  //Function for 
+		  //Check the Credentials entered into the patient login 
 		
 	}
 	
