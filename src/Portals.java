@@ -14,27 +14,16 @@
 	  - Messages.txt     {Used for communication between parties}
 						  [New chats are added linearly (by nextLine();)]
 
-	  - 
- 
- 
 //*/
 
 
-
 /* [Usage within Main]
-  	    // Step 1: Instantiate the outer class (Portals)
-        Portals portals = new Portals();
-        
-        // Step 2: Instantiate the inner class (patientPortal) using the outer class instance
-        Portals.patientPortal portal = portals.new patientPortal();
-        
-        // Step 3: Call the helloThere method
-        portal.helloThere();
+  	 
  */
 
 
-//Relevant JavaFX libraries
-//-----------------------------------
+//Relevant Java & JavaFX Libraries
+//----------------------------------
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -43,10 +32,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-//-----------------------------------
+//----------------------------------
 
 
-//Object/Class containing: WelcomePage, PatientPortal, NursePortal, DoctorPortal
+//Object/Class containing: WelcomePage, PatientPortal, NursePortal, DoctorPortal, PatientLogin, StaffLogin
 public class Portals {
 	//Private Data declarations
 	//---------------------------
@@ -109,17 +98,16 @@ public class Portals {
 	         
 	      //Navigation buttons for Main Page:
 	      //=============================================================================================
-	        //Create buttons for navigating TO the portals {Patient, Nurse, Doctor}
+	        //Create buttons for navigating TO the portals {Patient, Nurse, Doctor} & exiting the program
 	          Button patientLogin = new Button("Patient");
 	          Button staffLogin = new Button("Staff");
+	          Button exitProg = new Button("Exit");
+		       
 	          Button nurseLogin = new Button("Nurse");		//Create NursePortal Object --> [nurseMainPage]
 	          Button doctorLogin = new Button("Doctor");	//Create DoctorPortal Object --> [docMainPage]
 	      //=============================================================================================
 	       
-          //DEBUG BUTTON (DELETE ME)  {Used to see heap Sizze}
-            Button exitProg = new Button("Exit");
-	           
-	           
+               
           //Load Logo onto Main Page:
           //=============================================================================================
             //Load the image
@@ -145,13 +133,24 @@ public class Portals {
            	  VBox buttonsSection = new VBox(20, patientLogin, staffLogin, exitProg);
             
            	//Alignment, Padding, and Set size of buttons
-            //Set size of the Buttons
-              patientLogin.setPrefSize(100, 100);
-              staffLogin.setPrefSize(100, 100);
-              
+  			//Set the dimensions of the Buttons
+		        //[Width x Height]
+			  	  patientLogin.setPrefSize(100, 50);  
+		          patientLogin.setMaxSize(100, 50);
+		          patientLogin.setMinSize(100, 50);
+		        //[Width x Height]
+			  	  staffLogin.setPrefSize(100, 50);  
+		          staffLogin.setMaxSize(100, 50);
+		          staffLogin.setMinSize(100, 50);
+		        //[Width x Height]
+			  	  exitProg.setPrefSize(100, 50);  
+		          exitProg.setMaxSize(100, 50);
+		          exitProg.setMinSize(100, 50);
+		          
+		          
             //Set text Size within buttons
-              patientLogin.setStyle("-fx-font-size: 14px;");
-              staffLogin.setStyle("-fx-font-size: 14px;");
+              patientLogin.setStyle("-fx-font-size: 16px;");
+              staffLogin.setStyle("-fx-font-size: 16px;");
               
             //Set padding
               buttonsSection.setAlignment(Pos.CENTER);
@@ -202,7 +201,7 @@ public class Portals {
 		  //-----------------------------------------------------------------------------------------------------------
 	    
 		        
-	      //Create the welcomePage Scene
+	      //Create the welcomePage Scene  //ORIGINALL 800 X 600
 	        welcomePage = new Scene(mainLayout, 800, 600);          
 	    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	    //*/
@@ -370,20 +369,23 @@ public class Portals {
 	    	  //Call upon the "Check Credentials" Method to compare the users credentials to
 	          //That in the .txt file  "Patients.txt"
 	          //{THE USER CANNOT PROCEED IF CREDENTIALS INCORRECT [use if-branch]}
-	        
-	        	//Combine the TextBoxes to make the date Of Birth
-	        	  //String dateOfBirth = (monthTxt.getText() + "/" + dayTxt.getText() + "/" + yearTxt.getText());
+	    
 	        	
 	        	//Compile into one string to be passed into PatientPortal Constructor 
-	        	//This will conveniently load all of the corresponding data to that within the 
-	        	  String patientCredentials = firstNameTxt.getText() + "," + lastNameTxt.getText() + "," 
-	        			  					  + monthTxt.getText() + "/" + dayTxt.getText() + "/" + yearTxt.getText();
-	        	
-	        	//[DEBUG PRINT]
+	        	  String patientCredentials = firstNameTxt.getText().replaceAll("\\s", "") + "," 
+	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
+	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
+	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
+	        			  					  + yearTxt.getText().replaceAll("\\s", "");
+	        	  //[Every String contains a regex for removing all whitespace (Makes program more Robust)]
+	        	  
+	        	  
+	        	//[DEBUG PRINT] Delete when done
 	        	  System.out.println("Creds: " + patientCredentials);
+	        
 	        	  
 	        	//Check to see if the entered credentials exist/match that of an existing Patient Account (Loaded from .txt file) 
-	        	//if(checkCredentials()){
+	        	//if(checkCredentials(patientCredentials)){
 		          //Create and Display the patient Portal
 		        	PatientPortal patientPort = new PatientPortal(patientCredentials);
 		        	patientPort.displayPortal();
@@ -453,7 +455,7 @@ public class Portals {
 		//[Methods to include]
 		  //Check Credentials (returns true if entered credentials match a real Patient account from .txt)
 		  private boolean checkCredentials(String firstName, String lastName, String dateOfBirth) {
-			  //Open the file 
+			  //Open the file Containing all of the patient names  {PatientAccounts.txt}
 			  
 			  
 			  
