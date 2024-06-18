@@ -122,7 +122,7 @@ public class Portals {
           //Vertically align the elements 
           //=============================================================================================  
            	//Vertical Box
-           	 VBox buttonsSection = new VBox(20, patientLogin, staffLogin, exitProg);
+           	  VBox buttonsSection = new VBox(20, patientLogin, staffLogin, exitProg);
             
            	//Alignment, Padding, and Set size of buttons
             //Set size of the Buttons
@@ -219,7 +219,7 @@ public class Portals {
           //==========================================================
 			//Relevant Buttons for the Login/New Account Page 
 	 	 	  Button goBack = new Button("Go back");
-			  Button newPatient = new Button("New Patient Account");
+			  Button newPatient = new Button("Create Account");
 			  Button patientLogin = new Button("Log in");
 			  
 			//Set the alignment of the button
@@ -302,7 +302,7 @@ public class Portals {
 	          
 	          		
 	          //Date of Birth 
-	            Label dobLbl = new Label("Date of Birth ");
+	            Label dobLbl = new Label("Date of Birth:");
 	            //Set Font
 	          	  dobLbl.setStyle("-fx-font-size: 18px;");
 
@@ -312,7 +312,14 @@ public class Portals {
 		          //Set Font
 		            dobSep0.setStyle("-fx-font-size: 18px;");
 		            dobSep1.setStyle("-fx-font-size: 18px;");
-			      
+			  
+		            
+		      //New account Text
+		        Label accText = new Label("New Patient?");
+		        //Note text??
+		        	Label noteTxt0 = new Label("Credentials entered will be used to create a new account");
+		            
+		        	
 		        //DOB format guide for user
 		          Label dobFrmtLbl = new Label("\t\t      (MM / DD / YYYY)");	//Fix this?!
 		          dobFrmtLbl.setStyle("-fx-font-size: 18px;");
@@ -385,13 +392,16 @@ public class Portals {
           		
 	        //Functional Buttons Section:  [Login]  &  [New Account]
           	//-------------------------------------------------------------------------
-          	  VBox buttonContainer = new VBox(10);
+          	  //Place all of the functionality buttons into a VBox
+          	  VBox buttonContainer = new VBox(10, patientLogin, accText, newPatient, goBack);
+          	    //Alignment
+          	      buttonContainer.setAlignment(Pos.CENTER);
 	        //-------------------------------------------------------------------------
          //=====================================================================
 
 
 	     //Compile the Main Layout of the loginPage
-           VBox mainLayout = new VBox(header, credSection);
+           VBox mainLayout = new VBox(header, credSection, buttonContainer);
            mainLayout.setAlignment(Pos.CENTER);
        	  
          //Create the Scene that displays the "Patient Login/New Account Page"
