@@ -28,29 +28,36 @@ import javafx.stage.Stage;
 
 //Object/Class containing: WelcomePage, PatientPortal, NursePortal, DoctorPortal
 public class Portals {
-	//Private Data declarations		
+	//Private Data declarations
+	//---------------------------
 	  //Primary Stage 
 		private Stage primeStage;
 		//[This is the Screen that Displays all of the Pages/Scenes created in Phase-1 document]
 		
 	  //Welcome Page (First Page/Scene of Program)
 		private Scene welcomePage;
-	  
+	 
+	  //Arizona Medical Logo Image
+		private Image azMedLogo;
+		
+	  //[DELETE????]
 	  //Button that brings the User back to the Welcome Page (Starting Page)
-	    private Button logOut;
+	    //private Button logOut;
 		//This will be used amongst all three portals {Patient, Nurse, Doctor}
-
+	//---------------------------
+		
+		
 	    
 	//Method(s) of the Portals Object/Class
 	  //Starts the Program at the Welcome Page
-			void runProgram() {
-			//From the Welcome Page the user can navigate to the 'login page' for Patient and Staff
-			//The 'Login Page' will take the User to the respective Portal
-			//If the user is to Logout 
+		void runProgram() {
+		//From the Welcome Page the user can navigate to the 'login page' for Patient and Staff
+		//The 'Login Page' will take the User to the respective Portal
+		//If the user is to Logout 
 			
 			//Set the Scene of the Stage & Display it
-			primeStage.setScene(welcomePage);
-			primeStage.show();
+			  primeStage.setScene(welcomePage);
+			  primeStage.show();
 		}
 
 	  
@@ -64,7 +71,7 @@ public class Portals {
 		//Initialize the welcomePage Scene (This will be "global" and can be referenced by the other Scene methods)
 	
 		
-		
+		///*
 		//Welcome Page Scene
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           //The 'Welcome Page' is the "Portal to the Portals", so to speak.
@@ -96,10 +103,10 @@ public class Portals {
           //Load Logo onto Main Page:
           //=============================================================================================
             //Load the image
-           	  Image image = new Image(getClass().getResourceAsStream("azMedical.png"));
+           	  azMedLogo = new Image(getClass().getResourceAsStream("azMedical.png"));
 	           
            	//Create an ImageView to display the image
-           	  ImageView imageView = new ImageView(image);
+           	  ImageView imageView = new ImageView(azMedLogo);
 	           
            	//Adjust the size of the ImageView
            	  imageView.setFitWidth(500);
@@ -178,21 +185,13 @@ public class Portals {
 	      //Create the welcomePage Scene
 	        welcomePage = new Scene(mainLayout, 800, 600);          
 	    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	        
-	   
-	    //NEW [THIS MAY NOT WORK]
-		//Set Up the Logout Button & its Action Event Handling? (to be used later)
-	    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	        
-	     
-	        
-	    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   
-	    
-	      
+	    //*/
 	        
         //Set the private Stage of Portals {helps us to switch scenes easier}
           primeStage = primaryStage;
 	}
 
+	
 	
 	//Object for the Patient Login Page / Creating a New patient account
 	class PatientLogin{
@@ -230,20 +229,99 @@ public class Portals {
 			  VBox box0 =  new VBox(20, goBack, newPatient, patientLogin);          
 		  //==========================================================
 	 	    
-			
 			  
 		  //Text Boxes
 		  //================================================================================
-			//Create text boxes for the    
-			  TextArea firstName = new TextArea();
-			//Set the dimensions of the text box
-	          firstName.setPrefHeight(25);
-	          firstName.setPrefWidth(100);
-	      //================================================================================
+			//Create text boxes for the Credentials the user will be entering
 			
+			//First Name
+			  TextArea firstNameTxt = new TextArea();
+				//Set the dimensions of the text box
+		        //[Width x Height]
+			  	  firstNameTxt.setPrefSize(100, 25);  
+ 		          firstNameTxt.setMaxSize(100, 25);
+		          firstNameTxt.setMinSize(100, 25);
+			          
+	        //Last Name
+	          TextArea lastNameTxt = new TextArea();
+				//Set the dimensions of the text box
+		        //[Width x Height]
+			  	  lastNameTxt.setPrefSize(150, 25);  
+		          lastNameTxt.setMaxSize(150, 25);
+		          lastNameTxt.setMinSize(150, 25);
+		          
+		    //Date Of Birth    
+		      //(Broken up into three text boxes (MM/DD/YYYY)
+		      //Month
+ 		        TextArea monthTxt = new TextArea();
+		        //Set the dimensions of the text box
+ 		        //[Width x Height]
+ 		          monthTxt.setPrefSize(30, 25);  
+ 		          monthTxt.setMaxSize(30, 25);
+		          monthTxt.setMinSize(30, 25);
+		          
+	          //Day
+ 		        TextArea dayTxt = new TextArea();
+		        //Set the dimensions of the text box
+ 		        //[Width x Height]
+ 		          dayTxt.setPrefSize(30, 25);  
+ 		          dayTxt.setMaxSize(30, 25);
+		          dayTxt.setMinSize(30, 25);
+		          
+
+	          //Year
+ 		        TextArea yearTxt = new TextArea();
+		        //Set the dimensions of the text box
+ 		        //[Width x Height]
+ 		          yearTxt.setPrefSize(43, 25);  
+ 		          yearTxt.setMaxSize(43, 25);
+		          yearTxt.setMinSize(43, 25);
+		          
+	      //================================================================================
+		       
 	          
-	         
-	      //Action Event Handling
+	      //Labels & Headers 
+		  //================================================================================
+			//Labels for organizing userInput
+	          Label header = new Label("Patient Login");
+	          //Set Font
+	            header.setStyle("-fx-font-size: 38px; -fx-font-weight: bold;");
+	            //header.setAlignment(Pos.CENTER);
+	            
+	        //Labels relating to the user Credentials
+	        //-------------------------------------------------
+	          //First Name
+	            Label firstNameLbl = new Label("First Name:");
+	            //Set Font
+	            firstNameLbl.setStyle("-fx-font-size: 18px;");          
+	              
+	          //Last Name
+	            Label lastNameLbl = new Label("Last Name:");
+	            //Set Font
+	              lastNameLbl.setStyle("-fx-font-size: 18px;");
+	          
+	          		
+	          //Date of Birth 
+	            Label dobLbl = new Label("Date of Birth ");
+	            //Set Font
+	          	  dobLbl.setStyle("-fx-font-size: 18px;");
+
+		        //Separate: DD / MM / YY
+	 	          Label dobSep0 = new Label("/");
+		          Label dobSep1 = new Label("/");
+		          //Set Font
+		            dobSep0.setStyle("-fx-font-size: 18px;");
+		            dobSep1.setStyle("-fx-font-size: 18px;");
+			      
+		        //DOB format guide for user
+		          Label dobFrmtLbl = new Label("\t\t      (MM / DD / YYYY)");	//Fix this?!
+		          dobFrmtLbl.setStyle("-fx-font-size: 18px;");
+		          dobFrmtLbl.setAlignment(Pos.CENTER);
+		    //-------------------------------------------------
+	      //================================================================================      
+	          
+	          
+	      //Action Event Handling  {Button Usage}
 	      //================================================================================			  
 	        //Create a new Account
 	        newPatient.setOnAction(e -> {
@@ -274,38 +352,55 @@ public class Portals {
 	        
 	        //Go back to the Welcome Page
 	        goBack.setOnAction(e -> {
-	    	  //Go back to the Welcome Page from the 'Patient Login/New Account Page'
+	          //Go back to the Welcome Page from the 'Patient Login/New Account Page'
 	    	    runProgram();
 	        });
 		  //================================================================================
-		    
-	     
+		 
 	        
-	      //Alignment			  
+	      //VBox & HBox Alignments the main Layout of the program
 	      //=====================================================================
-	        //NEW
 	        
-	        //firstName.setPadding(new Insets(20));
-	        //firstName.setAlignment(Pos.CENTER);
-	        
-	        
-	        VBox vertAlign = new VBox(10, box0, firstName);
-	        
-	          
-	          
-	          
-	        //Create the Scene that displays the "Patient Login/New Account Page"
-	          Scene loginPage = new Scene(vertAlign, 800, 600);
+	        //Credentials Section
+	        //-------------------------------------------------------------------------
+	          //Alignment HBox(s) for the Text Box entries
+	        	HBox firstNameBox = new HBox(5, firstNameLbl, firstNameTxt);
+        		HBox lastNameBox = new HBox(5, lastNameLbl, lastNameTxt);
+        		HBox DOBbox = new HBox(5, dobLbl, monthTxt, dobSep0, dayTxt, dobSep1, yearTxt);
 		        
-	        
-  	        //Display the Login/Create account page
-	          primeStage.setScene(loginPage);
-	          primeStage.show();		       
-	        
-	          //DEBUG PRINT
-	          //System.out.println("WTFFFFF");
-		  //=====================================================================
+        	  //This will encapsulate all of the HBoxs for Patient Credentials 
+        		VBox credContainer = new VBox(5, firstNameBox, lastNameBox, DOBbox, dobFrmtLbl);
+		        //Sets the position to the center of the page/Stage
+		        //credContainer.setAlignment(Pos.CENTER);
+		        //credContainer.setMaxWidth(100);
+          		  credContainer.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10;");  
+		          
+          	  //This will position the Vbox correctly 
+          		HBox credSection = new HBox(credContainer);
+          		credSection.setAlignment(Pos.CENTER);
+          		credSection.setPadding(new Insets(25));
+	            //Places a Border around the Credsection box
+   	        //-------------------------------------------------------------------------
+	          
+          		
+	        //Functional Buttons Section:  [Login]  &  [New Account]
+          	//-------------------------------------------------------------------------
+          	  VBox buttonContainer = new VBox(10);
+	        //-------------------------------------------------------------------------
+         //=====================================================================
 
+
+	     //Compile the Main Layout of the loginPage
+           VBox mainLayout = new VBox(header, credSection);
+           mainLayout.setAlignment(Pos.CENTER);
+       	  
+         //Create the Scene that displays the "Patient Login/New Account Page"
+           Scene loginPage = new Scene(mainLayout, 800, 600);
+		          
+         //Display the Login/Create account page
+           primeStage.setScene(loginPage);
+           primeStage.show();		              
+	     //=====================================================================
 		}
 			
 		
@@ -316,6 +411,21 @@ public class Portals {
 		  //Create Account(String patientCredentials)
 		
 	}
+	
+	
+	
+	//NEW
+	//This will simply contain the methods for traversi
+	class StaffLogin{
+		
+	}
+	
+	
+	
+	//[!NEW NOTE!]
+	//Maybe make a new Java File for the portals??
+	//Call this file Welcome.Java?
+
 	
 	
 	//Buttons/Methods:		

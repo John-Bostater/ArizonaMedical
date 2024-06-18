@@ -1,13 +1,14 @@
 /*********************************************************************************************************
 	Description:
-		This File contains boiler-plate code that will help you out a lot in programming your Group
-		Project for CSE-360 this summer
+		Arizona Medical is 
+		//Continue writing description
+	
 	
 	Library/JavaFX Info:
 		
 		[External JARS/Libraries used]
 			- JavaSE-22	{JRE System Library}
-			- JavaFX24	{java-sdk-22}			
+			- JavaFX20	{java-sdk-22}			
 	
 		[Class path]
 			- JavaSDK
