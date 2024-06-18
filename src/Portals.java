@@ -59,8 +59,8 @@ import java.util.*;
 
 //Object/Class containing: WelcomePage, PatientPortal, NursePortal, DoctorPortal, PatientLogin, StaffLogin
 public class Portals {
-	//Private Data declarations
-	//---------------------------
+	//Data of the Portals Object/Class
+	//--------------------------------
 	  //Primary Stage 
 		private Stage primeStage;
 		//[This is the Screen that Displays all of the Pages/Scenes created in Phase-1 document]
@@ -71,41 +71,38 @@ public class Portals {
 	  //Arizona Medical Logo Image
 		private Image azMedLogo;
 		
-	  //[DELETE????]
-	  //Button that brings the User back to the Welcome Page (Starting Page)
-	    //private Button logOut;
-		//This will be used amongst all three portals {Patient, Nurse, Doctor}
-	//---------------------------
-		
+	  //New Idea
+		//Go back button here??
+	//--------------------------------
 		
 	    
 	//Method(s) of the Portals Object/Class
+	//------------------------------------------------------------------------------------------------------------------
 	  //Starts the Program at the Welcome Page
-		void runProgram() {
+	    void runProgram() {
 		//From the Welcome Page the user can navigate to the 'login page' for Patient and Staff
 		//The 'Login Page' will take the User to the respective Portal
 		//If the user is to Logout 
 			
-			//Set the Scene of the Stage & Display it
-			  primeStage.setScene(welcomePage);
-			  primeStage.show();
+		  //Set the Scene of the Stage & Display it
+			primeStage.setScene(welcomePage);
+			primeStage.show();
 		}
+	//------------------------------------------------------------------------------------------------------------------
 
 	  
 		
 	//Constructor of the Portals Object/Class
-	public Portals(Stage primaryStage){
+	//------------------------------------------------------------------------------------------------------------------
+	  public Portals(Stage primaryStage){
 		//Pass the primaryStage <Stage> Object/Class in Main.java so the User can seemlessly transition between pages
-		//Seemless transitions will be achieved by setting the private variable primeStage 
-		
+		//Seemless transitions will be achieved by setting the private variable primeStage 	
 		//This will also make the "Logout" buttons within the Patient, Nurse & Doctor portal return us to the "Welcome Page"
 		//Initialize the welcomePage Scene (This will be "global" and can be referenced by the other Scene methods)
 	
-		
-		///*
-		//Welcome Page Scene
-        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          //The 'Welcome Page' is the "Portal to the Portals", so to speak.
+		  
+		//Welcome Page Scene          
+		  //The 'Welcome Page' is the "Portal to the Portals", so to speak.
           //i.e.  We will navigate to the other portals from here {Patient, Nurse Doctor}
         
 		  //Header(s)/Label(s): 
@@ -154,21 +151,19 @@ public class Portals {
            	//Vertical Box
            	  VBox buttonsSection = new VBox(20, patientLogin, staffLogin, exitProg);
             
-           	//Alignment, Padding, and Set size of buttons
-  			//Set the dimensions of the Buttons
-		        //[Width x Height]
-			  	  patientLogin.setPrefSize(100, 50);  
-		          patientLogin.setMaxSize(100, 50);
-		          patientLogin.setMinSize(100, 50);
-		        //[Width x Height]
-			  	  staffLogin.setPrefSize(100, 50);  
-		          staffLogin.setMaxSize(100, 50);
-		          staffLogin.setMinSize(100, 50);
-		        //[Width x Height]
-			  	  exitProg.setPrefSize(60, 50);  
-		          exitProg.setMaxSize(60, 50);
-		          exitProg.setMinSize(60, 50);
-		          
+            //Set the dimensions of the Buttons
+           	  //[Width x Height]
+           	    patientLogin.setPrefSize(100, 50);  
+           	    patientLogin.setMaxSize(100, 50);
+           	    patientLogin.setMinSize(100, 50);
+	          //[Width x Height]
+           	    staffLogin.setPrefSize(100, 50);  
+           	    staffLogin.setMaxSize(100, 50);
+           	    staffLogin.setMinSize(100, 50);
+           	  //[Width x Height]
+           	    exitProg.setPrefSize(60, 50);  
+           	    exitProg.setMaxSize(60, 50);
+           	    exitProg.setMinSize(60, 50);          
 		          
             //Set text Size within buttons
               patientLogin.setStyle("-fx-font-size: 20px;");
@@ -188,7 +183,7 @@ public class Portals {
 	              
 	         
 	      //Action Event Handling  {Welcome Page}
-	      //-----------------------------------------------------------------------------------------------------------
+	      //================================================================================================================
 		    //Login/New Account Page/Scene for the Patient
 	          patientLogin.setOnAction(e -> {
 		        //Create the new patient portal object
@@ -221,27 +216,32 @@ public class Portals {
 	        	  welcomePage = null;
 	        	  primeStage.close();	        	 
 	          });
-		  //-----------------------------------------------------------------------------------------------------------
-	    
-		        
+		
 	      //Create the welcomePage Scene	//[4x3] aspect ratio
 	        welcomePage = new Scene(mainLayout, 1024, 768);          
-	    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	    //*/
+	    //================================================================================================================
 	        
         //Set the private Stage of Portals {helps us to switch scenes easier}
           primeStage = primaryStage;
-	}
-
+	  }
+	//------------------------------------------------------------------------------------------------------------------
 	
-	
+	  
+	//Objects/Class(s)
+	//
 	//Object for the Patient Login Page / Creating a New patient account
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	class PatientLogin{
-		//Constructor
+	  	
+	  //Constructor
+	  //------------------------------------------------------------------------------
 		//(this will be used in Main for "logging into" the account with the data the user entered {name & dob})
 		public PatientLogin(){}
+	  //------------------------------------------------------------------------------
+	
 		
-		
+	  //Methods
+	  //--------------------------------------------------------------------------------------------------------
 		//Login Page to proceed to the Patient Portal
 		//The user can also create a new Accoutn from here!!! (That will load a new Scene)
 		public void patientLogin(){
@@ -493,7 +493,7 @@ public class Portals {
            primeStage.show();		              
 	     //=====================================================================
 		}
-			
+		
 		
 		//[Methods to include]
 		//Check Credentials (returns true if entered credentials match a real Patient account from .txt)
@@ -511,53 +511,52 @@ public class Portals {
 		private void createAccount(String firstName, String lastName, String dateOfBirth) {
 			  
 		}
-	    
+		//--------------------------------------------------------------------------------------------------------
 	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	
 	
-	//NEW
 	//This will simply contain the methods for traversi
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	class StaffLogin{
 		
 	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
-	
-	
-	//[!NEW NOTE!]
-	//Maybe make a new Java File for the portals??
-	//Call this file Welcome.Java?
-
 	
 	
 	//Buttons/Methods:		
 	//		[Change Patient Information]	[View Previous Visits]	[Messages]	[Logout]
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	class PatientPortal{
 	  //Patient's data (Will be loaded upon the 'Login' button being hit in the Patient "Login/New Account Page" {loaded from Welcome Page})
 	  //------------------------------------
 		private String fullName = "";
 		private String dateOfBirth = "";
 		private String phoneNumber = "";
+		private String insuranceInfo = "";
 		private boolean logout = false;
 	  //------------------------------------
 			
 	
 	  //Default Constructor (Delete this piece of code when done debugging!!) 
-		public PatientPortal() {
-			
-		}
-		
+	  //------------------------------------	
+		public PatientPortal() {}
+  	  //------------------------------------
 		
 	  //Constructor
-		public PatientPortal(String userCredentials){
+	  //------------------------------------------------------------------------------
+	    public PatientPortal(String userCredentials){
 		  //Take apart the userCredentials String using delimeters
 		  // and set the following strings in  "Patient's data"
 			
 			
 		}
-		
+	  //------------------------------------------------------------------------------
 		 
 	  //Methods
+	  //------------------------------------------------------------------------------
 		//Creates & Displays the Patient Portal Scene
 		public void displayPortal() {
 		 //DEBUG
@@ -590,21 +589,29 @@ public class Portals {
 		
 		//Miscellanious (private functions)
 		  //Check the Credentials entered into the patient login 
-		
+		//------------------------------------------------------------------------------
 	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	
+	
+	//Nurse Portal Object/Class
 	//Buttons/Methods:
 	//		[New Visit Form]	[Messages]	[Logout]
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	class NursePortal{
 		
 	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	
 	
+	//Doctor Portal Object/Class
 	//Buttons/Methods:
 	//		[Patient Visit Form]	[View Patient Records]	[Messages]	[Logout]
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	class DoctorPortal{
 		
 	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
