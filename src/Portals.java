@@ -39,12 +39,17 @@
 
 /* [TO DO]:
   	 
-  	 - [6/18/24]:
-  	 	
-  	 	+ You might have to make the LoginPage and Create account Page separate pages?
+  	 - [6/19/24]:
+  	
+		+ Make the Patient Login require text to be entered to log into a valid account
+		   {Do an if-branch for checking that all of the shits has the shits }
+	
+	 	+ You might have to make the LoginPage and Create account Page separate pages?
   	 	  
   	 	+ Make a receptionist portal? for Scheduling and Deleting Patient Accounts?
-  	 
+
+	
+
 */
 
 
@@ -82,14 +87,18 @@ public class Portals {
 		private Image azMedLogo;
 		
 	  //New Idea
-		//Go back button here??
+		//Note text??  {Make this a global notification so that when }
+		private Label notificationTxt;
+		private boolean isNotified;   
+		//^^Used to ensure notification messages arent added too many times
+        
 	//--------------------------------
 		
 	    
 	//Method(s) of the Portals Object/Class
 	//------------------------------------------------------------------------------------------------------------------
 	  //Starts the Program at the Welcome Page
-	    void runProgram() {
+	    public void runProgram() {
 		//From the Welcome Page the user can navigate to the 'login page' for Patient and Staff
 		//The 'Login Page' will take the User to the respective Portal
 		//If the user is to Logout 
@@ -249,7 +258,7 @@ public class Portals {
 	        	FileWriter fileWriter = new FileWriter("PatientAccounts.txt");
 		        
 	          //Write the Leading text in the file
-	        	fileWriter.write("Patient Accounts:\n");
+	        	fileWriter.write("Patient Accounts:\n\n");
 	        	
 	          //Close the fileWriter
 	        	fileWriter.close();
@@ -259,14 +268,15 @@ public class Portals {
 	      catch(IOException e) {
 	    	  System.out.println("File Does not exist");
 	      }
-	        
-	        
         //================================================================================================================
-	        
-	        
+	               
 	        
         //Set the private Stage of Portals {helps us to switch scenes easier}
           primeStage = primaryStage;
+		//Update the notifcation txt to null (empty)
+		  //notificationTxt = new Label("");
+		//Update the private boolean for notifications
+		  isNotified = false; 
 	  }
 	//------------------------------------------------------------------------------------------------------------------
 	
@@ -413,7 +423,7 @@ public class Portals {
 	            //Set Font
 	          	  dobLbl.setStyle("-fx-font-size: 20px;");
 
-		        //Separate: DD / MM / YY
+		        //Separate: MM / DD / YYYY
 	 	          Label dobSep0 = new Label("/");
 		          Label dobSep1 = new Label("/");
 		          //Set Font
@@ -425,91 +435,17 @@ public class Portals {
 		        Label accText = new Label("New Patient?");
 		        accText.setStyle("-fx-font-size: 24px;");
 
-		        //Note text??
-		          Label noteTxt0 = new Label("Credentials entered will be used to create a new account");
-		            
 		        	
-		        //DOB format guide for user
-		          Label dobFrmtLbl = new Label("\t\t      (MM / DD / YYYY)");	//Fix this?!
-		          dobFrmtLbl.setStyle("-fx-font-size: 18px;");
-		          dobFrmtLbl.setAlignment(Pos.CENTER);
-		    //-------------------------------------------------
+		 	  //DOB format guide for user
+				Label dobFrmtLbl = new Label("\t\t\t(MM / DD / YYYY)");
+				dobFrmtLbl.setStyle("-fx-font-size: 18px;");
+				dobFrmtLbl.setAlignment(Pos.CENTER);
+			//-------------------------------------------------
 	      //================================================================================      
-	          
-	          
-	      //Action Event Handling  {Button Usage}
-	      //================================================================================			  
-	        //Create a new Account
-	        newPatient.setOnAction(e -> {
-	          //This will Create a new Account with the credentials the user has entered
-	        	//HAVE TEXT THAT NOTIFIES THE USER OF THE NEW ACCOUNT CREATED AND HOW THEY 
-	        	//CAN ENTER HIT the LOGIN button TO proceed to the patient portal
-	        	
-	          //Compile the credentials entered by the Patient/User
-	        	//Compile into one string to be passed into PatientPortal Constructor 
-	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
-	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
-	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
-	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
-	        			  					  + yearTxt.getText().replaceAll("\\s", "");
-	        	  //[Every String contains a regex for removing all whitespace (Makes program more Robust)]
-	        	
-	        	
-	          //Check to see if the Account already exists (if it does the new account will NOT be created)
-	        	if(!checkCredentials(patientCredentials)) {
-	        		//Account does not exist, create a new Patient Account with the credentials entered
-	        		  createAccount(patientCredentials);
-	        	}
-	          //Account already exists!
-	        	else {
-	        		//Print statement (have a message entity display when this happens?)
-	        		  System.out.println("Account Already Exists!");
-	        	}
-	        	
-	        	
-	        });
 
-	          
-	          
-	        //Log into the Patient Account 
-	        patientLogin.setOnAction(e -> {
-	    	  //Call upon the "Check Credentials" Method to compare the users credentials to
-	          //That in the .txt file  "Patients.txt"
-	          //{THE USER CANNOT PROCEED IF CREDENTIALS INCORRECT [use if-branch]}
-	    
-	        	
-	        	//Compile into one string to be passed into PatientPortal Constructor 
-	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
-	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
-	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
-	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
-	        			  					  + yearTxt.getText().replaceAll("\\s", "");
-	        	  //[Every String contains a regex for removing all whitespace (Makes program more Robust)]
-	        	  
-	        	  
-	        	//[DEBUG PRINT] Delete when done
-	        	  System.out.println("Creds: " + patientCredentials);
-	        
-	        	  
-	        	//Check to see if the entered credentials exist/match that of an existing Patient Account (Loaded from .txt file) 
-	        	if(checkCredentials(patientCredentials)){
-		          //Create and Display the patient Portal
-		        	PatientPortal patientPort = new PatientPortal(patientCredentials);
-		        	patientPort.displayPortal();
-	            }
-	       });
-	     
 
-	        
-	        //Go back to the Welcome Page
-	        goBack.setOnAction(e -> {
-	          //Go back to the Welcome Page from the 'Patient Login/New Account Page'
-	    	    runProgram();
-	        });
-		  //================================================================================
-		 
-	        
-	      //VBox & HBox Alignments the main Layout of the program
+
+		  //VBox & HBox Alignments the main Layout of the program
 	      //===================================================================================================
 	        //Credentials Section
 	        //-------------------------------------------------------------------------
@@ -536,13 +472,129 @@ public class Portals {
           		
 	        //Functional Buttons Section:  [Login]  &  [New Account]
           	//-------------------------------------------------------------------------
-          	  //Place all of the functionality buttons into a VBox
+          	  //Place all of the functionality buttons into a VBox		//NEW: include the notification message?
           	  VBox buttonContainer = new VBox(10, patientLogin, accText, newPatient, goBack);
           	    //Alignment
           	      buttonContainer.setAlignment(Pos.CENTER);
 	        //-------------------------------------------------------------------------
           //===================================================================================================
 
+
+	          
+	      //Action Event Handling  {Button Usage}
+	      //================================================================================			  
+	        //Log into the Patient Account 
+  	        patientLogin.setOnAction(e -> {
+	    	  //Call upon the "Check Credentials" Method to compare the users credentials to
+	          //That in the .txt file  "Patients.txt"
+	          //{THE USER CANNOT PROCEED IF CREDENTIALS INCORRECT [use if-branch]}
+	    
+	        	
+	        	//Compile into one string to be passed into PatientPortal Constructor 
+	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
+	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
+	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
+	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
+	        			  					  + yearTxt.getText().replaceAll("\\s", "");
+	        	  //[Every String contains a regex for removing all whitespace (Makes program more Robust)]
+	        	  
+	        	  
+	        	//[DEBUG PRINT] Delete when done
+	        	  System.out.println("Creds: " + patientCredentials);
+	        
+	        	//Successful Login
+	        	//Check to see if the entered credentials exist/match that of an existing Patient Account (Loaded from .txt file) 
+	        	if(checkCredentials(patientCredentials)){
+	        	  //Update global variables before proceeding to new Scene
+					isNotified = false;
+	        		
+		          //Create and Display the patient Portal
+		        	PatientPortal patientPort = new PatientPortal(patientCredentials);
+		        	patientPort.displayPortal();
+	            }
+	       });
+			     
+		          
+		          
+		    //Create a new Account
+	        newPatient.setOnAction(e -> {
+	          //This will Create a new Account with the credentials the user has entered
+	        	//HAVE TEXT THAT NOTIFIES THE USER OF THE NEW ACCOUNT CREATED AND HOW THEY 
+	        	//CAN ENTER HIT the LOGIN button TO proceed to the patient portal
+	        	
+	          //Compile the credentials entered by the Patient/User
+	        	//Compile into one string to be passed into PatientPortal Constructor 
+	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
+	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
+	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
+	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
+	        			  					  + yearTxt.getText().replaceAll("\\s", "");
+	        	  //[Every String contains a regex for removing all whitespace (Makes program more Robust)]
+
+
+			  //Flag to make sure the user has correctly entered their data to the field
+			    boolean validEntry = true;
+
+
+			  //Check that all textFields have an entry (the minimum length of a valid entry string is:(11) 
+  			  //Use this knowledge to construct a simple if-branch
+			  //The user has not entered the minimum amount of chars do not make an account
+			    if(patientCredentials.length() < 8){
+					if(!isNotified){
+					  //Notify user that their entry is invalid
+					    notificationTxt = new Label("*Required text box is missing or invalid");
+						buttonContainer.getChildren().add(notificationTxt);
+
+					  //Update the flag so the user cannot proceed to making a new account
+						validEntry = false;
+
+					  //Update notification flag
+					    isNotified = true;
+					}
+					else{
+					  //May be necessary??
+						//isNotified = false;
+					}
+
+
+ 			    }
+			  //[Note for later]: If you want to make this more verbose you can write it out so the user
+			  //			is notified which of the text fields/box(s) needs to be adjusted or filled out
+
+
+
+			  //If the credentials entered do not exist, then a new account is created
+	        	if(!checkCredentials(patientCredentials) && validEntry) {
+	        		//Account does not exist, create a new Patient Account with the credentials entered
+	        		  createAccount(patientCredentials);
+	        	}
+	          //Account already exists
+	        	else {
+					//Notify the user that the account credentials already exist
+
+					//If-branch to make sure the user isn't being notified to much
+					if(!isNotified){
+					  //Update the notification text/label and add it to the GUI Display
+						notificationTxt = new Label("*Account already exists, you may proceed to login.");
+						buttonContainer.getChildren().add(notificationTxt);
+
+					  //User has been notified
+					    isNotified = true;	
+					}
+	        	}
+	        	
+	        	
+	        });
+	      
+	        //Go back to the Welcome Page
+	        goBack.setOnAction(e -> {
+			  //Udpdate isNotified?? (prolly unecessary)
+
+	          //Go back to the Welcome Page from the 'Patient Login/New Account Page'
+	    	    runProgram();
+	        });
+		  //================================================================================
+		
 
 	     //Compile the Main Layout of the loginPage
            VBox mainLayout = new VBox(header, credSection, buttonContainer);
@@ -560,6 +612,9 @@ public class Portals {
 		
 		//Check Credentials (returns true if entered credentials match a real Patient account from .txt)
 		private boolean checkCredentials(String patientCredentials) {
+			//DEBUG
+			System.out.println("Checking credentials!!!");
+			
 			
 			//Open the file Containing all of the patient names  {PatientAccounts.txt}
 			try {
@@ -568,9 +623,9 @@ public class Portals {
 				  
 				//Read the file Line-by-Line and compare the strings for a match
 				  while(fileReader.hasNextLine()) {
-					  
-				     //Compare the credentials Entered with all of the accounts listed in the .txt file
-					   if(fileReader.nextLine() == patientCredentials) {
+
+					  //Compare the credentials Entered with all of the accounts listed in the .txt file
+					   if(fileReader.nextLine().contains(patientCredentials)) {
 						 //Match Found!
 						   
 						 //Close the fileReader
@@ -662,11 +717,25 @@ public class Portals {
 		
 	  //Constructor
 	  //------------------------------------------------------------------------------
-	    public PatientPortal(String userCredentials){
+	    public PatientPortal(String patientCredentials){
 		  //Take apart the userCredentials String using delimeters
-		  // and set the following strings in  "Patient's data"
-			
-			
+		  //Update the Patient's data with the following broken up data
+	    	
+	    	   //First Name
+	    	     int pos = patientCredentials.indexOf(",");
+	    	     fullName = patientCredentials.substring(0, pos);
+	    	     
+	    	     //DEBUG
+	    	     System.out.println("Debug: " + fullName);
+	    	   
+	    	   //Last Name
+	    	   
+	    	   
+	    	   //Date of Birth
+	    	   
+	    	   
+	    	   //----
+	    	
 		}
 	  //------------------------------------------------------------------------------
 		 
@@ -674,12 +743,16 @@ public class Portals {
 	  //------------------------------------------------------------------------------
 		//Creates & Displays the Patient Portal Scene		
 	      //[NEW NOTE: this method will be used for every "exit" button within the other methods below]
-		public void displayPortal() {
-		 //DEBUG
-		   Button hereHe = new Button("Debug button");
+		private void displayPortal() {
+		  //Debug thing
+			System.out.println("Login Successful!!");
 			
-		 //Load the Patient Portal scene to be displayed
-		   Scene someBs = new Scene(hereHe, 800, 600);
+			
+		   //DEBUG
+		    Button hereHe = new Button("Debug button");
+			
+		  //Load the Patient Portal scene to be displayed
+		    Scene someBs = new Scene(hereHe, 800, 600);
 			
 			
 		  //Set the primary/main Scene and displays it
