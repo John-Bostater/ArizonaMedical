@@ -22,7 +22,7 @@
 	//[Files Created/Used within the program for storing/loading data]:
 	  
 	  - PatientAccounts.txt 	
-	  		{Contains: FirstName, LastName, DOB, Insurance Info, Contact Info. of any existing patient accounts}
+	  		{Contains: FirstName, LastName, DOB, Insurance Info, Contact Info}
 	  
 	  - PatientData.txt
 	  		{Used for saving the patients data: [Insurance], [Contact], [etc.]}
@@ -37,7 +37,12 @@
 
 
 
-/* [Usage within Main]
+/* [TO DO]:
+  	 
+  	 - [6/18/24]:
+  	 	
+  	 	+ You might have to make the LoginPage and Create account Page separate pages?
+  	 	  
   	 
 */
 
@@ -226,16 +231,9 @@ public class Portals {
 	    //================================================================================================================
 
 	        
-	    //[NEW!!]  {Create input file if it does not exist?}
-	    //File Existence Check
+	    //Necessary File Check
         //================================================================================================================
-	      //If any of the required files do not exist, then Create them 
-	        
-	        //For patients account have leading text "Patient Accounts" 
-	        //(All new Patient Accounts added/written in will be added under this text)
-	        
-	        
-	      //Check to see if the file exists and if it does not then create it
+	      //Check to see if the file(s) exist. If not, create it.
 	      try {
 	        //List all of the required files for the system to run
 	          File patientAccounts = new File("PatientAccounts.txt");
@@ -243,18 +241,22 @@ public class Portals {
 	        //Check to see if the file already exists and if it does not, create it
 	        if(patientAccounts.exists()) {
 	        	//File Already exists, do nothing
-	        	
+	        	System.out.println("File Exists!");
 	        }
 	        else {
 	          //Create the file
 	        	FileWriter fileWriter = new FileWriter("PatientAccounts.txt");
 		        
-	          //Write the Header Text to the file
+	          //Write the Leading text in the file
+	        	fileWriter.write("Patient Accounts:\n");
 	        	
+	          //Close the fileWriter
+	        	fileWriter.close();
 	        }
 	      }
+	      //Catch any File I/O errors
 	      catch(IOException e) {
-	    	  
+	    	  System.out.println("File Does not exist");
 	      }
 	        
 	        
@@ -342,9 +344,9 @@ public class Portals {
 			  TextArea firstNameTxt = new TextArea();
 				//Set the dimensions of the text box
 		        //[Width x Height]
-			  	  firstNameTxt.setPrefSize(100, 25);  
- 		          firstNameTxt.setMaxSize(100, 25);
-		          firstNameTxt.setMinSize(100, 25);
+			  	  firstNameTxt.setPrefSize(150, 25);  
+ 		          firstNameTxt.setMaxSize(150, 25);
+		          firstNameTxt.setMinSize(150, 25);
 			          
 	        //Last Name
 	          TextArea lastNameTxt = new TextArea();
@@ -442,7 +444,20 @@ public class Portals {
 	        	//HAVE TEXT THAT NOTIFIES THE USER OF THE NEW ACCOUNT CREATED AND HOW THEY 
 	        	//CAN ENTER HIT the LOGIN button TO proceed to the patient portal
 	        	
-	          //
+	          //Compile the credentials entered by the Patient/User
+	        	//Compile into one string to be passed into PatientPortal Constructor 
+	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
+	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
+	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
+	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
+	        			  					  + yearTxt.getText().replaceAll("\\s", "");
+	        	  //[Every String contains a regex for removing all whitespace (Makes program more Robust)]
+	        	
+	        	
+	          //Check to see if the Account already exists (if it does the new account will NOT be created)
+	        	if(!checkCredentials(patientCredentials)) {
+	        		
+	        	}
 	        	
 	        	
 	        });
@@ -536,7 +551,6 @@ public class Portals {
 		}
 		
 		
-		//[Methods to include]
 		//Check Credentials (returns true if entered credentials match a real Patient account from .txt)
 		private boolean checkCredentials(String patientCredentials) {
 			
@@ -579,8 +593,10 @@ public class Portals {
 		
 		
 	    //Create Account(String patientCredentials)
-		private void createAccount(String firstName, String lastName, String dateOfBirth) {
-			  
+		private void createAccount(String patientCredentials) {
+		  //Create a new accoun/ add it to the 
+			
+			
 		}
 		//--------------------------------------------------------------------------------------------------------
 	}
@@ -628,7 +644,8 @@ public class Portals {
 		 
 	  //Methods
 	  //------------------------------------------------------------------------------
-		//Creates & Displays the Patient Portal Scene
+		//Creates & Displays the Patient Portal Scene		
+	      //[NEW NOTE: this method will be used for every "exit" button within the other methods below]
 		public void displayPortal() {
 		 //DEBUG
 		   Button hereHe = new Button("Debug button");
