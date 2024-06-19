@@ -21,13 +21,17 @@
 	
 	//[Files Created/Used within the program for storing/loading data]:
 	  
-	  - PatientAccounts.txt 	{Contains: FirstName, LastName, DOB  of any existing patient accounts}
+	  - PatientAccounts.txt 	
+	  		{Contains: FirstName, LastName, DOB, Insurance Info, Contact Info. of any existing patient accounts}
 	  
-	  - PatientData.txt  		{Used for saving the patients data: [Insurance], [Contact], [etc.]}
+	  - PatientData.txt
+	  		{Used for saving the patients data: [Insurance], [Contact], [etc.]}
 	  
-	  - PatientVisits			{Saved Patient Visit Information??}
+	  - PatientVisits
+			{Saved Patient Visit Information??}
 	  
-	  - Messages.txt     {Used for communication between parties}
+	  - Messages.txt
+			{Used for communication between parties}
 						  [New chats are added linearly (by nextLine();)]
 //*/
 
@@ -40,7 +44,7 @@
 
 
 //Relevant Java & JavaFX Libraries
-//----------------------------------
+//-----------------------------------------------
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -51,9 +55,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 //File I/O
-import java.io.*;
-import java.util.*;
-//----------------------------------
+import java.io.*;	//FileWriter for file writing
+import java.util.*;	//Scanner for file reading
+//-----------------------------------------------
 
 
 
@@ -220,6 +224,43 @@ public class Portals {
 	      //Create the welcomePage Scene	//[4x3] aspect ratio
 	        welcomePage = new Scene(mainLayout, 1024, 768);          
 	    //================================================================================================================
+
+	        
+	    //[NEW!!]  {Create input file if it does not exist?}
+	    //File Existence Check
+        //================================================================================================================
+	      //If any of the required files do not exist, then Create them 
+	        
+	        //For patients account have leading text "Patient Accounts" 
+	        //(All new Patient Accounts added/written in will be added under this text)
+	        
+	        
+	      //Check to see if the file exists and if it does not then create it
+	      try {
+	        //List all of the required files for the system to run
+	          File patientAccounts = new File("PatientAccounts.txt");
+		    
+	        //Check to see if the file already exists and if it does not, create it
+	        if(patientAccounts.exists()) {
+	        	//File Already exists, do nothing
+	        	
+	        }
+	        else {
+	          //Create the file
+	        	FileWriter fileWriter = new FileWriter("PatientAccounts.txt");
+		        
+	          //Write the Header Text to the file
+	        	
+	        }
+	      }
+	      catch(IOException e) {
+	    	  
+	      }
+	        
+	        
+        //================================================================================================================
+	        
+	        
 	        
         //Set the private Stage of Portals {helps us to switch scenes easier}
           primeStage = primaryStage;
@@ -429,11 +470,11 @@ public class Portals {
 	        
 	        	  
 	        	//Check to see if the entered credentials exist/match that of an existing Patient Account (Loaded from .txt file) 
-	        	//if(checkCredentials(patientCredentials)){
+	        	if(checkCredentials(patientCredentials)){
 		          //Create and Display the patient Portal
 		        	PatientPortal patientPort = new PatientPortal(patientCredentials);
 		        	patientPort.displayPortal();
-	            //}
+	            }
 	       });
 	     
 
@@ -497,13 +538,43 @@ public class Portals {
 		
 		//[Methods to include]
 		//Check Credentials (returns true if entered credentials match a real Patient account from .txt)
-		private boolean checkCredentials(String firstName, String lastName, String dateOfBirth) {
+		private boolean checkCredentials(String patientCredentials) {
+			
 			//Open the file Containing all of the patient names  {PatientAccounts.txt}
-			  
-			  
-			  
-			//Else, return false
-			return false;
+			try {
+				//Read the File with a scanner (easier to get Line by Line)
+				  Scanner fileReader = new Scanner(new File("PatientAccounts.txt"));
+				  
+				//Read the file Line-by-Line and compare the strings for a match
+				  while(fileReader.hasNextLine()) {
+					  
+				     //Compare the credentials Entered with all of the accounts listed in the .txt file
+					   if(fileReader.nextLine() == patientCredentials) {
+						 //Match Found!
+						   
+						 //Close the fileReader
+						   fileReader.close();
+						
+						 //Patient's account exists!
+						   return true;
+					   }
+				  }
+				  
+				  //Close the fileReader
+				    fileReader.close();
+			}
+			//Catch any Errors in File I/O
+			catch (IOException e) {
+			  //Error Statement
+				System.out.println("Error!, File does not exist");
+				
+			  //Error Opening File (Returns False)
+				return false;
+			}
+			
+			
+			//No matches found, return false
+			  return false;
 		}
 		
 		
