@@ -43,6 +43,7 @@
   	 	
   	 	+ You might have to make the LoginPage and Create account Page separate pages?
   	 	  
+  	 	+ Make a receptionist portal? for Scheduling and Deleting Patient Accounts?
   	 
 */
 
@@ -456,7 +457,13 @@ public class Portals {
 	        	
 	          //Check to see if the Account already exists (if it does the new account will NOT be created)
 	        	if(!checkCredentials(patientCredentials)) {
-	        		
+	        		//Account does not exist, create a new Patient Account with the credentials entered
+	        		  createAccount(patientCredentials);
+	        	}
+	          //Account already exists!
+	        	else {
+	        		//Print statement (have a message entity display when this happens?)
+	        		  System.out.println("Account Already Exists!");
 	        	}
 	        	
 	        	
@@ -594,9 +601,30 @@ public class Portals {
 		
 	    //Create Account(String patientCredentials)
 		private void createAccount(String patientCredentials) {
-		  //Create a new accoun/ add it to the 
-			
-			
+		  //Append the patients Credentials to the "PatientAccounts.txt"
+		
+			try {
+			  //Load [PatientAccounts.txt] for writing		
+				FileWriter fileWriter = new FileWriter("PatientAccounts.txt", true);
+			  //[Note]:  'true' in the second parameter tells the fileWriter the file already exists
+			    
+				
+			  //Append the new Patient's name to the .txt file
+			    fileWriter.append(patientCredentials + "\n");
+			 
+			  //Close the file Writer
+			    fileWriter.close();
+			    
+			}
+			//File Does not exist error catch
+			catch(IOException e) {
+			  //Error Statement
+				System.out.println("Error!, File does not exist");
+			}
+		    
+		    
+		    
+		    
 		}
 		//--------------------------------------------------------------------------------------------------------
 	}
