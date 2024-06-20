@@ -1,10 +1,20 @@
 /*********************************************************************************************************
-	Description:
+    //[Contributors]:
+ 	  - John Bostater
+ 	  
+ 	  - <Name here>
+ 	  
+ 	  - ...
+ 	  
+ 	  - <Name here>
+    
+
+    //[Description]:
 		Arizona Medical is 
 		//Continue writing description
 	
 	
-	Library/JavaFX Info:
+	//[Library/JavaFX Info]:
 		
 		[External JARS/Libraries used]
 			- JavaSE-22	{JRE System Library}
@@ -12,8 +22,9 @@
 	
 		[Class path]
 			- JavaSDK
-			
-	Etc:
+	
+    		
+	//[Etc]:
 			+ Virtual Machine Argument(s) used to run the .java file in EclipseIDE:
 			
 				--module-path /path/to/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml

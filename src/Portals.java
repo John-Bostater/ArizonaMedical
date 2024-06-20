@@ -1,4 +1,4 @@
-/*
+/****************************************************************************************
  	//[Contributors]:
  	  - John Bostater
  	  
@@ -16,7 +16,7 @@
 	
 	//[Aspect Ratio/Dimension of Graphical User Interface]: 
 
-	  - [4:3]	-->   [1024, 768]
+	  - [4:3]	-->   [1024 x 768]
 	 
 	
 	//[Files Created/Used within the program for storing/loading data]:
@@ -33,7 +33,7 @@
 	  - Messages.txt
 			{Used for communication between parties}
 						  [New chats are added linearly (by nextLine();)]
-//*/
+***************************************************************************************/
 
 
 
@@ -41,9 +41,13 @@
   	 
   	 - [6/19/24]:
   	
-		+ Make the Patient Login require text to be entered to log into a valid account
-		   {Do an if-branch for checking that all of the shits has the shits }
-	
+		[Functional requirements]
+
+		+ 
+
+
+		[Non-functional requirements]
+
 	 	+ You might have to make the LoginPage and Create account Page separate pages?
   	 	  
   	 	+ Make a receptionist portal? for Scheduling and Deleting Patient Accounts?
@@ -211,7 +215,6 @@ public class Portals {
 		    	//Create the Patient Login/New Account Page
 			      PatientLogin patientLog = new PatientLogin();
 			        	
-			      
 		        //Load the Page/Scene	
 			      //For login, the correct credentials must be entered in order to proceed to the actual 'Patient Portal'
           	      patientLog.patientLogin();
@@ -270,13 +273,11 @@ public class Portals {
 	      }
         //================================================================================================================
 	               
-	        
-        //Set the private Stage of Portals {helps us to switch scenes easier}
-          primeStage = primaryStage;
-		//Update the notifcation txt to null (empty)
-		  //notificationTxt = new Label("");
-		//Update the private boolean for notifications
-		  isNotified = false; 
+		//Set the attributes/private data of the Portals object        
+          //Set the private Stage of Portals {helps us to switch scenes easier}
+            primeStage = primaryStage;
+		  //Update the private boolean for notifications
+		    isNotified = false; 
 	  }
 	//------------------------------------------------------------------------------------------------------------------
 	
@@ -298,19 +299,7 @@ public class Portals {
 	  //--------------------------------------------------------------------------------------------------------
 		//Login Page to proceed to the Patient Portal
 		//The user can also create a new Accoutn from here!!! (That will load a new Scene)
-		public void patientLogin(){
-	  	  //"patientCredentials" String will be constructed from the textBoxes(0-n) next to the labels: 
-			//	[firstName]: {textBox0}, 
-			//	[lastName]:  {textBox1} 
-			//	[DOB]: 		 {textBox2}, 
-			//	[etc.]:		 {textBoxN}
-			//Refer to Project Phase 1 for visual
-		
-		  //For LOGIN function/feature
-		    //Compare the patient's created credentials against the .txt file
-		    //containing patient names & dob (if no match reprompt/no login)
-
-			
+		public void patientLogin(){		
 		  //Buttons
           //==========================================================
 			//Relevant Buttons for the Login/New Account Page 
@@ -500,7 +489,7 @@ public class Portals {
 	        	  
 	        	  
 	        	//[DEBUG PRINT] Delete when done
-	        	  System.out.println("Creds: " + patientCredentials);
+	        	  //System.out.println("Creds: " + patientCredentials);
 	        
 	        	//Successful Login
 	        	//Check to see if the entered credentials exist/match that of an existing Patient Account (Loaded from .txt file) 
@@ -512,6 +501,19 @@ public class Portals {
 		        	PatientPortal patientPort = new PatientPortal(patientCredentials);
 		        	patientPort.displayPortal();
 	            }
+				//Unsuccessful Login
+				else{
+				  //Make sure the user is only notified of their mistake once
+				  if(!isNotified){
+					//Add notification text to inform user
+						notificationTxt = new Label("*Account does not exist");
+						buttonContainer.getChildren().add(notificationTxt);
+
+					//Update Notification flag
+						isNotified = true;
+				  }
+
+				}
 	       });
 			     
 		          
@@ -536,27 +538,26 @@ public class Portals {
 			    boolean validEntry = true;
 
 
-			  //Check that all textFields have an entry (the minimum length of a valid entry string is:(11) 
+			  //Check that all textFields have an entry & their minimum text length is met 
   			  //Use this knowledge to construct a simple if-branch
 			  //The user has not entered the minimum amount of chars do not make an account
-			    if(patientCredentials.length() < 8){
+			    if(    firstNameTxt.getText().length() == 0  
+					|| lastNameTxt.getText().length() == 0
+					|| monthTxt.getText().length() < 2
+					|| dayTxt.getText().length() < 2
+					|| yearTxt.getText().length() < 4 
+				  ){
+					//Update the flag so the user cannot proceed to making a new account
+					  validEntry = false;
+
+					//Notify the user of their mistake if they have not already been
 					if(!isNotified){
 					  //Notify user that their entry is invalid
 					    notificationTxt = new Label("*Required text box is missing or invalid");
 						buttonContainer.getChildren().add(notificationTxt);
-
-					  //Update the flag so the user cannot proceed to making a new account
-						validEntry = false;
-
-					  //Update notification flag
+					  //Update the flag (User will be notified only once)
 					    isNotified = true;
 					}
-					else{
-					  //May be necessary??
-						//isNotified = false;
-					}
-
-
  			    }
 			  //[Note for later]: If you want to make this more verbose you can write it out so the user
 			  //			is notified which of the text fields/box(s) needs to be adjusted or filled out
@@ -565,6 +566,9 @@ public class Portals {
 
 			  //If the credentials entered do not exist, then a new account is created
 	        	if(!checkCredentials(patientCredentials) && validEntry) {
+					//Remove any previous Notifications
+					  buttonContainer.getChildren().remove(notificationTxt);
+
 	        		//Account does not exist, create a new Patient Account with the credentials entered
 	        		  createAccount(patientCredentials);
 	        	}
@@ -588,7 +592,8 @@ public class Portals {
 	      
 	        //Go back to the Welcome Page
 	        goBack.setOnAction(e -> {
-			  //Udpdate isNotified?? (prolly unecessary)
+			  //Update Notification Flag to false
+			    isNotified = false;
 
 	          //Go back to the Welcome Page from the 'Patient Login/New Account Page'
 	    	    runProgram();
