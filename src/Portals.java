@@ -568,8 +568,12 @@ public class Portals {
 	        		//Account does not exist, create a new Patient Account with the credentials entered
 	        		  createAccount(patientCredentials);
 
+					//Notify the user that the account is already created
+					  notificationTxt = new Label("*Account Successfully Created, you may proceed to login.");
+					  buttonContainer.getChildren().add(notificationTxt);
+
 					//Update notification flag
-					  isNotified = false;
+					  isNotified = true;
 	        	}
 	          //Account already exists
 	        	else {
@@ -618,7 +622,7 @@ public class Portals {
 		//Check Credentials (returns true if entered credentials match a real Patient account from .txt)
 		private boolean checkCredentials(String patientCredentials) {
 			//DEBUG
-			System.out.println("Checking credentials!!!");
+			//System.out.println("Checking credentials!!!");
 			
 			
 			//Open the file Containing all of the patient names  {PatientAccounts.txt}
