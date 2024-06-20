@@ -43,16 +43,13 @@
   	
 		[Functional requirements]
 
-		+ 
+		+ //Text here
 
 
 		[Non-functional requirements]
 
 	 	+ You might have to make the LoginPage and Create account Page separate pages?
-  	 	  
-  	 	+ Make a receptionist portal? for Scheduling and Deleting Patient Accounts?
-
-	
+		  [That way patient can enter insurance info, contact number, etc.]
 
 */
 
@@ -79,7 +76,7 @@ import java.util.*;	//Scanner for file reading
 //Object/Class containing: WelcomePage, PatientPortal, NursePortal, DoctorPortal, PatientLogin, StaffLogin
 public class Portals {
 	//Data of the Portals Object/Class
-	//--------------------------------
+	//-----------------------------------------------------------------
 	  //Primary Stage 
 		private Stage primeStage;
 		//[This is the Screen that Displays all of the Pages/Scenes created in Phase-1 document]
@@ -95,10 +92,9 @@ public class Portals {
 		private Label notificationTxt;
 		private boolean isNotified;   
 		//^^Used to ensure notification messages arent added too many times
-        
-	//--------------------------------
-		
+	//-----------------------------------------------------------------
 	    
+
 	//Method(s) of the Portals Object/Class
 	//------------------------------------------------------------------------------------------------------------------
 	  //Starts the Program at the Welcome Page
@@ -571,10 +567,14 @@ public class Portals {
 
 	        		//Account does not exist, create a new Patient Account with the credentials entered
 	        		  createAccount(patientCredentials);
+
+					//Update notification flag
+					  isNotified = false;
 	        	}
 	          //Account already exists
 	        	else {
 					//Notify the user that the account credentials already exist
+
 
 					//If-branch to make sure the user isn't being notified to much
 					if(!isNotified){
@@ -715,9 +715,9 @@ public class Portals {
 	  //------------------------------------
 			
 	
-	  //Default Constructor (Delete this piece of code when done debugging!!) 
+	  //Default Constructor (DELETE this piece of code when done debugging!!) 
 	  //------------------------------------	
-		public PatientPortal() {}
+		//public PatientPortal() {}
   	  //------------------------------------
 		
 	  //Constructor
