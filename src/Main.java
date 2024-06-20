@@ -1,5 +1,5 @@
 /*********************************************************************************************************
-    //[Contributors]:
+  //[Contributors]:
  	  - John Bostater
  	  
  	  - <Name here>
@@ -9,7 +9,7 @@
  	  - <Name here>
     
 
-    //[Description]:
+  //[Description]:
 		Arizona Medical is 
 		//Continue writing description
 	
@@ -17,15 +17,24 @@
 	//[Library/JavaFX Info]:
 		
 		[External JARS/Libraries used]
-			- JavaSE-22	{JRE System Library}
-			- JavaFX20	{java-sdk-22}			
+			- JavaSE-22.0.1 {JRE System Library}
+			- JavaFX22	    {java-sdk-22.0.1}			
 	
 		[Class path]
 			- JavaSDK
 	
     		
 	//[Etc]:
-			+ Virtual Machine Argument(s) used to run the .java file in EclipseIDE:
+      + [Running Program in Terminal]
+
+      //Compile/Build Object
+        javac --module-path "/path/to/javafx-sdk-22.0.1/lib" --add-modules javafx.controls,javafx.fxml Main.java
+
+      //Run the executable
+        java --module-path "/path/to/javafx-sdk-22.0.1/lib" --add-modules javafx.controls,javafx.fxml Main
+
+
+			+ Virtual Machine Argument(s) [For running in EclipseIDE]:
 			
 				--module-path /path/to/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml
 				
