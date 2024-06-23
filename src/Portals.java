@@ -2,12 +2,14 @@
  	//[Contributors]:
  	  - John Bostater
  	  
- 	  - <Name here>
- 	  
- 	  - ...
- 	  
- 	  - <Name here>
- 	  
+	  - Tristan Andrade
+
+      - Austin Mayhew
+
+      - Ryan Clark
+
+      - Juan Rosas Jr.
+
  	
  	//[Description]:
 	  This file contains code for creating/displaying the necessary Scenes/Pages
@@ -43,14 +45,18 @@
   	
 		[Functional requirements]
 
-		+ //Text here
-
+		+ NOTES THAT ARE RANDOM BUT I NEED TO WRITE DOWN
+		  
+		  For the [Create account button] when it is pressed remove the objects from the scene using 
+		  .getChildren.remove() related to logging in and then .getChildren.add() new/more text boxes 
+		  for Insurance, Contact info, etc.
+		
 
 		[Non-functional requirements]
 
 	 	+ You might have to make the LoginPage and Create account Page separate pages?
 		  [That way patient can enter insurance info, contact number, etc.]
-
+		  
 */
 
 
@@ -73,8 +79,12 @@ import java.util.*;	//Scanner for file reading
 
 
 
-//Object/Class containing: WelcomePage, PatientPortal, NursePortal, DoctorPortal, PatientLogin, StaffLogin
+//Portal Object/Class 
 public class Portals {
+	//This object contains: 
+	//						WelcomePage, PatientPortal, NursePortal, DoctorPortal, PatientLogin, StaffLogin
+
+
 	//Data of the Portals Object/Class
 	//-----------------------------------------------------------------
 	  //Primary Stage 
@@ -95,22 +105,7 @@ public class Portals {
 	//-----------------------------------------------------------------
 	    
 
-	//Method(s) of the Portals Object/Class
-	//------------------------------------------------------------------------------------------------------------------
-	  //Starts the Program at the Welcome Page
-	    public void runProgram() {
-		//From the Welcome Page the user can navigate to the 'login page' for Patient and Staff
-		//The 'Login Page' will take the User to the respective Portal
-		//If the user is to Logout 
-			
-		  //Set the Scene of the Stage & Display it
-			primeStage.setScene(welcomePage);
-			primeStage.show();
-		}
-	//------------------------------------------------------------------------------------------------------------------
 
-	  
-		
 	//Constructor of the Portals Object/Class
 	//------------------------------------------------------------------------------------------------------------------
 	  public Portals(Stage primaryStage){
@@ -209,12 +204,16 @@ public class Portals {
 	        	  //PatientPortal userPatient = new PatientPortal();
 			        	  
 		    	//Create the Patient Login/New Account Page
-			      PatientLogin patientLog = new PatientLogin();
+			      //PatientLogin patientLog = new PatientLogin();
 			        	
 		        //Load the Page/Scene	
 			      //For login, the correct credentials must be entered in order to proceed to the actual 'Patient Portal'
-          	      patientLog.patientLogin();
-		      });
+          	      //patientLog.patientLogin();
+		      
+			  	  //NEW
+				  patientLogin();
+			  
+			  });
 		          
 		  
 		        
@@ -222,6 +221,11 @@ public class Portals {
 	          staffLogin.setOnAction(e -> {
 	        	//From the Scene loaded here the user will select the Portal they would like to use {Nurse or Doctor}
 		        	  
+				//CALL UPON THE STAFF LOGIN SCENE FUNCTION OR WHATEVER TF
+				//HERE BRO
+
+
+
 	        	//Load the Scene that contains Buttons that will lead to the two Portal options {Nurse or Doctor}
 		        	  
 	          });
@@ -274,28 +278,65 @@ public class Portals {
             primeStage = primaryStage;
 		  //Update the private boolean for notifications
 		    isNotified = false; 
-	  }
+	}
 	//------------------------------------------------------------------------------------------------------------------
 	
-	  
-	//Objects/Class(s)
-	//
-	//Object for the Patient Login Page / Creating a New patient account
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	class PatientLogin{
-	  	
-	  //Constructor
-	  //------------------------------------------------------------------------------
-		//(this will be used in Main for "logging into" the account with the data the user entered {name & dob})
-		public PatientLogin(){}
-	  //------------------------------------------------------------------------------
-	
+
+
+	//Method(s) of the Portals Object/Class
+	//------------------------------------------------------------------------------------------------------------------
+	  //Starts the Program at the Welcome Page
+	    public void runProgram() {
+		  //From the Welcome Page the user can navigate to the 'login page' for Patient and Staff
+		  //The 'Login Page' will take the User to the respective Portal
+		  //If the user is to Logout 
+			
+		  //Set the Scene of the Stage & Display it
+			primeStage.setScene(welcomePage);
+			primeStage.show();
+		}
+
+
+	  //Displays the Staff Login Page
+	  	private void staffLogin(){
+		  //Debug
+		    Label yes = new Label("YESES");
+
+		  //Scene to be returned
+			Scene loginPage = new Scene(yes, 800, 600);
+
+		  //Create and return the scene with two buttons ()
+			//return loginPage;
+		}
+
+
+	  //Create Account
+		private void createAccount(String patientCredentials) {
+		  //Append the patients Credentials to the "PatientAccounts.txt"
 		
-	  //Methods
-	  //--------------------------------------------------------------------------------------------------------
-		//Login Page to proceed to the Patient Portal
-		//The user can also create a new Accoutn from here!!! (That will load a new Scene)
-		public void patientLogin(){		
+			try {
+			  //Load [PatientAccounts.txt] for writing		
+				FileWriter fileWriter = new FileWriter("PatientAccounts.txt", true);
+			  //[Note]:  'true' in the second parameter tells the fileWriter the file already exists
+			    
+				
+			  //Append the new Patient's name to the .txt file
+			    fileWriter.append(patientCredentials + "\n");
+			 
+			  //Close the file Writer
+			    fileWriter.close();
+			    
+			}
+			//File Does not exist error catch
+			catch(IOException e) {
+			  //Error Statement
+				System.out.println("Error!, File does not exist");
+			}
+		}
+
+
+	  //Log into account
+		private void patientLogin(){		
 		  //Buttons
           //==========================================================
 			//Relevant Buttons for the Login/New Account Page 
@@ -322,13 +363,13 @@ public class Portals {
 		    
 		    //Go Back      
 		      Button goBack = new Button("Go back");
-		  			//Set the dimensions of the Buttons
-			        //[Width x Height]
-				  	  goBack.setPrefSize(100, 40);  
-			          goBack.setMaxSize(100, 40);
-			          goBack.setMinSize(100, 40);
-			        //Set the Font of the Button's text
-			          goBack.setStyle("-fx-font-size: 16px;");      
+				//Set the dimensions of the Buttons
+				//[Width x Height]
+					goBack.setPrefSize(100, 40);  
+					goBack.setMaxSize(100, 40);
+					goBack.setMinSize(100, 40);
+				//Set the Font of the Button's text
+					goBack.setStyle("-fx-font-size: 16px;");      
 		  //==========================================================
 	 	    
 			  
@@ -377,8 +418,7 @@ public class Portals {
  		        //[Width x Height]
  		          yearTxt.setPrefSize(43, 25);  
  		          yearTxt.setMaxSize(43, 25);
-		          yearTxt.setMinSize(43, 25);
-		          
+		          yearTxt.setMinSize(43, 25);        
 	      //================================================================================
 		       
 	          
@@ -429,7 +469,6 @@ public class Portals {
 	      //================================================================================      
 
 
-
 		  //VBox & HBox Alignments the main Layout of the program
 	      //===================================================================================================
 	        //Credentials Section
@@ -464,8 +503,7 @@ public class Portals {
 	        //-------------------------------------------------------------------------
           //===================================================================================================
 
-
-	          
+          
 	      //Action Event Handling  {Button Usage}
 	      //================================================================================			  
 	        //Log into the Patient Account 
@@ -476,7 +514,7 @@ public class Portals {
 	    
 	        	
 	        	//Compile into one string to be passed into PatientPortal Constructor 
-	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
+	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + " " 
 	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
 	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
 	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
@@ -511,18 +549,37 @@ public class Portals {
 
 				}
 	       });
-			     
 		          
 		          
-		    //Create a new Account
+		  //Create a new Account
 	        newPatient.setOnAction(e -> {
 	          //This will Create a new Account with the credentials the user has entered
 	        	//HAVE TEXT THAT NOTIFIES THE USER OF THE NEW ACCOUNT CREATED AND HOW THEY 
 	        	//CAN ENTER HIT the LOGIN button TO proceed to the patient portal
 	        	
+				//[New Idea]
+				/*
+					//Have the new Account Button Change the Credentials container to include
+						Contact info (phone number), insurance info, pharmacy info, etc.
+
+					//Labels
+					Label contactLbl = new Label("Phone Number: ");
+					...
+
+					//Add the Labels and Text Boxes to the credentials container
+					credContainer.getChildren().add(contactLbl);
+					...
+
+					//You will have to update the container size for the new text box fields
+					credContainer.setPrefSize(300,200);
+					credContainer.setMaxSize(300,200);
+					credContainer.setMinSize(300,200);
+				*/
+
+
 	          //Compile the credentials entered by the Patient/User
 	        	//Compile into one string to be passed into PatientPortal Constructor 
-	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
+	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + " " 
 	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
 	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
 	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
@@ -559,7 +616,6 @@ public class Portals {
 			  //			is notified which of the text fields/box(s) needs to be adjusted or filled out
 
 
-
 			  //If the credentials entered do not exist, then a new account is created
 	        	if(!checkCredentials(patientCredentials) && validEntry) {
 					//Remove any previous Notifications
@@ -569,7 +625,7 @@ public class Portals {
 	        		  createAccount(patientCredentials);
 
 					//Notify the user that the account is already created
-					  notificationTxt = new Label("*Account Successfully Created, you may proceed to login.");
+					  notificationTxt = new Label("*Account Successfully Created.\n  You may proceed to login.");
 					  buttonContainer.getChildren().add(notificationTxt);
 
 					//Update notification flag
@@ -589,9 +645,7 @@ public class Portals {
 					  //User has been notified
 					    isNotified = true;	
 					}
-	        	}
-	        	
-	        	
+	        	}        	
 	        });
 	      
 	        //Go back to the Welcome Page
@@ -605,25 +659,21 @@ public class Portals {
 		  //================================================================================
 		
 
-	     //Compile the Main Layout of the loginPage
-           VBox mainLayout = new VBox(header, credSection, buttonContainer);
-           mainLayout.setAlignment(Pos.CENTER);
+	      //Compile the Main Layout of the loginPage
+           	VBox mainLayout = new VBox(header, credSection, buttonContainer);
+           	mainLayout.setAlignment(Pos.CENTER);
        	  
-         //Create the Scene that displays the "Patient Login/New Account Page"
-           Scene loginPage = new Scene(mainLayout, 1024, 768);
+          //Create the Scene that displays the "Patient Login/New Account Page"
+          	Scene loginPage = new Scene(mainLayout, 1024, 768);
 		          
-         //Display the Login/Create account page
-           primeStage.setScene(loginPage);
-           primeStage.show();		              
-	     //=====================================================================
+          //Display the Login/Create account page
+          	primeStage.setScene(loginPage);
+            primeStage.show();		              
 		}
-		
-		
+	     
+
 		//Check Credentials (returns true if entered credentials match a real Patient account from .txt)
-		private boolean checkCredentials(String patientCredentials) {
-			//DEBUG
-			//System.out.println("Checking credentials!!!");
-			
+		  private boolean checkCredentials(String patientCredentials) {
 			
 			//Open the file Containing all of the patient names  {PatientAccounts.txt}
 			try {
@@ -661,146 +711,153 @@ public class Portals {
 			//No matches found, return false
 			  return false;
 		}
-		
-		
-	    //Create Account(String patientCredentials)
-		private void createAccount(String patientCredentials) {
-		  //Append the patients Credentials to the "PatientAccounts.txt"
-		
-			try {
-			  //Load [PatientAccounts.txt] for writing		
-				FileWriter fileWriter = new FileWriter("PatientAccounts.txt", true);
-			  //[Note]:  'true' in the second parameter tells the fileWriter the file already exists
-			    
+	//--------------------------------------------------------------------------------------------------------
+	
+
+	  
+	//Objects/Class(s)
+	//--------------------------------------------------------------------------------------------------------
+
+	  //Patient Portal
+	  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		class PatientPortal{
+		  //Buttons/Methods:		
+		  //		[Change Patient Information]	[View Previous Visits]	[Messages]	[Logout]
+
+
+		  //Patient's data (Will be loaded upon the 'Login' button being hit in the Patient "Login/New Account Page" {loaded from Welcome Page})
+		  //--------------------------------------------------
+				private String fullName = "";	//Ex: "John Smith"
+				private String dateOfBirth = "";
+				private String phoneNumber = "";
+				private String insuranceInfo = "";
+				private String pharmacyInfo = "";
+				//private boolean logout = false;
+		  //--------------------------------------------------
 				
-			  //Append the new Patient's name to the .txt file
-			    fileWriter.append(patientCredentials + "\n");
-			 
-			  //Close the file Writer
-			    fileWriter.close();
-			    
-			}
-			//File Does not exist error catch
-			catch(IOException e) {
-			  //Error Statement
-				System.out.println("Error!, File does not exist");
-			}
-		    
-		    
-		    
-		    
-		}
-		//--------------------------------------------------------------------------------------------------------
-	}
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
-	
-	
-	//This will simply contain the methods for traversi
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	class StaffLogin{
 		
-	}
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
-	
-	
-	//Buttons/Methods:		
-	//		[Change Patient Information]	[View Previous Visits]	[Messages]	[Logout]
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	class PatientPortal{
-	  //Patient's data (Will be loaded upon the 'Login' button being hit in the Patient "Login/New Account Page" {loaded from Welcome Page})
-	  //------------------------------------
-		private String fullName = "";
-		private String dateOfBirth = "";
-		private String phoneNumber = "";
-		private String insuranceInfo = "";
-		private boolean logout = false;
-	  //------------------------------------
+		  //Default Constructor (DELETE this piece of code when done debugging!!) 
+		  //------------------------------------	
+			//public PatientPortal() {}
+		  //------------------------------------
 			
-	
-	  //Default Constructor (DELETE this piece of code when done debugging!!) 
-	  //------------------------------------	
-		//public PatientPortal() {}
-  	  //------------------------------------
-		
-	  //Constructor
-	  //------------------------------------------------------------------------------
-	    public PatientPortal(String patientCredentials){
-		  //Take apart the userCredentials String using delimeters
-		  //Update the Patient's data with the following broken up data
-	    	
-	    	   //First Name
-	    	     int pos = patientCredentials.indexOf(",");
-	    	     fullName = patientCredentials.substring(0, pos);
-	    	     
-	    	     //DEBUG
-	    	     System.out.println("Debug: " + fullName);
-	    	   
-	    	   //Last Name
-	    	   
-	    	   
-	    	   //Date of Birth
-	    	   
-	    	   
-	    	   //----
-	    	
-		}
-	  //------------------------------------------------------------------------------
-		 
-	  //Methods
-	  //------------------------------------------------------------------------------
-		//Creates & Displays the Patient Portal Scene		
-	      //[NEW NOTE: this method will be used for every "exit" button within the other methods below]
-		private void displayPortal() {
-		  //Debug thing
-			System.out.println("Login Successful!!");
+
+		  //Constructor
+		  //------------------------------------------------------------------------------
+			public PatientPortal(String patientCredentials){
+			//Take apart the userCredentials String using delimeters
+			//Update the Patient's data with the following broken up data
+			
+			//Full Name (First & Last Name)
+				int pos = patientCredentials.indexOf(",");
+				fullName = patientCredentials.substring(0, pos);
+					
+			//Date of Birth
+				dateOfBirth = patientCredentials.substring(pos + 1, patientCredentials.length());
+
+			//FIX THIS UP OR JUST MAKE THE PATIENT ACCOUNT CREATION FORM REQUIRE IT!!
+			//Set default values to the unentered information??
+				phoneNumber = "XXX-XXX-XXXX";
+			
+			//Set default values to the unentered information??
+				insuranceInfo = "<Insurance Information>";
+			}
+		  //------------------------------------------------------------------------------
+
+
+
+		  //Buttons	{These will load the methods with the same name}
+		  //------------------------------------------------------------------------------
+			//Change Patient Information {Scene}
+			//You can exit this method via the Button "Exit"
 			
 			
-		   //DEBUG
-		    Button hereHe = new Button("Debug button");
-			
-		  //Load the Patient Portal scene to be displayed
-		    Scene someBs = new Scene(hereHe, 800, 600);
+			//View Previous Visits {Scene}
+			//You can exit this method via the Button "Exit"
 			
 			
-		  //Set the primary/main Scene and displays it
- 		    primeStage.setScene(someBs);
-		    primeStage.show();
+			//Messages {Scene}
+			//You can exit this method/scene via the Button "Exit"
+			
+			
+			//Logout {runs the function:  runProgram() }
+			
+			
+			//Miscellanious (private functions)
+			//Check the Credentials entered into the patient login 
+		  //------------------------------------------------------------------------------
+
+
+
+		  //Methods
+		  //------------------------------------------------------------------------------
+			//Creates & Displays the Patient Portal Scene		
+			//[NEW NOTE: this method will be used for every "exit" button within the other methods below]
+			private void displayPortal() {
+			//Debug thing
+				System.out.println("Login Successful!!");
+				
+				
+			//DEBUG
+				Button hereHe = new Button("Debug button");
+				
+			//Load the Patient Portal scene to be displayed
+				Scene someBs = new Scene(hereHe, 800, 600);
+				
+				
+			//Set the primary/main Scene and displays it
+				primeStage.setScene(someBs);
+				primeStage.show();
+			}
+
+			//Change Patient Information {Scene}
+			//You can exit this method via the Button "Exit"
+			
+			
+			//View Previous Visits {Scene}
+			//You can exit this method via the Button "Exit"
+			
+			
+			//Messages {Scene}
+			//You can exit this method/scene via the Button "Exit"
+			
+			
+			//Logout {runs the function:  runProgram() }
+
+		  //------------------------------------------------------------------------------
+
+		  //Action Event Handling
+		  //------------------------------------------------------------------------------
+			//Change Patient Information {Scene}
+			//You can exit this method via the Button "Exit"
+			
+			
+			//View Previous Visits {Scene}
+			//You can exit this method via the Button "Exit"
+			
+			
+			//Messages {Scene}
+			//You can exit this method/scene via the Button "Exit"
+			
+			
+			//Logout {runs the function:  runProgram() }
+			
+			
+			//Miscellanious (private functions)
+			//Check the Credentials entered into the patient login 
+		  //------------------------------------------------------------------------------
 	    }
-		
-		
-		//Change Patient Information {Scene}
-		  //You can exit this method via the Button "Exit"
-		
-		
-		//View Previous Visits {Scene}
-		  //You can exit this method via the Button "Exit"
-		
-		
-		//Messages {Scene}
-		  //You can exit this method/scene via the Button "Exit"
-		
-		
-		//Logout {runs the function:  runProgram() }
-		
-		
-		//Miscellanious (private functions)
-		  //Check the Credentials entered into the patient login 
-		//------------------------------------------------------------------------------
-	}
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	
-	
-	//Nurse Portal Object/Class
-	//Buttons/Methods:
-	//		[New Visit Form]	[Messages]	[Logout]
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	class NursePortal{
+  	  //Nurse Portal Object/Class
+	  //Buttons/Methods:
+	  //		[New Visit Form]	[Messages]	[Logout]
+	  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		class NursePortal{
 		
-	}
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	  	}
+	  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	
 	
@@ -808,8 +865,100 @@ public class Portals {
 	//Buttons/Methods:
 	//		[Patient Visit Form]	[View Patient Records]	[Messages]	[Logout]
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	class DoctorPortal{
+	  class DoctorPortal{
 		
-	}
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	  }
+  	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //--------------------------------------------------------------------------------------------------------
 }
+
+
+
+//[Etc]:
+//--------------------------------------------------------------------------------------------------------
+//[TEMPLATE/BOILER-PLATE CODE FOR DropDown menu/ComboBox]
+/*
+//Refreshing on string array!
+//-----
+System.out.print("Enter Capacity: ");
+Scanner scanner = new Scanner(System.in);
+int userInput = scanner.nextInt();
+
+
+//---------------------------------------------------------------------------------------------------------------------
+//[Relevant Code for Project {CSE-360 Summer}]
+
+//New ComboBox (Dropdown Selection)
+ComboBox<String> dropSelect = new ComboBox<>();
+//(We will be using a String array to store the unique PatientIds & Names to be displayed/useable within the ComboBox)
+//[Below Code]: Adding Strings to the ComboBox manually
+//dropSelect.getItems().addAll("Selection #1", "Selection #2", "Selection #3");
+
+
+//This will be the list generated from reading the relevant .txt file for loading patient names & dob
+String[] patientList = new String[userInput];
+//We will most likely be creating a method or function that reads from a small .txt file
+//to get the patients names (Unique Patient name & Dob per line?? so we use file.read.nextLine()??)
+//that simply has the patients' full name & dob? (PatientList.txt??)
+//	[Note: we will have other .txt files for storing the patient data, this smaller .txt file could
+//			be a little faster to read from??]
+
+
+//Fill the String array & print success/progress
+//[Pointless code for our Project (do not include)]
+for(int i = 0; i < userInput; i++){
+	//Add the string to the shit
+	patientList[i] = "Yes#" + i;
+
+	//Print from the yes array!
+	System.out.println("yes[" + i + "] == " + patientList[i]);
+}
+
+//Close the scanner
+scanner.close();
+//-----
+
+
+//Add our String array to the ComboBox, (Add options to dropdown menu)
+//[This will have to be adapted and will be used in the: doctor portal (view patient data), messaging board, etc.]
+dropSelect.getItems().addAll(patientList);
+
+
+//Create new Vertical Box to display the ComboBox
+VBox root = new VBox();
+root.getChildren().add(dropSelect);
+
+// Create a scene with the VBox layout
+Scene scene = new Scene(root, 300, 200);
+
+// Set the scene to the stage and show the stage
+primaryStage.setScene(scene);
+primaryStage.setTitle("ComboBox Example");
+primaryStage.show();
+
+
+HBox rootMe = new HBox();
+Scene scene3 = new Scene(rootMe, 400, 500);
+
+
+
+//Handler for selection/action on the CheckBox Object (Dropdown menu)
+dropSelect.setOnAction(event -> {
+	String selectedScene = dropSelect.getSelectionModel().getSelectedItem();
+	
+	//Switch-case statement for the event of "Selecting patient"
+	switch (selectedScene) {
+		case "Yes#4":
+			
+			primaryStage.setScene(scene3);
+			primaryStage.show();
+		
+			break;
+			
+		case "Yes#1":
+			
+			break;
+	}
+});
+*/	
+//--------------------------------------------------------------------------------------------------------
