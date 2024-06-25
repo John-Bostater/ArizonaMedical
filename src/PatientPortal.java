@@ -92,8 +92,8 @@ public class PatientPortal{
         private Scene welcomePage;
 
       //Patient Information
-        private String fullName = "";	//Ex: "John Smith"
-        private String dateOfBirth = "";
+        //private String fullName = "";	//Ex: "John Smith"
+        //private String dateOfBirth = "";
         private String phoneNumber = "";
         private String insuranceInfo = "";
         private String pharmacyInfo = "";
@@ -120,7 +120,6 @@ public class PatientPortal{
 
         //Set the patients credentials
           patientCredentials = patientCreds;
-
 
 
         //Full Name (First & Last Name)
@@ -422,10 +421,17 @@ public class PatientPortal{
                  //before the patients credentials have the leading text: "Patient: <patientCreds>"
 
                  //Flag that "puts on the brakes" of the fileReader so it will
-
+                   boolean patientFound = false;
 
                  //Store the line into a string to be used
                    String line = fileReader.nextLine(); //Starts at the first line of text in .txt file
+
+                 //NEW
+                   short yesME = 10;
+
+
+                 //String array that contains all of the exam dates
+                   String[] examDates = new String[yesME];   //We could either use the default
 
                  //This 
                    if(line.contains("Patient: " + patientCredentials)){
@@ -433,10 +439,18 @@ public class PatientPortal{
                        System.out.println("Patient has been found!");
 
                      //Activate the flag
-
+                     patientFound = true;
                    }
 
-                 //If-branches below for collecting the data to display
+                 //Collect all of the exam dates
+                  if(line.contains("Date: ") && patientFound){
+                    
+                  }
+
+                 //Break statement if another "Patient: " is encountered (we are done reading all the exam dates for our specified patient)
+
+
+
                }
 
 

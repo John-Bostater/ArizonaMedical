@@ -629,6 +629,17 @@ public class Portals {
 				*/
 
 
+			  //Add new text boxes to the Create account section for the user to enter
+			  //Do this via the credSection.getChildren().addAll()
+				//Label debugLbl = new Label("DEBUG!!");
+
+			  //Make sure these elements only get added once!!
+
+			  //EXAMPLE [Conform this to your needs]
+				//credContainer.getChildren().add(debugLbl);
+
+
+
 	          //Compile the credentials entered by the Patient/User
 	        	//Compile into one string to be passed into PatientPortal Constructor 
 	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + " " 
@@ -637,6 +648,11 @@ public class Portals {
 	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
 	        			  					  + yearTxt.getText().replaceAll("\\s", "");
 	        	  //[Every String contains a regex for removing all whitespace (Makes program more Robust)]
+
+			  
+			  //Patient Information String that will contain: phonenumber, insuranceInfo, pharmacyInfo
+				//It will collect these from the new text fields/boxes you have added
+				  String patientInfo = "Placeholder text";
 
 
 			  //Flag to make sure the user has correctly entered their data to the field
