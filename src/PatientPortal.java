@@ -184,13 +184,15 @@ public class PatientPortal{
 
         //Labels/Text
         //==================================================================
+          //Welcome!
             Label header0 = new Label("Welcome!");
-            //Set the font of header
-            header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
+             //Set the font of header
+               header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
 
+          //What would you  like to do today?
             Label text0 = new Label("What would you like to do today?");
-            //Set the font of text
-            text0.setStyle("-fx-font-size: 18px;");
+              //Set the font of text
+                text0.setStyle("-fx-font-size: 18px;");
         //==================================================================
 
 
@@ -261,11 +263,11 @@ public class PatientPortal{
         //You can exit this Scene via the Button "Exit"
 
         //Labels
-        //=====================================================================
+        //==============================================================================
           //Contact Information
             Label contactInfoLbl = new Label("Contact Information:");
               //Set font of Text
-                contactInfoLbl.setStyle("-fx-font-size: 20px;");
+                contactInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
 
           //Phone Number
@@ -277,14 +279,14 @@ public class PatientPortal{
           //Insurance Information
             Label insuranceInfoLbl = new Label("Insurance Information:");
               //Set font of Text
-                insuranceInfoLbl.setStyle("-fx-font-size: 20px;");
+                insuranceInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
 
           //Pharmaceutical Information
             Label pharmacyInfoLbl = new Label("Pharmaceutical Information:");
               //Set font of Text
-                pharmacyInfoLbl.setStyle("-fx-font-size: 20px;");
-        //=====================================================================
+                pharmacyInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+        //==============================================================================
         
 
         //Buttons
@@ -292,6 +294,12 @@ public class PatientPortal{
           //Update Information (Saves to .txt file: PatientInfo.txt)
             Button updateInfo = new Button("Update Information");
               //Set the Dimensions & text of the button
+              //[Width x Height]
+    			  	  updateInfo.setPrefSize(200, 40);  
+		            updateInfo.setMaxSize(200, 40);
+		            updateInfo.setMinSize(200, 40);
+		          //Set the Font of the Button's text
+		            updateInfo.setStyle("-fx-font-size: 20px;");
 
           //Exit,   This will run the displayPortal() Method!!
             Button exitPage = new Button("Exit");
@@ -327,13 +335,8 @@ public class PatientPortal{
               //Align the Hbox
                 alignBox0.setAlignment(Pos.CENTER);
 
-          //The second HBox will contain the three VBox(s) with black borders around them
-            //HBox alignBox1 = new HBox(20, );
-
-
           //The third HBox will encapsulate the buttons
             HBox buttonsSection = new HBox(20, updateInfo, exitPage);
-
 
           //DEBUG VBOX
             VBox theBs = new VBox(alignBox0, buttonsSection);
@@ -356,12 +359,12 @@ public class PatientPortal{
           //Select visit to view
             Label header0 = new Label("Select Visit to view:");
               //Set size of text
-                header0.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+                header0.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
 
           //Visit summary
-            Label header1 = new Label("Visit Summary");
+            Label header1 = new Label("Visit Summary:");
               //Set size of text
-                header1.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+                header1.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
         //======================================================================
 
 
@@ -369,9 +372,12 @@ public class PatientPortal{
         //=====================================================
           Button exitPage = new Button("Exit");
             //Set the Dimensions and text of the button
-              exitPage.setPrefSize(75, 25);
-              exitPage.setMinSize(75, 25);
-              exitPage.setMaxSize(75, 25);
+              exitPage.setPrefSize(75, 40);
+              exitPage.setMinSize(75, 40);
+              exitPage.setMaxSize(75, 40);
+            //Set the font & size
+              exitPage.setStyle("-fx-font-size: 20px;");
+          
         //=====================================================
 
 
@@ -379,11 +385,15 @@ public class PatientPortal{
         //=====================================================
           //Create the dropDown menu object
             ComboBox<String> dropSelect = new ComboBox<>();
+              //Set the Dimensions of the drop down menu
+              //[Width x Height]
+                dropSelect.setPrefSize(200, 40);
+                dropSelect.setMinSize(200, 40);
+                dropSelect.setMaxSize(200, 40);
 
           //Fill the ComboBox with all of the Visit Dates via: PatientVisits.txt???
             //You will have to use a for-loop for that...
             //Call upon a function or method to do it or just do it here
-
         //=====================================================
 
 
@@ -391,6 +401,16 @@ public class PatientPortal{
         //=================================================================================
           //This text box will display the visit summary of the visit date selected
             TextArea visitSummary = new TextArea("<Select a Visit to be Displayed>");
+
+          //Set the textBox size and text style??
+            visitSummary.setStyle("-fx-font-weight: 18px");
+
+          //[Width x Height]
+			  	  visitSummary.setPrefSize(800, 550);  
+            visitSummary.setMaxSize(800, 550);
+            visitSummary.setMinSize(800, 550);
+          //Set the Font of the Button's text
+            visitSummary.setStyle("-fx-font-size: 18px;");
         //=================================================================================
 
 
@@ -408,22 +428,40 @@ public class PatientPortal{
         //=================================================================
           //So far this alignment is concurrent with that of Phase1
 
-          //Horizontally align the Labels on top
-            HBox lblBox = new HBox(25, header0, header1);
+          //Horizontally align the Dropdown select & Exit button
+            HBox functContainer = new HBox(10, dropSelect, exitPage);
 
-          //Vertically align the Dropdown select & Exit button
-            VBox functContainer = new VBox(30, dropSelect, exitPage);
+          //Vertically align the Header 0 Label and the button container box
+            VBox vertical0 = new VBox(header0, functContainer);
 
-          //Horizontally align the functioanl feats & text to be displayed
-            HBox horizontal0 = new HBox(20, functContainer, visitSummary);
+          //Vertically alignment of header and text box
+            VBox vertical1 = new VBox(10, header1, visitSummary);
 
-          //Final Vertical alignment of the Boxes For a clean display
-            VBox vertical0 = new VBox(10, lblBox, horizontal0);
+          //Set the alignment of the HBox
+            //horizontal0.setAlignment(Pos.CENTER);
+
+          //Final Box for alignment
+            //HBox horizontal0 = new HBox(20, functContainer, vertical0);
+
+          //Final Adjustment VBox
+            VBox vertical2 = new VBox(vertical0, vertical1);
+          
+          //Set the alignment of the VBox
+            vertical2.setAlignment(Pos.CENTER);
+
+          //Set the alignment of the final box to be concurrent with the center of the page
+            vertical2.setAlignment(Pos.CENTER);
+
+          //Horizontally align the VBox [Final box & adjustment]
+            HBox horizontal0 = new HBox(vertical2);
+
+          //Set the adjustment
+            horizontal0.setAlignment(Pos.CENTER);        
         //=================================================================
 
 
         //Setup Scene
-          Scene mainLayout = new Scene(vertical0, 1024, 768);
+          Scene mainLayout = new Scene(horizontal0, 1024, 768);
         //Return Scene
           return mainLayout;
       }
@@ -431,9 +469,9 @@ public class PatientPortal{
 
     //Messages {Scene}
     //You can exit this method/scene via the Button "Exit"
-      private Scene messagePage(){
+      //private Scene messagePage(){
 
-      }
+      //}
 
     
     //Logout {runs the function:  runProgram() }
