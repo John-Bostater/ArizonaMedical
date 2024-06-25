@@ -144,32 +144,41 @@ public class PatientPortal{
             Button changePatientInfo = new Button("Change Patient Information");
             //Set the dimensions of the Button
            	  //[Width x Height]
-           	    changePatientInfo.setPrefSize(100, 50);  
-           	    changePatientInfo.setMaxSize(100, 50);
-           	    changePatientInfo.setMinSize(100, 50);
-	          //[Width x Height]
-           	    changePatientInfo.setPrefSize(100, 50);  
-           	    changePatientInfo.setMaxSize(100, 50);
-           	    changePatientInfo.setMinSize(100, 50);
-
+           	    changePatientInfo.setPrefSize(250, 40);  
+           	    changePatientInfo.setMaxSize(250, 40);
+           	    changePatientInfo.setMinSize(250, 40);
+              //Set the Font of the Button's text
+                changePatientInfo.setStyle("-fx-font-size: 18px;");
 
         //View Previous Visits 
             Button viewPreviousVisits = new Button("View Previous Visits");
-            //Set the Font and Size of the button
-
-
-            //(^^ use a dropdown menu!!! for navigating/seeing available visits)
-
+            //Set the dimensions of the Buttons
+              //[Width x Height]
+                viewPreviousVisits.setPrefSize(200, 40);  
+                viewPreviousVisits.setMaxSize(200, 40);
+                viewPreviousVisits.setMinSize(200, 40);
+              //Set the Font of the Button's text
+                viewPreviousVisits.setStyle("-fx-font-size: 18px;");
 
         //Messages
             Button messageInbox = new Button("Messages");
-            //Set the Font and Size of the button
-
+            //Set the dimensions of the Buttons
+              //[Width x Height]
+                messageInbox.setPrefSize(125, 40);  
+                messageInbox.setMaxSize(125, 40);
+                messageInbox.setMinSize(125, 40);
+              //Set the Font of the Button's text
+                messageInbox.setStyle("-fx-font-size: 18px;");
 
         //Logout	
             Button signOut = new Button("Logout");	
-            //Set the Font and Size of the button
-
+            //Set the dimensions of the Buttons
+              //[Width x Height]
+                signOut.setPrefSize(100, 40);  
+                signOut.setMaxSize(100, 40);
+                signOut.setMinSize(100, 40);
+              //Set the Font of the Button's text
+                signOut.setStyle("-fx-font-size: 18px;");
         //==================================================================
 
 
@@ -200,6 +209,11 @@ public class PatientPortal{
             viewPreviousVisits.setOnAction(e -> {
               //This will load a scene that has the DROPDOWN menu
               //Refer to code in [etc] for usage...
+              //Load the View Previous Visits Page
+                primeStage.setScene(previousVisits());
+
+              //Display the Scene
+                primeStage.show();
             });
 
 
@@ -334,12 +348,93 @@ public class PatientPortal{
     
 
     //View Previous Visits {Scene}
-    //You can exit this method via the Button "Exit"
+      private Scene previousVisits(){
+        //This will have a dropwn down menu and only one button for exiting
+
+        //Labels
+        //======================================================================
+          //Select visit to view
+            Label header0 = new Label("Select Visit to view:");
+              //Set size of text
+                header0.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+
+          //Visit summary
+            Label header1 = new Label("Visit Summary");
+              //Set size of text
+                header1.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        //======================================================================
+
+
+        //Buttons
+        //=====================================================
+          Button exitPage = new Button("Exit");
+            //Set the Dimensions and text of the button
+              exitPage.setPrefSize(75, 25);
+              exitPage.setMinSize(75, 25);
+              exitPage.setMaxSize(75, 25);
+        //=====================================================
+
+
+        //DropDown Menu
+        //=====================================================
+          //Create the dropDown menu object
+            ComboBox<String> dropSelect = new ComboBox<>();
+
+          //Fill the ComboBox with all of the Visit Dates via: PatientVisits.txt???
+            //You will have to use a for-loop for that...
+            //Call upon a function or method to do it or just do it here
+
+        //=====================================================
+
+
+        //Text Boxes
+        //=================================================================================
+          //This text box will display the visit summary of the visit date selected
+            TextArea visitSummary = new TextArea("<Select a Visit to be Displayed>");
+        //=================================================================================
+
+
+        //Action-Event Handling
+        //=====================================================
+          //Exit
+            exitPage.setOnAction(e -> {
+              //Load the Patient Portal page/scene
+                displayPortal();
+            });
+        //=====================================================
+
+
+        //Alignment
+        //=================================================================
+          //So far this alignment is concurrent with that of Phase1
+
+          //Horizontally align the Labels on top
+            HBox lblBox = new HBox(25, header0, header1);
+
+          //Vertically align the Dropdown select & Exit button
+            VBox functContainer = new VBox(30, dropSelect, exitPage);
+
+          //Horizontally align the functioanl feats & text to be displayed
+            HBox horizontal0 = new HBox(20, functContainer, visitSummary);
+
+          //Final Vertical alignment of the Boxes For a clean display
+            VBox vertical0 = new VBox(10, lblBox, horizontal0);
+        //=================================================================
+
+
+        //Setup Scene
+          Scene mainLayout = new Scene(vertical0, 1024, 768);
+        //Return Scene
+          return mainLayout;
+      }
     
-    
+
     //Messages {Scene}
     //You can exit this method/scene via the Button "Exit"
-    
+      private Scene messagePage(){
+
+      }
+
     
     //Logout {runs the function:  runProgram() }
 

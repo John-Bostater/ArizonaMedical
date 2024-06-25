@@ -97,7 +97,6 @@ public class Main extends Application{
       launch(args);
   }
 
-
   //Sets up the GUI, along with the event handling & functionality of the program
   public void start(Stage primaryStage) {
     //Program Loop: 
