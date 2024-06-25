@@ -18,7 +18,7 @@
 	
 	//[Aspect Ratio/Dimension of Graphical User Interface]: 
 
-	  - [4:3]	-->   [1024 x 768]
+	  - [4:3]	-->   [1024 x 768]	--	{Width x Height}
 	 
 	
 	//[Files Created/Used within the program for storing/loading data]:
@@ -82,11 +82,11 @@ import java.util.*;	//Scanner for file reading
 //Portal Object/Class 
 public class Portals {
 	//This object contains: 
-	//						WelcomePage, PatientPortal, NursePortal, DoctorPortal, PatientLogin, StaffLogin
+	//	[WelcomePage]	[PatientPortal]	[NursePortal]	[DoctorPortal]	[PatientLogin]	[StaffLogin]
 
 
 	//Data of the Portals Object/Class
-	//-----------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------
 	  //Primary Stage 
 		private Stage primeStage;
 		//[This is the Screen that Displays all of the Pages/Scenes created in Phase-1 document]
@@ -97,13 +97,20 @@ public class Portals {
 	  //Arizona Medical Logo Image
 		private Image azMedLogo;
 		
-	  //New Idea
-		//Note text??  {Make this a global notification so that when }
+	  //Notification Text
 		private Label notificationTxt;
+
+	  //Notification Flag
 		private boolean isNotified;   
 		//^^Used to ensure notification messages arent added too many times
-	//-----------------------------------------------------------------
-	    
+
+	  //[New Idea!!]
+	  //
+	  //Portal Objects
+	    private PatientPortal patientView;
+		private NursePortal nurseView;
+		private DoctorPortal doctorView;
+	//-------------------------------------------------------------------------------------------
 
 
 	//Constructor of the Portals Object/Class
@@ -179,20 +186,20 @@ public class Portals {
            	    exitProg.setMaxSize(60, 50);
            	    exitProg.setMinSize(60, 50);          
 		          
-            //Set text Size within buttons
-              patientLogin.setStyle("-fx-font-size: 20px;");
-              staffLogin.setStyle("-fx-font-size: 20px;");
-              exitProg.setStyle("-fx-font-size: 18px;");
+              //Set text Size within buttons
+  	            patientLogin.setStyle("-fx-font-size: 20px;");
+				staffLogin.setStyle("-fx-font-size: 20px;");
+				exitProg.setStyle("-fx-font-size: 18px;");
               
-            //Set padding
-              buttonsSection.setAlignment(Pos.CENTER);
-              buttonsSection.setPadding(new Insets(10, 0, 10, 0));
+              //Set padding
+              	buttonsSection.setAlignment(Pos.CENTER);
+              	buttonsSection.setPadding(new Insets(10, 0, 10, 0));
                     
             //Set up the main layout of the GUI 
-	          VBox mainLayout = new VBox(20, header0, azMedLogo, header1, buttonsSection);
-	          mainLayout.setPadding(new Insets(10));
+			  VBox mainLayout = new VBox(20, header0, azMedLogo, header1, buttonsSection);
+			  mainLayout.setPadding(new Insets(10));
 	        //Set all of the relevant Labels, Photos, and Buttons into center alignment
-	          mainLayout.setAlignment(Pos.CENTER);
+	      	  mainLayout.setAlignment(Pos.CENTER);
 	      //=============================================================================================  
 	              
 	         
@@ -200,36 +207,16 @@ public class Portals {
 	      //================================================================================================================
 		    //Login/New Account Page/Scene for the Patient
 	          patientLogin.setOnAction(e -> {
-		        //Create the new patient portal object
-	        	  //PatientPortal userPatient = new PatientPortal();
-			        	  
-		    	//Create the Patient Login/New Account Page
-			      //PatientLogin patientLog = new PatientLogin();
-			        	
-		        //Load the Page/Scene	
-			      //For login, the correct credentials must be entered in order to proceed to the actual 'Patient Portal'
-          	      //patientLog.patientLogin();
-		      
-			  	  //NEW
+		        //Call upon the patientLogin method {Method of Portals Object/Class}
 				  patientLogin();
-			  
 			  });
 		          
-		  
 		        
 		    //Login Page/Scene for the Staff
 	          staffLogin.setOnAction(e -> {
-	        	//From the Scene loaded here the user will select the Portal they would like to use {Nurse or Doctor}
-		        	  
-				//CALL UPON THE STAFF LOGIN SCENE FUNCTION OR WHATEVER TF
-				//HERE BRO
-
-
-
-	        	//Load the Scene that contains Buttons that will lead to the two Portal options {Nurse or Doctor}
-		        	  
-	          });
-		          
+				//Call upon the staff login page that shows: [Nurse] --> NursePortal  &&  [Doctor] --> DoctorPortal
+				  staffLogin(); 
+	          });        
 		        
 		        
 	        //End the program (More of a debug thing but why not keep it)
@@ -239,45 +226,48 @@ public class Portals {
 	        	  primeStage.close();	        	 
 	          });
 		
-	      //Create the welcomePage Scene	//[4x3] aspect ratio
-	        welcomePage = new Scene(mainLayout, 1024, 768);          
-	    //================================================================================================================
+	        //Create the welcomePage Scene	//[4x3] aspect ratio
+	          welcomePage = new Scene(mainLayout, 1024, 768);          
+	      //================================================================================================================
 
 	        
-	    //Necessary File Check
-        //================================================================================================================
-	      //Check to see if the file(s) exist. If not, create it.
-	      try {
-	        //List all of the required files for the system to run
-	          File patientAccounts = new File("PatientAccounts.txt");
-		    
-	        //Check to see if the file already exists and if it does not, create it
-	        if(patientAccounts.exists()) {
-	        	//File Already exists, do nothing
-	        	System.out.println("File Exists!");
-	        }
-	        else {
-	          //Create the file
-	        	FileWriter fileWriter = new FileWriter("PatientAccounts.txt");
-		        
-	          //Write the Leading text in the file
-	        	fileWriter.write("Patient Accounts:\n\n");
-	        	
-	          //Close the fileWriter
-	        	fileWriter.close();
-	        }
-	      }
-	      //Catch any File I/O errors
-	      catch(IOException e) {
-	    	  System.out.println("File Does not exist");
-	      }
-        //================================================================================================================
-	               
+	  	  //Necessary File Check
+          //================================================================================================================
+			//Check to see if the file(s) exist. If not, create it.
+			try {
+				//List all of the required files for the system to run
+				File patientAccounts = new File("PatientAccounts.txt");
+				
+				//Check to see if the file already exists and if it does not, create it
+				if(patientAccounts.exists()) {
+					//File Already exists, do nothing
+					System.out.println("File Exists!");
+				}
+				else {
+				//Create the file
+					FileWriter fileWriter = new FileWriter("PatientAccounts.txt");
+					
+				//Write the Leading text in the file
+					fileWriter.write("Patient Accounts:\n\n");
+					
+				//Close the fileWriter
+					fileWriter.close();
+				}
+			}
+			//Catch any File I/O errors
+			catch(IOException e) {
+				System.out.println("File Does not exist");
+			}
+		  //================================================================================================================
+					
+
 		//Set the attributes/private data of the Portals object        
-          //Set the private Stage of Portals {helps us to switch scenes easier}
-            primeStage = primaryStage;
+		//================================================================================================================			
+		  //Set the private Stage of Portals {helps us to switch scenes easier}
+			primeStage = primaryStage;
 		  //Update the private boolean for notifications
-		    isNotified = false; 
+			isNotified = false; 	
+		//================================================================================================================
 	}
 	//------------------------------------------------------------------------------------------------------------------
 	
@@ -290,27 +280,78 @@ public class Portals {
 		  //From the Welcome Page the user can navigate to the 'login page' for Patient and Staff
 		  //The 'Login Page' will take the User to the respective Portal
 		  //If the user is to Logout 
-			
+
+		  //[New Idea]:
+		  //  Update all of the other portal objects to null 
+		  //  (this will [deconstruct our old objects])
+			patientView = null;
+			nurseView = null;
+			doctorView = null;			
+
 		  //Set the Scene of the Stage & Display it
 			primeStage.setScene(welcomePage);
 			primeStage.show();
 		}
 
 
-	  //Displays the Staff Login Page
+	  //Login --> [Staff]
 	  	private void staffLogin(){
-		  //Debug
-		    Label yes = new Label("YESES");
+		  //This scene will only have two buttons (Nurse) && (Doctor)
+		  //When the user clicks the respective button a new portal object will be added
+		  //to the global variables
 
-		  //Scene to be returned
-			Scene loginPage = new Scene(yes, 800, 600);
+		  //Buttons && Labels
+		  //=====================================================================
+			//Label
+			  Label note0 = new Label("Select User");
+				//Set the Font of the Label
+		          note0.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-		  //Create and return the scene with two buttons ()
-			//return loginPage;
+
+			//Nurse Button
+			  Button nurseButton = new Button("Nurse");
+			  //Format stuff below!!
+
+			//Doctor Button
+			  Button doctorButton = new Button("Doctor");
+		  //=====================================================================
+
+
+		  //Scene & Alignments
+		  //=====================================================================
+			//VBox for ordering items
+			  VBox buttonBox = new VBox(note0, nurseButton, doctorButton);
+			
+			//Scene for the 
+			  Scene staffPage = new Scene(buttonBox, 1024, 768);
+		  //=====================================================================
+
+
+		  //Action-Event Handling
+		  //=====================================================================
+			//Nurse Login  --> Create/Use Nurse Portal!!
+			  nurseButton.setOnAction(e -> {
+				//Load Nurse Portal Object/Class to display / use the portal
+				  
+
+				//
+				  
+			  });
+
+
+			//
+
+		  //=====================================================================
+
+
+		  //Display the scene created
+			primeStage.setScene(staffPage);
+			primeStage.show();
+
 		}
 
 
-	  //Create Account
+	  //Create Account	[Patient]
 		private void createAccount(String patientCredentials) {
 		  //Append the patients Credentials to the "PatientAccounts.txt"
 		
@@ -335,7 +376,7 @@ public class Portals {
 		}
 
 
-	  //Log into account
+	  //Login --> [Patient]
 		private void patientLogin(){		
 		  //Buttons
           //==========================================================
@@ -546,7 +587,6 @@ public class Portals {
 					//Update Notification flag
 						isNotified = true;
 				  }
-
 				}
 	       });
 		          
@@ -635,7 +675,6 @@ public class Portals {
 	        	else {
 					//Notify the user that the account credentials already exist
 
-
 					//If-branch to make sure the user isn't being notified to much
 					if(!isNotified){
 					  //Update the notification text/label and add it to the GUI Display
@@ -706,7 +745,6 @@ public class Portals {
 			  //Error Opening File (Returns False)
 				return false;
 			}
-			
 			
 			//No matches found, return false
 			  return false;
@@ -860,16 +898,15 @@ public class Portals {
 	  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	
-	
-	//Doctor Portal Object/Class
-	//Buttons/Methods:
-	//		[Patient Visit Form]	[View Patient Records]	[Messages]	[Logout]
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	  class DoctorPortal{
+	  //Doctor Portal Object/Class
+	  //Buttons/Methods:
+	  //		[Patient Visit Form]	[View Patient Records]	[Messages]	[Logout]
+	  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		class DoctorPortal{
 		
-	  }
-  	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  //--------------------------------------------------------------------------------------------------------
+	  	}
+  	  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //--------------------------------------------------------------------------------------------------------
 }
 
 

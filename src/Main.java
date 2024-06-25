@@ -66,34 +66,29 @@
 //Relevant JavaFX imports for our GUI
 import javafx.application.Application;
 import javafx.stage.Stage;
-	//[Note]: So far these libraries are relevant for Loading the scenes of the program
 
 
 //Driver of program: "Arizona Medical"
 public class Main extends Application{
 	//Driver for our 'hw1' Class/Object
-    public static void main(String[] args) {
-        launch(args);
-    }
-    
+  public static void main(String[] args) {
+      launch(args);
+  }
 
-    //Sets up the GUI, along with the event handling & functionality of the program
-    public void start(Stage primaryStage) {
-    	//Program Loop: 
-    	//-------------------------------------------------------------------------------------------------------
-    	//Title of the program
-          primaryStage.setTitle("Arizona Medical");
-      
-        //Load the Welcome Page of the program and continue from there...
-          //We pass primaryStage into the Portal Object to be used within the Object 
-          //for seemless page transitions as well as displaying our GUI
-          Portals driver = new Portals(primaryStage);
-          
-        //Call upon the public method to run the program
-    	  driver.runProgram();
-      
-    	  //DEBUG Print
-    	  System.out.println("Program Done!");
-    	  
-    }
+
+  //Sets up the GUI, along with the event handling & functionality of the program
+  public void start(Stage primaryStage) {
+    //Program Loop: 
+    //-------------------------------------------------------------------------------------------------------
+    //Title of the program
+        primaryStage.setTitle("Arizona Medical");
+    
+      //Load the Welcome Page of the program and continue from there...
+        //We pass primaryStage into the Portal Object to be used within the Object 
+        //for seemless page transitions as well as displaying our GUI
+        Portals driver = new Portals(primaryStage);
+        
+      //Call upon the public method to run the program
+      driver.runProgram();      
+  }
 }
