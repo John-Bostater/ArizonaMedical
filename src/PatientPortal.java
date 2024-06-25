@@ -79,6 +79,12 @@ public class PatientPortal{
 
     //Patient's data (Will be loaded upon the 'Login' button being hit in the Patient "Login/New Account Page" {loaded from Welcome Page})
     //--------------------------------------------------        
+      //NEW!!!
+      //Use Patient Credentials as a "key" for finding 
+      //info within .txt files easily
+        private String patientCredentials;
+
+
       //Stage for displaying the relevant Scene(s)
         private Stage primeStage;
       
@@ -102,7 +108,7 @@ public class PatientPortal{
 
     //Constructor
     //------------------------------------------------------------------------------
-      public PatientPortal(String patientCredentials, Stage primaryStage, Scene welcomePg){
+      public PatientPortal(String patientCreds, Stage primaryStage, Scene welcomePg){
         //Take apart the userCredentials String using delimeters
         //Update the Patient's data with the following broken up data
 
@@ -112,19 +118,24 @@ public class PatientPortal{
         //Set the primary stage for displaying Scenes
           primeStage = primaryStage;
 
+        //Set the patients credentials
+          patientCredentials = patientCreds;
+
+
+
         //Full Name (First & Last Name)
-          int pos = patientCredentials.indexOf(",");
-          fullName = patientCredentials.substring(0, pos);
+        //  int pos = patientCredentials.indexOf(",");
+        //  fullName = patientCredentials.substring(0, pos);
                     
         //Date of Birth
-          dateOfBirth = patientCredentials.substring(pos + 1, patientCredentials.length());
+        //  dateOfBirth = patientCredentials.substring(pos + 1, patientCredentials.length());
 
         //FIX THIS UP OR JUST MAKE THE PATIENT ACCOUNT CREATION FORM REQUIRE IT!!
         //Set default values to the unentered information??
-          phoneNumber = "XXX-XXX-XXXX";
+        //  phoneNumber = "XXX-XXX-XXXX";
             
         //Set default values to the unentered information??
-          insuranceInfo = "<Insurance Information>";
+        //  insuranceInfo = "<Insurance Information>";
       }
     //------------------------------------------------------------------------------
 
@@ -387,13 +398,55 @@ public class PatientPortal{
             ComboBox<String> dropSelect = new ComboBox<>();
               //Set the Dimensions of the drop down menu
               //[Width x Height]
-                dropSelect.setPrefSize(200, 40);
-                dropSelect.setMinSize(200, 40);
-                dropSelect.setMaxSize(200, 40);
+                dropSelect.setPrefSize(200, 30);
+                dropSelect.setMinSize(200, 30);
+                dropSelect.setMaxSize(200, 30);
 
-          //Fill the ComboBox with all of the Visit Dates via: PatientVisits.txt???
-            //You will have to use a for-loop for that...
-            //Call upon a function or method to do it or just do it here
+          //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
+            try{
+              //Open: PatientInfo.txt
+              //Read the File with a scanner (easier to get Line by Line)
+                Scanner fileReader = new Scanner(new File("PatientSummary.txt"));
+            
+             //Read the file Line-by-Line and compare the strings for a match
+               while(fileReader.hasNextLine()) {
+                 //Have series of if statements & flags for: 
+                 //  finding the patients section of data in the .txt via their credentials
+                 //  setting a flag to true when the credentials are found
+                 //  Collecting the data via: if(line.contains("Data: ") && flag))  
+
+                 //READ THE .TXT FILE UNTIL WE FIND THE PATIENT'S CREDS, ONCE U FIND THEM 
+                 //ACTIVATE THE FLAG So we can START READING THE patients data
+
+                 //NEW IDEA!!!!
+                 //before the patients credentials have the leading text: "Patient: <patientCreds>"
+
+                 //Flag that "puts on the brakes" of the fileReader so it will
+
+
+                 //Store the line into a string to be used
+                   String line = fileReader.nextLine(); //Starts at the first line of text in .txt file
+
+                 //This 
+                   if(line.contains("Patient: " + patientCredentials)){
+                     //Debug print
+                       System.out.println("Patient has been found!");
+
+                     //Activate the flag
+
+                   }
+
+                 //If-branches below for collecting the data to display
+               }
+
+
+              //Close the fileReader
+                fileReader.close();
+            }
+            catch(IOException e){
+              //Error Print
+                System.out.println("File Not Found!!");
+            }
         //=====================================================
 
 
@@ -429,7 +482,7 @@ public class PatientPortal{
           //So far this alignment is concurrent with that of Phase1
 
           //Horizontally align the Dropdown select & Exit button
-            HBox functContainer = new HBox(10, dropSelect, exitPage);
+            HBox functContainer = new HBox(525, dropSelect, exitPage);
 
           //Vertically align the Header 0 Label and the button container box
             VBox vertical0 = new VBox(header0, functContainer);
@@ -480,8 +533,13 @@ public class PatientPortal{
 
 
     //Private functions {really methods but I'm not calling them that here LoL!}
-      //This function is for 
-      
+    //------------------------------------------------------------------------------
+      //Function for gathering the examination dates (used in: View Previous Visits)
+        //private void examinationDates(){
+          //Should this return the shit??
+
+        //}
+    //------------------------------------------------------------------------------  
 }	
 
 
