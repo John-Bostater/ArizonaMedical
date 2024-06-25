@@ -276,7 +276,7 @@ public class Portals {
 		  //to the global variables
 
 		  //Buttons && Labels
-		  //=====================================================================
+		  //======================================================================
 			//Label
 			  Label header0 = new Label("Select User");
 				//Set the Font of the Label
@@ -584,8 +584,8 @@ public class Portals {
 	        	  //Update global variables before proceeding to new Scene
 					isNotified = false;
 	        		
-		          //Create and Display the patient Portal		{NEW ADDITION TO END}
-		        	PatientPortal patientPort = new PatientPortal(patientCredentials, primeStage);
+		          //Create and Display the patient Portal		{NEW ADDITION TO ENDs}
+		        	PatientPortal patientPort = new PatientPortal(patientCredentials, primeStage, welcomePage);
 		        	patientPort.displayPortal();
 	            }
 				//Unsuccessful Login

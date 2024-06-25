@@ -12,11 +12,12 @@
 
  	
 //[Description]:
-  This file contains the relevant code for creating the Patient Portal.
+    This file contains the relevant code for creating the Patient Portal.
  
-  Upon a successful login by the user, the main page of the portal will be displayed
+    Upon a successful login by the user, the main page of the portal will be displayed
 
-  From this Portal the Patient/User can use the following functionality
+    From this Portal the Patient/User can use the following functionality
+
 
   [Change Patient Information]:
     This functional feature of the Patient Portal is 
@@ -24,8 +25,10 @@
   
   [View Previous Visits]:
 
-  
+
+
   [Messages]:
+
 
   
   [Logout]:
@@ -78,6 +81,8 @@ public class PatientPortal{
     //--------------------------------------------------        
       //Stage for displaying the relevant Scene(s)
         private Stage primeStage;
+        private Scene welcomePage;
+
 
       //Patient Information
         private String fullName = "";	//Ex: "John Smith"
@@ -96,12 +101,16 @@ public class PatientPortal{
 
     //Constructor
     //------------------------------------------------------------------------------
-      public PatientPortal(String patientCredentials, Stage primeStage0){
+      public PatientPortal(String patientCredentials, Stage primaryStage, Scene welcomePg){
         //Take apart the userCredentials String using delimeters
         //Update the Patient's data with the following broken up data
 
-        //NEW {set the primestage}
-            primeStage = primeStage0;
+        //NEW
+          welcomePage = welcomePg;
+
+
+        //Set the primary stage for displaying Scenes
+            primeStage = primaryStage;
 
         //Full Name (First & Last Name)
             int pos = patientCredentials.indexOf(",");
@@ -167,14 +176,26 @@ public class PatientPortal{
 
         //Labels/Text
         //==================================================================
-        Label header0 = new Label("Welcome!");
+            Label header0 = new Label("Welcome!");
             //Set the font of header
             header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
 
-        Label text0 = new Label("What would you like to do today?");
+            Label text0 = new Label("What would you like to do today?");
             //Set the font of text
             text0.setStyle("-fx-font-size: 18px;");
         //==================================================================
+
+
+        //Action-Event Handling
+        //========================================================================================================
+          //Logout
+            signOut.setOnAction(e -> {
+              //NEW TEST
+              primeStage.setScene(welcomePage);
+              primeStage.show();
+
+            });
+        //========================================================================================================
 
 
         //Align the buttons, text, etc.
@@ -187,12 +208,6 @@ public class PatientPortal{
         //========================================================================================================
 
 
-        //Action-Event Handling
-        //========================================================================================================
-            //Alignment box for all of the text, buttons, etc.
-
-        //========================================================================================================
-
         //Make the Scene, set the scene, and display it
         //Load the Patient Portal scene to be displayed
         Scene mainScene = new Scene(alignBox0, 1024, 768);
@@ -201,7 +216,6 @@ public class PatientPortal{
         primeStage.setScene(mainScene);
         primeStage.show();
     }
-
 
 
     //Methods below will either return of use primeStage to set the scene upon button activation
@@ -224,27 +238,6 @@ public class PatientPortal{
 
     //------------------------------------------------------------------------------
 
-
-    //Action Event Handling
-    //------------------------------------------------------------------------------
-    //Change Patient Information {Scene}
-    //You can exit this method via the Button "Exit"
-    
-    
-    //View Previous Visits {Scene}
-    //You can exit this method via the Button "Exit"
-    
-    
-    //Messages {Scene}
-    //You can exit this method/scene via the Button "Exit"
-    
-    
-    //Logout {runs the function:  runProgram() }
-    
-    
-    //Miscellanious (private functions)
-    //Check the Credentials entered into the patient login 
-    //------------------------------------------------------------------------------
 }	
 
 

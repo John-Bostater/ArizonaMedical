@@ -112,5 +112,6 @@ public class Main extends Application{
         
       //Call upon the public method to run the program
       driver.runProgram();      
+    //-------------------------------------------------------------------------------------------------------
   }
 }
