@@ -1,6 +1,6 @@
 /****************************************************************************************
  	//[Contributors]:
- 	  - John Bostater
+	  - John Bostater
  	  
 	  - Tristan Andrade
 
@@ -95,7 +95,7 @@ public class Portals {
 		private Scene welcomePage;
 	 
 	  //Arizona Medical Logo Image
-		private Image azMedLogo;
+		//private Image azMedLogo;
 		
 	  //Notification Text
 		private Label notificationTxt;
@@ -104,9 +104,7 @@ public class Portals {
 		private boolean isNotified;   
 		//^^Used to ensure notification messages arent added too many times
 
-	  //[New Idea!!]
-	  //
-	  //Portal Objects
+	  //Portal Objects	[Note]: this is so they can be easliy deallocated/set to null for runProgram()
 	    private PatientPortal patientView;
 		private NursePortal nurseView;
 		private DoctorPortal doctorView;
@@ -151,10 +149,10 @@ public class Portals {
           //Load Logo onto Main Page:
           //=============================================================================================
             //Load the image
-           	  azMedLogo = new Image(getClass().getResourceAsStream("azMedical.png"));
+           	  Image logoImg = new Image(getClass().getResourceAsStream("azMedical.png"));
 	           
            	//Create an ImageView to display the image
-           	  ImageView imageView = new ImageView(azMedLogo);
+           	  ImageView imageView = new ImageView(logoImg);
 	           
            	//Adjust the size of the ImageView
            	  imageView.setFitWidth(500);
@@ -282,11 +280,12 @@ public class Portals {
 		  //If the user is to Logout 
 
 		  //[New Idea]:
-		  //  Update all of the other portal objects to null 
-		  //  (this will [deconstruct our old objects])
+		  //Update all of the other portal objects to null 
+		  //This will [deconstruct our old objects]
 			patientView = null;
 			nurseView = null;
 			doctorView = null;			
+			//azMedLogo = null;
 
 		  //Set the Scene of the Stage & Display it
 			primeStage.setScene(welcomePage);
@@ -303,51 +302,88 @@ public class Portals {
 		  //Buttons && Labels
 		  //=====================================================================
 			//Label
-			  Label note0 = new Label("Select User");
+			  Label header0 = new Label("Select User");
 				//Set the Font of the Label
-		          note0.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-
+		          header0.setStyle("-fx-font-size: 38px; -fx-font-weight: bold;");
 
 			//Nurse Button
 			  Button nurseButton = new Button("Nurse");
-			  //Format stuff below!!
+	  			//Set the dimensions of the Buttons
+		        //[Width x Height]
+			  	  nurseButton.setPrefSize(75, 40);  
+		          nurseButton.setMaxSize(75, 40);
+		          nurseButton.setMinSize(75, 40);
+	            //Set the Font of the Button's text
+		          nurseButton.setStyle("-fx-font-size: 18px;");
 
 			//Doctor Button
 			  Button doctorButton = new Button("Doctor");
+			  //Format stuff below!!
+	  			//Set the dimensions of the Buttons
+		        //[Width x Height]
+			  	  doctorButton.setPrefSize(80, 40);  
+		          doctorButton.setMaxSize(80, 40);
+		          doctorButton.setMinSize(80, 40);
+	            //Set the Font of the Button's text
+		          doctorButton.setStyle("-fx-font-size: 18px;");
+
+
+			//Go Back	[Main Page]
+			  Button goBack = new Button("Go Back");
+				//Set the dimensions of the Buttons
+		        //[Width x Height]
+			  	  goBack.setPrefSize(100, 40);  
+		          goBack.setMaxSize(100, 40);
+		          goBack.setMinSize(100, 40);
+	            //Set the Font of the Button's text
+		          goBack.setStyle("-fx-font-size: 18px;");
 		  //=====================================================================
 
 
 		  //Scene & Alignments
 		  //=====================================================================
 			//VBox for ordering items
-			  VBox buttonBox = new VBox(note0, nurseButton, doctorButton);
-			
+			  VBox buttonBox = new VBox(20, header0, nurseButton, doctorButton, goBack);
+			  //Align the vbox elements to be in the middle???
+				buttonBox.setAlignment(Pos.CENTER);
+
 			//Scene for the 
 			  Scene staffPage = new Scene(buttonBox, 1024, 768);
 		  //=====================================================================
 
 
 		  //Action-Event Handling
-		  //=====================================================================
-			//Nurse Login  --> Create/Use Nurse Portal!!
+		  //======================================================================================
+			//Nurse Login  --> Create/Use Nurse Portal
 			  nurseButton.setOnAction(e -> {
 				//Load Nurse Portal Object/Class to display / use the portal
-				  
+				  nurseView = new NursePortal();
 
-				//
-				  
+				//Call upon the object method for displaying/using the main page for the Nurse
+				  //nurseView.runPortal();
 			  });
 
 
-			//
+			//Doctor Login --> Create/Use Doctor Portal
+			  doctorButton.setOnAction(e -> {
+				//Load Nurse Portal Object/Class to display / use the portal
+				  doctorView = new DoctorPortal();
 
-		  //=====================================================================
+				//Call upon the object method for displaying/using the main page for the Doctor
+				  //doctorView.runPortal();
+			  });
 
+
+			//Go Back (Set all of the global variables to 'null' and go back)
+			  goBack.setOnAction(e -> {
+				//Run the main page again
+				  runProgram();
+			  });
+		  //======================================================================================
 
 		  //Display the scene created
 			primeStage.setScene(staffPage);
 			primeStage.show();
-
 		}
 
 
@@ -572,8 +608,8 @@ public class Portals {
 	        	  //Update global variables before proceeding to new Scene
 					isNotified = false;
 	        		
-		          //Create and Display the patient Portal
-		        	PatientPortal patientPort = new PatientPortal(patientCredentials);
+		          //Create and Display the patient Portal		{NEW ADDITION TO END}
+		        	PatientPortal patientPort = new PatientPortal(patientCredentials, primeStage);
 		        	patientPort.displayPortal();
 	            }
 				//Unsuccessful Login
@@ -752,142 +788,13 @@ public class Portals {
 	//--------------------------------------------------------------------------------------------------------
 	
 
-	  
 	//Objects/Class(s)
-	//--------------------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------------------
+	  //Patient Portal has been made it's own .java file!!
 
-	  //Patient Portal
-	  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		class PatientPortal{
-		  //Buttons/Methods:		
-		  //		[Change Patient Information]	[View Previous Visits]	[Messages]	[Logout]
-
-
-		  //Patient's data (Will be loaded upon the 'Login' button being hit in the Patient "Login/New Account Page" {loaded from Welcome Page})
-		  //--------------------------------------------------
-				private String fullName = "";	//Ex: "John Smith"
-				private String dateOfBirth = "";
-				private String phoneNumber = "";
-				private String insuranceInfo = "";
-				private String pharmacyInfo = "";
-				//private boolean logout = false;
-		  //--------------------------------------------------
-				
-		
-		  //Default Constructor (DELETE this piece of code when done debugging!!) 
-		  //------------------------------------	
-			//public PatientPortal() {}
-		  //------------------------------------
-			
-
-		  //Constructor
-		  //------------------------------------------------------------------------------
-			public PatientPortal(String patientCredentials){
-			//Take apart the userCredentials String using delimeters
-			//Update the Patient's data with the following broken up data
-			
-			//Full Name (First & Last Name)
-				int pos = patientCredentials.indexOf(",");
-				fullName = patientCredentials.substring(0, pos);
-					
-			//Date of Birth
-				dateOfBirth = patientCredentials.substring(pos + 1, patientCredentials.length());
-
-			//FIX THIS UP OR JUST MAKE THE PATIENT ACCOUNT CREATION FORM REQUIRE IT!!
-			//Set default values to the unentered information??
-				phoneNumber = "XXX-XXX-XXXX";
-			
-			//Set default values to the unentered information??
-				insuranceInfo = "<Insurance Information>";
-			}
-		  //------------------------------------------------------------------------------
-
-
-
-		  //Buttons	{These will load the methods with the same name}
-		  //------------------------------------------------------------------------------
-			//Change Patient Information {Scene}
-			//You can exit this method via the Button "Exit"
-			
-			
-			//View Previous Visits {Scene}
-			//You can exit this method via the Button "Exit"
-			
-			
-			//Messages {Scene}
-			//You can exit this method/scene via the Button "Exit"
-			
-			
-			//Logout {runs the function:  runProgram() }
-			
-			
-			//Miscellanious (private functions)
-			//Check the Credentials entered into the patient login 
-		  //------------------------------------------------------------------------------
-
-
-
-		  //Methods
-		  //------------------------------------------------------------------------------
-			//Creates & Displays the Patient Portal Scene		
-			//[NEW NOTE: this method will be used for every "exit" button within the other methods below]
-			private void displayPortal() {
-			//Debug thing
-				System.out.println("Login Successful!!");
-				
-				
-			//DEBUG
-				Button hereHe = new Button("Debug button");
-				
-			//Load the Patient Portal scene to be displayed
-				Scene someBs = new Scene(hereHe, 800, 600);
-				
-				
-			//Set the primary/main Scene and displays it
-				primeStage.setScene(someBs);
-				primeStage.show();
-			}
-
-			//Change Patient Information {Scene}
-			//You can exit this method via the Button "Exit"
-			
-			
-			//View Previous Visits {Scene}
-			//You can exit this method via the Button "Exit"
-			
-			
-			//Messages {Scene}
-			//You can exit this method/scene via the Button "Exit"
-			
-			
-			//Logout {runs the function:  runProgram() }
-
-		  //------------------------------------------------------------------------------
-
-		  //Action Event Handling
-		  //------------------------------------------------------------------------------
-			//Change Patient Information {Scene}
-			//You can exit this method via the Button "Exit"
-			
-			
-			//View Previous Visits {Scene}
-			//You can exit this method via the Button "Exit"
-			
-			
-			//Messages {Scene}
-			//You can exit this method/scene via the Button "Exit"
-			
-			
-			//Logout {runs the function:  runProgram() }
-			
-			
-			//Miscellanious (private functions)
-			//Check the Credentials entered into the patient login 
-		  //------------------------------------------------------------------------------
-	    }
-	  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	  //DO THE SAME WITH THE CLASSES BELOW!!
 	
-	
+
   	  //Nurse Portal Object/Class
 	  //Buttons/Methods:
 	  //		[New Visit Form]	[Messages]	[Logout]
