@@ -133,9 +133,9 @@ public class PatientPortal{
     //------------------------------------------------------------------------------
     //Creates & Displays the Patient Portal Scene		
     //[NEW NOTE: this method will be used for every "exit" button within the other methods below]
-    public void displayPortal() {
+      public void displayPortal() {
         //Debug Print
-        System.out.println("Login Successful!!");
+          System.out.println("Login Successful!!");
 
 
         //Buttons
@@ -236,15 +236,16 @@ public class PatientPortal{
         //Set the primary/main Scene and displays it
           primeStage.setScene(mainScene);
           primeStage.show();
-    }
+      }
 
 
     //Methods below will either return of use primeStage to set the scene upon button activation
 
 
     //Change Patient Information {Scene}
-    //You can exit this method via the Button "Exit"
-    private Scene changePatientInfo(){
+      private Scene changePatientInfo(){
+        //You can exit this Scene via the Button "Exit"
+
         //Labels
         //=====================================================================
           //Contact Information
@@ -270,7 +271,6 @@ public class PatientPortal{
               //Set font of Text
                 pharmacyInfoLbl.setStyle("-fx-font-size: 20px;");
         //=====================================================================
-
         
 
         //Buttons
@@ -285,7 +285,6 @@ public class PatientPortal{
         //==========================================================
 
 
-
         //Action-Event Handling
         //==========================================================
           //Update the Information Entered into the text fields
@@ -293,6 +292,7 @@ public class PatientPortal{
               //Relevant code below...
                 //
             });
+
 
           //Exit the 'Update Information' page
             exitPage.setOnAction(e -> {
@@ -315,15 +315,22 @@ public class PatientPortal{
 
           //The second HBox will contain the three VBox(s) with black borders around them
             //HBox alignBox1 = new HBox(20, );
+
+
+          //The third HBox will encapsulate the buttons
+            HBox buttonsSection = new HBox(20, updateInfo, exitPage);
+
+
+          //DEBUG VBOX
+            VBox theBs = new VBox(alignBox0, buttonsSection);
         //================================================================================
 
+        //Build the Scene
+          Scene mainLayout = new Scene(theBs, 1024, 768);
 
-      //Build the Scene
-        Scene mainLayout = new Scene(alignBox0, 1024, 768);
-
-      //Return the Scene
-        return mainLayout;
-    }
+        //Return the Scene
+          return mainLayout;
+      }
     
 
     //View Previous Visits {Scene}
@@ -343,6 +350,7 @@ public class PatientPortal{
       //This function is for 
       
 }	
+
 
 
 //[Etc]:
