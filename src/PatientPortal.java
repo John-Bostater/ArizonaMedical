@@ -1,40 +1,39 @@
 /****************************************************************************************
- 	//[Contributors]:
-      - John Bostater
+//[Contributors]:
+    - John Bostater
  	  
-      - Tristan Andrade
+    - Tristan Andrade
 
-      - Austin Mayhew
+    - Austin Mayhew
 
-      - Ryan Clark
+    - Ryan Clark
 
-      - Juan Rosas Jr.
+    - Juan Rosas Jr.
 
  	
- 	//[Description]:
-	  This file contains code for creating/displaying the necessary Scenes/Pages
-	  for the GUI. The code also perfo
+//[Description]:
+    This file contains code for creating/displaying the necessary Scenes/Pages
+    for the GUI. The code also perfo
 	
 	
-	//[Aspect Ratio/Dimension of Graphical User Interface]: 
+//[Aspect Ratio/Dimension of Graphical User Interface]: 
 
-	  - [4:3]	-->   [1024 x 768]	--	{Width x Height}
+    - [4:3]	-->   [1024 x 768]	--	{Width x Height}
 	 
 	
-	//[Files Created/Used within the program for storing/loading data]:
+//[Files Created/Used within the program for storing/loading data]:	  
+    - PatientAccounts.txt 	
+        {Contains: FirstName, LastName, DOB, Insurance Info, Contact Info}
+    
+    - PatientData.txt
+        {Used for saving the patients data: [Insurance], [Contact], [etc.]}
 	  
-	  - PatientAccounts.txt 	
-	  		{Contains: FirstName, LastName, DOB, Insurance Info, Contact Info}
+    - PatientVisits
+        {Saved Patient Visit Information??}
 	  
-	  - PatientData.txt
-	  		{Used for saving the patients data: [Insurance], [Contact], [etc.]}
-	  
-	  - PatientVisits
-			{Saved Patient Visit Information??}
-	  
-	  - Messages.txt
-			{Used for communication between parties}
-						  [New chats are added linearly (by nextLine();)]
+    - Messages.txt
+        {Used for communication between parties}
+            [New chats are added linearly (by nextLine();)]
 ***************************************************************************************/
 
 

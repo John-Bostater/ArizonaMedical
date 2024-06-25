@@ -1,46 +1,46 @@
 /*********************************************************************************************************
-  //[Contributors]:
- 	  - John Bostater
- 	   
-	  - Tristan Andrade
+//[Contributors]:
+  - John Bostater
+    
+  - Tristan Andrade
 
-    - Austin Mayhew
+  - Austin Mayhew
 
-    - Ryan Clark
+  - Ryan Clark
 
-    - Juan Rosas Jr.
-   
+  - Juan Rosas Jr.
+  
 
-  //[Description]:
-		Arizona Medical is 
-		//Continue writing description
-	
-	
-	//[Library/JavaFX Info]:
-		
-		[External JARS/Libraries used]
-			- JavaSE-22.0.1 {JRE System Library}
-			- JavaFX22	    {java-sdk-22.0.1}			
-	
-		[Class path]
-			- JavaSDK
-	
-    		
-	//[Etc]:
-      + [Running Program in Terminal]
-
-      //Compile/Build Object
-        javac --module-path "/path/to/javafx-sdk-22.0.1/lib" --add-modules javafx.controls,javafx.fxml Main.java
-
-      //Run the executable
-        java --module-path "/path/to/javafx-sdk-22.0.1/lib" --add-modules javafx.controls,javafx.fxml Main
+//[Description]:
+  Arizona Medical is 
+  //Continue writing description
 
 
-			+ Virtual Machine Argument(s) [For running in EclipseIDE]:
-			
-				--module-path /path/to/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml
-				
-			[NOTE] Change VM argument(s) via: 'Run Configurations' under 'Run as' in Eclipse
+//[Library/JavaFX Info]:
+  
+  [External JARS/Libraries used]
+    - JavaSE-22.0.1 {JRE System Library}
+    - JavaFX22	    {java-sdk-22.0.1}			
+
+  [Class path]
+    - JavaSDK
+
+      
+//[Etc]:
+    + [Running Program in Terminal]
+
+    //Compile/Build Object
+      javac --module-path "/path/to/javafx-sdk-22.0.1/lib" --add-modules javafx.controls,javafx.fxml Main.java
+
+    //Run the executable
+      java --module-path "/path/to/javafx-sdk-22.0.1/lib" --add-modules javafx.controls,javafx.fxml Main
+
+
+    + Virtual Machine Argument(s) [For running in EclipseIDE]:
+    
+      --module-path /path/to/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml
+      
+    [NOTE] Change VM argument(s) via: 'Run Configurations' under 'Run as' in Eclipse
 *********************************************************************************************************/
 
 
