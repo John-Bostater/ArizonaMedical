@@ -280,7 +280,7 @@ public class Portals {
 			//Label
 			  Label header0 = new Label("Select User");
 				//Set the Font of the Label
-		          header0.setStyle("-fx-font-size: 38px; -fx-font-weight: bold;");
+		          header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
 
 			//Nurse Button
 			  Button nurseButton = new Button("Nurse");

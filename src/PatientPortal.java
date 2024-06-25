@@ -75,17 +75,16 @@ public class PatientPortal{
     //		[Change Patient Information]	[View Previous Visits]	[Messages]	[Logout]
 
     //Patient's data (Will be loaded upon the 'Login' button being hit in the Patient "Login/New Account Page" {loaded from Welcome Page})
-    //--------------------------------------------------
-      private String fullName = "";	//Ex: "John Smith"
-      private String dateOfBirth = "";
-      private String phoneNumber = "";
-      private String insuranceInfo = "";
-      private String pharmacyInfo = "";
+    //--------------------------------------------------        
+      //Stage for displaying the relevant Scene(s)
+        private Stage primeStage;
 
-      //New!!
-      Stage primeStage;
-
-     //private boolean logout = false;
+      //Patient Information
+        private String fullName = "";	//Ex: "John Smith"
+        private String dateOfBirth = "";
+        private String phoneNumber = "";
+        private String insuranceInfo = "";
+        private String pharmacyInfo = "";
     //--------------------------------------------------
         
 
@@ -133,13 +132,20 @@ public class PatientPortal{
         //Buttons
         //==================================================================
         //Change Patient Information
-            Button changeInfo = new Button("Change Patient Information");
-            //Set the Font and Size of the button
-
+            Button changePatientInfo = new Button("Change Patient Information");
+            //Set the dimensions of the Button
+           	  //[Width x Height]
+           	    changePatientInfo.setPrefSize(100, 50);  
+           	    changePatientInfo.setMaxSize(100, 50);
+           	    changePatientInfo.setMinSize(100, 50);
+	          //[Width x Height]
+           	    changePatientInfo.setPrefSize(100, 50);  
+           	    changePatientInfo.setMaxSize(100, 50);
+           	    changePatientInfo.setMinSize(100, 50);
 
 
         //View Previous Visits 
-            Button previousVisits = new Button("View Previous Visits");
+            Button viewPreviousVisits = new Button("View Previous Visits");
             //Set the Font and Size of the button
 
 
@@ -163,7 +169,7 @@ public class PatientPortal{
         //==================================================================
         Label header0 = new Label("Welcome!");
             //Set the font of header
-            header0.setStyle("-fx-font-size: 38px; -fx-font-weight: bold;");
+            header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
 
         Label text0 = new Label("What would you like to do today?");
             //Set the font of text
@@ -173,23 +179,19 @@ public class PatientPortal{
 
         //Align the buttons, text, etc.
         //========================================================================================================
-        //Alignment box for all of the text, buttons, etc.
-            VBox alignBox0 = new VBox(header0, text0, changePatientInfo, viewPreviousVisits, messageInbox, signOut);
+          //Alignment box for all of the text, buttons, etc.
+            VBox alignBox0 = new VBox(20, header0, text0, changePatientInfo, viewPreviousVisits, messageInbox, signOut);
 
-        //Set the alignment of the VBox for the Scene
+          //Set the alignment of the VBox for the Scene
             alignBox0.setAlignment(Pos.CENTER);
         //========================================================================================================
 
 
         //Action-Event Handling
         //========================================================================================================
-        //Alignment box for all of the text, buttons, etc.
-            VBox alignBox0 = new VBox(header0, text0, changePatientInfo, viewPreviousVisits, messageInbox, signOut);
+            //Alignment box for all of the text, buttons, etc.
 
-        //Set the alignment of the VBox for the Scene
-            alignBox0.setAlignment(Pos.CENTER);
         //========================================================================================================
-
 
         //Make the Scene, set the scene, and display it
         //Load the Patient Portal scene to be displayed
