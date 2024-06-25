@@ -81,8 +81,9 @@ public class PatientPortal{
     //--------------------------------------------------        
       //Stage for displaying the relevant Scene(s)
         private Stage primeStage;
+      
+      //Load Welcome Scene & all of its functionality
         private Scene welcomePage;
-
 
       //Patient Information
         private String fullName = "";	//Ex: "John Smith"
@@ -105,26 +106,25 @@ public class PatientPortal{
         //Take apart the userCredentials String using delimeters
         //Update the Patient's data with the following broken up data
 
-        //NEW
+        //Welcome Page that was created in Portals.java
           welcomePage = welcomePg;
 
-
         //Set the primary stage for displaying Scenes
-            primeStage = primaryStage;
+          primeStage = primaryStage;
 
         //Full Name (First & Last Name)
-            int pos = patientCredentials.indexOf(",");
-            fullName = patientCredentials.substring(0, pos);
+          int pos = patientCredentials.indexOf(",");
+          fullName = patientCredentials.substring(0, pos);
                     
         //Date of Birth
-            dateOfBirth = patientCredentials.substring(pos + 1, patientCredentials.length());
+          dateOfBirth = patientCredentials.substring(pos + 1, patientCredentials.length());
 
         //FIX THIS UP OR JUST MAKE THE PATIENT ACCOUNT CREATION FORM REQUIRE IT!!
         //Set default values to the unentered information??
-            phoneNumber = "XXX-XXX-XXXX";
+          phoneNumber = "XXX-XXX-XXXX";
             
         //Set default values to the unentered information??
-            insuranceInfo = "<Insurance Information>";
+          insuranceInfo = "<Insurance Information>";
       }
     //------------------------------------------------------------------------------
 
@@ -170,7 +170,6 @@ public class PatientPortal{
             Button signOut = new Button("Logout");	
             //Set the Font and Size of the button
 
-            //^^This will take user back to Welcome page
         //==================================================================
 
 
@@ -188,12 +187,34 @@ public class PatientPortal{
 
         //Action-Event Handling
         //========================================================================================================
+          //Change Patient Information
+            changePatientInfo.setOnAction(e -> {
+              //Load the scene/method
+                primeStage.setScene(changePatientInfo());
+              //Display the Scene created
+                primeStage.show();
+            });
+
+
+          //View Previous Visits
+            viewPreviousVisits.setOnAction(e -> {
+              //This will load a scene that has the DROPDOWN menu
+              //Refer to code in [etc] for usage...
+            });
+
+
+          //Messages
+            messageInbox.setOnAction(e -> {
+              //This will also use the DROPDOWN menu...  [For the doctor actually]
+
+            });
+
+
           //Logout
             signOut.setOnAction(e -> {
-              //NEW TEST
-              primeStage.setScene(welcomePage);
-              primeStage.show();
-
+              //Set the stage to the Welcome page and run
+                primeStage.setScene(welcomePage);
+                primeStage.show();
             });
         //========================================================================================================
 
@@ -201,7 +222,7 @@ public class PatientPortal{
         //Align the buttons, text, etc.
         //========================================================================================================
           //Alignment box for all of the text, buttons, etc.
-            VBox alignBox0 = new VBox(20, header0, text0, changePatientInfo, viewPreviousVisits, messageInbox, signOut);
+            VBox alignBox0 = new VBox(25, header0, text0, changePatientInfo, viewPreviousVisits, messageInbox, signOut);
 
           //Set the alignment of the VBox for the Scene
             alignBox0.setAlignment(Pos.CENTER);
@@ -210,22 +231,101 @@ public class PatientPortal{
 
         //Make the Scene, set the scene, and display it
         //Load the Patient Portal scene to be displayed
-        Scene mainScene = new Scene(alignBox0, 1024, 768);
+          Scene mainScene = new Scene(alignBox0, 1024, 768);
         
         //Set the primary/main Scene and displays it
-        primeStage.setScene(mainScene);
-        primeStage.show();
+          primeStage.setScene(mainScene);
+          primeStage.show();
     }
 
 
     //Methods below will either return of use primeStage to set the scene upon button activation
 
+
     //Change Patient Information {Scene}
     //You can exit this method via the Button "Exit"
-    private void changePatientInfo(){
+    private Scene changePatientInfo(){
+        //Labels
+        //=====================================================================
+          //Contact Information
+            Label contactInfoLbl = new Label("Contact Information:");
+              //Set font of Text
+                contactInfoLbl.setStyle("-fx-font-size: 20px;");
 
+
+          //Phone Number
+            Label phoneNumLbl = new Label("Phone Number:");
+              //Set font of Text
+                phoneNumLbl.setStyle("-fx-font-size: 18px;");
+
+
+          //Insurance Information
+            Label insuranceInfoLbl = new Label("Insurance Information:");
+              //Set font of Text
+                insuranceInfoLbl.setStyle("-fx-font-size: 20px;");
+
+
+          //Pharmaceutical Information
+            Label pharmacyInfoLbl = new Label("Pharmaceutical Information:");
+              //Set font of Text
+                pharmacyInfoLbl.setStyle("-fx-font-size: 20px;");
+        //=====================================================================
+
+        
+
+        //Buttons
+        //==========================================================
+          //Update Information (Saves to .txt file: PatientInfo.txt)
+            Button updateInfo = new Button("Update Information");
+              //Set the Dimensions & text of the button
+
+          //Exit,   This will run the displayPortal() Method!!
+            Button exitPage = new Button("Exit");
+              //Set the Dimensions & text of the button
+        //==========================================================
+
+
+
+        //Action-Event Handling
+        //==========================================================
+          //Update the Information Entered into the text fields
+            updateInfo.setOnAction(e -> {
+              //Relevant code below...
+                //
+            });
+
+          //Exit the 'Update Information' page
+            exitPage.setOnAction(e -> {
+              //[For the future...] 
+              //we may have to set objects to null 
+              //before jumping into a new 'display portal'
+
+              //Runs 'displayPortal()' to traverse back page
+                displayPortal();
+            });
+        //==========================================================
+
+
+        //Alignment of Buttons, Labels, etc.
+        //================================================================================
+          //Helps align all buttons, text boxes, etc.
+            HBox alignBox0 = new HBox(20, contactInfoLbl, insuranceInfoLbl, pharmacyInfoLbl);
+              //Align the Hbox
+                alignBox0.setAlignment(Pos.CENTER);
+
+          //The second HBox will contain the three VBox(s) with black borders around them
+            //HBox alignBox1 = new HBox(20, );
+        //================================================================================
+
+
+      //Build the Scene
+        Scene mainLayout = new Scene(alignBox0, 1024, 768);
+
+      //Return the Scene
+        return mainLayout;
     }
     
+
     //View Previous Visits {Scene}
     //You can exit this method via the Button "Exit"
     
@@ -238,6 +338,10 @@ public class PatientPortal{
 
     //------------------------------------------------------------------------------
 
+
+    //Private functions {really methods but I'm not calling them that here LoL!}
+      //This function is for 
+      
 }	
 
 
