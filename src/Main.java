@@ -44,6 +44,26 @@
 *********************************************************************************************************/
 
 
+/* [TO DO]:
+  	 
+  	 - [6/19/24]:
+  	
+		[Functional requirements]
+
+		+ NOTES THAT ARE RANDOM BUT I NEED TO WRITE DOWN
+		  
+		  For the [Create account button] when it is pressed remove the objects from the scene using 
+		  .getChildren.remove() related to logging in and then .getChildren.add() new/more text boxes 
+		  for Insurance, Contact info, etc.
+		
+
+		[Non-functional requirements]
+
+	 	+ You might have to make the LoginPage and Create account Page separate pages?
+		  [That way patient can enter insurance info, contact number, etc.]
+		  
+*/
+
 
 /*[Side Notes]
  *	This is the boiler-plate code for your CSSE-360 SU24 Project "Arizona Medical"
@@ -64,8 +84,10 @@
 
 
 //Relevant JavaFX imports for our GUI
+//------------------------------------
 import javafx.application.Application;
 import javafx.stage.Stage;
+//------------------------------------
 
 
 //Driver of program: "Arizona Medical"

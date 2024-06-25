@@ -38,29 +38,6 @@
 ***************************************************************************************/
 
 
-
-/* [TO DO]:
-  	 
-  	 - [6/19/24]:
-  	
-		[Functional requirements]
-
-		+ NOTES THAT ARE RANDOM BUT I NEED TO WRITE DOWN
-		  
-		  For the [Create account button] when it is pressed remove the objects from the scene using 
-		  .getChildren.remove() related to logging in and then .getChildren.add() new/more text boxes 
-		  for Insurance, Contact info, etc.
-		
-
-		[Non-functional requirements]
-
-	 	+ You might have to make the LoginPage and Create account Page separate pages?
-		  [That way patient can enter insurance info, contact number, etc.]
-		  
-*/
-
-
-
 //Relevant Java & JavaFX Libraries
 //-----------------------------------------------
 import javafx.geometry.Insets;
@@ -76,7 +53,6 @@ import javafx.stage.Stage;
 import java.io.*;	//FileWriter for file writing
 import java.util.*;	//Scanner for file reading
 //-----------------------------------------------
-
 
 
 //Portal Object/Class 
@@ -815,94 +791,3 @@ public class Portals {
   	  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //--------------------------------------------------------------------------------------------------------
 }
-
-
-
-//[Etc]:
-//--------------------------------------------------------------------------------------------------------
-//[TEMPLATE/BOILER-PLATE CODE FOR DropDown menu/ComboBox]
-/*
-//Refreshing on string array!
-//-----
-System.out.print("Enter Capacity: ");
-Scanner scanner = new Scanner(System.in);
-int userInput = scanner.nextInt();
-
-
-//---------------------------------------------------------------------------------------------------------------------
-//[Relevant Code for Project {CSE-360 Summer}]
-
-//New ComboBox (Dropdown Selection)
-ComboBox<String> dropSelect = new ComboBox<>();
-//(We will be using a String array to store the unique PatientIds & Names to be displayed/useable within the ComboBox)
-//[Below Code]: Adding Strings to the ComboBox manually
-//dropSelect.getItems().addAll("Selection #1", "Selection #2", "Selection #3");
-
-
-//This will be the list generated from reading the relevant .txt file for loading patient names & dob
-String[] patientList = new String[userInput];
-//We will most likely be creating a method or function that reads from a small .txt file
-//to get the patients names (Unique Patient name & Dob per line?? so we use file.read.nextLine()??)
-//that simply has the patients' full name & dob? (PatientList.txt??)
-//	[Note: we will have other .txt files for storing the patient data, this smaller .txt file could
-//			be a little faster to read from??]
-
-
-//Fill the String array & print success/progress
-//[Pointless code for our Project (do not include)]
-for(int i = 0; i < userInput; i++){
-	//Add the string to the shit
-	patientList[i] = "Yes#" + i;
-
-	//Print from the yes array!
-	System.out.println("yes[" + i + "] == " + patientList[i]);
-}
-
-//Close the scanner
-scanner.close();
-//-----
-
-
-//Add our String array to the ComboBox, (Add options to dropdown menu)
-//[This will have to be adapted and will be used in the: doctor portal (view patient data), messaging board, etc.]
-dropSelect.getItems().addAll(patientList);
-
-
-//Create new Vertical Box to display the ComboBox
-VBox root = new VBox();
-root.getChildren().add(dropSelect);
-
-// Create a scene with the VBox layout
-Scene scene = new Scene(root, 300, 200);
-
-// Set the scene to the stage and show the stage
-primaryStage.setScene(scene);
-primaryStage.setTitle("ComboBox Example");
-primaryStage.show();
-
-
-HBox rootMe = new HBox();
-Scene scene3 = new Scene(rootMe, 400, 500);
-
-
-
-//Handler for selection/action on the CheckBox Object (Dropdown menu)
-dropSelect.setOnAction(event -> {
-	String selectedScene = dropSelect.getSelectionModel().getSelectedItem();
-	
-	//Switch-case statement for the event of "Selecting patient"
-	switch (selectedScene) {
-		case "Yes#4":
-			
-			primaryStage.setScene(scene3);
-			primaryStage.show();
-		
-			break;
-			
-		case "Yes#1":
-			
-			break;
-	}
-});
-*/	
-//--------------------------------------------------------------------------------------------------------
