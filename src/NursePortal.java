@@ -1,6 +1,176 @@
-//Insert Description n allat below!!
+/****************************************************************************************
+//[Contributors]:
+    - John Bostater
+ 	  
+    - Tristan Andrade
+
+    - Austin Mayhew
+
+    - Ryan Clark
+
+    - Juan Rosas Jr.
+
+ 	
+//[Description]:
+    //Write description here...
+
+
+  [New Visit Form]:
+    //Text here...
+  
+
+  [Messages]:
+    //Text here...
+  
+
+  [Logout]:
+    //This will load the welcomePage scene
+  
+	
+//[Aspect Ratio/Dimension of Graphical User Interface]: 
+
+    - [4:3]	-->   [1024 x 768]	--	{Width x Height}
+	 
+	
+//[Files Created/Used within the program for storing/loading data]:	  
+    - //here...
+***************************************************************************************/
+
+
+//Relevant Java & JavaFX Libraries
+//-----------------------------------------------
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+//File I/O
+import java.io.*;	//FileWriter for file writing
+import java.util.*;	//Scanner for file reading
+//-----------------------------------------------
+
+
+//Random notes
+//      any "go back"/Exit will use the  displayPortal()  method
+
 
 public class NursePortal{
     //Private Data & Variables
+    //------------------------------------------
+      //Stage used to display the Scenes/Methods
+        private Stage primeStage;
 
+      //Welcome Page (Used upon logout)
+        private Scene welcomePage;
+
+      //There may be no more??
+    //------------------------------------------
+
+
+    //Constructor
+    //------------------------------------------------------------------------------
+      public NursePortal(Stage primaryStage, Scene welcomeScene){
+        //Set the private variables...
+          primeStage = primaryStage;
+          welcomePage = welcomeScene;
+      }
+    //------------------------------------------------------------------------------
+
+
+    //[New Visit Form]      [Messages]      [Logout]
+
+    //Methods
+    //------------------------------------------------------------------------------
+      public void displayPortal(){
+        //Create the scene: Buttons, Action-Event, Alignment, Scene...
+
+        //Labels/Headers
+        //===========================================================================
+          //Welcome
+            Label header0 = new Label("Welcome!");
+              //Set Font & size of text
+                header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
+
+          //What would you like to do today??
+            Label header1 = new Label("What would you like to do today?");
+              //Set Font & size of text
+                header1.setStyle("-fx-font-size: 20px;");
+        //===========================================================================
+
+
+        //Buttons
+        //===========================================================================
+          //New Visit Form
+            Button newVisitButton = new Button("New Visit Form");
+              //Set the Dimensions of the Button
+                newVisitButton.setPrefSize(200, 40);
+                newVisitButton.setMinSize(200, 40);
+                newVisitButton.setMaxSize(200, 40);
+              //Set the Font size of the text
+                newVisitButton.setStyle("-fx-font-size: 20px;");
+
+          //Messages
+            Button messageButton = new Button("Messages");
+              //Set the Dimensions of the Button
+                messageButton.setPrefSize(150, 45);
+                messageButton.setMinSize(150, 45);
+                messageButton.setMaxSize(150, 45);
+              //Set the Font size of the text
+                messageButton.setStyle("-fx-font-size: 20px;");
+
+          //Logout
+            Button logoutButton = new Button("Logout");
+              //Set the Dimensions of the Button
+                logoutButton.setPrefSize(150, 45);
+                logoutButton.setMinSize(150, 45);
+                logoutButton.setMaxSize(150, 45);
+              //Set the Font size of the text
+                logoutButton.setStyle("-fx-font-size: 20px;");
+        //===========================================================================
+
+
+        //Action-Event Handling
+        //===========================================================================
+          //New Visit Form      [This will save to:  "PatientSummary.txt"  <-- rename this .txt file]
+
+
+          //Messages
+
+
+
+          //Logout
+            goBack.setOnAction(e -> {
+              //Load the welcome page and display it    [Side Note: deallocate items??]
+                primeStage.setScene(welcomePage);
+                primeStage.show();
+            });
+        //===========================================================================
+
+
+        //Alignment
+        //===========================================================================================
+          //Vertically align the Buttons/Functionality of the Nurse Portal
+            VBox vertical0 = new VBox(20, header0, header1, newVisitButton, messageButton, logoutButton);
+              //Alignment
+                vertical0.setAlignment(Pos.CENTER);
+
+          //Horizontally align the Vertical alignment of buttons and labels/texts
+            HBox horizontal0 = new HBox(vertical0);
+              //Alignment
+                horizontal0.setAlignment(Pos.CENTER);
+        //===========================================================================================
+
+
+        //Build the Scene
+          Scene mainLayout = new Scene(horizontal0, 1024, 768);
+
+        //Display the Scene
+          primeStage.setScene(mainLayout);
+          primeStage.show();
+      }
+    //------------------------------------------------------------------------------
 }

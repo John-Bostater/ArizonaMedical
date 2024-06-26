@@ -205,7 +205,7 @@ public class Portals {
 	      //================================================================================================================
 
 	        
-	  	  //Necessary File Check
+	  	  //Necessary File Check:	[PatientAccounts.txt]	[VisitSummary.txt]
           //================================================================================================================
 			//Check to see if the file(s) exist. If not, create it.
 			try {
@@ -332,11 +332,13 @@ public class Portals {
 		  //======================================================================================
 			//Nurse Login  --> Create/Use Nurse Portal
 			  nurseButton.setOnAction(e -> {
+				//Idea:  May have to deallocate objects before new page...
+
 				//Load Nurse Portal Object/Class to display / use the portal
-				  nurseView = new NursePortal();
+				  nurseView = new NursePortal(primeStage, welcomePage);
 
 				//Call upon the object method for displaying/using the main page for the Nurse
-				  //nurseView.runPortal();
+				  nurseView.displayPortal();
 			  });
 
 

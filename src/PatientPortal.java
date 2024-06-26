@@ -207,7 +207,7 @@ public class PatientPortal{
 
 
         //Action-Event Handling
-        //========================================================================================================
+        //=============================================================================
           //Change Patient Information
             changePatientInfo.setOnAction(e -> {
               //Load the scene/method
@@ -242,7 +242,7 @@ public class PatientPortal{
                 primeStage.setScene(welcomePage);
                 primeStage.show();
             });
-        //========================================================================================================
+        //=============================================================================
 
 
         //Align the buttons, text, etc.
@@ -314,6 +314,13 @@ public class PatientPortal{
           //Exit,   This will run the displayPortal() Method!!
             Button exitPage = new Button("Exit");
               //Set the Dimensions & text of the button
+              //[Width x Height]
+    			  	  exitPage.setPrefSize(200, 40);  
+		            exitPage.setMaxSize(200, 40);
+		            exitPage.setMinSize(200, 40);
+		          //Set the Font of the Button's text
+		            exitPage.setStyle("-fx-font-size: 20px;");
+
         //==========================================================
 
 
@@ -425,7 +432,7 @@ public class PatientPortal{
             try{
               //Open: PatientInfo.txt
               //Read the File with a scanner (easier to get Line by Line)
-                Scanner fileReader = new Scanner(new File("PatientSummary.txt"));
+                Scanner fileReader = new Scanner(new File("VisitSummary.txt"));
 
               //Flag that "puts on the brakes" of the fileReader so it will
                 boolean patientFound = false;
