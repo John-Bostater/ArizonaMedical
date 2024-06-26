@@ -1,19 +1,21 @@
 /****************************************************************************************
-//[Contributors]:
-    - John Bostater
- 	  
-    - Tristan Andrade
+[Contributors]:
+  - John Bostater
+  
+  - Tristan Andrade
 
-    - Austin Mayhew
+  - Austin Mayhew
 
-    - Ryan Clark
+  - Ryan Clark
 
-    - Juan Rosas Jr.
+  - Juan Rosas Jr.
 
  	
-//[Description]:
-    //Write description here...
+[Description]:
+  //Write description here...
 
+
+[Functionality]:
 
   [New Visit Form]:
     //Text here...
@@ -27,13 +29,13 @@
     //This will load the welcomePage scene
   
 	
-//[Aspect Ratio/Dimension of Graphical User Interface]: 
+[Aspect Ratio/Dimension of Graphical User Interface]: 
 
-    - [4:3]	-->   [1024 x 768]	--	{Width x Height}
+  - [4:3]	-->   [1024 x 768]	--	{Width x Height}
 	 
 	
-//[Files Created/Used within the program for storing/loading data]:	  
-    - //here...
+[Files Created/Used within the program for storing/loading data]:	  
+  - //here...
 ***************************************************************************************/
 
 

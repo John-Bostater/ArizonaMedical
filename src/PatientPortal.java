@@ -1,23 +1,25 @@
 /****************************************************************************************
-//[Contributors]:
-    - John Bostater
- 	  
-    - Tristan Andrade
+[Contributors]:
+  - John Bostater
+  
+  - Tristan Andrade
 
-    - Austin Mayhew
+  - Austin Mayhew
 
-    - Ryan Clark
+  - Ryan Clark
 
-    - Juan Rosas Jr.
+  - Juan Rosas Jr.
 
  	
-//[Description]:
-    This file contains the relevant code for creating the Patient Portal.
- 
-    Upon a successful login by the user, the main page of the portal will be displayed
+[Description]:
+  This file contains the relevant code for creating the Patient Portal.
 
-    From this Portal the Patient/User can use the following functionality
+  Upon a successful login by the user, the main page of the portal will be displayed
 
+  From this Portal the Patient/User can use the following functionality
+
+
+[Functionality]: 
 
   [Change Patient Information]:
     This functional feature of the Patient Portal is 
@@ -35,24 +37,24 @@
 
   
 	
-//[Aspect Ratio/Dimension of Graphical User Interface]: 
+[Aspect Ratio/Dimension of Graphical User Interface]: 
 
-    - [4:3]	-->   [1024 x 768]	--	{Width x Height}
-	 
+  - [4:3]	-->   [1024 x 768]	--	{Width x Height}
+
 	
-//[Files Created/Used within the program for storing/loading data]:	  
-    - PatientAccounts.txt 	
-        {Contains: FirstName, LastName, DOB, Insurance Info, Contact Info}
+[Files Created/Used within the program for storing/loading data]:	  
+  - PatientAccounts.txt 	
+      {Contains: FirstName, LastName, DOB, Insurance Info, Contact Info}
     
-    - PatientData.txt
-        {Used for saving the patients data: [Insurance], [Contact], [etc.]}
+  - VisitSummary.txt
+      {Used for saving the patients data: [Insurance], [Contact], [etc.]}
 	  
-    - PatientVisits
-        {Saved Patient Visit Information??}
+  - PatientVisits
+      {Saved Patient Visit Information??}
 	  
-    - Messages.txt
-        {Used for communication between parties}
-            [New chats are added linearly (by nextLine();)]
+  - Messages.txt
+      {Used for communication between parties}
+        [New chats are added linearly (by nextLine();)]
 ***************************************************************************************/
 
 

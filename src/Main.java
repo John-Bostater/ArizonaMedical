@@ -1,5 +1,5 @@
 /*********************************************************************************************************
-//[Contributors]:
+[Contributors]:
   - John Bostater
     
   - Tristan Andrade
@@ -9,14 +9,13 @@
   - Ryan Clark
 
   - Juan Rosas Jr.
-  
-
-//[Description]:
-  Arizona Medical is 
-  //Continue writing description
 
 
-//[Library/JavaFX Info]:
+[Description]:
+  //Text here describing the whole program
+
+
+[Library/JavaFX Info]:
   
   [External JARS/Libraries used]
     - JavaSE-22.0.1 {JRE System Library}
@@ -26,8 +25,8 @@
     - JavaSDK
 
       
-//[Etc]:
-    + [Running Program in Terminal]
+[Etc]:
+  + [Running Program in Terminal]
 
     //Compile/Build Object
       javac --module-path "/path/to/javafx-sdk-22.0.1/lib" --add-modules javafx.controls,javafx.fxml Main.java
@@ -36,11 +35,11 @@
       java --module-path "/path/to/javafx-sdk-22.0.1/lib" --add-modules javafx.controls,javafx.fxml Main
 
 
-    + Virtual Machine Argument(s) [For running in EclipseIDE]:
+  + Virtual Machine Argument(s) [For running in EclipseIDE]:
+  
+    --module-path /path/to/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml
     
-      --module-path /path/to/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml
-      
-    [NOTE] Change VM argument(s) via: 'Run Configurations' under 'Run as' in Eclipse
+  [NOTE] Change VM argument(s) via: 'Run Configurations' under 'Run as' in Eclipse
 *********************************************************************************************************/
 
 

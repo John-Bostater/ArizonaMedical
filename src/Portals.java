@@ -1,7 +1,7 @@
 /****************************************************************************************
-//[Contributors]:
+[Contributors]:
 	- John Bostater
- 	  
+		
 	- Tristan Andrade
 
 	- Austin Mayhew
@@ -11,27 +11,35 @@
 	- Juan Rosas Jr.
 
  	
-//[Description]:
+[Description]:
 	This file contains code for creating/displaying the necessary Scenes/Pages
 	for the GUI. The code also perfo
 
 
-//[Aspect Ratio/Dimension of Graphical User Interface]: 
+[Functionality]:
 
+	[Patient]
+		//Description here
+
+
+	[Staff]
+		//Description here
+
+
+[Aspect Ratio/Dimension of Graphical User Interface]: 
 	- [4:3]	-->   [1024 x 768]	--	{Width x Height}
-	
 
-//[Files Created/Used within the program for storing/loading data]:
-	
+
+[Files Created/Used within the program for storing/loading data]:
 	- PatientAccounts.txt 	
 		{Contains: FirstName, LastName, DOB, Insurance Info, Contact Info}
-	
+
 	- VisitSummary.txt
 		{Used for saving the patients data: [Insurance], [Contact], [etc.]}
-	
+
 	- PatientVisits
 		{Saved Patient Visit Information??}
-	
+
 	- Messages.txt:		Viewable by:	 Doctor, Nurse, Patient
 		{Used for communication between parties}
 						[New chats are added linearly (by nextLine();)]

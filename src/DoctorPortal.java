@@ -1,6 +1,6 @@
 /****************************************************************************************
-//[Contributors]:
-    - John Bostater
+[Contributors]:
+	- John Bostater
  	  
     - Tristan Andrade
 
@@ -11,9 +11,11 @@
     - Juan Rosas Jr.
 
  	
-//[Description]:
-    //Write description here...
+[Description]:
+	//Write description here...
 
+
+[Functionality]:
 
   [Patient Visit Form]:
     //Text here...
@@ -31,13 +33,13 @@
     //This will load the welcomePage scene
   
 	
-//[Aspect Ratio/Dimension of Graphical User Interface]: 
+[Aspect Ratio/Dimension of Graphical User Interface]: 
 
-    - [4:3]	-->   [1024 x 768]	--	{Width x Height}
+	- [4:3]	-->   [1024 x 768]	--	{Width x Height}
 	 
 	
-//[Files Created/Used within the program for storing/loading data]:	  
-    - //here...
+[Files Created/Used within the program for storing/loading data]:	  
+	- //here...
 ***************************************************************************************/
 
 
