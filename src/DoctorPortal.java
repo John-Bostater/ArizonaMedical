@@ -84,47 +84,44 @@ public class DoctorPortal extends NursePortal{
 	//Methods
 	//-------------------------------------------------------------------------------------------
 	  //We will be using the same methods to that of the NursePortal but we will override them
-	  //that way we can manipulate aspect of the shit that we want to or whatever
+	  //that way we can manipulate aspect of the stuff that we want to or whatever
 	  //Display portal that has the same name....
 	  
 
 	  //Display the Main Page
-		//Override the displayPortal(){} method so that we can redefine everything within it as we like
 	  @Override
-	  public void displayPortal(){
-		//Set the Buttons, Labels, Action-Event, etc.  [In the future this may be moved to the constructor?]
+	    public void displayPortal(){
+		  //Set the Buttons, Labels, Action-Event, etc.  [In the future this may be moved to the constructor?]
 
-		//Labels
-		//========================================================================
+		  //Labels
+		  //========================================================================
 
-		//========================================================================
-
-
-		//Buttons
-		//========================================================================
-
-		//========================================================================
+		  //========================================================================
 
 
-		//Action-Event Handling
-		//========================================================================
+		  //Buttons
+		  //========================================================================
 
-		//========================================================================
-
-
-		//Alignment
-		//========================================================================
-		//========================================================================
+		  //========================================================================
 
 
-		//Set the Scene & Display it
-	  }
+		  //Action-Event Handling
+		  //========================================================================
+
+		  //========================================================================
+
+
+		  //Alignment
+		  //========================================================================
+		  //========================================================================
+
+
+		  //Set the Scene & Display it
+		}
+
 
 	  //Methods you already have...  (these can be reference within the Action Event buttons you created)
 		//	[Messages]
 		//	[Logout]
 	//-------------------------------------------------------------------------------------------
-
-
-	//ALRIGHT MOTHER FUCKER TRY TO LEARN ABOUT POLYMORPHISM IN THIS LITTLE SCISM!!!!
 }
