@@ -482,12 +482,19 @@ public class PatientPortal{
                 System.out.println("File Not Found!!");
             }
 
-            //Add all of the exam Dates to the ComboBox
+
+          //Add all of the exam Dates to the ComboBox
             for(int i = 0; i < 10; i++){
-              if(examDates[i] != ""){
-                //Add the Exam date to the box
-                  dropSelect.getItems().add(examDates[i]);
-              }
+              //Add exam dates
+                if(examDates[i] != ""){
+                  //Add the Exam date to the box
+                    dropSelect.getItems().add(examDates[i]);
+                }
+              //Else, help the garbage collector
+                else{
+                  //Set the empty slots to null
+                    examDates[i] = null;
+                }
             }
         //==========================================================================================
 
