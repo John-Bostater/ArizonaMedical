@@ -567,7 +567,7 @@ public class Portals {
 	    
 	        	
 	        	//Compile into one string to be passed into PatientPortal Constructor 
-	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + " " 
+	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
 	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
 	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
 	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
@@ -642,7 +642,7 @@ public class Portals {
 
 	          //Compile the credentials entered by the Patient/User
 	        	//Compile into one string to be passed into PatientPortal Constructor 
-	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + " " 
+	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
 	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
 	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
 	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 

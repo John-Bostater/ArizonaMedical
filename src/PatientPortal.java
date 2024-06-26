@@ -390,9 +390,13 @@ public class PatientPortal{
           
         //=====================================================
 
+        //NEW?DEBUG
+        System.out.println("Patient Credentials: " + patientCredentials);
 
-        //DropDown Menu
-        //=====================================================
+
+
+        //DropDown Menu 
+        //==========================================================================================
           //Create the dropDown menu object
             ComboBox<String> dropSelect = new ComboBox<>();
               //Set the Dimensions of the drop down menu
@@ -400,59 +404,75 @@ public class PatientPortal{
                 dropSelect.setPrefSize(200, 30);
                 dropSelect.setMinSize(200, 30);
                 dropSelect.setMaxSize(200, 30);
+              //NEW
+              //Set the font of the text within
+                dropSelect.setStyle("-fx-font-size: 16px;");
+
+   
+          //String array that contains all of the exam dates
+            String[] examDates = new String[10];   //We could either use the default
+            //Max amount of exams per Patient is 10
+
+
+          //Instantiate the string array
+            for(short i = 0; i < 10; i++){
+              //New shit
+                examDates[i] = "";
+            }
+
 
           //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
             try{
               //Open: PatientInfo.txt
               //Read the File with a scanner (easier to get Line by Line)
                 Scanner fileReader = new Scanner(new File("PatientSummary.txt"));
-            
+
+              //Flag that "puts on the brakes" of the fileReader so it will
+                boolean patientFound = false;
+              //NEW
+                short counter = 0;
+
              //Read the file Line-by-Line and compare the strings for a match
                while(fileReader.hasNextLine()) {
-                 //Have series of if statements & flags for: 
-                 //  finding the patients section of data in the .txt via their credentials
-                 //  setting a flag to true when the credentials are found
-                 //  Collecting the data via: if(line.contains("Data: ") && flag))  
-
-                 //READ THE .TXT FILE UNTIL WE FIND THE PATIENT'S CREDS, ONCE U FIND THEM 
-                 //ACTIVATE THE FLAG So we can START READING THE patients data
-
-                 //NEW IDEA!!!!
-                 //before the patients credentials have the leading text: "Patient: <patientCreds>"
-
-                 //Flag that "puts on the brakes" of the fileReader so it will
-                   boolean patientFound = false;
-
-                 //Store the line into a string to be used
+                 //Gather and store the 
                    String line = fileReader.nextLine(); //Starts at the first line of text in .txt file
 
-                 //NEW
-                   short yesME = 10;
+                  //NEW/DEBUG
+                   //System.out.println("Line: " + line);
+                   //System.out.println("Patient")
 
-
-                 //String array that contains all of the exam dates
-                   String[] examDates = new String[yesME];   //We could either use the default
-
-                 //This 
-                   if(line.contains("Patient: " + patientCredentials)){
+                 //Line of code will activate data collection
+                   if(line.contains("Patient: " + patientCredentials) && !patientFound){
                      //Debug print
                        System.out.println("Patient has been found!");
 
+                      //NEW
+                       // System.out.println("Patient Found!!");
+
+                       //NEW
+                       //Move to the next line
+                         line = fileReader.nextLine();
+
                      //Activate the flag
-                     patientFound = true;
+                       patientFound = true;
                    }
 
                  //Collect all of the exam dates
                   if(line.contains("Date: ") && patientFound){
-                    
+                    //Collect the exam date
+                      examDates[counter] += line.substring(6, line.length());
+
+                    //increment counter
+                      counter++;
                   }
-
-                 //Break statement if another "Patient: " is encountered (we are done reading all the exam dates for our specified patient)
-
-
-
-               }
-
+                  //Finished collecting all of the exam dates
+                  else{
+                    if(line.contains("Patient: ") && patientFound){
+                      //break the reading loop
+                        break;
+                    }
+                  }
+                }
 
               //Close the fileReader
                 fileReader.close();
@@ -461,8 +481,15 @@ public class PatientPortal{
               //Error Print
                 System.out.println("File Not Found!!");
             }
-        //=====================================================
 
+            //Add all of the exam Dates to the ComboBox
+            for(int i = 0; i < 10; i++){
+              if(examDates[i] != ""){
+                //Add the Exam date to the box
+                  dropSelect.getItems().add(examDates[i]);
+              }
+            }
+        //==========================================================================================
 
         //Text Boxes
         //=================================================================================
