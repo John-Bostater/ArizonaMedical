@@ -575,15 +575,11 @@ public class PatientPortal{
       }
     
 
-    //Messages {Scene}
-    //You can exit this method/scene via the Button "Exit"
-      //private Scene messagePage(){
+      //Messages {Scene}
+      //You can exit this method/scene via the Button "Exit"
+        //private Scene messagePage(){
 
-      //}
-
-    
-    //Logout {runs the function:  runProgram() }
-
+        //}
     //------------------------------------------------------------------------------
 
 

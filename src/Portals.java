@@ -26,13 +26,13 @@
 	- PatientAccounts.txt 	
 		{Contains: FirstName, LastName, DOB, Insurance Info, Contact Info}
 	
-	- PatientData.txt
+	- VisitSummary.txt
 		{Used for saving the patients data: [Insurance], [Contact], [etc.]}
 	
 	- PatientVisits
 		{Saved Patient Visit Information??}
 	
-	- Messages.txt
+	- Messages.txt:		Viewable by:	 Doctor, Nurse, Patient
 		{Used for communication between parties}
 						[New chats are added linearly (by nextLine();)]
 ***************************************************************************************/
@@ -210,22 +210,33 @@ public class Portals {
 			//Check to see if the file(s) exist. If not, create it.
 			try {
 				//List all of the required files for the system to run
-				File patientAccounts = new File("PatientAccounts.txt");
-				
+				  File patientAccounts = new File("PatientAccounts.txt");
+				  File visitSummary = new File("VisitSummary.txt");
+
+
+				//TO DO!!!!
+				//THere is an error with the if-branch below where if one of the files already exists
+				//It is still overwritten by the 'else-branch' we need to prevent this!!!
+
+
 				//Check to see if the file already exists and if it does not, create it
-				if(patientAccounts.exists()) {
+				if(patientAccounts.exists() && visitSummary.exists()) {
 					//File Already exists, do nothing
-					System.out.println("File Exists!");
+					System.out.println("Both File Exists!");
 				}
+				//What the fuckkk
 				else {
-				//Create the file
-					FileWriter fileWriter = new FileWriter("PatientAccounts.txt");
-					
-				//Write the Leading text in the file
-					fileWriter.write("Patient Accounts:\n\n");
-					
-				//Close the fileWriter
-					fileWriter.close();
+				  //Create the file
+				  	FileWriter fileWriter0 = new FileWriter("PatientAccounts.txt");
+					FileWriter fileWriter1 =  new FileWriter("VisitSummary.txt");
+
+				  //Write the Leading text(s) to the respective files
+				  	fileWriter0.write("Patient Accounts:\n\n");
+					fileWriter1.write("");
+				
+				  //Close the fileWriter(s)
+				  	fileWriter0.close();
+					fileWriter1.close();
 				}
 			}
 			//Catch any File I/O errors
@@ -345,10 +356,10 @@ public class Portals {
 			//Doctor Login --> Create/Use Doctor Portal
 			  doctorButton.setOnAction(e -> {
 				//Load Nurse Portal Object/Class to display / use the portal
-				  doctorView = new DoctorPortal();
+				  doctorView = new DoctorPortal(primeStage, welcomePage);
 
 				//Call upon the object method for displaying/using the main page for the Doctor
-				  //doctorView.runPortal();
+				  doctorView.displayPortal();
 			  });
 
 

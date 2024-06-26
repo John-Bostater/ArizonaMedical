@@ -53,9 +53,12 @@ import java.io.*;	//FileWriter for file writing
 import java.util.*;	//Scanner for file reading
 //-----------------------------------------------
 
-
-//Random notes
-//      any "go back"/Exit will use the  displayPortal()  method
+//[VERY IMPORTANT NOTE FOR THE FUTURE/LATER in writing this program]
+//  Consider making the buttons of the mainPage [New Visit Form] [Messages] [Logout]
+//  Private data of the NursePortal Object & instantiate them in the NursePortal Constructor
+//  This way they can be used later in the Doctor Portal Methods???
+//  This probably won't work but once you have a working program you are comfortable with plz consider it
+//  [It could also help create less allocations on the heap???]
 
 
 public class NursePortal{
@@ -68,6 +71,11 @@ public class NursePortal{
         private Scene welcomePage;
 
       //There may be no more??
+        //This is a new dumb idea but i want to try it out
+          VBox vertical0;
+
+        //Make the buttons Private variables!!??!?!?
+          Button newVisitButton;
     //------------------------------------------
 
 
@@ -105,7 +113,9 @@ public class NursePortal{
         //Buttons
         //===========================================================================
           //New Visit Form
-            Button newVisitButton = new Button("New Visit Form");
+            //Original...
+            //Button newVisitButton = new Button("New Visit Form");
+              newVisitButton = new Button("New Visit Form");
               //Set the Dimensions of the Button
                 newVisitButton.setPrefSize(200, 40);
                 newVisitButton.setMinSize(200, 40);
@@ -136,14 +146,21 @@ public class NursePortal{
         //Action-Event Handling
         //===========================================================================
           //New Visit Form      [This will save to:  "PatientSummary.txt"  <-- rename this .txt file]
+            newVisitButton.setOnAction(e -> {
+              //stuff here
+                //code there
+            });
 
 
           //Messages
-
+            messageButton.setOnAction(e -> {
+              //stuff here
+                //code there
+            });
 
 
           //Logout
-            goBack.setOnAction(e -> {
+            logoutButton.setOnAction(e -> {
               //Load the welcome page and display it    [Side Note: deallocate items??]
                 primeStage.setScene(welcomePage);
                 primeStage.show();
@@ -154,7 +171,11 @@ public class NursePortal{
         //Alignment
         //===========================================================================================
           //Vertically align the Buttons/Functionality of the Nurse Portal
-            VBox vertical0 = new VBox(20, header0, header1, newVisitButton, messageButton, logoutButton);
+            //Original
+            //VBox vertical0 = new VBox(20, header0, header1, newVisitButton, messageButton, logoutButton);
+
+            //NEW
+            vertical0 = new VBox(20, header0, header1, newVisitButton, messageButton, logoutButton);
               //Alignment
                 vertical0.setAlignment(Pos.CENTER);
 
