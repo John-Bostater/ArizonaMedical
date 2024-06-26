@@ -217,7 +217,9 @@ public class Portals {
 				//TO DO!!!!
 				//THere is an error with the if-branch below where if one of the files already exists
 				//It is still overwritten by the 'else-branch' we need to prevent this!!!
-
+				//OR!!!
+				//	It won't be an issue because you are using the run.bat which is automatically
+				//	Deleting the "PatientAccounts.txt" upon running of the batch script
 
 				//Check to see if the file already exists and if it does not, create it
 				if(patientAccounts.exists() && visitSummary.exists()) {
