@@ -226,7 +226,7 @@ public class Portals {
 					//File Already exists, do nothing
 					System.out.println("Both File Exists!");
 				}
-				//What the fuckkk
+				//Files do not exist
 				else {
 				  //Create the file
 				  	FileWriter fileWriter0 = new FileWriter("PatientAccounts.txt");

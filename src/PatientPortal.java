@@ -265,8 +265,9 @@ public class PatientPortal{
       }
 
 
-    //Methods below will either return of use primeStage to set the scene upon button activation
 
+
+    //Methods below will either return Scene or use primeStage to set the Scene upon button activation
 
     //Change Patient Information {Scene}
       private Scene changePatientInfo(){
@@ -283,7 +284,17 @@ public class PatientPortal{
           //Phone Number
             Label phoneNumLbl = new Label("Phone Number:");
               //Set font of Text
-                phoneNumLbl.setStyle("-fx-font-size: 18px;");
+                phoneNumLbl.setStyle("-fx-font-size: 20px;");
+
+
+          //Digit seperators for the phone number
+            Label phoneDash0 = new Label("-");
+              //Set the font of the Label
+                phoneDash0.setStyle("-fx-font-size: 20px;");
+            
+            Label phoneDash1 = new Label("-");
+              //Set the font of the Label
+                phoneDash1.setStyle("-fx-font-size: 20px;");
 
 
           //Insurance Information
@@ -291,11 +302,21 @@ public class PatientPortal{
               //Set font of Text
                 insuranceInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
+          //Insurance Information {Specifier text}
+            Label insuranceInfoLbl0 = new Label("Insurance Provider:");
+              //Set font of Text
+                insuranceInfoLbl0.setStyle("-fx-font-size: 20px;");
+
 
           //Pharmaceutical Information
             Label pharmacyInfoLbl = new Label("Pharmaceutical Information:");
               //Set font of Text
                 pharmacyInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+
+          //Pharmacy Information {Specifier text}
+            Label pharmacyInfoLbl0 = new Label("Pharmacy Provider:");
+              //Set font of Text
+                pharmacyInfoLbl0.setStyle("-fx-font-size: 20px;");
         //==============================================================================
         
 
@@ -315,13 +336,61 @@ public class PatientPortal{
             Button exitPage = new Button("Exit");
               //Set the Dimensions & text of the button
               //[Width x Height]
-    			  	  exitPage.setPrefSize(200, 40);  
-		            exitPage.setMaxSize(200, 40);
-		            exitPage.setMinSize(200, 40);
+    			  	  exitPage.setPrefSize(150, 40);  
+		            exitPage.setMaxSize(150, 40);
+		            exitPage.setMinSize(150, 40);
 		          //Set the Font of the Button's text
 		            exitPage.setStyle("-fx-font-size: 20px;");
 
         //==========================================================
+
+
+        //Text Boxes
+        //==============================================================================
+          //3 text boxes for the phone number...
+          //Phone Number
+            //First three Digits
+            TextArea phoneNum0 = new TextArea("XXX");
+              //Set the dimensions of the text area/box
+                phoneNum0.setPrefSize(60, 40);
+                phoneNum0.setMinSize(60, 40);
+                phoneNum0.setMaxSize(60, 40);
+              //Set the size of the text in the text box
+                phoneNum0.setStyle("-fx-font-size: 18px;");
+
+            //Second three Digits
+            TextArea phoneNum1 = new TextArea("XXX");
+              //Set the dimensions of the text area/box
+                phoneNum1.setPrefSize(60, 40);
+                phoneNum1.setMinSize(60, 40);
+                phoneNum1.setMaxSize(60, 40);
+              //Set the size of the text in the text box
+                phoneNum1.setStyle("-fx-font-size: 18px;");
+
+            //Final four Digits
+            TextArea phoneNum2 = new TextArea("XXXX");
+              //Set the dimensions of the text area/box
+                phoneNum2.setPrefSize(70, 40);
+                phoneNum2.setMinSize(70, 40);
+                phoneNum2.setMaxSize(70, 40);
+              //Set the size of the text in the text box
+                phoneNum2.setStyle("-fx-font-size: 18px;");
+
+
+          //Insurance Provider
+            TextArea insuranceTxt = new TextArea();
+              //Set the dimensions of the text area/box
+                insuranceTxt.setPrefSize(250, 40);
+                insuranceTxt.setMinSize(250, 40);
+                insuranceTxt.setMaxSize(250, 40);
+
+          //Pharmacy Provider
+            TextArea pharmacyTxt = new TextArea();
+              //Set the dimensions of the text area/box
+                pharmacyTxt.setPrefSize(250, 40);
+                pharmacyTxt.setMinSize(250, 40);
+                pharmacyTxt.setMaxSize(250, 40);
+        //==============================================================================
 
 
         //Action-Event Handling
@@ -330,6 +399,46 @@ public class PatientPortal{
             updateInfo.setOnAction(e -> {
               //Relevant code below...
                 //
+
+                //This will open the "PatientAccounts.txt" for reading & writing
+
+                //We will use the flag to put on the "brakes"
+
+                //Once the scanner reads the line containing the Patient's credentials 
+                //We will activate our flag to start writing/collecting the other relevant info
+
+                //Contact Information Data Write (take the line & only update changed text)
+                //Collect the old information & use .contains()
+                  //here...
+
+                //use try{}catch(IOException e){}
+              
+              //Open the file "PatientAccounts.txt"
+                try{
+                  //Create a File object to check for files existence
+                    File patientAccounts = new File("PatientAccounts.txt");
+
+                  //Scanner for file reading
+                    Scanner fileReader = new Scanner(patientAccounts);
+
+                  //File writer for writing/updating the Patient's information
+
+                  //Flag for collecting data
+                    boolean patientFound = false;
+
+                  //Start reading the File
+                  while(fileReader.hasNextLine()){
+                    //Put the Line read into a string for us to manipulate
+                      String line = fileReader.nextLine();
+                  }
+
+
+                }
+                //If the file DNE error will be caught
+                catch(IOException x){
+                  //Error Catch print
+                    System.out.println("File does NOT exist!.!"); 
+                }
             });
 
 
@@ -346,21 +455,51 @@ public class PatientPortal{
 
 
         //Alignment of Buttons, Labels, etc.
-        //================================================================================
-          //Helps align all buttons, text boxes, etc.
-            HBox alignBox0 = new HBox(20, contactInfoLbl, insuranceInfoLbl, pharmacyInfoLbl);
+        //========================================================================================
+          //Labels
+           // HBox horizontal0 = new HBox(20, contactInfoLbl, insuranceInfoLbl, pharmacyInfoLbl);
               //Align the Hbox
-                alignBox0.setAlignment(Pos.CENTER);
+             //   horizontal0.setAlignment(Pos.CENTER);
 
-          //The third HBox will encapsulate the buttons
+          //Buttons
             HBox buttonsSection = new HBox(20, updateInfo, exitPage);
+              //Set the alignment of the HBox containing the functionality
+                buttonsSection.setAlignment(Pos.CENTER);
+    
+      
+          //Contact Info:
+            //Horizontally align the text fields & labels of the Phone Number entry
+              HBox horizontal1 = new HBox(5, phoneNum0, phoneDash0, phoneNum1, phoneDash1, phoneNum2);
 
-          //DEBUG VBOX
-            VBox theBs = new VBox(alignBox0, buttonsSection);
-        //================================================================================
+            //Vertically align the phoneNumLbl & horizontal1
+              VBox vertical0 = new VBox(10, contactInfoLbl, phoneNumLbl, horizontal1);
+
+
+          //Insurance Info:
+            //Vertical alignment box
+              VBox vertical1 = new VBox(10, insuranceInfoLbl, insuranceInfoLbl0, insuranceTxt);
+          
+
+          //Pharmacy Info:
+            //Vertical alignment box
+              VBox vertical2 = new VBox(10, pharmacyInfoLbl, pharmacyInfoLbl0, pharmacyTxt);
+
+
+          //Align the sections: [Contact Info, Insurance Info, Pharmaceutical Info]
+            HBox sectionAlignment = new HBox(20, vertical0, vertical1, vertical2);
+              //Set the alignment of the Hbox
+                sectionAlignment.setAlignment(Pos.CENTER);
+      
+
+          //Final Alignment/Main Layout
+            VBox vertical3 = new VBox(50, sectionAlignment, buttonsSection);
+              //Set the alignment of the Vertical box
+                vertical3.setAlignment(Pos.CENTER);
+        //========================================================================================
+
 
         //Build the Scene
-          Scene mainLayout = new Scene(theBs, 1024, 768);
+          Scene mainLayout = new Scene(vertical3, 1024, 768);
 
         //Return the Scene
           return mainLayout;
@@ -386,7 +525,7 @@ public class PatientPortal{
 
 
         //Buttons
-        //=====================================================
+        //==============================================
           Button exitPage = new Button("Exit");
             //Set the Dimensions and text of the button
               exitPage.setPrefSize(75, 40);
@@ -394,12 +533,11 @@ public class PatientPortal{
               exitPage.setMaxSize(75, 40);
             //Set the font & size
               exitPage.setStyle("-fx-font-size: 20px;");
-          
-        //=====================================================
+        //==============================================
+
 
         //NEW?DEBUG
         System.out.println("Patient Credentials: " + patientCredentials);
-
 
 
         //DropDown Menu 
@@ -444,41 +582,37 @@ public class PatientPortal{
                  //Gather and store the 
                    String line = fileReader.nextLine(); //Starts at the first line of text in .txt file
 
-                  //NEW/DEBUG
+                  //DEBUG
                    //System.out.println("Line: " + line);
                    //System.out.println("Patient")
 
-                 //Line of code will activate data collection
+                 //If-branch will activate data collection once the patient is found via their credentials
                    if(line.contains("Patient: " + patientCredentials) && !patientFound){
                      //Debug print
                        System.out.println("Patient has been found!");
 
-                      //NEW
-                       // System.out.println("Patient Found!!");
-
-                       //NEW
-                       //Move to the next line
-                         line = fileReader.nextLine();
+                     //Move to the next line
+                       line = fileReader.nextLine();
 
                      //Activate the flag
                        patientFound = true;
                    }
 
                  //Collect all of the exam dates
-                  if(line.contains("Date: ") && patientFound){
+                   if(line.contains("Date: ") && patientFound){
                     //Collect the exam date
                       examDates[counter] += line.substring(6, line.length());
 
                     //increment counter
                       counter++;
-                  }
-                  //Finished collecting all of the exam dates
-                  else{
-                    if(line.contains("Patient: ") && patientFound){
-                      //break the reading loop
-                        break;
-                    }
-                  }
+                   }
+                 //Finished collecting all of the exam dates
+                   else{
+                     if(line.contains("Patient: ") && patientFound){
+                        //break the reading loop
+                          break;
+                     }
+                   }
                 }
 
               //Close the fileReader
@@ -512,13 +646,12 @@ public class PatientPortal{
 
           //Set the textBox size and text style??
             visitSummary.setStyle("-fx-font-weight: 18px");
-
-          //[Width x Height]
-			  	  visitSummary.setPrefSize(800, 550);  
-            visitSummary.setMaxSize(800, 550);
-            visitSummary.setMinSize(800, 550);
-          //Set the Font of the Button's text
-            visitSummary.setStyle("-fx-font-size: 18px;");
+            //[Width x Height]
+              visitSummary.setPrefSize(800, 550);  
+              visitSummary.setMaxSize(800, 550);
+              visitSummary.setMinSize(800, 550);
+            //Set the Font of the Button's text
+              visitSummary.setStyle("-fx-font-size: 18px;");
         //=================================================================================
 
 
