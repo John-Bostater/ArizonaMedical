@@ -338,7 +338,7 @@ public class Portals {
 
 
 		  //Scene & Alignments
-		  //=====================================================================
+		  //============================================================================
 			//VBox for ordering items
 			  VBox buttonBox = new VBox(20, header0, nurseButton, doctorButton, goBack);
 			  //Align the vbox elements to be in the middle???
@@ -346,7 +346,7 @@ public class Portals {
 
 			//Scene for the 
 			  Scene staffPage = new Scene(buttonBox, 1024, 768);
-		  //=====================================================================
+		  //============================================================================
 
 
 		  //Action-Event Handling
@@ -398,6 +398,9 @@ public class Portals {
 				
 			  //Append the new Patient's name to the .txt file
 			    fileWriter.append(patientCredentials + "\n");
+
+				//Add more patient info??? (I.e. add the default vals: PhoneNum = XXX-XXX-XXXX)
+
 			 
 			  //Close the file Writer
 			    fileWriter.close();

@@ -123,20 +123,10 @@ public class PatientPortal{
         //Set the patients credentials
           patientCredentials = patientCreds;
 
+        //Load a method or function that looks for the user's info: [Contact], [], []
 
-        //Full Name (First & Last Name)
-        //  int pos = patientCredentials.indexOf(",");
-        //  fullName = patientCredentials.substring(0, pos);
-                    
-        //Date of Birth
-        //  dateOfBirth = patientCredentials.substring(pos + 1, patientCredentials.length());
 
-        //FIX THIS UP OR JUST MAKE THE PATIENT ACCOUNT CREATION FORM REQUIRE IT!!
-        //Set default values to the unentered information??
-        //  phoneNumber = "XXX-XXX-XXXX";
-            
-        //Set default values to the unentered information??
-        //  insuranceInfo = "<Insurance Information>";
+
       }
     //------------------------------------------------------------------------------
 
@@ -234,7 +224,11 @@ public class PatientPortal{
           //Messages
             messageInbox.setOnAction(e -> {
               //This will also use the DROPDOWN menu...  [For the doctor actually]
+              //Load & Display the Message(s) inbox Scene
+                primeStage.setScene(messagePage());
 
+              //Display the Scene
+                primeStage.show();
             });
 
 
@@ -385,13 +379,19 @@ public class PatientPortal{
                 insuranceTxt.setPrefSize(250, 40);
                 insuranceTxt.setMinSize(250, 40);
                 insuranceTxt.setMaxSize(250, 40);
+              //Set the size of the text in the text box
+                insuranceTxt.setStyle("-fx-font-size: 18px;");
+
 
           //Pharmacy Provider
             TextArea pharmacyTxt = new TextArea();
               //Set the dimensions of the text area/box
-                pharmacyTxt.setPrefSize(250, 40);
-                pharmacyTxt.setMinSize(250, 40);
-                pharmacyTxt.setMaxSize(250, 40);
+                pharmacyTxt.setPrefSize(300, 40);
+                pharmacyTxt.setMinSize(300, 40);
+                pharmacyTxt.setMaxSize(300, 40);
+              //Set the size of the text in the text box
+                pharmacyTxt.setStyle("-fx-font-size: 18px;");
+
         //==============================================================================
 
 
@@ -476,19 +476,21 @@ public class PatientPortal{
             //Vertically align the phoneNumLbl & horizontal1
               VBox vertical0 = new VBox(10, phoneNumLbl, horizontal1);
                 //Set the border of the shits??
-            		  vertical0.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10; -fx-background-color: aqua;");  
+                  vertical0.setStyle("-fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1; -fx-padding: 10; -fx-background-color: lightblue; -fx-border-radius: 10;");  
 
 
           //Insurance Info:
             //Vertical alignment box
               VBox vertical1 = new VBox(10, insuranceInfoLbl0, insuranceTxt);
           		  //Set the background color & border of the box
-                vertical1.setStyle("-fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1; -fx-padding: 10; -fx-background-color: aqua; -fx-border-radius: 10;");  
+                vertical1.setStyle("-fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1; -fx-padding: 10; -fx-background-color: lightblue; -fx-border-radius: 10;");  
           
 
           //Pharmacy Info:
             //Vertical alignment box
               VBox vertical2 = new VBox(10, pharmacyInfoLbl0, pharmacyTxt);
+                //Set the background color & border of the box
+                vertical2.setStyle("-fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1; -fx-padding: 10; -fx-background-color: lightblue; -fx-border-radius: 10;");  
 
 
           //Final adjustments to be consistent with the Phase1-specifications
@@ -722,9 +724,129 @@ public class PatientPortal{
 
       //Messages {Scene}
       //You can exit this method/scene via the Button "Exit"
-        //private Scene messagePage(){
+        private Scene messagePage(){
+          //Labels, Buttons, Text Box, Action-Event Handling, Scene
 
-        //}
+          //Labels
+          //=======================================================================
+            //Message Board
+              Label messageBrdLbl = new Label("Message Board:");
+                //Set the Font & size of the text
+                  //Code here....
+
+            //Message
+              Label messageLbl = new Label("Message:");
+
+            //Inbox
+              Label inboxLbl = new Label("Inbox:");
+          //=======================================================================
+
+
+          //Buttons
+          //=======================================================================
+            //Send Message
+              Button sendMessage = new Button("Send Message");
+                //Set the dimensions of the Button
+                  sendMessage.setPrefSize(200, 40);
+                  sendMessage.setMinSize(200, 40);
+                  sendMessage.setMaxSize(200, 40);
+                //Set the Font size of the text
+                  sendMessage.setStyle("-fx-font-size: 18px;");
+
+
+            //Delete Message
+              Button deleteMessage = new Button("Delete Message");
+              //^^This will simply remove the lines of the .txt file after & including "Patient Name:"
+                //Set the dimensions of the Button
+                  deleteMessage.setPrefSize(200, 40);
+                  deleteMessage.setMinSize(200, 40);
+                  deleteMessage.setMaxSize(200, 40);
+                //Set the Font size of the text
+                  deleteMessage.setStyle("-fx-font-size: 18px;");
+
+
+            //Exit
+              Button goBack = new Button("Logout");
+                //Set the dimensions of the Button
+                  goBack.setPrefSize(200, 40);
+                  goBack.setMinSize(200, 40);
+                  goBack.setMaxSize(200, 40);
+                //Set the Font size of the text
+                  goBack.setStyle("-fx-font-size: 18px;");
+          //=======================================================================
+
+
+          //Text Boxes
+          //=======================================================================
+            //Message Text Box  {Anything written here will be posted to the board}
+              TextArea messageTxt = new TextArea();
+                //Set the dimensions of the Button
+                  messageTxt.setPrefSize(200, 500);
+                  messageTxt.setMinSize(200, 500);
+                  messageTxt.setMaxSize(200, 500);
+                //Set the Font size of the text
+                  messageTxt.setStyle("-fx-font-size: 18px;");
+
+
+            //Inbox Text Box
+              TextArea inboxTxt = new TextArea();
+                //Set the dimensions of the Button
+                  inboxTxt.setPrefSize(500, 500);
+                  inboxTxt.setMinSize(500, 500);
+                  inboxTxt.setMaxSize(500, 500);
+                //Set the Font size of the text
+                  inboxTxt.setStyle("-fx-font-size: 18px;");
+
+            //NEW!!!
+            //Set the text box: "inboxTxt" to have the latest message(s) appear
+            //loaded from the .txt file "Messages.txt"
+            //Run a while loop until the Patient's name is hit (First & Last name)
+            //Do the flag method for starting to collect data 
+            //(Collect all text between Matched patient name & the next patient's name {when we will stop, i.e. set the flag to false})
+
+
+          //=======================================================================
+
+
+          //Action-Event Handling
+          //=======================================================================
+
+
+          //=======================================================================
+
+
+          //Alignments
+          //==========================================================================================
+            //Message:
+              VBox messageSection = new VBox(messageLbl, messageTxt);
+              
+            //Inbox:
+              VBox inboxSection = new VBox(inboxLbl, inboxTxt);
+            
+            //HBox containing the text fields & their resepective labels (background color: lightblue)
+              HBox functContainer = new HBox(messageSection, inboxSection); 
+                //Set the dimensions & other feats of the function container
+                  functContainer.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 10; -fx-background-color: lightblue;");
+                  functContainer.setAlignment(Pos.CENTER);
+
+            //Horizontally Align the Buttons/Functionality
+              HBox buttonContainer = new HBox(sendMessage, deleteMessage, goBack);
+
+
+            //Vertically align all of the sections {Last VBox}
+              VBox finAlign = new VBox(10, messageBrdLbl, functContainer, buttonContainer);
+                //Set the alignment of the VBox
+                //Maybe unecessary???
+                  finAlign.setAlignment(Pos.CENTER);
+          //==========================================================================================
+
+
+          //Build the Scene
+            Scene mainLayout = new Scene(finAlign, 1024, 768);
+
+          //Return the Scene
+            return mainLayout;
+        }
     //------------------------------------------------------------------------------
 
 
