@@ -792,19 +792,23 @@ public class PatientPortal{
                 //Set the Font size of the text
                   messageTxt.setStyle("-fx-font-size: 18px;");
                 //Set text wrapping 
-                  messageTxt.setWrapText(true);
-                
-                //[Note]: ^^ any text that exceeeds the width will fall to a new line
+                  messageTxt.setWrapText(true);                
+                  //[Note]: ^^ any text that exceeeds the width will fall to a new line
 
 
             //Inbox Text Box
-              TextArea inboxTxt = new TextArea();
+              TextArea inboxTxt = new TextArea("<Inbox Empty>");
                 //Set the dimensions of the Button
                   inboxTxt.setPrefSize(600, 525);
                   inboxTxt.setMinSize(600, 525);
                   inboxTxt.setMaxSize(600, 525);
                 //Set the Font size of the text
                   inboxTxt.setStyle("-fx-font-size: 18px;");
+                //Set text wrapping 
+                  inboxTxt.setWrapText(true);                
+                  //[Note]: ^^ any text that exceeeds the width will fall to a new line
+
+
 
             //NEW!!!
             //Set the text box: "inboxTxt" to have the latest message(s) appear
@@ -812,6 +816,9 @@ public class PatientPortal{
             //Run a while loop until the Patient's name is hit (First & Last name)
             //Do the flag method for starting to collect data 
             //(Collect all text between Matched patient name & the next patient's name {when we will stop, i.e. set the flag to false})
+          
+
+          
           //=======================================================================
 
 
@@ -821,8 +828,33 @@ public class PatientPortal{
               //This will open the "Messages.txt" file for reading & writing
               sendMessage.setOnAction(e -> {
                 //Add/Append the message to the  Inbox/Current Conversation
-                  //Hello there...
-                  //
+                  
+
+                //Read through the .txt file and look for the [<Patient Name>]: 
+                //Once found, 
+
+
+
+                //if [<Patient Name>]: does NOT exist, start the first comment
+
+
+              });
+
+
+            //Delete Message
+              deleteMessage.setOnAction(e -> {
+                //Delete the last new message {will be done by deleteing: [<Patient Name>]:  & everything after it}
+                //Replace with ""
+
+                //Delete the message
+
+              });
+
+
+            //Exit
+              goBack.setOnAction(e-> {
+                //Call upon displayPortal()
+                  displayPortal();
               });
 
 
