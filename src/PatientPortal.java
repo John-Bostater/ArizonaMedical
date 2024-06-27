@@ -102,13 +102,7 @@ public class PatientPortal{
         private String insuranceInfo = "";
         private String pharmacyInfo = "";
     //--------------------------------------------------
-        
 
-    //Default Constructor (DELETE this piece of code when done debugging!!) 
-    //------------------------------------	
-      //public PatientPortal() {}
-    //------------------------------------
-    
 
     //Constructor
     //-----------------------------------------------------------------------------------------
@@ -905,58 +899,41 @@ public class PatientPortal{
               //This will open the "Messages.txt" file for reading & writing
               sendMessage.setOnAction(e -> {
                 //Add/Append the message to the  Inbox/Current Conversation
-                  
+              
 
                 //Read through the .txt file and look for the [<Patient Name>]: 
                 //Once found, activate the flag at that line to collect that line + all of the succeding lines lines
                 //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
                 try{
-                  //Open: PatientInfo.txt
-                  //Read the File with a scanner (easier to get Line by Line)
-                    Scanner fileReader = new Scanner(new File("Messages.txt"));
+                  //Open: <this.fullName>PatientInfo.txt
+                    File patientInbox = new File(fullName + "Messages.txt");    
 
-                  //Flag that "puts on the brakes" of the fileReader so it will
-                    boolean patientFound = false;
-                  //NEW
-                    short counter = 0;
+                  //If the File exists append the new message to the end
+                  if(patientInbox.exists()){
+                    //Append the new message to the "<FullName>Message.txt"
+                  }
+                  else{
+                    //Create the new message inbox for writing
+                      FileWriter fileWriter0 = new FileWriter(patientInbox);
 
-                  //Read the file Line-by-Line and compare the strings for a match
-                    while(fileReader.hasNextLine()) {
-                      //Gather and store the 
-                        String line = fileReader.nextLine(); //Starts at the first line of text in .txt file
+                    //Create the file
+                      fileWriter0.write("");
 
-                        //DEBUG
-                        //System.out.println("Line: " + line);
-                        //System.out.println("Patient")
-
-                      //If-branch will activate data collection once the patient is found via their credentials
-                        if(line.contains("[" + patientCredentials + "] ") && !patientFound){
-                          //Debug print
-                            System.out.println("Patient has been found!");
-
-                          //Move to the next line
-                            line = fileReader.nextLine();
-
-                          //Activate the flag
-                            patientFound = true;
-                        }
-
-                      //Collect all of the messages
+                    //Close the File Reader
+                      fileWriter0.close();
+                  }
 
 
-                      //Finished collecting all of the exam dates
-                        if(line.contains("Patient: ") && patientFound){
-                            //break the reading loop
-                              break;
-                        }
-                    }
-                
-                  //Close the fileReader
-                    fileReader.close();
                 }
                 catch(IOException n){
                   //Error Print
-                    System.out.println("File Not Found!!");
+                  //  System.out.println("File Not Found!!");
+
+                  //Create the new Unique messages.txt:   Named: "<PatientName>Messages.txt"
+                  //<PatientName> = this.fullName;
+
+                  //Create the file
+
                 }
                 //if [<Patient Name>]: does NOT exist, start the first comment [If while-loop finished without finding user]
 
@@ -1033,13 +1010,5 @@ public class PatientPortal{
         }
     //------------------------------------------------------------------------------
 
-
-    //Private functions {really methods but I'm not calling them that here LoL!}
-    //------------------------------------------------------------------------------
-      //Function for gathering the examination dates (used in: View Previous Visits)
-        //private void examinationDates(){
-          //Should this return the shit??
-
-        //}
-    //------------------------------------------------------------------------------  
+    //Other functions/feats of the object
 }	

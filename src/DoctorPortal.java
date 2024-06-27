@@ -70,7 +70,7 @@ public class DoctorPortal extends NursePortal{
 
 	//Data of the Portals Object/Class
 	//-------------------------------------------------------------------------------------------
-	  //The same as the nurse portal... they can be accessed and changed via: super???
+	  private String staffId;
 	//-------------------------------------------------------------------------------------------
 
 
@@ -79,6 +79,7 @@ public class DoctorPortal extends NursePortal{
 	  public DoctorPortal(Stage primaryStage, Scene welcomeScene){
 		//Call upon the same constructor of the NursePortal (since they act similar)
 		  super(primaryStage, welcomeScene);
+		  this.staffId = "Doctor";
 	  }
 	//-------------------------------------------------------------------------------------------
 

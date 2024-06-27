@@ -72,6 +72,9 @@ public class NursePortal{
       //Welcome Page (Used upon logout)
         private Scene welcomePage;
 
+      //Since the Doctor portal extends the NursePortal we will need to use this ID to differentiate them
+        private String staffId;
+
       //There may be no more??
         //This is a new dumb idea but i want to try it out
           VBox vertical0;
@@ -87,6 +90,7 @@ public class NursePortal{
         //Set the private variables...
           primeStage = primaryStage;
           welcomePage = welcomeScene;
+          staffId = "Nurse";
       }
     //------------------------------------------------------------------------------
 
