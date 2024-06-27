@@ -103,12 +103,12 @@ public class NursePortal{
           //Welcome
             Label header0 = new Label("Welcome!");
               //Set Font & size of text
-                header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
+                header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: white;");
 
           //What would you like to do today??
             Label header1 = new Label("What would you like to do today?");
               //Set Font & size of text
-                header1.setStyle("-fx-font-size: 20px;");
+                header1.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
         //===========================================================================
 
 
@@ -123,7 +123,7 @@ public class NursePortal{
                 newVisitButton.setMinSize(200, 40);
                 newVisitButton.setMaxSize(200, 40);
               //Set the Font size of the text
-                newVisitButton.setStyle("-fx-font-size: 20px;");
+                newVisitButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
           //Messages
             Button messageButton = new Button("Messages");
@@ -132,16 +132,16 @@ public class NursePortal{
                 messageButton.setMinSize(150, 45);
                 messageButton.setMaxSize(150, 45);
               //Set the Font size of the text
-                messageButton.setStyle("-fx-font-size: 20px;");
+                messageButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
           //Logout
             Button logoutButton = new Button("Logout");
               //Set the Dimensions of the Button
-                logoutButton.setPrefSize(150, 45);
-                logoutButton.setMinSize(150, 45);
-                logoutButton.setMaxSize(150, 45);
+                logoutButton.setPrefSize(125, 45);
+                logoutButton.setMinSize(125, 45);
+                logoutButton.setMaxSize(125, 45);
               //Set the Font size of the text
-                logoutButton.setStyle("-fx-font-size: 20px;");
+                logoutButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
         //===========================================================================
 
 
@@ -185,6 +185,8 @@ public class NursePortal{
             HBox horizontal0 = new HBox(vertical0);
               //Alignment
                 horizontal0.setAlignment(Pos.CENTER);
+              //Set the background color of the scene
+                horizontal0.setStyle("-fx-background-color: #3A3A3A;");
         //===========================================================================================
 
 

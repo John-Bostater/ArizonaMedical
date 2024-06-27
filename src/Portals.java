@@ -214,14 +214,14 @@ public class Portals {
 	      //================================================================================================================
 
 	        
-	  	  //Necessary File Check:	[PatientAccounts.txt]	[VisitSummary.txt]
+	  	  //Necessary File Check:	[PatientAccounts.txt]	[VisitSummary.txt]	[Messages.txt]
           //================================================================================================================
 			//Check to see if the file(s) exist. If not, create it.
 			try {
 				//List all of the required files for the system to run
 				  File patientAccounts = new File("PatientAccounts.txt");
 				  File visitSummary = new File("VisitSummary.txt");
-
+				  File messages = new File("Messages.txt");
 
 				//TO DO!!!!
 				//THere is an error with the if-branch below where if one of the files already exists
@@ -237,17 +237,21 @@ public class Portals {
 				}
 				//Files do not exist
 				else {
-				  //Create the file
+				  //Create the files if they do not exist
 				  	FileWriter fileWriter0 = new FileWriter("PatientAccounts.txt");
 					FileWriter fileWriter1 =  new FileWriter("VisitSummary.txt");
+					FileWriter fileWriter2 = new FileWriter("Messages.txt");
 
 				  //Write the Leading text(s) to the respective files
 				  	fileWriter0.write("Patient Accounts:\n\n");
 					fileWriter1.write("");
-				
+					fileWriter2.write("");
+
+
 				  //Close the fileWriter(s)
 				  	fileWriter0.close();
 					fileWriter1.close();
+					fileWriter2.close();
 				}
 			}
 			//Catch any File I/O errors
@@ -308,33 +312,33 @@ public class Portals {
 			  Button nurseButton = new Button("Nurse");
 	  			//Set the dimensions of the Buttons
 		        //[Width x Height]
-			  	  nurseButton.setPrefSize(75, 40);  
-		          nurseButton.setMaxSize(75, 40);
-		          nurseButton.setMinSize(75, 40);
+			  	  nurseButton.setPrefSize(100, 40);  
+		          nurseButton.setMaxSize(100, 40);
+		          nurseButton.setMinSize(100, 40);
 	            //Set the Font of the Button's text
-		          nurseButton.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+		          nurseButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
 			//Doctor Button
 			  Button doctorButton = new Button("Doctor");
 			  //Format stuff below!!
 	  			//Set the dimensions of the Buttons
 		        //[Width x Height]
-			  	  doctorButton.setPrefSize(80, 40);  
-		          doctorButton.setMaxSize(80, 40);
-		          doctorButton.setMinSize(80, 40);
+			  	  doctorButton.setPrefSize(110, 40);  
+		          doctorButton.setMaxSize(110, 40);
+		          doctorButton.setMinSize(110, 40);
 	            //Set the Font of the Button's text
-		          doctorButton.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+		          doctorButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
 
 			//Go Back	[Main Page]
 			  Button goBack = new Button("Go Back");
 				//Set the dimensions of the Buttons
 		        //[Width x Height]
-			  	  goBack.setPrefSize(100, 40);  
-		          goBack.setMaxSize(100, 40);
-		          goBack.setMinSize(100, 40);
+			  	  goBack.setPrefSize(125, 40);  
+		          goBack.setMaxSize(125, 40);
+		          goBack.setMinSize(125, 40);
 	            //Set the Font of the Button's text
-		          goBack.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+		          goBack.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 		  //=====================================================================
 
 
@@ -419,43 +423,44 @@ public class Portals {
 
 
 	  //Login --> [Patient]
-		private void patientLogin(){		
+		private void patientLogin(){	
+
 		  //Buttons
-          //==========================================================
+          //===============================================================================================================
 			//Relevant Buttons for the Login/New Account Page 
 			
 			//Log in
 			  Button patientLogin = new Button("Log in");
 	  			//Set the dimensions of the Buttons
 		        //[Width x Height]
-			  	  patientLogin.setPrefSize(75, 40);  
-		          patientLogin.setMaxSize(75, 40);
-		          patientLogin.setMinSize(75, 40);
+			  	  patientLogin.setPrefSize(100, 45);  
+		          patientLogin.setMaxSize(100, 45);
+		          patientLogin.setMinSize(100, 45);
 	            //Set the Font of the Button's text
-		          patientLogin.setStyle("-fx-font-size: 18px;");
+		          patientLogin.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 			
 		    //Create Account
 			  Button newPatient = new Button("Create Account");
 	  			//Set the dimensions of the Buttons
 		        //[Width x Height]
-			  	  newPatient.setPrefSize(160, 40);  
-		          newPatient.setMaxSize(160, 40);
-		          newPatient.setMinSize(160, 40);
+			  	  newPatient.setPrefSize(195, 45);  
+		          newPatient.setMaxSize(195, 45);
+		          newPatient.setMinSize(195, 45);
 		        //Set the Font of the Button's text
-		          newPatient.setStyle("-fx-font-size: 18px;");
+		          newPatient.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 		    
 		    //Go Back      
 		      Button goBack = new Button("Go back");
 				//Set the dimensions of the Buttons
 				//[Width x Height]
-					goBack.setPrefSize(100, 40);  
-					goBack.setMaxSize(100, 40);
-					goBack.setMinSize(100, 40);
+					goBack.setPrefSize(120, 45);  
+					goBack.setMaxSize(120, 45);
+					goBack.setMinSize(120, 45);
 				//Set the Font of the Button's text
-					goBack.setStyle("-fx-font-size: 16px;");      
-		  //==========================================================
-	 	    
+					goBack.setStyle("-fx-font-size: 24px; -fx-font-family: 'Times New Roman';");      
+          //===============================================================================================================
 			  
+
 		  //Text Boxes
 		  //================================================================================
 			//Create text boxes for the Credentials the user will be entering
@@ -642,7 +647,7 @@ public class Portals {
 					//Add notification text to inform user
 					  notificationTxt = new Label("*Account does not exist");
 						//Set the color of the text
-						  notificationTxt.setStyle("-fx-text-fill: white;");
+						  notificationTxt.setStyle("-fx-font-weight: 16px; -fx-text-fill: white;");
 
 					//Add the notification text to the Page
 						buttonContainer.getChildren().add(notificationTxt);
@@ -719,7 +724,7 @@ public class Portals {
 					  //Notify user that their entry is invalid
 					    notificationTxt = new Label("*Required text box is missing or invalid");
 						  //Set the color of the text
-						  	notificationTxt.setStyle("-fx-text-fill: white;");
+						  	notificationTxt.setStyle("-fx-font-weight: 16px; -fx-text-fill: white;");
 
 					  //Add the notification to the page
 						buttonContainer.getChildren().add(notificationTxt);
@@ -742,7 +747,7 @@ public class Portals {
 					//Notify the user that the account is already created
 					  notificationTxt = new Label("*Account Successfully Created.\n  You may proceed to login.");
 						//Set the color of the text
-						  notificationTxt.setStyle("-fx-text-fill: white;");
+						  notificationTxt.setStyle("-fx-font-weight: 16px; -fx-text-fill: white;");
 
 
 					//Add the text to the page
@@ -760,7 +765,7 @@ public class Portals {
 					  //Update the notification text/label and add it to the GUI Display
 						notificationTxt = new Label("*Account already exists, you may proceed to login.");
 						//Set the color of the text
-						  notificationTxt.setStyle("-fx-text-fill: white;");
+						  notificationTxt.setStyle("-fx-font-weight: 16px; -fx-text-fill: white;");
 
 	
 					  //Set the color of the text

@@ -543,12 +543,12 @@ public class PatientPortal{
           //Select visit to view
             Label header0 = new Label("Select Visit to view:");
               //Set size of text
-                header0.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
+                header0.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: white;");
 
           //Visit summary
             Label header1 = new Label("Visit Summary:");
               //Set size of text
-                header1.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
+                header1.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: white;");
         //======================================================================
 
 
@@ -564,9 +564,13 @@ public class PatientPortal{
         //==============================================
 
 
-        //NEW?DEBUG
+        //DEBUG Print
         System.out.println("Patient Credentials: " + patientCredentials);
 
+
+        //It works!!
+          //uniqueKeyInt = Integer.parseInt(uniqueKeyStr);
+         // System.out.println("Unique Key Integer: " + uniqueKeyInt);
 
         //DropDown Menu 
         //==========================================================================================
@@ -585,6 +589,20 @@ public class PatientPortal{
           //String array that contains all of the exam dates
             String[] examDates = new String[10];   //We could either use the default
             //Max amount of exams per Patient is 10
+
+         //NEW ADDITION!!! Do a hashmap to map the visit summary(s) {Strings} to a key {Visit Date as integer}
+            HashMap<Integer, String> summaryMap = new HashMap<>();
+
+          //Integer that stores/uses the Date's numbers as a Key
+            Integer uniqueKeyInt = null; 
+        
+          //String that stores the unique key Integer stripped from: "Date: <date here>"
+            String uniqueKeyStr = "";
+
+          //String that stores the visit summary (all text below patient being found)
+            String visitSummary = ""; //These will be added to the hashMap
+
+          //We will be able to access these in constant time via the action event-handling
 
 
           //Instantiate the string array
@@ -628,19 +646,38 @@ public class PatientPortal{
 
                  //Collect all of the exam dates
                    if(line.contains("Date: ") && patientFound){
+                    //Set the visitSummary to "" 
+                      visitSummary = "";
+
                     //Collect the exam date
                       examDates[counter] += line.substring(6, line.length());
 
+                    //Strip the exam Date string for the numbers to be mapped into hashmap
+                      uniqueKeyStr = line.replaceAll("\\D", "");  
+                      //Using regex to replace all non digits with ""
+
+                    //Add the stripped number to the Integer/Key
+                       uniqueKeyInt = Integer.parseInt(uniqueKeyStr);
+         
                     //increment counter
                       counter++;
-                   }
-                 //Finished collecting all of the exam dates
+                    }
+                 //Collect the visit summary or break the reading loop at next patient's data
                    else{
+                    //If the patient is found start collecting their data!!
+                      if(patientFound && !line.isEmpty()){
+                        visitSummary += line + "\n";
+                      }
+
+                    //Break the while loop once the next patient's information appears
                      if(line.contains("Patient: ") && patientFound){
                         //break the reading loop
                           break;
                      }
                    }
+
+                 //Add the unique Integer [Visit Date] & visit String [Summary] to the hashmap
+                   summaryMap.put(uniqueKeyInt, visitSummary);
                 }
 
               //Close the fileReader
@@ -650,7 +687,6 @@ public class PatientPortal{
               //Error Print
                 System.out.println("File Not Found!!");
             }
-
 
           //Add all of the exam Dates to the ComboBox
             for(int i = 0; i < 10; i++){
@@ -665,27 +701,49 @@ public class PatientPortal{
                     examDates[i] = null;
                 }
             }
+
+            //NEW!!
+            // See if our hashmap works!!
+            //It works!!
+            System.out.println("Key: " + uniqueKeyInt + "\nSummary: " + summaryMap.get(uniqueKeyInt));
         //==========================================================================================
 
 
         //Text Boxes
         //=================================================================================
           //This text box will display the visit summary of the visit date selected
-            TextArea visitSummary = new TextArea("<Select a Visit to be Displayed>");
+            TextArea visitSummaryTxt = new TextArea("<Select a Visit to be Displayed>");
 
           //Set the textBox size and text style??
-            visitSummary.setStyle("-fx-font-weight: 18px");
+            visitSummaryTxt.setStyle("-fx-font-weight: 18px");
             //[Width x Height]
-              visitSummary.setPrefSize(800, 550);  
-              visitSummary.setMaxSize(800, 550);
-              visitSummary.setMinSize(800, 550);
+              visitSummaryTxt.setPrefSize(800, 550);  
+              visitSummaryTxt.setMaxSize(800, 550);
+              visitSummaryTxt.setMinSize(800, 550);
             //Set the Font of the Button's text
-              visitSummary.setStyle("-fx-font-size: 18px;");
+              visitSummaryTxt.setStyle("-fx-font-size: 18px;");
         //=================================================================================
 
 
         //Action-Event Handling
         //=====================================================
+          //Add action event handling for changes in the drop down selector!
+          //This will access the hash map via stripping the strings inserted into the examDates[i]
+          //STRIP THE STRINGS IN examDates[i] TO GET THE UNIQUE CORRESPONDING ID FOR THE HASHMAP
+          //PLACE THE STRING INTO THE visitSummart (text box)
+            
+          //User select's an exam date from the dropdown menu
+            dropSelect.setOnAction(event -> {
+              
+              //Get the Date String that is currently selected by the user
+              //Then strip the String 
+              //This gets the unique integer Id that will load the summary via the hashMap
+              visitSummaryTxt.setText(summaryMap.get(Integer.parseInt(dropSelect.getValue().replaceAll("\\D", ""))));
+              //Do it all in one line of code!!
+
+            });
+
+
           //Exit
             exitPage.setOnAction(e -> {
               //Load the Patient Portal page/scene
@@ -705,7 +763,8 @@ public class PatientPortal{
             VBox vertical0 = new VBox(header0, functContainer);
 
           //Vertically alignment of header and text box
-            VBox vertical1 = new VBox(10, header1, visitSummary);
+            VBox vertical1 = new VBox(10, header1, visitSummaryTxt);
+   
 
           //Set the alignment of the HBox
             //horizontal0.setAlignment(Pos.CENTER);
@@ -714,18 +773,17 @@ public class PatientPortal{
             //HBox horizontal0 = new HBox(20, functContainer, vertical0);
 
           //Final Adjustment VBox
-            VBox vertical2 = new VBox(vertical0, vertical1);
-          
-          //Set the alignment of the VBox
-            vertical2.setAlignment(Pos.CENTER);
+            VBox vertical2 = new VBox(vertical0, vertical1);         
+              //Set the alignment of the VBox
+                vertical2.setAlignment(Pos.CENTER);
 
           //Set the alignment of the final box to be concurrent with the center of the page
-            vertical2.setAlignment(Pos.CENTER);
+            //vertical2.setAlignment(Pos.CENTER);
 
           //Horizontally align the VBox [Final box & adjustment]
             HBox horizontal0 = new HBox(vertical2);
               //NEw
-                horizontal0.setStyle("-fx-background-color: #2A2A2A");
+                horizontal0.setStyle("-fx-background-color: #3A3A3A;");
 
           //Set the adjustment
             horizontal0.setAlignment(Pos.CENTER);        
