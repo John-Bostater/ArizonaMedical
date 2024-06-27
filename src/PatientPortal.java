@@ -81,11 +81,15 @@ public class PatientPortal{
 
     //Patient's data (Will be loaded upon the 'Login' button being hit in the Patient "Login/New Account Page" {loaded from Welcome Page})
     //--------------------------------------------------        
-      //NEW!!!
       //Use Patient Credentials as a "key" for finding 
-      //info within .txt files easily
+      //the specified patient's info within .txt files
         private String patientCredentials;
 
+      //Full Name
+        private String fullName = "";  //Ex; "John Smith"
+
+      //Date Of Birth
+        private String dateOfBirth;
 
       //Stage for displaying the relevant Scene(s)
         private Stage primeStage;
@@ -94,8 +98,6 @@ public class PatientPortal{
         private Scene welcomePage;
 
       //Patient Information
-        //private String fullName = "";	//Ex: "John Smith"
-        //private String dateOfBirth = "";
         private String phoneNumber = "";
         private String insuranceInfo = "";
         private String pharmacyInfo = "";
@@ -109,7 +111,7 @@ public class PatientPortal{
     
 
     //Constructor
-    //------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------
       public PatientPortal(String patientCreds, Stage primaryStage, Scene welcomePg){
         //Take apart the userCredentials String using delimeters
         //Update the Patient's data with the following broken up data
@@ -123,12 +125,22 @@ public class PatientPortal{
         //Set the patients credentials
           patientCredentials = patientCreds;
 
-        //Load a method or function that looks for the user's info: [Contact], [], []
 
+        //DEBUG!!
+          System.out.println("Patient Creds: " + patientCreds);
+
+
+        //Break apart the patient's credentials to set the private data: fullName & dateOfBirth
+          //Use the delimeter stuff
+          //Break the string and then set the string to the substring...
+          //this might break some stuff
+
+          //YOU MUST USE INTEGER TO STORE "patientCreds.indexOf()" & the other indexes!!
+          //YOU MUST USE STRING TO STORE the substrings!/trimmed string
 
 
       }
-    //------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------
 
 
     //Methods
@@ -141,48 +153,47 @@ public class PatientPortal{
 
 
         //Buttons
-        //==================================================================
-        //Change Patient Information
+        //====================================================================================================================
+          //Change Patient Information
             Button changePatientInfo = new Button("Change Patient Information");
             //Set the dimensions of the Button
            	  //[Width x Height]
-           	    changePatientInfo.setPrefSize(250, 40);  
-           	    changePatientInfo.setMaxSize(250, 40);
-           	    changePatientInfo.setMinSize(250, 40);
+           	    changePatientInfo.setPrefSize(325, 50);  
+           	    changePatientInfo.setMaxSize(325, 50);
+           	    changePatientInfo.setMinSize(325, 50);
               //Set the Font of the Button's text
-                changePatientInfo.setStyle("-fx-font-size: 18px;");
+                changePatientInfo.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
-        //View Previous Visits 
+          //View Previous Visits 
             Button viewPreviousVisits = new Button("View Previous Visits");
             //Set the dimensions of the Buttons
               //[Width x Height]
-                viewPreviousVisits.setPrefSize(200, 40);  
-                viewPreviousVisits.setMaxSize(200, 40);
-                viewPreviousVisits.setMinSize(200, 40);
+                viewPreviousVisits.setPrefSize(275, 50);  
+                viewPreviousVisits.setMaxSize(275, 50);
+                viewPreviousVisits.setMinSize(275, 50);
               //Set the Font of the Button's text
-                viewPreviousVisits.setStyle("-fx-font-size: 18px;");
+                viewPreviousVisits.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
-        //Messages
+          //Messages
             Button messageInbox = new Button("Messages");
             //Set the dimensions of the Buttons
               //[Width x Height]
-                messageInbox.setPrefSize(125, 40);  
-                messageInbox.setMaxSize(125, 40);
-                messageInbox.setMinSize(125, 40);
+                messageInbox.setPrefSize(150, 50);  
+                messageInbox.setMaxSize(150, 50);
+                messageInbox.setMinSize(150, 50);
               //Set the Font of the Button's text
-                messageInbox.setStyle("-fx-font-size: 18px;");
+                messageInbox.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
-        //Logout	
+          //Logout	
             Button signOut = new Button("Logout");	
-            //Set the dimensions of the Buttons
+              //Set the dimensions of the Buttons
               //[Width x Height]
-                signOut.setPrefSize(100, 40);  
-                signOut.setMaxSize(100, 40);
-                signOut.setMinSize(100, 40);
+                signOut.setPrefSize(125, 50);  
+                signOut.setMaxSize(125, 50);
+                signOut.setMinSize(125, 50);
               //Set the Font of the Button's text
-                signOut.setStyle("-fx-font-size: 18px;");
-        //==================================================================
-
+                signOut.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+        //====================================================================================================================
 
         //Labels/Text
         //==================================================================
@@ -272,51 +283,51 @@ public class PatientPortal{
         //You can exit this Scene via the Button "Exit"
 
         //Labels
-        //==============================================================================
+        //======================================================================================================
           //Contact Information
             Label contactInfoLbl = new Label("Contact Information:");
               //Set font of Text
-                contactInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+                contactInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");
 
 
           //Phone Number
             Label phoneNumLbl = new Label("Phone Number:");
               //Set font of Text
-                phoneNumLbl.setStyle("-fx-font-size: 20px;");
+                phoneNumLbl.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
 
           //Digit seperators for the phone number
             Label phoneDash0 = new Label("-");
               //Set the font of the Label
-                phoneDash0.setStyle("-fx-font-size: 20px;");
+                phoneDash0.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
             
             Label phoneDash1 = new Label("-");
               //Set the font of the Label
-                phoneDash1.setStyle("-fx-font-size: 20px;");
+                phoneDash1.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
 
           //Insurance Information
             Label insuranceInfoLbl = new Label("Insurance Information:");
               //Set font of Text
-                insuranceInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+                insuranceInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");
 
           //Insurance Information {Specifier text}
             Label insuranceInfoLbl0 = new Label("Insurance Provider:");
               //Set font of Text
-                insuranceInfoLbl0.setStyle("-fx-font-size: 20px;");
+                insuranceInfoLbl0.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
 
           //Pharmaceutical Information
             Label pharmacyInfoLbl = new Label("Pharmaceutical Information:");
               //Set font of Text
-                pharmacyInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+                pharmacyInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");
 
           //Pharmacy Information {Specifier text}
             Label pharmacyInfoLbl0 = new Label("Pharmacy Provider:");
               //Set font of Text
-                pharmacyInfoLbl0.setStyle("-fx-font-size: 20px;");
-        //==============================================================================
-        
+                pharmacyInfoLbl0.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        //======================================================================================================
+
 
         //Buttons
         //==========================================================
@@ -339,7 +350,6 @@ public class PatientPortal{
 		            exitPage.setMinSize(150, 40);
 		          //Set the Font of the Button's text
 		            exitPage.setStyle("-fx-font-size: 20px;");
-
         //==========================================================
 
 
@@ -740,7 +750,7 @@ public class PatientPortal{
             //Message Board
               Label messageBrdLbl = new Label("Message Board:");
                 //Set the Font & size of the text
-                  messageBrdLbl.setStyle("-fx-font-size: 34px; -fx-font-weight: bold;");
+                  messageBrdLbl.setStyle("-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: white;");
                  
 
             //Message
@@ -840,12 +850,60 @@ public class PatientPortal{
                   
 
                 //Read through the .txt file and look for the [<Patient Name>]: 
-                //Once found, 
+                //Once found, activate the flag at that line to collect that line + all of the succeding lines lines
+                //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
+                try{
+                  //Open: PatientInfo.txt
+                  //Read the File with a scanner (easier to get Line by Line)
+                    Scanner fileReader = new Scanner(new File("Messages.txt"));
+
+                  //Flag that "puts on the brakes" of the fileReader so it will
+                    boolean patientFound = false;
+                  //NEW
+                    short counter = 0;
+
+                  //Read the file Line-by-Line and compare the strings for a match
+                    while(fileReader.hasNextLine()) {
+                      //Gather and store the 
+                        String line = fileReader.nextLine(); //Starts at the first line of text in .txt file
+
+                        //DEBUG
+                        //System.out.println("Line: " + line);
+                        //System.out.println("Patient")
+
+                      //If-branch will activate data collection once the patient is found via their credentials
+                        if(line.contains("[" + patientCredentials + "] ") && !patientFound){
+                          //Debug print
+                            System.out.println("Patient has been found!");
+
+                          //Move to the next line
+                            line = fileReader.nextLine();
+
+                          //Activate the flag
+                            patientFound = true;
+                        }
+
+                      //Collect all of the messages
 
 
+                      //Finished collecting all of the exam dates
+                        if(line.contains("Patient: ") && patientFound){
+                            //break the reading loop
+                              break;
+                        }
+                    }
+                
+                  //Close the fileReader
+                    fileReader.close();
+                }
+                catch(IOException n){
+                  //Error Print
+                    System.out.println("File Not Found!!");
+                }
+                //if [<Patient Name>]: does NOT exist, start the first comment [If while-loop finished without finding user]
 
-                //if [<Patient Name>]: does NOT exist, start the first comment
 
+                //Else
 
               });
 
@@ -883,9 +941,9 @@ public class PatientPortal{
             
             //HBox containing the text fields & their resepective labels (background color: lightblue)
               HBox messageBoard = new HBox(10, messageSection, inboxSection); 
-                //Set the dimensions & other feats of the function container
-                  messageBoard.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 10; -fx-background-padding: 10; -fx-background-radius: 10; -fx-background-color: lightblue;");
-                  messageBoard.setAlignment(Pos.CENTER);
+                //Set Style, alignment, borders, & rounded edges
+                  messageBoard.setStyle("-fx-border-color: black; -fx-border-width: 1px;  -fx-background-padding: 10; -fx-background-radius: 10; -fx-background-color: lightblue;");
+                  messageBoard.setAlignment(Pos.CENTER);        
                 //Set the dimensions of the "Message Board"
                   messageBoard.setPrefSize(950, 600);
                   messageBoard.setMinSize(950, 600);
@@ -903,6 +961,8 @@ public class PatientPortal{
                 //Set the alignment of the VBox
                 //Maybe unecessary???
                   finAlign.setAlignment(Pos.CENTER);
+                //Set the background color of the entire page to gray
+                  finAlign.setStyle("-fx-background-color: #3A3A3A;");
           //==========================================================================================
 
 

@@ -695,7 +695,7 @@ public class Portals {
 			  
 			  //Patient Information String that will contain: phonenumber, insuranceInfo, pharmacyInfo
 			  //It will collect these from the new text fields/boxes you have added
-				String patientInfo = "Placeholder text";
+				String patientInfo = "Place Holder Text";
 
 
 			  //Flag to make sure the user has correctly entered their data to the field
