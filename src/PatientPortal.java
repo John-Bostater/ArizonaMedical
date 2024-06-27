@@ -474,21 +474,31 @@ public class PatientPortal{
               HBox horizontal1 = new HBox(5, phoneNum0, phoneDash0, phoneNum1, phoneDash1, phoneNum2);
 
             //Vertically align the phoneNumLbl & horizontal1
-              VBox vertical0 = new VBox(10, contactInfoLbl, phoneNumLbl, horizontal1);
+              VBox vertical0 = new VBox(10, phoneNumLbl, horizontal1);
+                //Set the border of the shits??
+            		  vertical0.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10; -fx-background-color: aqua;");  
 
 
           //Insurance Info:
             //Vertical alignment box
-              VBox vertical1 = new VBox(10, insuranceInfoLbl, insuranceInfoLbl0, insuranceTxt);
+              VBox vertical1 = new VBox(10, insuranceInfoLbl0, insuranceTxt);
+          		  //Set the background color & border of the box
+                vertical1.setStyle("-fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1; -fx-padding: 10; -fx-background-color: aqua; -fx-border-radius: 10;");  
           
 
           //Pharmacy Info:
             //Vertical alignment box
-              VBox vertical2 = new VBox(10, pharmacyInfoLbl, pharmacyInfoLbl0, pharmacyTxt);
+              VBox vertical2 = new VBox(10, pharmacyInfoLbl0, pharmacyTxt);
+
+
+          //Final adjustments to be consistent with the Phase1-specifications
+            VBox column0 = new VBox(contactInfoLbl, vertical0);
+            VBox column1 = new VBox(insuranceInfoLbl, vertical1);
+            VBox column2 = new VBox(pharmacyInfoLbl, vertical2);
 
 
           //Align the sections: [Contact Info, Insurance Info, Pharmaceutical Info]
-            HBox sectionAlignment = new HBox(20, vertical0, vertical1, vertical2);
+            HBox sectionAlignment = new HBox(20, column0, column1, column2);
               //Set the alignment of the Hbox
                 sectionAlignment.setAlignment(Pos.CENTER);
       
