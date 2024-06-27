@@ -189,12 +189,12 @@ public class PatientPortal{
           //Welcome!
             Label header0 = new Label("Welcome!");
              //Set the font of header
-               header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
+               header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: white;");
 
           //What would you  like to do today?
             Label text0 = new Label("What would you like to do today?");
               //Set the font of text
-                text0.setStyle("-fx-font-size: 18px;");
+                text0.setStyle("-fx-font-size: 18px; -fx-text-fill: white;");
         //==================================================================
 
 
@@ -248,6 +248,9 @@ public class PatientPortal{
 
           //Set the alignment of the VBox for the Scene
             alignBox0.setAlignment(Pos.CENTER);
+          
+          //Set the background color of the page
+            alignBox0.setStyle("-fx-background-color: #3A3A3A;");
         //========================================================================================================
 
 
@@ -259,7 +262,6 @@ public class PatientPortal{
           primeStage.setScene(mainScene);
           primeStage.show();
       }
-
 
 
 
@@ -509,6 +511,8 @@ public class PatientPortal{
             VBox vertical3 = new VBox(50, sectionAlignment, buttonsSection);
               //Set the alignment of the Vertical box
                 vertical3.setAlignment(Pos.CENTER);
+              //Set the background color of the page to dark gray
+                vertical3.setStyle("-fx-background-color: #3A3A3A;");
         //========================================================================================
 
 
@@ -653,6 +657,7 @@ public class PatientPortal{
             }
         //==========================================================================================
 
+
         //Text Boxes
         //=================================================================================
           //This text box will display the visit summary of the visit date selected
@@ -709,6 +714,8 @@ public class PatientPortal{
 
           //Horizontally align the VBox [Final box & adjustment]
             HBox horizontal0 = new HBox(vertical2);
+              //NEw
+                horizontal0.setStyle("-fx-background-color: #2A2A2A");
 
           //Set the adjustment
             horizontal0.setAlignment(Pos.CENTER);        
@@ -717,6 +724,7 @@ public class PatientPortal{
 
         //Setup Scene
           Scene mainLayout = new Scene(horizontal0, 1024, 768);
+
         //Return Scene
           return mainLayout;
       }
@@ -809,14 +817,15 @@ public class PatientPortal{
                   //[Note]: ^^ any text that exceeeds the width will fall to a new line
 
 
-
             //NEW!!!
             //Set the text box: "inboxTxt" to have the latest message(s) appear
             //loaded from the .txt file "Messages.txt"
             //Run a while loop until the Patient's name is hit (First & Last name)
             //Do the flag method for starting to collect data 
             //(Collect all text between Matched patient name & the next patient's name {when we will stop, i.e. set the flag to false})
-          
+
+            //Open the 
+
 
           
           //=======================================================================
@@ -916,94 +925,3 @@ public class PatientPortal{
         //}
     //------------------------------------------------------------------------------  
 }	
-
-
-
-//[Etc]:
-//--------------------------------------------------------------------------------------------------------
-//[TEMPLATE/BOILER-PLATE CODE FOR DropDown menu/ComboBox]
-/*
-//Refreshing on string array!
-//-----
-System.out.print("Enter Capacity: ");
-Scanner scanner = new Scanner(System.in);
-int userInput = scanner.nextInt();
-
-
-//---------------------------------------------------------------------------------------------------------------------
-//[Relevant Code for Project {CSE-360 Summer}]
-
-//New ComboBox (Dropdown Selection)
-ComboBox<String> dropSelect = new ComboBox<>();
-//(We will be using a String array to store the unique PatientIds & Names to be displayed/useable within the ComboBox)
-//[Below Code]: Adding Strings to the ComboBox manually
-//dropSelect.getItems().addAll("Selection #1", "Selection #2", "Selection #3");
-
-
-//This will be the list generated from reading the relevant .txt file for loading patient names & dob
-String[] patientList = new String[userInput];
-//We will most likely be creating a method or function that reads from a small .txt file
-//to get the patients names (Unique Patient name & Dob per line?? so we use file.read.nextLine()??)
-//that simply has the patients' full name & dob? (PatientList.txt??)
-//	[Note: we will have other .txt files for storing the patient data, this smaller .txt file could
-//			be a little faster to read from??]
-
-
-//Fill the String array & print success/progress
-//[Pointless code for our Project (do not include)]
-for(int i = 0; i < userInput; i++){
-	//Add the string to the shit
-	patientList[i] = "Yes#" + i;
-
-	//Print from the yes array!
-	System.out.println("yes[" + i + "] == " + patientList[i]);
-}
-
-//Close the scanner
-scanner.close();
-//-----
-
-
-//Add our String array to the ComboBox, (Add options to dropdown menu)
-//[This will have to be adapted and will be used in the: doctor portal (view patient data), messaging board, etc.]
-dropSelect.getItems().addAll(patientList);
-
-
-//Create new Vertical Box to display the ComboBox
-VBox root = new VBox();
-root.getChildren().add(dropSelect);
-
-// Create a scene with the VBox layout
-Scene scene = new Scene(root, 300, 200);
-
-// Set the scene to the stage and show the stage
-primaryStage.setScene(scene);
-primaryStage.setTitle("ComboBox Example");
-primaryStage.show();
-
-
-HBox rootMe = new HBox();
-Scene scene3 = new Scene(rootMe, 400, 500);
-
-
-
-//Handler for selection/action on the CheckBox Object (Dropdown menu)
-dropSelect.setOnAction(event -> {
-	String selectedScene = dropSelect.getSelectionModel().getSelectedItem();
-	
-	//Switch-case statement for the event of "Selecting patient"
-	switch (selectedScene) {
-		case "Yes#4":
-			
-			primaryStage.setScene(scene3);
-			primaryStage.show();
-		
-			break;
-			
-		case "Yes#1":
-			
-			break;
-	}
-});
-*/	
-//--------------------------------------------------------------------------------------------------------

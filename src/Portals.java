@@ -34,11 +34,10 @@
 	- PatientAccounts.txt 	
 		{Contains: FirstName, LastName, DOB, Insurance Info, Contact Info}
 
-	- VisitSummary.txt
-		{Used for saving the patients data: [Insurance], [Contact], [etc.]}
 
-	- PatientVisits
-		{Saved Patient Visit Information??}
+	- VisitSummary.txt
+		{Contains the visit summary (saved visit form's will write to here)}
+
 
 	- Messages.txt:		Viewable by:	 Doctor, Nurse, Patient
 		{Used for communication between parties}
@@ -109,13 +108,13 @@ public class Portals {
           //i.e.  We will navigate to the other portals from here {Patient, Nurse Doctor}
         
 		  //Header(s)/Label(s): 
-	      //================================================================
+	      //==========================================================================================================================
 	        Label header0 = new Label("Welcome");
-	        header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
+	        header0.setStyle("-fx-font-size: 55px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 	         
 	        Label header1 = new Label("Select Login");
-	        header1.setStyle("-fx-font-size: 26px;");
-	      //================================================================
+	        header1.setStyle("-fx-font-size: 32px; -fx-text-fill: white; -fx-font-family: 'Times New Roman';");
+	      //==========================================================================================================================
 	        
 	         
 	      //Navigation buttons for Main Page:
@@ -150,28 +149,28 @@ public class Portals {
 			
           
           //Vertically align the elements 
-          //=============================================================================================  
+	      //=============================================================================================================  
            	//Vertical Box
            	  VBox buttonsSection = new VBox(20, patientLogin, staffLogin, exitProg);
             
             //Set the dimensions of the Buttons
            	  //[Width x Height]
-           	    patientLogin.setPrefSize(100, 50);  
-           	    patientLogin.setMaxSize(100, 50);
-           	    patientLogin.setMinSize(100, 50);
+           	    patientLogin.setPrefSize(120, 50);  
+           	    patientLogin.setMaxSize(120, 50);
+           	    patientLogin.setMinSize(120, 50);
 	          //[Width x Height]
-           	    staffLogin.setPrefSize(100, 50);  
-           	    staffLogin.setMaxSize(100, 50);
-           	    staffLogin.setMinSize(100, 50);
+           	    staffLogin.setPrefSize(120, 50);  
+           	    staffLogin.setMaxSize(120, 50);
+           	    staffLogin.setMinSize(120, 50);
            	  //[Width x Height]
-           	    exitProg.setPrefSize(60, 50);  
-           	    exitProg.setMaxSize(60, 50);
-           	    exitProg.setMinSize(60, 50);          
+           	    exitProg.setPrefSize(70, 40);  
+           	    exitProg.setMaxSize(70, 40);
+           	    exitProg.setMinSize(70, 40);          
 		          
               //Set text Size within buttons
-  	            patientLogin.setStyle("-fx-font-size: 20px;");
-				staffLogin.setStyle("-fx-font-size: 20px;");
-				exitProg.setStyle("-fx-font-size: 18px;");
+  	            patientLogin.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+				staffLogin.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+				exitProg.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
               
               //Set padding
               	buttonsSection.setAlignment(Pos.CENTER);
@@ -182,7 +181,9 @@ public class Portals {
 			  mainLayout.setPadding(new Insets(10));
 	        //Set all of the relevant Labels, Photos, and Buttons into center alignment
 	      	  mainLayout.setAlignment(Pos.CENTER);
-	      //=============================================================================================  
+			//Set the background color of the Welcome page to a dark gray
+			  mainLayout.setStyle("-fx-background-color: #3A3A3A;");
+	      //=============================================================================================================  
 	              
 	         
 	      //Action Event Handling  {Welcome Page}
@@ -297,11 +298,11 @@ public class Portals {
 		  //to the global variables
 
 		  //Buttons && Labels
-		  //======================================================================
+		  //============================================================================================
 			//Label
 			  Label header0 = new Label("Select User");
 				//Set the Font of the Label
-		          header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
+		          header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: white");
 
 			//Nurse Button
 			  Button nurseButton = new Button("Nurse");
@@ -311,7 +312,7 @@ public class Portals {
 		          nurseButton.setMaxSize(75, 40);
 		          nurseButton.setMinSize(75, 40);
 	            //Set the Font of the Button's text
-		          nurseButton.setStyle("-fx-font-size: 18px;");
+		          nurseButton.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
 			//Doctor Button
 			  Button doctorButton = new Button("Doctor");
@@ -322,7 +323,7 @@ public class Portals {
 		          doctorButton.setMaxSize(80, 40);
 		          doctorButton.setMinSize(80, 40);
 	            //Set the Font of the Button's text
-		          doctorButton.setStyle("-fx-font-size: 18px;");
+		          doctorButton.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
 
 			//Go Back	[Main Page]
@@ -333,20 +334,8 @@ public class Portals {
 		          goBack.setMaxSize(100, 40);
 		          goBack.setMinSize(100, 40);
 	            //Set the Font of the Button's text
-		          goBack.setStyle("-fx-font-size: 18px;");
+		          goBack.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 		  //=====================================================================
-
-
-		  //Scene & Alignments
-		  //============================================================================
-			//VBox for ordering items
-			  VBox buttonBox = new VBox(20, header0, nurseButton, doctorButton, goBack);
-			  //Align the vbox elements to be in the middle???
-				buttonBox.setAlignment(Pos.CENTER);
-
-			//Scene for the 
-			  Scene staffPage = new Scene(buttonBox, 1024, 768);
-		  //============================================================================
 
 
 		  //Action-Event Handling
@@ -379,6 +368,21 @@ public class Portals {
 				  runProgram();
 			  });
 		  //======================================================================================
+
+
+		  //Scene & Alignments
+		  //============================================================================
+			//VBox for ordering items
+			  VBox buttonBox = new VBox(20, header0, nurseButton, doctorButton, goBack);
+			  	//Align the vbox elements to be in the middle???
+				  buttonBox.setAlignment(Pos.CENTER);
+			  	//Set the Background color of the page
+				  buttonBox.setStyle("-fx-background-color: #3A3A3A;");
+
+			//Scene for the 
+			  Scene staffPage = new Scene(buttonBox, 1024, 768);
+		  //============================================================================
+
 
 		  //Display the scene created
 			primeStage.setScene(staffPage);
@@ -460,44 +464,56 @@ public class Portals {
 			  TextArea firstNameTxt = new TextArea();
 				//Set the dimensions of the text box
 		        //[Width x Height]
-			  	  firstNameTxt.setPrefSize(150, 25);  
- 		          firstNameTxt.setMaxSize(150, 25);
-		          firstNameTxt.setMinSize(150, 25);
-			          
+			  	  firstNameTxt.setPrefSize(200, 35);  
+ 		          firstNameTxt.setMaxSize(200, 35);
+		          firstNameTxt.setMinSize(200, 35);
+				//Set the size of the text
+				  firstNameTxt.setStyle("-fx-font-size: 16px;");
+
 	        //Last Name
 	          TextArea lastNameTxt = new TextArea();
 				//Set the dimensions of the text box
 		        //[Width x Height]
-			  	  lastNameTxt.setPrefSize(150, 25);  
-		          lastNameTxt.setMaxSize(150, 25);
-		          lastNameTxt.setMinSize(150, 25);
+			  	  lastNameTxt.setPrefSize(200, 35);  
+		          lastNameTxt.setMaxSize(200, 35);
+		          lastNameTxt.setMinSize(200, 35);
+				//Set the size of the text
+				  lastNameTxt.setStyle("-fx-font-size: 16px;");
 		          
+
 		    //Date Of Birth    
 		      //(Broken up into three text boxes (MM/DD/YYYY)
 		      //Month
  		        TextArea monthTxt = new TextArea();
 		        //Set the dimensions of the text box
  		        //[Width x Height]
- 		          monthTxt.setPrefSize(30, 25);  
- 		          monthTxt.setMaxSize(30, 25);
-		          monthTxt.setMinSize(30, 25);
-		          
+ 		          monthTxt.setPrefSize(75, 35);  
+ 		          monthTxt.setMaxSize(75, 35);
+		          monthTxt.setMinSize(75, 35);
+				//Set the size of the text
+				  monthTxt.setStyle("-fx-font-size: 16px;");
+
+
 	          //Day
  		        TextArea dayTxt = new TextArea();
 		        //Set the dimensions of the text box
  		        //[Width x Height]
- 		          dayTxt.setPrefSize(30, 25);  
- 		          dayTxt.setMaxSize(30, 25);
-		          dayTxt.setMinSize(30, 25);
-		          
+ 		          dayTxt.setPrefSize(75, 35);  
+ 		          dayTxt.setMaxSize(75, 35);
+		          dayTxt.setMinSize(75, 35);
+				//Set the size of the text
+				  dayTxt.setStyle("-fx-font-size: 16px;");
+
 
 	          //Year
  		        TextArea yearTxt = new TextArea();
 		        //Set the dimensions of the text box
  		        //[Width x Height]
- 		          yearTxt.setPrefSize(43, 25);  
- 		          yearTxt.setMaxSize(43, 25);
-		          yearTxt.setMinSize(43, 25);        
+ 		          yearTxt.setPrefSize(100, 35);  
+ 		          yearTxt.setMaxSize(100, 35);
+		          yearTxt.setMinSize(100, 35);
+				//Set the size of the text
+				  yearTxt.setStyle("-fx-font-size: 16px;");
 	      //================================================================================
 		       
 	          
@@ -506,7 +522,7 @@ public class Portals {
 			//Labels for organizing userInput
 	          Label header = new Label("Patient Login");
 	          //Set Font
-	            header.setStyle("-fx-font-size: 38px; -fx-font-weight: bold;");
+	            header.setStyle("-fx-font-size: 38px; -fx-font-weight: bold; -fx-text-fill: white;");
 	            //header.setAlignment(Pos.CENTER);
 	            
 	        //Labels relating to the user Credentials
@@ -514,35 +530,35 @@ public class Portals {
 	          //First Name
 	            Label firstNameLbl = new Label("First Name:");
 	            //Set Font
-	              firstNameLbl.setStyle("-fx-font-size: 20px;");          
+	              firstNameLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");          
 	              
 	          //Last Name
 	            Label lastNameLbl = new Label("Last Name:");
 	            //Set Font
-	              lastNameLbl.setStyle("-fx-font-size: 20px;");
+	              lastNameLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
 	          
 	          		
 	          //Date of Birth 
 	            Label dobLbl = new Label("Date of Birth:");
 	            //Set Font
-	          	  dobLbl.setStyle("-fx-font-size: 20px;");
+	          	  dobLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
 
 		        //Separate: MM / DD / YYYY
 	 	          Label dobSep0 = new Label("/");
 		          Label dobSep1 = new Label("/");
 		          //Set Font
-		            dobSep0.setStyle("-fx-font-size: 20px;");
-		            dobSep1.setStyle("-fx-font-size: 20px;");
+		            dobSep0.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
+		            dobSep1.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
 			  
 		            
 		      //New account Text
 		        Label accText = new Label("New Patient?");
-		        accText.setStyle("-fx-font-size: 24px;");
+		        accText.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
 
 		        	
 		 	  //DOB format guide for user
 				Label dobFrmtLbl = new Label("\t\t\t(MM / DD / YYYY)");
-				dobFrmtLbl.setStyle("-fx-font-size: 18px;");
+				dobFrmtLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
 				dobFrmtLbl.setAlignment(Pos.CENTER);
 			//-------------------------------------------------
 	      //================================================================================      
@@ -561,15 +577,18 @@ public class Portals {
         		VBox credContainer = new VBox(5, firstNameBox, lastNameBox, DOBbox, dobFrmtLbl);
         		//Set the dimensions & create a border around the credential container VBox
         		  credContainer.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10;");  
-          		  credContainer.setPrefSize(300,150);
-          		  credContainer.setMaxSize(300,150);
-          		  credContainer.setMinSize(300,150);
+          		  credContainer.setPrefSize(500,250);
+          		  credContainer.setMaxSize(500,250);
+          		  credContainer.setMinSize(500,250);
+				//NEW, Set the alignment of the cred container
+				  credContainer.setAlignment(Pos.CENTER);
 		          
           	  //This will position the Vbox correctly 
           		HBox credSection = new HBox(credContainer);
           		credSection.setAlignment(Pos.CENTER);
           		credSection.setPadding(new Insets(25));
-	            //Places a Border around the Credsection box
+	              //Set the Background color of the credentials box & the border radii
+				  	credContainer.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
    	        //-------------------------------------------------------------------------
 	          
           		
@@ -579,6 +598,8 @@ public class Portals {
           	  VBox buttonContainer = new VBox(10, patientLogin, accText, newPatient, goBack);
           	    //Alignment
           	      buttonContainer.setAlignment(Pos.CENTER);
+				//Set the background color to gray??
+				   
 	        //-------------------------------------------------------------------------
           //===================================================================================================
 
@@ -619,7 +640,11 @@ public class Portals {
 				  //Make sure the user is only notified of their mistake once
 				  if(!isNotified){
 					//Add notification text to inform user
-						notificationTxt = new Label("*Account does not exist");
+					  notificationTxt = new Label("*Account does not exist");
+						//Set the color of the text
+						  notificationTxt.setStyle("-fx-text-fill: white;");
+
+					//Add the notification text to the Page
 						buttonContainer.getChildren().add(notificationTxt);
 
 					//Update Notification flag
@@ -635,6 +660,7 @@ public class Portals {
 	        	//HAVE TEXT THAT NOTIFIES THE USER OF THE NEW ACCOUNT CREATED AND HOW THEY 
 	        	//CAN ENTER HIT the LOGIN button TO proceed to the patient portal
 	        	
+
 				//[New Idea]
 				/*
 					//Have the new Account Button Change the Credentials container to include
@@ -653,17 +679,7 @@ public class Portals {
 					credContainer.setMaxSize(300,200);
 					credContainer.setMinSize(300,200);
 				*/
-
-
-			  //Add new text boxes to the Create account section for the user to enter
-			  //Do this via the credSection.getChildren().addAll()
-				//Label debugLbl = new Label("DEBUG!!");
-
-			  //Make sure these elements only get added once!!
-
-			  //EXAMPLE [Conform this to your needs]
-				//credContainer.getChildren().add(debugLbl);
-
+				//[This code would have to be implemented here...]
 
 
 	          //Compile the credentials entered by the Patient/User
@@ -673,12 +689,13 @@ public class Portals {
 	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
 	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
 	        			  					  + yearTxt.getText().replaceAll("\\s", "");
-	        	  //[Every String contains a regex for removing all whitespace (Makes program more Robust)]
+	        	  //[Every String contains a regex for removing all whitespace via: ("\\s", "")
+				  //This helps to make the program more Robust
 
 			  
 			  //Patient Information String that will contain: phonenumber, insuranceInfo, pharmacyInfo
-				//It will collect these from the new text fields/boxes you have added
-				  String patientInfo = "Placeholder text";
+			  //It will collect these from the new text fields/boxes you have added
+				String patientInfo = "Placeholder text";
 
 
 			  //Flag to make sure the user has correctly entered their data to the field
@@ -701,6 +718,10 @@ public class Portals {
 					if(!isNotified){
 					  //Notify user that their entry is invalid
 					    notificationTxt = new Label("*Required text box is missing or invalid");
+						  //Set the color of the text
+						  	notificationTxt.setStyle("-fx-text-fill: white;");
+
+					  //Add the notification to the page
 						buttonContainer.getChildren().add(notificationTxt);
 					  //Update the flag (User will be notified only once)
 					    isNotified = true;
@@ -720,6 +741,11 @@ public class Portals {
 
 					//Notify the user that the account is already created
 					  notificationTxt = new Label("*Account Successfully Created.\n  You may proceed to login.");
+						//Set the color of the text
+						  notificationTxt.setStyle("-fx-text-fill: white;");
+
+
+					//Add the text to the page
 					  buttonContainer.getChildren().add(notificationTxt);
 
 					//Update notification flag
@@ -733,6 +759,11 @@ public class Portals {
 					if(!isNotified){
 					  //Update the notification text/label and add it to the GUI Display
 						notificationTxt = new Label("*Account already exists, you may proceed to login.");
+						//Set the color of the text
+						  notificationTxt.setStyle("-fx-text-fill: white;");
+
+	
+					  //Set the color of the text
 						buttonContainer.getChildren().add(notificationTxt);
 
 					  //User has been notified
@@ -755,6 +786,8 @@ public class Portals {
 	      //Compile the Main Layout of the loginPage
            	VBox mainLayout = new VBox(header, credSection, buttonContainer);
            	mainLayout.setAlignment(Pos.CENTER);
+			  //Set the background color of the page
+			  	mainLayout.setStyle("-fx-background-color: #3A3A3A;");
        	  
           //Create the Scene that displays the "Patient Login/New Account Page"
           	Scene loginPage = new Scene(mainLayout, 1024, 768);
