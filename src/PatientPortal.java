@@ -732,13 +732,18 @@ public class PatientPortal{
             //Message Board
               Label messageBrdLbl = new Label("Message Board:");
                 //Set the Font & size of the text
-                  //Code here....
+                  messageBrdLbl.setStyle("-fx-font-size: 34px; -fx-font-weight: bold;");
+                 
 
             //Message
               Label messageLbl = new Label("Message:");
+                //Set the size of the text
+                  messageLbl.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
 
             //Inbox
               Label inboxLbl = new Label("Inbox:");
+                //Set the size of the text
+                  inboxLbl.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
           //=======================================================================
 
 
@@ -747,9 +752,9 @@ public class PatientPortal{
             //Send Message
               Button sendMessage = new Button("Send Message");
                 //Set the dimensions of the Button
-                  sendMessage.setPrefSize(200, 40);
-                  sendMessage.setMinSize(200, 40);
-                  sendMessage.setMaxSize(200, 40);
+                  sendMessage.setPrefSize(150, 40);
+                  sendMessage.setMinSize(150, 40);
+                  sendMessage.setMaxSize(150, 40);
                 //Set the Font size of the text
                   sendMessage.setStyle("-fx-font-size: 18px;");
 
@@ -758,19 +763,19 @@ public class PatientPortal{
               Button deleteMessage = new Button("Delete Message");
               //^^This will simply remove the lines of the .txt file after & including "Patient Name:"
                 //Set the dimensions of the Button
-                  deleteMessage.setPrefSize(200, 40);
-                  deleteMessage.setMinSize(200, 40);
-                  deleteMessage.setMaxSize(200, 40);
+                  deleteMessage.setPrefSize(175, 40);
+                  deleteMessage.setMinSize(175, 40);
+                  deleteMessage.setMaxSize(175, 40);
                 //Set the Font size of the text
                   deleteMessage.setStyle("-fx-font-size: 18px;");
 
 
             //Exit
-              Button goBack = new Button("Logout");
+              Button goBack = new Button("Exit");
                 //Set the dimensions of the Button
-                  goBack.setPrefSize(200, 40);
-                  goBack.setMinSize(200, 40);
-                  goBack.setMaxSize(200, 40);
+                  goBack.setPrefSize(100, 40);
+                  goBack.setMinSize(100, 40);
+                  goBack.setMaxSize(100, 40);
                 //Set the Font size of the text
                   goBack.setStyle("-fx-font-size: 18px;");
           //=======================================================================
@@ -781,19 +786,23 @@ public class PatientPortal{
             //Message Text Box  {Anything written here will be posted to the board}
               TextArea messageTxt = new TextArea();
                 //Set the dimensions of the Button
-                  messageTxt.setPrefSize(200, 500);
-                  messageTxt.setMinSize(200, 500);
-                  messageTxt.setMaxSize(200, 500);
+                  messageTxt.setPrefSize(300, 525);
+                  messageTxt.setMinSize(300, 525);
+                  messageTxt.setMaxSize(300, 525);
                 //Set the Font size of the text
                   messageTxt.setStyle("-fx-font-size: 18px;");
+                //Set text wrapping 
+                  messageTxt.setWrapText(true);
+                
+                //[Note]: ^^ any text that exceeeds the width will fall to a new line
 
 
             //Inbox Text Box
               TextArea inboxTxt = new TextArea();
                 //Set the dimensions of the Button
-                  inboxTxt.setPrefSize(500, 500);
-                  inboxTxt.setMinSize(500, 500);
-                  inboxTxt.setMaxSize(500, 500);
+                  inboxTxt.setPrefSize(600, 525);
+                  inboxTxt.setMinSize(600, 525);
+                  inboxTxt.setMaxSize(600, 525);
                 //Set the Font size of the text
                   inboxTxt.setStyle("-fx-font-size: 18px;");
 
@@ -803,38 +812,53 @@ public class PatientPortal{
             //Run a while loop until the Patient's name is hit (First & Last name)
             //Do the flag method for starting to collect data 
             //(Collect all text between Matched patient name & the next patient's name {when we will stop, i.e. set the flag to false})
-
-
           //=======================================================================
 
 
           //Action-Event Handling
-          //=======================================================================
+          //=============================================================================
+            //Send Message
+              //This will open the "Messages.txt" file for reading & writing
+              sendMessage.setOnAction(e -> {
+                //Add/Append the message to the  Inbox/Current Conversation
+                  //Hello there...
+                  //
+              });
 
 
-          //=======================================================================
+              //If the file does not contain the Patients Name write a new entry!!
+              
+              //Else, append the new message to the messages to a fro the Doctor || Nurse
+          //=============================================================================
 
 
           //Alignments
           //==========================================================================================
             //Message:
-              VBox messageSection = new VBox(messageLbl, messageTxt);
+              VBox messageSection = new VBox(5, messageLbl, messageTxt);
               
             //Inbox:
-              VBox inboxSection = new VBox(inboxLbl, inboxTxt);
+              VBox inboxSection = new VBox(5, inboxLbl, inboxTxt);
             
             //HBox containing the text fields & their resepective labels (background color: lightblue)
-              HBox functContainer = new HBox(messageSection, inboxSection); 
+              HBox messageBoard = new HBox(10, messageSection, inboxSection); 
                 //Set the dimensions & other feats of the function container
-                  functContainer.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 10; -fx-background-color: lightblue;");
-                  functContainer.setAlignment(Pos.CENTER);
+                  messageBoard.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 10; -fx-background-padding: 10; -fx-background-radius: 10; -fx-background-color: lightblue;");
+                  messageBoard.setAlignment(Pos.CENTER);
+                //Set the dimensions of the "Message Board"
+                  messageBoard.setPrefSize(950, 600);
+                  messageBoard.setMinSize(950, 600);
+                  messageBoard.setMaxSize(950, 600);
+
 
             //Horizontally Align the Buttons/Functionality
-              HBox buttonContainer = new HBox(sendMessage, deleteMessage, goBack);
-
+              HBox buttonContainer = new HBox(30, sendMessage, deleteMessage, goBack);
+                //Set the alignment of the button container
+                  buttonContainer.setAlignment(Pos.CENTER);
+                  
 
             //Vertically align all of the sections {Last VBox}
-              VBox finAlign = new VBox(10, messageBrdLbl, functContainer, buttonContainer);
+              VBox finAlign = new VBox(20, messageBrdLbl, messageBoard, buttonContainer);
                 //Set the alignment of the VBox
                 //Maybe unecessary???
                   finAlign.setAlignment(Pos.CENTER);
@@ -843,6 +867,7 @@ public class PatientPortal{
 
           //Build the Scene
             Scene mainLayout = new Scene(finAlign, 1024, 768);
+              //mainLayout.setStyle("-fx-background-color: lightblue;");
 
           //Return the Scene
             return mainLayout;
