@@ -77,9 +77,9 @@ public class Portals {
 	  //Welcome Page (First Page/Scene of Program)
 		private Scene welcomePage;
 	 
-	  //Arizona Medical Logo Image
-		//private Image azMedLogo;
-		
+	  //User has created a new account
+		boolean accountCreated = false;
+
 	  //Notification Text
 		private Label notificationTxt;
 
@@ -92,10 +92,6 @@ public class Portals {
 		private NursePortal nurseView;
 		private DoctorPortal doctorView;
 
-
-
-		//NEWW!!!
-		boolean accountCreated = false;
 	//-------------------------------------------------------------------------------------------
 
 
@@ -411,8 +407,8 @@ public class Portals {
 			  //Load [PatientAccounts.txt] for writing		
 				FileWriter fileWriter = new FileWriter("PatientAccounts.txt", true);
 			  //[Note]:  'true' in the second parameter tells the fileWriter the file already exists
-			    
-				
+
+
 			  //Append the new Patient's name to the .txt file
 			    fileWriter.append(patientCredentials + "\n");
 
@@ -426,10 +422,9 @@ public class Portals {
 			  	//Use '\t' to make it look cleaner
 				fileWriter.append("\t[Pharmacy Provider]: " + pharmacyProv + "\n\n");
 
-			 
+
 			  //Close the file Writer
-			    fileWriter.close();
-			    
+			    fileWriter.close();    
 			}
 			//File Does not exist error catch
 			catch(IOException e) {
@@ -490,8 +485,7 @@ public class Portals {
 					goBack.setStyle("-fx-font-size: 24px; -fx-font-family: 'Times New Roman';");      
 
 
-			//NEW BUTTON TO EXIT THE PAGE (Leaves less ambiguity in language)
-			//REPLACE ALL goBack with our new Exit button & vice versa
+			//Exit the page [Goes to Welcome Page]
 			  Button exitPage = new Button("Exit");
 				//Set the dimensions of the Buttons
 				//[Width x Height]
@@ -511,9 +505,9 @@ public class Portals {
 			  TextArea firstNameTxt = new TextArea();
 				//Set the dimensions of the text box
 		        //[Width x Height]
-			  	  firstNameTxt.setPrefSize(200, 35);  
- 		          firstNameTxt.setMaxSize(200, 35);
-		          firstNameTxt.setMinSize(200, 35);
+			  	  firstNameTxt.setPrefSize(310, 35);  
+ 		          firstNameTxt.setMaxSize(310, 35);
+		          firstNameTxt.setMinSize(310, 35);
 				//Set the size of the text
 				  firstNameTxt.setStyle("-fx-font-size: 16px;");
 
@@ -521,9 +515,9 @@ public class Portals {
 	          TextArea lastNameTxt = new TextArea();
 				//Set the dimensions of the text box
 		        //[Width x Height]
-			  	  lastNameTxt.setPrefSize(200, 35);  
-		          lastNameTxt.setMaxSize(200, 35);
-		          lastNameTxt.setMinSize(200, 35);
+			  	  lastNameTxt.setPrefSize(310, 35);  
+		          lastNameTxt.setMaxSize(310, 35);
+		          lastNameTxt.setMinSize(310, 35);
 				//Set the size of the text
 				  lastNameTxt.setStyle("-fx-font-size: 16px;");
 		          
@@ -561,6 +555,7 @@ public class Portals {
 				  yearTxt.setStyle("-fx-font-size: 16px;");
 
 
+			//[Additional Information for "Create Account" action]
           	//Phone Number
 			  //First three Digits
 				TextArea phoneNum0 = new TextArea("XXX");
@@ -568,8 +563,14 @@ public class Portals {
 					phoneNum0.setPrefSize(60, 40);
 					phoneNum0.setMinSize(60, 40);
 					phoneNum0.setMaxSize(60, 40);
-					//Set the size of the text in the text box
+				  //Set the size of the text in the text box
 					phoneNum0.setStyle("-fx-font-size: 18px;");
+				  //Clear the text box when the user clicks on it to enter new text!
+					phoneNum0.setOnMouseClicked(event-> {
+					  //Clear the text
+						phoneNum0.clear();
+					});
+				
 
 			  //Second three Digits
 				TextArea phoneNum1 = new TextArea("XXX");
@@ -579,6 +580,12 @@ public class Portals {
 					phoneNum1.setMaxSize(60, 40);
 				  //Set the size of the text in the text box
 					phoneNum1.setStyle("-fx-font-size: 18px;");
+				  //Clear the text box when the user clicks on it to enter new text!
+					phoneNum1.setOnMouseClicked(event-> {
+					  //Clear the text
+						phoneNum1.clear();
+					});
+
 
 			  //Final four Digits
 				TextArea phoneNum2 = new TextArea("XXXX");
@@ -588,6 +595,11 @@ public class Portals {
 					phoneNum2.setMaxSize(70, 40);
 				  //Set the size of the text in the text box
 					phoneNum2.setStyle("-fx-font-size: 18px;");
+				  //Clear the text box when the user clicks on it to enter new text!
+					phoneNum2.setOnMouseClicked(event-> {
+					  //Clear the text
+						phoneNum2.clear();
+					});
 
 
         	//Insurance Provider
@@ -598,6 +610,11 @@ public class Portals {
                 insuranceTxt.setMaxSize(250, 40);
               //Set the size of the text in the text box
                 insuranceTxt.setStyle("-fx-font-size: 18px;");
+			  //Clear the text box when the user clicks on it to enter new text!
+				insuranceTxt.setOnMouseClicked(event-> {
+				  //Clear the text
+					insuranceTxt.clear();
+				});
 
 
           	//Pharmacy Provider
@@ -608,6 +625,11 @@ public class Portals {
                   pharmacyTxt.setMaxSize(300, 40);
                 //Set the size of the text in the text box
                   pharmacyTxt.setStyle("-fx-font-size: 18px;");
+				//Clear the text box when the user clicks on it to enter new text!
+				  pharmacyTxt.setOnMouseClicked(event-> {
+					//Clear the text
+					  pharmacyTxt.clear();
+				  });
 	      //================================================================================
 		       
 	          
@@ -622,18 +644,18 @@ public class Portals {
 	        //Labels relating to the user Credentials
 	        //-------------------------------------------------
 	          //First Name
-	            Label firstNameLbl = new Label("First Name:");
+	            Label firstNameLbl = new Label("   First Name:");
 	            //Set Font
 	              firstNameLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");          
 	              
 	          //Last Name
-	            Label lastNameLbl = new Label("Last Name:");
+	            Label lastNameLbl = new Label("   Last Name:");
 	            //Set Font
 	              lastNameLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
 	          
 	          		
 	          //Date of Birth 
-	            Label dobLbl = new Label("Date of Birth:");
+	            Label dobLbl = new Label( "   Date of Birth:");
 	            //Set Font
 	          	  dobLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
 
@@ -652,29 +674,42 @@ public class Portals {
 
 		        	
 		 	  //DOB format guide for user
-				Label dobFrmtLbl = new Label("\t\t\t(MM / DD / YYYY)");
-				dobFrmtLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
-				dobFrmtLbl.setAlignment(Pos.CENTER);
+				Label dobFrmtLbl = new Label("\t(MM / DD / YYYY)");
+				  //Set the Font & Alignemtn
+					dobFrmtLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
+					dobFrmtLbl.setAlignment(Pos.CENTER);
 
 
 			  //NEW LABELS & HEADERS!! {Phone Num, Insurance, Pharmacy}
 			  //Phone Number
-            	Label phoneNumLbl = new Label("Phone Number:");
+            	Label phoneNumLbl = new Label("   Phone Number:");
               	  //Set font of Text
-                	phoneNumLbl.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+                	phoneNumLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold;");
 			  
 			  //Digit seperators for the phone number
 				Label phoneDash0 = new Label("-");
 				  //Set the font of the Label
-					phoneDash0.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+					phoneDash0.setStyle("-fx-font-size: 26px; -fx-font-weight: bold;");
 				
 				Label phoneDash1 = new Label("-");
 				  //Set the font of the Label
-					phoneDash1.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-	      //================================================================================      
+					phoneDash1.setStyle("-fx-font-size: 26px; -fx-font-weight: bold;");
+	      
+
+         	  //Insurance Information {Specifier text}
+			  	Label insuranceInfoLbl0 = new Label("   Insurance Provider:");
+              	  //Set font of Text
+                	insuranceInfoLbl0.setStyle("-fx-font-size: 26px; -fx-font-weight: bold;");
 
 
-		  //VBox & HBox Alignments the main Layout of the program
+	          //Pharmacy Information {Specifier text}
+            	Label pharmacyInfoLbl0 = new Label("   Pharmacy Provider:");
+              	  //Set font of Text
+                	pharmacyInfoLbl0.setStyle("-fx-font-size: 26px; -fx-font-weight: bold;");
+		  //================================================================================      
+
+
+		  //Alignments the main Layout of the program
 	      //===================================================================================================
 	        //Credentials Section
 	        //-------------------------------------------------------------------------
@@ -687,9 +722,9 @@ public class Portals {
         		VBox credContainer = new VBox(5, firstNameBox, lastNameBox, DOBbox, dobFrmtLbl);
         		//Set the dimensions & create a border around the credential container VBox
         		  credContainer.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10;");  
-          		  credContainer.setPrefSize(500,250);
-          		  credContainer.setMaxSize(500,250);
-          		  credContainer.setMinSize(500,250);
+          		  credContainer.setPrefSize(500,200);
+          		  credContainer.setMaxSize(500,200);
+          		  credContainer.setMinSize(500,200);
 				//NEW, Set the alignment of the cred container
 				  credContainer.setAlignment(Pos.CENTER);
 		          
@@ -701,6 +736,18 @@ public class Portals {
 				  	credContainer.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
    	        //-------------------------------------------------------------------------
 	          
+
+			//Horizontal Alignments for the [Create New account] Sections
+			//HBox for the Phone Number/Contact Info
+			  HBox phoneNumSection = new HBox(5, phoneNumLbl, phoneNum0, phoneDash0, phoneNum1, phoneDash1, phoneNum2);	
+			  //Move this up to its proper section above??
+
+			//HBox for the Insurance Provider
+			  HBox insuranceSection = new HBox(5, insuranceInfoLbl0, insuranceTxt);	
+			
+			//HBox for the Pharmaceutical Provider
+			  HBox pharmacySection = new HBox(5, pharmacyInfoLbl0, pharmacyTxt);	
+				
           		
 	        //Functional Buttons Section:  [Login]  &  [New Account]
           	//-------------------------------------------------------------------------
@@ -845,18 +892,15 @@ public class Portals {
 			  //Make a "Create Account method that returns the Scene"
 
 			  //Make the user text entry box bigger
-			  	credContainer.setPrefSize(500,400);
-			  	credContainer.setMinSize(500,400);
-			  	credContainer.setMaxSize(500,400);
+			  	credContainer.setPrefSize(600,400);
+			  	credContainer.setMinSize(600,400);
+			  	credContainer.setMaxSize(600,400);
 
 
-
-			  //Add the HBox(s) for the new account entry info!!
-			  	HBox phoneNumSection = new HBox(5, phoneNumLbl, phoneNum0, phoneDash0, phoneNum1, phoneDash1, phoneNum2);	//Move this up to its proper section above??
-
-
-			  //Add new text boxes to the credentials container
+			  //Add the new text sections to the credentials container
 			  	credContainer.getChildren().add(phoneNumSection);
+			  	credContainer.getChildren().add(insuranceSection);
+			  	credContainer.getChildren().add(pharmacySection);
 
 
 			  //Remove all of the buttons from the container & load the new one's relevant to the Login page

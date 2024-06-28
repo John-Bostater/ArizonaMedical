@@ -126,7 +126,7 @@ public class PatientPortal{
 
         //Break apart the patient's credentials to set the private data: fullName & dateOfBirth
         //Get the patients Full Name {first & last}
-          
+        
           //Delimeter used to break up the text
             int delimeter = patientCreds.indexOf(",");
 
@@ -139,17 +139,8 @@ public class PatientPortal{
           //Last Name
             fullName += " " + placeHolder.substring(0, placeHolder.indexOf(","));
 
-        //Set the string to null to help Garbage collector
-          placeHolder = null;
-
-          //DEBUG
-            System.out.println("FullName: " + fullName);
-
-
-        //NEW IDEA AFTER FOR THE FUTURE
-          //Read the PatientAccounts.txt to get the patients relevant info: phone#, insurance, etc.
-
-
+          //Set the string to null to help Garbage collector
+            placeHolder = null;
       }
     //-----------------------------------------------------------------------------------------
 
@@ -629,7 +620,8 @@ public class PatientPortal{
 
               //Flag that "puts on the brakes" of the fileReader so it will
                 boolean patientFound = false;
-              //NEW
+              
+              //Counter for: examDate[counter] = <Exam Date String> 
                 short counter = 0;
 
              //Read the file Line-by-Line and compare the strings for a match
@@ -1055,8 +1047,7 @@ public class PatientPortal{
 
           //Build the Scene
             Scene mainLayout = new Scene(finAlign, 1024, 768);
-              //mainLayout.setStyle("-fx-background-color: lightblue;");
-
+      
           //Return the Scene
             return mainLayout;
         }
@@ -1097,9 +1088,6 @@ public class PatientPortal{
               return messageStr;
         }
         catch(IOException m){
-          //DEBUG
-            //System.out.println("File does not exist");
-          
           //Do nothing...
             return "<Inbox Empty>";
         }
