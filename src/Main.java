@@ -99,7 +99,7 @@ public class Main extends Application{
   public void start(Stage primaryStage) {
     //Program Loop: 
     //-------------------------------------------------------------------------------------------------------
-    //Title of the program
+      //Title of the program
         primaryStage.setTitle("Arizona Medical");
     
       //Load the Welcome Page of the program and continue from there...
@@ -108,7 +108,7 @@ public class Main extends Application{
         Portals driver = new Portals(primaryStage);
         
       //Call upon the public method to run the program
-      driver.runProgram();      
+        driver.runProgram();      
     //-------------------------------------------------------------------------------------------------------
   }
 }

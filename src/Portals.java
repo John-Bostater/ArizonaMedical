@@ -168,14 +168,14 @@ public class Portals {
            	    staffLogin.setMaxSize(120, 50);
            	    staffLogin.setMinSize(120, 50);
            	  //[Width x Height]
-           	    exitProg.setPrefSize(70, 40);  
-           	    exitProg.setMaxSize(70, 40);
-           	    exitProg.setMinSize(70, 40);          
+           	    exitProg.setPrefSize(80, 45);  
+           	    exitProg.setMaxSize(80, 45);
+           	    exitProg.setMinSize(80, 45);          
 		          
               //Set text Size within buttons
   	            patientLogin.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 				staffLogin.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
-				exitProg.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+				exitProg.setStyle("-fx-font-size: 22px; -fx-font-family: 'Times New Roman';");
               
               //Set padding
               	buttonsSection.setAlignment(Pos.CENTER);
@@ -317,22 +317,22 @@ public class Portals {
 			  Button nurseButton = new Button("Nurse");
 	  			//Set the dimensions of the Buttons
 		        //[Width x Height]
-			  	  nurseButton.setPrefSize(100, 40);  
-		          nurseButton.setMaxSize(100, 40);
-		          nurseButton.setMinSize(100, 40);
+			  	  nurseButton.setPrefSize(120, 50);  
+		          nurseButton.setMaxSize(120, 50);
+		          nurseButton.setMinSize(120, 50);
 	            //Set the Font of the Button's text
-		          nurseButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+		          nurseButton.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
 			//Doctor Button
 			  Button doctorButton = new Button("Doctor");
 			  //Format stuff below!!
 	  			//Set the dimensions of the Buttons
 		        //[Width x Height]
-			  	  doctorButton.setPrefSize(110, 40);  
-		          doctorButton.setMaxSize(110, 40);
-		          doctorButton.setMinSize(110, 40);
+			  	  doctorButton.setPrefSize(125, 50);  
+		          doctorButton.setMaxSize(125, 50);
+		          doctorButton.setMinSize(125, 50);
 	            //Set the Font of the Button's text
-		          doctorButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+		          doctorButton.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
 
 			//Go Back	[Main Page]
@@ -343,7 +343,7 @@ public class Portals {
 		          goBack.setMaxSize(125, 40);
 		          goBack.setMinSize(125, 40);
 	            //Set the Font of the Button's text
-		          goBack.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+		          goBack.setStyle("-fx-font-size: 24px; -fx-font-family: 'Times New Roman';");
 		  //=====================================================================
 
 
@@ -405,8 +405,8 @@ public class Portals {
 		
 		  //[DEBUG!!]	
 		  	System.out.println("All the other strings: \n" + "\t[Phone Number]: " + phoneNum);
-
-
+		
+		  //try catch in case of file I/O errors
 			try {
 			  //Load [PatientAccounts.txt] for writing		
 				FileWriter fileWriter = new FileWriter("PatientAccounts.txt", true);
@@ -416,7 +416,15 @@ public class Portals {
 			  //Append the new Patient's name to the .txt file
 			    fileWriter.append(patientCredentials + "\n");
 
-				//Add more patient info??? (I.e. add the default vals: PhoneNum = XXX-XXX-XXXX)
+			  //Append the phone number just under the patients credentials
+				fileWriter.append("\t[Phone Number]: " + phoneNum + "\n");
+
+			  //Append the insurance provider 
+				fileWriter.append("\t[Insurance Provider]: " + insuranceProv + "\n");
+
+			  //Append the pharmaceutical provider
+			  	//Use '\t' to make it look cleaner
+				fileWriter.append("\t[Pharmacy Provider]: " + pharmacyProv + "\n\n");
 
 			 
 			  //Close the file Writer
@@ -463,24 +471,35 @@ public class Portals {
 			//This will create the new account with the inputted credentials
 			  Button confirmAccount = new Button("Confirm");
 				//Set the dimensions of the button
-				  //Code here
+		        //[Width x Height]
+			  	  confirmAccount.setPrefSize(120, 45);  
+		          confirmAccount.setMaxSize(120, 45);
+		          confirmAccount.setMinSize(120, 45);
+		        //Set the Font of the Button's text
+		          confirmAccount.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
 
 		    //Go Back      
 		      Button goBack = new Button("Go back");
 				//Set the dimensions of the Buttons
 				//[Width x Height]
-					goBack.setPrefSize(120, 45);  
-					goBack.setMaxSize(120, 45);
-					goBack.setMinSize(120, 45);
+					goBack.setPrefSize(115, 45);  
+					goBack.setMaxSize(115, 45);
+					goBack.setMinSize(115, 45);
 				//Set the Font of the Button's text
 					goBack.setStyle("-fx-font-size: 24px; -fx-font-family: 'Times New Roman';");      
 
 
 			//NEW BUTTON TO EXIT THE PAGE (Leaves less ambiguity in language)
 			//REPLACE ALL goBack with our new Exit button & vice versa
-			  Button exitPage = new Button("Exit Page");
-
+			  Button exitPage = new Button("Exit");
+				//Set the dimensions of the Buttons
+				//[Width x Height]
+					exitPage.setPrefSize(75, 45);  
+					exitPage.setMaxSize(75, 45);
+					exitPage.setMinSize(75, 45);
+				//Set the Font of the Button's text
+					exitPage.setStyle("-fx-font-size: 24px; -fx-font-family: 'Times New Roman';");      
           //===============================================================================================================
 			  
 
@@ -909,21 +928,10 @@ public class Portals {
 
 			  //Create a New Account!
 	        	if(!checkCredentials(patientCredentials) && validEntry) {
-					//Remove any previous Notifications
-					  //buttonContainer.getChildren().remove(notificationTxt);
-
-
-					//[HERE!!]
-					//UPDATE THIS METHOD BELOW SO THAT IT ALSO TAKES our new text boxes we created: [Phone#: 3 text boxes] [Insurance: 1 text] [pharmacy: 1 text]
-					//NEW
+					//Create the New account 
 					  createAccount(patientCredentials, phoneNumber, insuranceProvider, pharmacyProvider);
 
-
-	        		//Account does not exist, create a new Patient Account with the credentials entered
-	        		 //OLD!! createAccount(patientCredentials);
-
-
-					//REmove all of the buttosn again to add[Notifcation Txt] [Login] [Go Back]
+					//Remove all of the buttosn again to add[Notifcation Txt] [Login] [Go Back]
 					  buttonContainer.getChildren().clear();
 
 
@@ -972,8 +980,6 @@ public class Portals {
 					    isNotified = true;	
 					}
 	        	}        	
-
-
 			});
 
 
@@ -1018,10 +1024,10 @@ public class Portals {
 
 		//Check Credentials (returns true if entered credentials match a real Patient account from .txt)
 		  private boolean checkCredentials(String patientCredentials) {
-			
-			//Open the file Containing all of the patient names  {PatientAccounts.txt}
-			try {
-				//Read the File with a scanner (easier to get Line by Line)
+
+		    //Open the file Containing all of the patient names  {PatientAccounts.txt}
+			  try {
+			  	//Read the File with a scanner (easier to get Line by Line)
 				  Scanner fileReader = new Scanner(new File("PatientAccounts.txt"));
 				  
 				//Read the file Line-by-Line and compare the strings for a match
