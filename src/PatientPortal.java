@@ -295,17 +295,17 @@ public class PatientPortal{
           //Phone Number
             Label phoneNumLbl = new Label("Phone Number:");
               //Set font of Text
-                phoneNumLbl.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+                phoneNumLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
 
           //Digit seperators for the phone number
             Label phoneDash0 = new Label("-");
               //Set the font of the Label
-                phoneDash0.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+                phoneDash0.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
             
             Label phoneDash1 = new Label("-");
               //Set the font of the Label
-                phoneDash1.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+                phoneDash1.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
 
           //Insurance Information
@@ -332,27 +332,27 @@ public class PatientPortal{
 
 
         //Buttons
-        //==========================================================
+        //=============================================================================================================
           //Update Information (Saves to .txt file: PatientInfo.txt)
             Button updateInfo = new Button("Update Information");
               //Set the Dimensions & text of the button
               //[Width x Height]
-    			  	  updateInfo.setPrefSize(200, 40);  
-		            updateInfo.setMaxSize(200, 40);
-		            updateInfo.setMinSize(200, 40);
+    			  	  updateInfo.setPrefSize(250, 45);  
+		            updateInfo.setMaxSize(250, 45);
+		            updateInfo.setMinSize(250, 45);
 		          //Set the Font of the Button's text
-		            updateInfo.setStyle("-fx-font-size: 20px;");
+		            updateInfo.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
           //Exit,   This will run the displayPortal() Method!!
             Button exitPage = new Button("Exit");
               //Set the Dimensions & text of the button
               //[Width x Height]
-    			  	  exitPage.setPrefSize(150, 40);  
-		            exitPage.setMaxSize(150, 40);
-		            exitPage.setMinSize(150, 40);
+    			  	  exitPage.setPrefSize(75, 45);  
+		            exitPage.setMaxSize(75, 45);
+		            exitPage.setMinSize(75, 45);
 		          //Set the Font of the Button's text
-		            exitPage.setStyle("-fx-font-size: 20px;");
-        //==========================================================
+		            exitPage.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+        //=============================================================================================================
 
 
         //Text Boxes
@@ -360,7 +360,7 @@ public class PatientPortal{
           //3 text boxes for the phone number...
           //Phone Number
             //First three Digits
-            TextArea phoneNum0 = new TextArea("XXX");
+            TextArea phoneNum0 = new TextArea();
               //Set the dimensions of the text area/box
                 phoneNum0.setPrefSize(60, 40);
                 phoneNum0.setMinSize(60, 40);
@@ -369,7 +369,7 @@ public class PatientPortal{
                 phoneNum0.setStyle("-fx-font-size: 18px;");
 
             //Second three Digits
-            TextArea phoneNum1 = new TextArea("XXX");
+            TextArea phoneNum1 = new TextArea();
               //Set the dimensions of the text area/box
                 phoneNum1.setPrefSize(60, 40);
                 phoneNum1.setMinSize(60, 40);
@@ -378,7 +378,7 @@ public class PatientPortal{
                 phoneNum1.setStyle("-fx-font-size: 18px;");
 
             //Final four Digits
-            TextArea phoneNum2 = new TextArea("XXXX");
+            TextArea phoneNum2 = new TextArea();
               //Set the dimensions of the text area/box
                 phoneNum2.setPrefSize(70, 40);
                 phoneNum2.setMinSize(70, 40);
@@ -405,6 +405,80 @@ public class PatientPortal{
                 pharmacyTxt.setMaxSize(300, 40);
               //Set the size of the text in the text box
                 pharmacyTxt.setStyle("-fx-font-size: 18px;");
+
+          ///*
+          //Open "PatientAccounts.txt" & Collect the information to be placed into the text boxes
+            try{
+              //Flag that allows collection of the patient's unique data
+                boolean patientFound = false;
+
+              //Open "PatientAccount.txt"
+                File patientAccountFile = new File("PatientAccounts.txt");
+
+              //File Reader
+                Scanner fileReader = new Scanner(patientAccountFile);
+
+              //Start reading the file and collect the user's [contact, insurance, pharmacy] info
+                while(fileReader.hasNextLine()){
+                  //String that saves each line read
+                    String line = fileReader.nextLine();
+
+                  //If the Patient is found based on their credentials...
+                    if(line.contains(this.patientCredentials)){
+                      //Activate the flag so we can start reading
+                        patientFound = true;
+
+                      //Move the line forward??
+                        line = fileReader.nextLine();
+                    }
+
+                  //Break the file reader if the line does not contain "\t"
+                    if(patientFound && !line.contains("\t")){
+                      //Break the reading loop
+                        break;
+                    }
+
+
+                  //Start collecting the patient's data & place it into the Text Boxes
+                    //if(patientFound){
+                      //Phone Number Collection
+                        if(line.contains("[Phone Number]: ") && patientFound){
+                          //Trim the String 
+                            String phoneStr = line.trim().substring(16, line.length() -1);
+
+                          //Set up delimeters for breaking up the Phone Number String
+                            int delimeter = phoneStr.indexOf("-");
+
+                          //DEBUG
+                            System.out.println("First 3 numbers!!: " + phoneStr.substring(0, delimeter));
+
+                          //Move the line forward!
+                            //line = fileReader.nextLine();
+
+
+                        }
+
+                      //Insurance Collection
+                      //  if(line.contains("[Insurance Provider]: ")){
+                          //Trim the string and
+
+                      //  }
+
+                      //Pharmacy Collection
+                      //  if(line.contains("[Pharmacy Provider]: ")){
+
+                      //  }
+                    //}
+
+                }
+
+              //Close the file Reader
+                fileReader.close();
+            }
+            catch(IOException k){
+              //Do nothing??
+            }
+            //*/
         //==============================================================================
 
 
@@ -447,7 +521,6 @@ public class PatientPortal{
                       String line = fileReader.nextLine();
                   }
 
-
                 }
                 //If the file DNE error will be caught
                 catch(IOException x){
@@ -477,7 +550,7 @@ public class PatientPortal{
              //   horizontal0.setAlignment(Pos.CENTER);
 
           //Buttons
-            HBox buttonsSection = new HBox(20, updateInfo, exitPage);
+            VBox buttonsSection = new VBox(20, updateInfo, exitPage);
               //Set the alignment of the HBox containing the functionality
                 buttonsSection.setAlignment(Pos.CENTER);
     

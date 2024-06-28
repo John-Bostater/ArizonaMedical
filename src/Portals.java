@@ -809,7 +809,7 @@ public class Portals {
 					  //Notify user that their entry is invalid
 						notificationTxt = new Label("*Required text box is missing or invalid");
 						  //Set the color of the text
-							notificationTxt.setStyle("-fx-text-fill: white;");
+							notificationTxt.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
 
 					  //Add the notification to the page
 						buttonContainer.getChildren().add(notificationTxt);
@@ -844,7 +844,7 @@ public class Portals {
 					//Add notification text to inform user
 					  notificationTxt = new Label("*Account does not exist");
 						//Set the color of the text
-						  notificationTxt.setStyle("-fx-text-fill: white;");
+						  notificationTxt.setStyle("-fx-text-fill: white; -fx-font-size: 18px");
 
 					//Add the notification text to the Page
 						buttonContainer.getChildren().add(notificationTxt);
@@ -861,15 +861,13 @@ public class Portals {
 	          //This will Create a new Account with the credentials the user has entered
 	        	//HAVE TEXT THAT NOTIFIES THE USER OF THE NEW ACCOUNT CREATED AND HOW THEY 
 	        	//CAN ENTER HIT the LOGIN button TO proceed to the patient portal
-	        	
 			  //Update the flag
 				//isNotified = false;
 
-
 			  //Make the user text entry box bigger
-			  	credContainer.setPrefSize(600,400);
-			  	credContainer.setMinSize(600,400);
-			  	credContainer.setMaxSize(600,400);
+			  	credContainer.setPrefSize(600,375);
+			  	credContainer.setMinSize(600,375);
+			  	credContainer.setMaxSize(600,375);
 
 
 			  //Add the new text sections to the credentials container
@@ -929,7 +927,7 @@ public class Portals {
 					  //Notify user that their entry is invalid
 					    notificationTxt = new Label("*Required text box is missing or invalid");
 						  //Set the color of the text
-						  	notificationTxt.setStyle("-fx-text-fill: white;");
+						  	notificationTxt.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
 
 					  //Add the notification to the page
 						buttonContainer.getChildren().add(notificationTxt);
