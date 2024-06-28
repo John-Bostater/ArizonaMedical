@@ -295,7 +295,7 @@ public class PatientPortal{
           //Phone Number
             Label phoneNumLbl = new Label("Phone Number:");
               //Set font of Text
-                phoneNumLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+                phoneNumLbl.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
 
           //Digit seperators for the phone number
@@ -572,21 +572,21 @@ public class PatientPortal{
               HBox horizontal1 = new HBox(5, phoneNum0, phoneDash0, phoneNum1, phoneDash1, phoneNum2);
 
             //Vertically align the phoneNumLbl & horizontal1
-              VBox vertical0 = new VBox(10, phoneNumLbl, horizontal1);
+              VBox vertical0 = new VBox(5, phoneNumLbl, horizontal1);
                 //Set the border of the shits??
                   vertical0.setStyle("-fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1; -fx-padding: 10; -fx-background-color: lightblue; -fx-border-radius: 10;");  
 
 
           //Insurance Info:
             //Vertical alignment box
-              VBox vertical1 = new VBox(10, insuranceInfoLbl0, insuranceTxt);
+              VBox vertical1 = new VBox(5, insuranceInfoLbl0, insuranceTxt);
           		  //Set the background color & border of the box
                 vertical1.setStyle("-fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1; -fx-padding: 10; -fx-background-color: lightblue; -fx-border-radius: 10;");  
           
 
           //Pharmacy Info:
             //Vertical alignment box
-              VBox vertical2 = new VBox(10, pharmacyInfoLbl0, pharmacyTxt);
+              VBox vertical2 = new VBox(5, pharmacyInfoLbl0, pharmacyTxt);
                 //Set the background color & border of the box
                 vertical2.setStyle("-fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1; -fx-padding: 10; -fx-background-color: lightblue; -fx-border-radius: 10;");  
 
