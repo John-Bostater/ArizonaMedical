@@ -241,18 +241,18 @@ public class Portals {
 				  //Create the files if they do not exist
 				  	FileWriter fileWriter0 = new FileWriter("PatientAccounts.txt");
 					FileWriter fileWriter1 =  new FileWriter("VisitSummary.txt");
-					FileWriter fileWriter2 = new FileWriter("Messages.txt");
+					//FileWriter fileWriter2 = new FileWriter("Messages.txt");
 
 				  //Write the Leading text(s) to the respective files
 				  	fileWriter0.write("Patient Accounts:\n\n");
 					fileWriter1.write("");
-					fileWriter2.write("");
+					//fileWriter2.write("");
 
 
 				  //Close the fileWriter(s)
 				  	fileWriter0.close();
 					fileWriter1.close();
-					fileWriter2.close();
+					//fileWriter2.close();
 				}
 			}
 			//Catch any File I/O errors
@@ -271,7 +271,7 @@ public class Portals {
 		//================================================================================================================
 	}
 	//------------------------------------------------------------------------------------------------------------------
-	
+
 
 
 	//Method(s) of the Portals Object/Class
@@ -722,9 +722,9 @@ public class Portals {
         		VBox credContainer = new VBox(10, firstNameBox, lastNameBox, DOBbox, dobFrmtLbl);
         		//Set the dimensions & create a border around the credential container VBox
         		  credContainer.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10;");  
-          		  credContainer.setPrefSize(500,200);
-          		  credContainer.setMaxSize(500,200);
-          		  credContainer.setMinSize(500,200);
+          		  credContainer.setPrefSize(500,215);
+          		  credContainer.setMaxSize(500,215);
+          		  credContainer.setMinSize(500,215);
 				//NEW, Set the alignment of the cred container
 				  credContainer.setAlignment(Pos.CENTER);
 		          
@@ -890,7 +890,7 @@ public class Portals {
 
 			//Confirm the Account data entered to be written to the PatientAccounts.txt
 			confirmAccount.setOnAction(e -> {
-				
+
 			  //Compile the credentials entered by the Patient/User
 			  //Compile into one string to be passed into PatientPortal Constructor 
 				String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
