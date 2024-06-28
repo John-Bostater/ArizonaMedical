@@ -551,14 +551,15 @@ public class Portals {
 		        //Separate: MM / DD / YYYY
 	 	          Label dobSep0 = new Label("/");
 		          Label dobSep1 = new Label("/");
-		          //Set Font
-		            dobSep0.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
-		            dobSep1.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
+		         	 //Set Font
+		            	dobSep0.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
+		            	dobSep1.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
 			  
 		            
 		      //New account Text
 		        Label accText = new Label("New Patient?");
-		        accText.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
+				  //Set the font & size
+		        	accText.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
 
 		        	
 		 	  //DOB format guide for user

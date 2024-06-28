@@ -97,6 +97,10 @@ public class PatientPortal{
       //Load Welcome Scene & all of its functionality
         private Scene welcomePage;
 
+      //String that holds the last message sent by the user
+        String messageSent = "";
+      //[Used for deleting last message sent]
+
       //Patient Information
         private String phoneNumber = "";
         private String insuranceInfo = "";
@@ -133,7 +137,26 @@ public class PatientPortal{
           //YOU MUST USE STRING TO STORE the substrings!/trimmed string
 
         //Get the patients full name:
+          int delimeter = patientCreds.indexOf(",");
 
+          //First Name
+            fullName += patientCreds.substring(0, delimeter);
+
+          //Place Holder for the edited string
+            String placeHolder = patientCreds.substring(delimeter + 1, patientCreds.length());
+
+          //Last Name
+            fullName += " " + placeHolder.substring(0, placeHolder.indexOf(","));
+
+        //Set the string to null to help Garbage collector
+          placeHolder = null;
+
+          //DEBUG
+            System.out.println("FullName: " + fullName);
+
+
+        //NEW IDEA AFTER FOR THE FUTURE
+          //Read the PatientAccounts.txt to get the patients relevant info: phone#, insurance, etc.
 
 
       }
@@ -896,17 +919,24 @@ public class PatientPortal{
                 //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
                   try{
                     //Open: <this.fullName>PatientInfo.txt
-                      File patientInbox = new File(this.fullName + "Messages.txt");    
+                      File patientInbox = new File(this.fullName.replace(" ", "") + "Messages.txt");    
 
                     //Open the File Writer for adding new messages to the file
                       FileWriter fileWriter = new FileWriter(patientInbox, true);
                         //[we set 'true' so that the fileWriter can append to the file]
 
                     //If the File exists append the new message to the end
-                      if(patientInbox.exists()){      
+                      if(patientInbox.exists() && !messageTxt.getText().isEmpty()){      
+                        //Save the message sent to the global variable [so it can be used in deletion]
+                        //Empty the global variable used for sending messages
+                          messageSent = "[" + this.fullName + "]: " + messageTxt.getText() + "\n\n";
+                  
                         //Append the new message to the "<FullName>Message.txt"
-                          fileWriter.append("[" + this.fullName + "]: " + messageTxt.getText() + "\n\n");
-                      
+                          fileWriter.append(messageSent);
+                  
+                        //Empty the text area used for sending messages
+                          messageTxt.setText("");
+
                         //Close the file writer
                           fileWriter.close();
                       }
@@ -917,17 +947,11 @@ public class PatientPortal{
 
                         //Close the File Reader
                           fileWriter.close();
-                    }
+                      }
                   }
                   catch(IOException n){
-                    //Error Print
-                    //  System.out.println("File Not Found!!");
-
-                    //Create the new Unique messages.txt:   Named: "<PatientName>Messages.txt"
-                    //<PatientName> = this.fullName;
-
-                    //Create the file
-
+                    //File doesn't exits do nothing
+                    //Might have to creat a new file???
                   }
 
                 //if [<Patient Name>]: does NOT exist, start the first comment [If while-loop finished without finding user]
@@ -939,11 +963,60 @@ public class PatientPortal{
 
             //Delete Message
               deleteMessage.setOnAction(e -> {
-                //Delete the last new message {will be done by deleteing: [<Patient Name>]:  & everything after it}
-                //Replace with ""
+                //Count the total number of messages sent by the user {i.e. count everytime we see: "[fullName]:"}
 
-                //Delete the message
+                //Then reread the file and collect all of the text and stop once we see the last instance of [fullName]:
+                //Then use .write() to rewrite all of the text in the <fullName>Messages.txt NOT including the last message sent by the user
 
+                //JUst gonna get my brain spaghetti out !!!
+                try{
+                  //Get the messages via our method...
+                    
+                    //If the message inbox is not empty...
+                    if(getMessages() != "<Inbox Empty>"){
+                      //DEBUG
+                       //All messages in the .txt file
+                       System.out.println("Inbox: \n" + getMessages());
+      
+                      //DEbug
+                        //Print the last message sent/saved in the global variable
+                          //System.out.println("Message sent: " + this.messageSent);
+
+                      //Write this into the <this.fullName>Messagest.txt
+                      String editedStr = getMessages().replace(this.messageSent, "");
+                      
+                      //Edit the <this.fullName>Messages.txt to have the new inbox displayed!
+                        File editedFile = new File(this.fullName.replaceAll(" ", "") + "Messages.txt");
+
+                      //Open a file writer for writing the new text into the .txt file
+                        FileWriter fileWriter0 = new FileWriter(this.fullName.replaceAll(" ", "") + "Messages.txt");
+
+                      //DEBUG STATEMENT
+                        //System.out.println("Edited TExt: \n" + editedStr);
+
+                      //If the string we made is not empty, update the .txt file
+                        if(this.messageSent != ("[" + this.fullName + "]: \n\n")){
+                          //Replace all of the text in the Messages.txt with the latest message deleted
+                            fileWriter0.write(editedStr);
+          
+                          //Place new text into inbox being displayed
+                            inboxTxt.setText(editedStr);
+
+                          //CLOSE THE FILE WRITER OMG
+                            fileWriter0.close();
+                        }
+                      
+                    }
+
+                  //If the inbox is empty display the relevant text
+                    if(inboxTxt.getText().isEmpty()){
+                      //Set the inbox text
+                        inboxTxt.setText("<Inbox Empty>");
+                    }
+                }
+                catch(IOException l){
+                  //File does not exist.. either do nothing? or create it...
+                }
               });
 
 
@@ -952,11 +1025,6 @@ public class PatientPortal{
                 //Call upon displayPortal()
                   displayPortal();
               });
-
-
-              //If the file does not contain the Patients Name write a new entry!!
-              
-              //Else, append the new message to the messages to a fro the Doctor || Nurse
           //=============================================================================
 
 
@@ -1002,13 +1070,11 @@ public class PatientPortal{
           //Return the Scene
             return mainLayout;
         }
-    //------------------------------------------------------------------------------
+  //-------------------------------------------------------------------------------------------------------
 
-    //Other functions/feats of the object
 
-    //Make a private function/Method that will return all of the text in the "<PatientName>Messages.txt"
-    //This way we can refresh the inbox text box upon every new message sent!!
-
+  //Getters & Setters
+  //-------------------------------------------------------------------------------------------------------
     //Returns all of the text within: <this.fullName>Messages.txt
       private String getMessages(){
         //Open the  File for reading and read every line and set the inboxTxt to it!!
@@ -1017,7 +1083,7 @@ public class PatientPortal{
               String messageStr = "";
 
             //Open the file & if it exists post the text to the messageBoard
-              File inboxFile = new File(this.fullName + "Messages.txt");
+              File inboxFile = new File(this.fullName.replaceAll(" ", "") + "Messages.txt");
 
             //Scanner that will read the file
               Scanner fileReader = new Scanner(inboxFile);
@@ -1039,7 +1105,6 @@ public class PatientPortal{
 
             //Return the string
               return messageStr;
-
         }
         catch(IOException m){
           //DEBUG
@@ -1049,4 +1114,5 @@ public class PatientPortal{
             return "<Inbox Empty>";
         }
     }
+  //-------------------------------------------------------------------------------------------------------
 }	

@@ -78,7 +78,6 @@
  *  	- Load patient Names & DOB from a .txt document and put said patients data into a
  *  	  String[] Array named 'allPatients' (Set DEFAULT_CAPACITY to 5 patients?)
  *  	  This string array 'allPatients' will be used in our CheckBox (dropdown menu) 
- *  
 */
 
 

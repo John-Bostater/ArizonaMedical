@@ -177,10 +177,6 @@ public class NursePortal{
         //Alignment
         //===========================================================================================
           //Vertically align the Buttons/Functionality of the Nurse Portal
-            //Original
-            //VBox vertical0 = new VBox(20, header0, header1, newVisitButton, messageButton, logoutButton);
-
-            //NEW
             vertical0 = new VBox(20, header0, header1, newVisitButton, messageButton, logoutButton);
               //Alignment
                 vertical0.setAlignment(Pos.CENTER);
