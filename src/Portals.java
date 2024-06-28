@@ -719,7 +719,7 @@ public class Portals {
         		HBox DOBbox = new HBox(5, dobLbl, monthTxt, dobSep0, dayTxt, dobSep1, yearTxt);
 		        
         	  //This will encapsulate all of the HBoxs for Patient Credentials 
-        		VBox credContainer = new VBox(5, firstNameBox, lastNameBox, DOBbox, dobFrmtLbl);
+        		VBox credContainer = new VBox(10, firstNameBox, lastNameBox, DOBbox, dobFrmtLbl);
         		//Set the dimensions & create a border around the credential container VBox
         		  credContainer.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10;");  
           		  credContainer.setPrefSize(500,200);
@@ -758,14 +758,15 @@ public class Portals {
 				//Set the background color to gray??
 				   
 
-			  //NEW!!!	[If a new account has been created display the relevant message!]
+			  //If a new account has been created display the relevant message
 			    if(accountCreated){
 				  //Set the notification text notifying the user their account has been successfully created
 					notificationTxt = new Label("*Account Successfully Created.\n  You may proceed to login.");
 					//Set the color of the text
 						notificationTxt.setStyle("-fx-text-fill: white;");
 
-					buttonContainer.getChildren().add(notificationTxt);
+				  //Add the notification to the container
+					//buttonContainer.getChildren().add(notificationTxt);
 				}
 	        //-------------------------------------------------------------------------
           //===================================================================================================
@@ -826,9 +827,6 @@ public class Portals {
 				}
 
 
-	        	//[DEBUG PRINT] Delete when done
-	        	  //System.out.println("Creds: " + patientCredentials);
-	        
 	        	//Successful Login
 	        	//Check to see if the entered credentials exist/match that of an existing Patient Account (Loaded from .txt file) 
 	        	if(checkCredentials(patientCredentials)){
@@ -864,32 +862,9 @@ public class Portals {
 	        	//HAVE TEXT THAT NOTIFIES THE USER OF THE NEW ACCOUNT CREATED AND HOW THEY 
 	        	//CAN ENTER HIT the LOGIN button TO proceed to the patient portal
 	        	
+			  //Update the flag
+				//isNotified = false;
 
-				//NEW!!
-				//SEt the flag to false??
-				isNotified = false;
-
-				//[New Idea]
-				/*
-					//Have the new Account Button Change the Credentials container to include
-						Contact info (phone number), insurance info, pharmacy info, etc.
-
-					//Labels
-					Label contactLbl = new Label("Phone Number: ");
-					...
-
-					//Add the Labels and Text Boxes to the credentials container
-					credContainer.getChildren().add(contactLbl);
-					...
-
-					//You will have to update the container size for the new text box fields
-					credContainer.setPrefSize(300,200);
-					credContainer.setMaxSize(300,200);
-					credContainer.setMinSize(300,200);
-				*/
-				//[This code would have to be implemented here...]
-
-			  //Make a "Create Account method that returns the Scene"
 
 			  //Make the user text entry box bigger
 			  	credContainer.setPrefSize(600,400);
@@ -915,11 +890,7 @@ public class Portals {
 
 			//Confirm the Account data entered to be written to the PatientAccounts.txt
 			confirmAccount.setOnAction(e -> {
-			
-				//Add the no
-
-
-				//This might make my computer explode !!
+				
 			  //Compile the credentials entered by the Patient/User
 			  //Compile into one string to be passed into PatientPortal Constructor 
 				String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
@@ -972,30 +943,24 @@ public class Portals {
 
 			  //Create a New Account!
 	        	if(!checkCredentials(patientCredentials) && validEntry) {
-					//Create the New account 
-					  createAccount(patientCredentials, phoneNumber, insuranceProvider, pharmacyProvider);
+				  //Create the New account 
+					createAccount(patientCredentials, phoneNumber, insuranceProvider, pharmacyProvider);
 
-					//Remove all of the buttosn again to add[Notifcation Txt] [Login] [Go Back]
-					  buttonContainer.getChildren().clear();
+				  //Remove all of the buttosn again to add[Notifcation Txt] [Login] [Go Back]
+					buttonContainer.getChildren().clear();
 
 
-					//Set the notificationtext to something nEW!!
-					if(!isNotified){
-					  //Set the notification text and place it into the box
-						notificationTxt = new Label("*Account Successfully Created\nYou may Proceed to Login");
-						  //Set the style of the label
-						  	notificationTxt.setStyle("-fx-font-size: 18px; -fx-text-fill: white;");
+				  //Set the notification text and place it into the box
+					notificationTxt = new Label("*Account Successfully Created\n   You may Proceed to Login");
+					  //Set the style of the label
+						notificationTxt.setStyle("-fx-font-size: 18px; -fx-text-fill: white;");
 
-					  //Add the notification to page
-						buttonContainer.getChildren().add(notificationTxt);
+				  //Add the notification to page
+					buttonContainer.getChildren().add(notificationTxt);
 
-					  //Update the flag
-						isNotified = true;
-					}
-					
-					//Add the functionality to Login or go back
-					  buttonContainer.getChildren().add(patientLogin);
-					  buttonContainer.getChildren().add(goBack);
+				  //Add the functionality to Login or go back
+					buttonContainer.getChildren().add(patientLogin);
+					buttonContainer.getChildren().add(goBack);
 	        	}
 	          //Account already exists
 	        	else {
