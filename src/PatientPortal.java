@@ -132,6 +132,9 @@ public class PatientPortal{
           //YOU MUST USE INTEGER TO STORE "patientCreds.indexOf()" & the other indexes!!
           //YOU MUST USE STRING TO STORE the substrings!/trimmed string
 
+        //Get the patients full name:
+
+
 
       }
     //-----------------------------------------------------------------------------------------
@@ -575,7 +578,6 @@ public class PatientPortal{
                 dropSelect.setPrefSize(200, 30);
                 dropSelect.setMinSize(200, 30);
                 dropSelect.setMaxSize(200, 30);
-              //NEW
               //Set the font of the text within
                 dropSelect.setStyle("-fx-font-size: 16px;");
 
@@ -621,10 +623,6 @@ public class PatientPortal{
                while(fileReader.hasNextLine()) {
                  //Gather and store the 
                    String line = fileReader.nextLine(); //Starts at the first line of text in .txt file
-
-                  //DEBUG
-                   //System.out.println("Line: " + line);
-                   //System.out.println("Patient")
 
                  //If-branch will activate data collection once the patient is found via their credentials
                    if(line.contains("Patient: " + patientCredentials) && !patientFound){
@@ -696,10 +694,8 @@ public class PatientPortal{
                 }
             }
 
-            //NEW!!
-            // See if our hashmap works!!
-            //It works!!
-            System.out.println("Key: " + uniqueKeyInt + "\nSummary: " + summaryMap.get(uniqueKeyInt));
+            //DEBUG, hashmap works!
+            //System.out.println("Key: " + uniqueKeyInt + "\nSummary: " + summaryMap.get(uniqueKeyInt));
         //==========================================================================================
 
 
@@ -867,7 +863,7 @@ public class PatientPortal{
 
 
             //Inbox Text Box
-              TextArea inboxTxt = new TextArea("<Inbox Empty>");
+              TextArea inboxTxt = new TextArea();
                 //Set the dimensions of the Button
                   inboxTxt.setPrefSize(600, 525);
                   inboxTxt.setMinSize(600, 525);
@@ -886,10 +882,8 @@ public class PatientPortal{
             //Do the flag method for starting to collect data 
             //(Collect all text between Matched patient name & the next patient's name {when we will stop, i.e. set the flag to false})
 
-            //Open the 
-
-
-          
+            //Use our new method we created!!
+              inboxTxt.setText(getMessages());
           //=======================================================================
 
 
@@ -898,48 +892,48 @@ public class PatientPortal{
             //Send Message
               //This will open the "Messages.txt" file for reading & writing
               sendMessage.setOnAction(e -> {
-                //Add/Append the message to the  Inbox/Current Conversation
-              
-
-                //Read through the .txt file and look for the [<Patient Name>]: 
-                //Once found, activate the flag at that line to collect that line + all of the succeding lines lines
+                //Add/Append the message written in "Message: " to the Inbox/Current Conversation              
                 //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
-                try{
-                  //Open: <this.fullName>PatientInfo.txt
-                    File patientInbox = new File(fullName + "Messages.txt");    
+                  try{
+                    //Open: <this.fullName>PatientInfo.txt
+                      File patientInbox = new File(this.fullName + "Messages.txt");    
 
-                  //If the File exists append the new message to the end
-                  if(patientInbox.exists()){
-                    //Append the new message to the "<FullName>Message.txt"
+                    //Open the File Writer for adding new messages to the file
+                      FileWriter fileWriter = new FileWriter(patientInbox, true);
+                        //[we set 'true' so that the fileWriter can append to the file]
+
+                    //If the File exists append the new message to the end
+                      if(patientInbox.exists()){      
+                        //Append the new message to the "<FullName>Message.txt"
+                          fileWriter.append("[" + this.fullName + "]: " + messageTxt.getText() + "\n\n");
+                      
+                        //Close the file writer
+                          fileWriter.close();
+                      }
+                    //Else, file does not exist
+                      else{
+                        //Create the file
+                          fileWriter.write("");
+
+                        //Close the File Reader
+                          fileWriter.close();
+                    }
                   }
-                  else{
-                    //Create the new message inbox for writing
-                      FileWriter fileWriter0 = new FileWriter(patientInbox);
+                  catch(IOException n){
+                    //Error Print
+                    //  System.out.println("File Not Found!!");
+
+                    //Create the new Unique messages.txt:   Named: "<PatientName>Messages.txt"
+                    //<PatientName> = this.fullName;
 
                     //Create the file
-                      fileWriter0.write("");
 
-                    //Close the File Reader
-                      fileWriter0.close();
                   }
 
-
-                }
-                catch(IOException n){
-                  //Error Print
-                  //  System.out.println("File Not Found!!");
-
-                  //Create the new Unique messages.txt:   Named: "<PatientName>Messages.txt"
-                  //<PatientName> = this.fullName;
-
-                  //Create the file
-
-                }
                 //if [<Patient Name>]: does NOT exist, start the first comment [If while-loop finished without finding user]
 
-
-                //Else
-
+                //Update the inbox to show the new message added
+                  inboxTxt.setText(getMessages());
               });
 
 
@@ -1011,4 +1005,48 @@ public class PatientPortal{
     //------------------------------------------------------------------------------
 
     //Other functions/feats of the object
+
+    //Make a private function/Method that will return all of the text in the "<PatientName>Messages.txt"
+    //This way we can refresh the inbox text box upon every new message sent!!
+
+    //Returns all of the text within: <this.fullName>Messages.txt
+      private String getMessages(){
+        //Open the  File for reading and read every line and set the inboxTxt to it!!
+          try{
+            //Collect the Lines into a String variable
+              String messageStr = "";
+
+            //Open the file & if it exists post the text to the messageBoard
+              File inboxFile = new File(this.fullName + "Messages.txt");
+
+            //Scanner that will read the file
+              Scanner fileReader = new Scanner(inboxFile);
+
+            //Read all of the text in the file and place it into the inbox
+              while(fileReader.hasNextLine()){
+                //Add the lines to the string
+                  messageStr += fileReader.nextLine() + "\n";
+              }
+
+            //Close the file reader
+              fileReader.close();
+
+            //If the Messagebox is empty set return empty notification
+              if(messageStr.isEmpty()){
+                //Return the notification
+                  return "<Inbox Empty>";
+              }
+
+            //Return the string
+              return messageStr;
+
+        }
+        catch(IOException m){
+          //DEBUG
+            //System.out.println("File does not exist");
+          
+          //Do nothing...
+            return "<Inbox Empty>";
+        }
+    }
 }	

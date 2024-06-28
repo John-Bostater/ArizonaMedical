@@ -712,9 +712,9 @@ public class Portals {
 			  //The user has not entered the minimum amount of chars do not make an account
 			    if(    firstNameTxt.getText().length() == 0  
 					|| lastNameTxt.getText().length() == 0
-					|| monthTxt.getText().length() < 2
-					|| dayTxt.getText().length() < 2
-					|| yearTxt.getText().length() < 4 
+					|| monthTxt.getText().length() != 2
+					|| dayTxt.getText().length() != 2
+					|| yearTxt.getText().length() != 4 
 				  ){
 					//Update the flag so the user cannot proceed to making a new account
 					  validEntry = false;
@@ -724,7 +724,7 @@ public class Portals {
 					  //Notify user that their entry is invalid
 					    notificationTxt = new Label("*Required text box is missing or invalid");
 						  //Set the color of the text
-						  	notificationTxt.setStyle("-fx-font-weight: 16px; -fx-text-fill: white;");
+						  	notificationTxt.setStyle("-fx-text-fill: white;");
 
 					  //Add the notification to the page
 						buttonContainer.getChildren().add(notificationTxt);
@@ -747,7 +747,7 @@ public class Portals {
 					//Notify the user that the account is already created
 					  notificationTxt = new Label("*Account Successfully Created.\n  You may proceed to login.");
 						//Set the color of the text
-						  notificationTxt.setStyle("-fx-font-weight: 16px; -fx-text-fill: white;");
+						  notificationTxt.setStyle("-fx-text-fill: white;");
 
 
 					//Add the text to the page
@@ -765,7 +765,7 @@ public class Portals {
 					  //Update the notification text/label and add it to the GUI Display
 						notificationTxt = new Label("*Account already exists, you may proceed to login.");
 						//Set the color of the text
-						  notificationTxt.setStyle("-fx-font-weight: 16px; -fx-text-fill: white;");
+						  notificationTxt.setStyle("-fx-text-fill: white;");
 
 	
 					  //Set the color of the text
