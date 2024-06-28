@@ -75,12 +75,10 @@ public class NursePortal{
       //Since the Doctor portal extends the NursePortal we will need to use this ID to differentiate them
         private String staffId;
 
+
       //There may be no more??
         //This is a new dumb idea but i want to try it out
-          VBox vertical0;
-
-        //Make the buttons Private variables!!??!?!?
-          Button newVisitButton;
+         // VBox vertical0;
     //------------------------------------------
 
 
@@ -120,8 +118,7 @@ public class NursePortal{
         //Buttons
         //===========================================================================
           //New Visit Form
-            //Original...
-            //Button newVisitButton = new Button("New Visit Form");
+            Button newVisitButton = new Button("New Visit Form");
               newVisitButton = new Button("New Visit Form");
               //Set the Dimensions of the Button
                 newVisitButton.setPrefSize(200, 45);
@@ -178,7 +175,7 @@ public class NursePortal{
         //Alignment
         //===========================================================================================
           //Vertically align the Buttons/Functionality of the Nurse Portal
-            vertical0 = new VBox(20, header0, header1, newVisitButton, messageButton, logoutButton);
+            VBox vertical0 = new VBox(20, header0, header1, newVisitButton, messageButton, logoutButton);
               //Alignment
                 vertical0.setAlignment(Pos.CENTER);
 
@@ -198,6 +195,93 @@ public class NursePortal{
           primeStage.setScene(mainLayout);
           primeStage.show();
       }
+
+
+      //New Visit Form
+      private Scene newVisitForm(){
+        //Labels, Buttons, TextBoxes, Action-Event Handling, Alignments, Scene
+          //Code here...
+
+        //Labels
+        //====================================================================
+          //Vitals
+            Label vitalsLbl = new Label("Vitals:");
+              //Set the Dimensions & Font style
+                //   vitalsLbl.setPrefSize();
+
+            //Weight
+              Label weightLbl = new Label("Weight:");
+                //Set the dimensions & font style
+                  //Code here
+
+            //Height
+              Label heightLbl = new Label("Height:");
+                //Set the dimensions & font style
+                  //Code here
+
+            //Feet/Inches
+              Label feetInchLbl = new Label("Feet/Inches:");
+                //Set the dimensions & font style
+                  //Code here
+
+            //Body Temperature
+              Label bodyTempLbl = new Label("Body Temperature:");
+                //Set the dimensions & font style
+
+                  //Code here
+
+            //Blood Pressure
+              Label bloodPressureLbl = new Label("Blood Pressure:");
+                //Set the dimensions & font style
+                  //Code here
+
+
+          //Patient Credentials
+            Label patientCredsLbl = new Label("Patient Credentials:");
+              //Set dimensions & font style
+                //Code here...
+
+            //First Name
+              Label firstNameLbl = new Label("First Name:");
+                //Set the dimensions & font style
+                  //Code here
+
+            //Last Name
+              Label lastNameLbl = new Label("Last Name:");
+                //Set the dimensions & font style
+                  //Code here
+
+            //Date Of Birth
+              Label dobLbl = new Label("Date of Birth:");
+                //Set the dimensions & font style
+                  //Code here
+
+
+
+          //Patient's Previous History
+            Label previousHistoryLbl = new Label("Patient's Previous History:");
+              //Set the dimensions & font style
+                //Code here...
+
+
+          //Nurse's Notes
+            Label nurseNotesLbl = new Label("Nurse's Notes:");
+              //Set the dimension & font style
+                //Code here...
+        //====================================================================
+
+        //Debug VBox
+         VBox debugBox = new VBox();
+
+
+        //Build the Scene
+          Scene mainLayout = new Scene(debugBox, 1024,768);
+        //Return the Scene
+          return mainLayout;
+      }
+
+
+
 
 
 //NEW METHODS THAT NEED TO BE EDITED/FORMED TO WORK ALONGSIDE A DROPDOWN MENU 

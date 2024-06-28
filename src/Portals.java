@@ -505,21 +505,21 @@ public class Portals {
 			  TextArea firstNameTxt = new TextArea();
 				//Set the dimensions of the text box
 		        //[Width x Height]
-			  	  firstNameTxt.setPrefSize(310, 35);  
- 		          firstNameTxt.setMaxSize(310, 35);
-		          firstNameTxt.setMinSize(310, 35);
+			  	  firstNameTxt.setPrefSize(310, 40);  
+ 		          firstNameTxt.setMaxSize(310, 40);
+		          firstNameTxt.setMinSize(310, 40);
 				//Set the size of the text
-				  firstNameTxt.setStyle("-fx-font-size: 16px;");
+				  firstNameTxt.setStyle("-fx-font-size: 18px;");
 
 	        //Last Name
 	          TextArea lastNameTxt = new TextArea();
 				//Set the dimensions of the text box
 		        //[Width x Height]
-			  	  lastNameTxt.setPrefSize(310, 35);  
-		          lastNameTxt.setMaxSize(310, 35);
-		          lastNameTxt.setMinSize(310, 35);
+			  	  lastNameTxt.setPrefSize(310, 40);  
+		          lastNameTxt.setMaxSize(310, 40);
+		          lastNameTxt.setMinSize(310, 40);
 				//Set the size of the text
-				  lastNameTxt.setStyle("-fx-font-size: 16px;");
+				  lastNameTxt.setStyle("-fx-font-size: 18px;");
 		          
 
 		    //Date Of Birth    
@@ -528,31 +528,31 @@ public class Portals {
  		        TextArea monthTxt = new TextArea();
 		        //Set the dimensions of the text box
  		        //[Width x Height]
- 		          monthTxt.setPrefSize(75, 35);  
- 		          monthTxt.setMaxSize(75, 35);
-		          monthTxt.setMinSize(75, 35);
+ 		          monthTxt.setPrefSize(45, 40);  
+ 		          monthTxt.setMaxSize(45, 40);
+		          monthTxt.setMinSize(45, 40);
 				//Set the size of the text
-				  monthTxt.setStyle("-fx-font-size: 16px;");
+				  monthTxt.setStyle("-fx-font-size: 18px;");
 
 	          //Day
  		        TextArea dayTxt = new TextArea();
 		        //Set the dimensions of the text box
  		        //[Width x Height]
- 		          dayTxt.setPrefSize(75, 35);  
- 		          dayTxt.setMaxSize(75, 35);
-		          dayTxt.setMinSize(75, 35);
+ 		          dayTxt.setPrefSize(45, 40);  
+ 		          dayTxt.setMaxSize(45, 40);
+		          dayTxt.setMinSize(45, 40);
 				//Set the size of the text
-				  dayTxt.setStyle("-fx-font-size: 16px;");
+				  dayTxt.setStyle("-fx-font-size: 18px;");
 
 	          //Year
  		        TextArea yearTxt = new TextArea();
 		        //Set the dimensions of the text box
  		        //[Width x Height]
- 		          yearTxt.setPrefSize(100, 35);  
- 		          yearTxt.setMaxSize(100, 35);
-		          yearTxt.setMinSize(100, 35);
+ 		          yearTxt.setPrefSize(65, 40);  
+ 		          yearTxt.setMaxSize(65, 40);
+		          yearTxt.setMinSize(65, 40);
 				//Set the size of the text
-				  yearTxt.setStyle("-fx-font-size: 16px;");
+				  yearTxt.setStyle("-fx-font-size: 18px;");
 
 
 			//[Additional Information for "Create Account" action]

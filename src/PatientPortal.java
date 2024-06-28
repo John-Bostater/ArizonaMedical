@@ -444,7 +444,7 @@ public class PatientPortal{
                   //Phone Number Collection
                     if(line.contains("[Phone Number]: ") && patientFound){
                       //Trim the String 
-                        String phoneStr = line.trim().substring(16, line.length() -1);
+                        String phoneStr = line.trim().substring(16, line.length() - 1);
 
                       //Set up delimeters for breaking up the Phone Number String
                         int delimeter = phoneStr.indexOf("-");
@@ -473,15 +473,16 @@ public class PatientPortal{
                     System.out.println("Line: " + line);
 
                   //Insurance Collection
-                  //  if(line.contains("[Insurance Provider]: ")){
+                    if(line.contains("[Insurance Provider]: ") && patientFound){
                       //Trim the string and
-
-                  //  }
+                        insuranceTxt.setText(line.trim().substring(22, line.length()-1));
+                    }
 
                   //Pharmacy Collection
-                  //  if(line.contains("[Pharmacy Provider]: ")){
-
-                  //  }
+                    if(line.contains("[Pharmacy Provider]: ") && patientFound){
+                      //Trim the string and
+                        pharmacyTxt.setText(line.trim().substring(21, line.length()-1));
+                    }
                 }
 
               //Close the file Reader
@@ -625,7 +626,7 @@ public class PatientPortal{
         //This will have a dropwn down menu and only one button for exiting
 
         //Labels
-        //======================================================================
+        //============================================================================================
           //Select visit to view
             Label header0 = new Label("Select Visit to view:");
               //Set size of text
@@ -635,19 +636,19 @@ public class PatientPortal{
             Label header1 = new Label("Visit Summary:");
               //Set size of text
                 header1.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: white;");
-        //======================================================================
+        //============================================================================================
 
 
         //Buttons
-        //==============================================
+        //=========================================================================================================
           Button exitPage = new Button("Exit");
             //Set the Dimensions and text of the button
               exitPage.setPrefSize(75, 40);
               exitPage.setMinSize(75, 40);
               exitPage.setMaxSize(75, 40);
             //Set the font & size
-              exitPage.setStyle("-fx-font-size: 20px;");
-        //==============================================
+              exitPage.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+        //=========================================================================================================
 
 
         //DEBUG Print
@@ -1035,7 +1036,7 @@ public class PatientPortal{
                 //Then reread the file and collect all of the text and stop once we see the last instance of [fullName]:
                 //Then use .write() to rewrite all of the text in the <fullName>Messages.txt NOT including the last message sent by the user
 
-                //JUst gonna get my brain spaghetti out !!!
+              //Open the text file to delete the message sent
                 try{
                   //Get the messages via our method...
                     
