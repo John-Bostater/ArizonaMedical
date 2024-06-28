@@ -912,7 +912,7 @@ public class PatientPortal{
                   sendMessage.setMinSize(150, 40);
                   sendMessage.setMaxSize(150, 40);
                 //Set the Font size of the text
-                  sendMessage.setStyle("-fx-font-size: 18px; -fx-font-family: 'Times New Roman'; -fx-font-weigtht: bold;");
+                  sendMessage.setStyle("-fx-font-size: 20px; -fx-font-family: 'Times New Roman'; -fx-font-weight: bold;");
 
 
             //Delete Message
@@ -923,7 +923,7 @@ public class PatientPortal{
                   deleteMessage.setMinSize(175, 40);
                   deleteMessage.setMaxSize(175, 40);
                 //Set the Font size of the text
-                  deleteMessage.setStyle("-fx-font-size: 18px; -fx-font-family: 'Times New Roman'; -fx-font-weigtht: bold;");
+                  deleteMessage.setStyle("-fx-font-size: 20px; -fx-font-family: 'Times New Roman'; -fx-font-weight: bold;");
 
 
             //Exit
@@ -933,7 +933,7 @@ public class PatientPortal{
                   goBack.setMinSize(100, 40);
                   goBack.setMaxSize(100, 40);
                 //Set the Font size of the text
-                  goBack.setStyle("-fx-font-size: 18px; -fx-font-family: 'Times New Roman'; -fx-font-weigtht: bold;");
+                  goBack.setStyle("-fx-font-size: 20px; -fx-font-family: 'Times New Roman'; -fx-font-weight: bold;");
           //=================================================================================================================
 
 
