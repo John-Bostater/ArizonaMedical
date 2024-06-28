@@ -527,94 +527,42 @@ public class PatientPortal{
                     //Put the Line read into a string for us to manipulate
                       String line = fileReader.nextLine();
 
-                    //DEBUG!!
-                      //Print the lines to see if it works well
-                        System.out.println("Line: " + line);
-          
-
-                    //Collect all of the Text leading up & including the patients credentials
-                     // newText += line + "\n";
-
-                    //Buffer String for reading ahead by one
-                      //String bufferLine = fileReader.nextLine();
-
-            
-                    //DEBUG!!  
-                       // System.out.println("Buffer Line: " + bufferLine);
-
-                    //These are both ok...
-                      System.out.println("Phone number: " + this.phoneNumber);
-                    
-
-                    //These are both ok...
-                      System.out.println("TOTAL Phone number: " + totalPhoneNum);
-                    
 
                     //Update the flag that we have found the patient
-                      if(line.contains(this.patientCredentials) /*|| bufferLine.contains(this.patientCredentials)*/){
+                      if(line.contains(this.patientCredentials)){
                         //Update the flag
                           patientFound = true;
-
-                        //DEbug
-                          System.out.println("\t\tPatient Found!!");
                       }
-
-
-                     // if(line.contains("[Phone Number]: " + this.phoneNumber) && this.phoneNumber != totalPhoneNum && patientFound){
-                        //^^ This logic should work!! 
-                        //Code here...
-                        //DEBUG
-                       //   System.out.println("Phone Number Updated!!");
-
-
-                        //Add the New Phone number into the editedText String! 
-                         // newText += "\t" + totalPhoneNum + "\n"; 
-
-                        //Skip the line!!
-                         // line = fileReader.nextLine();
-                         // bufferLine = fileReader.nextLine();
-                      //}
-               
-
 
 
                     //If the textbox has changed stop reading here & "skip this line" to collect all of
                     //the other text below it... [i.e if we updated "PhoneNumber" then collect all text before it skip the line a]
                     //Updated phone number 
-                      if( /*(bufferLine.contains("[Phone Number]: " + this.phoneNumber)*/
-                          line.contains("[Phone Number]: " + this.phoneNumber)
-                            
+                      if(    line.contains("[Phone Number]: " + this.phoneNumber)   
                           && this.phoneNumber != totalPhoneNum 
                           && patientFound
                         ){
-                        //^^ This logic should work!! 
-                        //Code here...
-                        //DEBUG
-                          System.out.println("Phone Number Updated!!");
-
-                        //Make sure the 
-
 
                         //Add the New Phone number into the editedText String! 
                           newText += "\t[Phone Number]: " + totalPhoneNum + "\n"; 
 
                         //Skip the line!!
                           line = fileReader.nextLine();
-
-                        //New!!
-                          //newText += bufferLine + "\n";
-
-                          //bufferLine = fileReader.nextLine();
                       }
                     
 
                     //Update Insurance
-                      //if(!line.contains(insuranceTxt) && patientFound){
-                        //Code here
+                      if(    line.contains("[Insurance Provider]: " + this.insuranceInfo)   
+                          && this.insuranceInfo != insuranceTxt.getText()
+                          && patientFound
+                        ){
 
-                        //Skip the line
-                          //line = fileReader.nextLine();
-                      //}
+                        //Add the New Insurance Provider into the editedText String! 
+                          newText += "\t[Insurance Provider]: " + insuranceTxt.getText() + "\n"; 
+
+                        //Skip the line!!
+                          line = fileReader.nextLine();
+                      }
 
 
                     //Update Pharmacy
@@ -625,12 +573,13 @@ public class PatientPortal{
                           //line = fileREader.nextLine();
                       //}
 
+                    //New!!!! {this could honestly go below the stuff we added}
+                    //if-branch that will set patientFound = false once the next patient is encountered!!!
+
+
 
                     //Add the Line's contents
                       newText += line + "\n";
-
-
-
                   }
 
                   //New!!
