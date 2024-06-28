@@ -440,48 +440,53 @@ public class PatientPortal{
 
 
                   //Start collecting the patient's data & place it into the Text Boxes
-
                   //Phone Number Collection
                     if(line.contains("[Phone Number]: ") && patientFound){
                       //Trim the String 
-                        String phoneStr = line.trim().substring(16, line.length() - 1);
+                        this.phoneNumber = line.trim().substring(16, line.length() - 1);
+
+                      //DEBUG/CHECK
+                        //System.out.println("Phone Number: " + this.phoneNumber);
+
 
                       //Set up delimeters for breaking up the Phone Number String
-                        int delimeter = phoneStr.indexOf("-");
+                        int delimeter = this.phoneNumber.indexOf("-");
 
                       //First 3 numbers
-                        phoneNum0.setText(phoneStr.substring(0, delimeter));
+                        phoneNum0.setText(this.phoneNumber.substring(0, delimeter));
 
                       //Update the trimmed string
-                        phoneStr = phoneStr.substring(delimeter+1, phoneStr.length());
+                        String editedStr = this.phoneNumber.substring(delimeter+1, this.phoneNumber.length());
                       
                       //Update the delimeter
-                        delimeter = phoneStr.indexOf("-");
+                        delimeter = editedStr.indexOf("-");
 
                       //Second 3 numbers
-                        phoneNum1.setText(phoneStr.substring(0, delimeter));
+                        phoneNum1.setText(editedStr.substring(0, delimeter));
 
                       //Update the trimmed string
-                        phoneStr = phoneStr.substring(delimeter+1, phoneStr.length());
+                        editedStr = editedStr.substring(delimeter+1, editedStr.length());
                       
                       //Last 4 numbers
-                        phoneNum2.setText(phoneStr.substring(0, phoneStr.length()));
+                        phoneNum2.setText(editedStr.substring(0, editedStr.length()));
                     }
-
-                    //DEBUG!!
-                    //See what line looks like after allat mess
-                    System.out.println("Line: " + line);
 
                   //Insurance Collection
                     if(line.contains("[Insurance Provider]: ") && patientFound){
-                      //Trim the string and
-                        insuranceTxt.setText(line.trim().substring(22, line.length()-1));
+                      //Update the private variable that stores the insurance provider
+                        this.insuranceInfo = line.trim().substring(22, line.length()-1);
+
+                      //Trim the string
+                        insuranceTxt.setText(this.insuranceInfo);
                     }
 
                   //Pharmacy Collection
                     if(line.contains("[Pharmacy Provider]: ") && patientFound){
+                      //Update the privat variable that stores the pharmacy provider
+                        this.pharmacyInfo = line.trim().substring(21, line.length()-1);
+
                       //Trim the string and
-                        pharmacyTxt.setText(line.trim().substring(21, line.length()-1));
+                        pharmacyTxt.setText(pharmacyInfo);
                     }
                 }
 
@@ -498,24 +503,9 @@ public class PatientPortal{
         //Action-Event Handling
         //==========================================================
           //Update the Information Entered into the text fields
-            updateInfo.setOnAction(e -> {
-              //Relevant code below...
-                //
-
-                //This will open the "PatientAccounts.txt" for reading & writing
-
-                //We will use the flag to put on the "brakes"
-
-                //Once the scanner reads the line containing the Patient's credentials 
-                //We will activate our flag to start writing/collecting the other relevant info
-
-                //Contact Information Data Write (take the line & only update changed text)
-                //Collect the old information & use .contains()
-                  //here...
-
-                //use try{}catch(IOException e){}
-              
-              //Open the file "PatientAccounts.txt"
+            updateInfo.setOnAction(e -> {         
+              //Open the file "PatientAccounts.txt" for writing new information
+              //Pull the information for writing from the relevant text boxes
                 try{
                   //Create a File object to check for files existence
                     File patientAccounts = new File("PatientAccounts.txt");
@@ -523,7 +513,11 @@ public class PatientPortal{
                   //Scanner for file reading
                     Scanner fileReader = new Scanner(patientAccounts);
 
-                  //File writer for writing/updating the Patient's information
+                  //String that will collect all of the text leading up to & NOT including
+                    String newText = "";
+
+                  //Combine the phone Number text boxes into a string to be used easier
+                    String totalPhoneNum = phoneNum0.getText() + "-" + phoneNum1.getText() + "-" + phoneNum2.getText();
 
                   //Flag for collecting data
                     boolean patientFound = false;
@@ -532,7 +526,117 @@ public class PatientPortal{
                   while(fileReader.hasNextLine()){
                     //Put the Line read into a string for us to manipulate
                       String line = fileReader.nextLine();
+
+                    //DEBUG!!
+                      //Print the lines to see if it works well
+                        System.out.println("Line: " + line);
+          
+
+                    //Collect all of the Text leading up & including the patients credentials
+                     // newText += line + "\n";
+
+                    //Buffer String for reading ahead by one
+                      //String bufferLine = fileReader.nextLine();
+
+            
+                    //DEBUG!!  
+                       // System.out.println("Buffer Line: " + bufferLine);
+
+                    //These are both ok...
+                      System.out.println("Phone number: " + this.phoneNumber);
+                    
+
+                    //These are both ok...
+                      System.out.println("TOTAL Phone number: " + totalPhoneNum);
+                    
+
+                    //Update the flag that we have found the patient
+                      if(line.contains(this.patientCredentials) /*|| bufferLine.contains(this.patientCredentials)*/){
+                        //Update the flag
+                          patientFound = true;
+
+                        //DEbug
+                          System.out.println("\t\tPatient Found!!");
+                      }
+
+
+                     // if(line.contains("[Phone Number]: " + this.phoneNumber) && this.phoneNumber != totalPhoneNum && patientFound){
+                        //^^ This logic should work!! 
+                        //Code here...
+                        //DEBUG
+                       //   System.out.println("Phone Number Updated!!");
+
+
+                        //Add the New Phone number into the editedText String! 
+                         // newText += "\t" + totalPhoneNum + "\n"; 
+
+                        //Skip the line!!
+                         // line = fileReader.nextLine();
+                         // bufferLine = fileReader.nextLine();
+                      //}
+               
+
+
+
+                    //If the textbox has changed stop reading here & "skip this line" to collect all of
+                    //the other text below it... [i.e if we updated "PhoneNumber" then collect all text before it skip the line a]
+                    //Updated phone number 
+                      if( /*(bufferLine.contains("[Phone Number]: " + this.phoneNumber)*/
+                          line.contains("[Phone Number]: " + this.phoneNumber)
+                            
+                          && this.phoneNumber != totalPhoneNum 
+                          && patientFound
+                        ){
+                        //^^ This logic should work!! 
+                        //Code here...
+                        //DEBUG
+                          System.out.println("Phone Number Updated!!");
+
+                        //Make sure the 
+
+
+                        //Add the New Phone number into the editedText String! 
+                          newText += "\t[Phone Number]: " + totalPhoneNum + "\n"; 
+
+                        //Skip the line!!
+                          line = fileReader.nextLine();
+
+                        //New!!
+                          //newText += bufferLine + "\n";
+
+                          //bufferLine = fileReader.nextLine();
+                      }
+                    
+
+                    //Update Insurance
+                      //if(!line.contains(insuranceTxt) && patientFound){
+                        //Code here
+
+                        //Skip the line
+                          //line = fileReader.nextLine();
+                      //}
+
+
+                    //Update Pharmacy
+                      //if(!line.contains(pharmacyTxt) && patientFound){
+                        //Code here
+
+                        //Skip the line
+                          //line = fileREader.nextLine();
+                      //}
+
+
+                    //Add the Line's contents
+                      newText += line + "\n";
+
+
+
                   }
+
+                  //New!!
+                  //Print the new Text file's contents
+                    System.out.println("New File!!: \n" + newText);
+
 
                 }
                 //If the file DNE error will be caught
@@ -557,11 +661,6 @@ public class PatientPortal{
 
         //Alignment of Buttons, Labels, etc.
         //========================================================================================
-          //Labels
-           // HBox horizontal0 = new HBox(20, contactInfoLbl, insuranceInfoLbl, pharmacyInfoLbl);
-              //Align the Hbox
-             //   horizontal0.setAlignment(Pos.CENTER);
-
           //Buttons
             VBox buttonsSection = new VBox(20, updateInfo, exitPage);
               //Set the alignment of the HBox containing the functionality
@@ -651,10 +750,6 @@ public class PatientPortal{
         //=========================================================================================================
 
 
-        //DEBUG Print
-        System.out.println("Patient Credentials: " + patientCredentials);
-
-
         //It works!!
           //uniqueKeyInt = Integer.parseInt(uniqueKeyStr);
          // System.out.println("Unique Key Integer: " + uniqueKeyInt);
@@ -676,7 +771,7 @@ public class PatientPortal{
             String[] examDates = new String[10];   //We could either use the default
             //Max amount of exams per Patient is 10
 
-         //NEW ADDITION!!! Do a hashmap to map the visit summary(s) {Strings} to a key {Visit Date as integer}
+         //Do a hashmap to map the visit summary(s) {Strings} to a key {Visit Date as integer}
             HashMap<Integer, String> summaryMap = new HashMap<>();
 
           //Integer that stores/uses the Date's numbers as a Key
@@ -696,7 +791,6 @@ public class PatientPortal{
               //New shit
                 examDates[i] = "";
             }
-
 
           //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
             try{
@@ -784,9 +878,6 @@ public class PatientPortal{
                     examDates[i] = null;
                 }
             }
-
-            //DEBUG, hashmap works!
-            //System.out.println("Key: " + uniqueKeyInt + "\nSummary: " + summaryMap.get(uniqueKeyInt));
         //==========================================================================================
 
 
@@ -814,12 +905,11 @@ public class PatientPortal{
           //PLACE THE STRING INTO THE visitSummart (text box)
             
           //User select's an exam date from the dropdown menu
-            dropSelect.setOnAction(event -> {
-              
+            dropSelect.setOnAction(event -> { 
               //Get the Date String that is currently selected by the user
               //Then strip the String 
               //This gets the unique integer Id that will load the summary via the hashMap
-              visitSummaryTxt.setText(summaryMap.get(Integer.parseInt(dropSelect.getValue().replaceAll("\\D", ""))));
+                visitSummaryTxt.setText(summaryMap.get(Integer.parseInt(dropSelect.getValue().replaceAll("\\D", ""))));
               //Do it all in one line of code!!
 
             });
@@ -845,14 +935,7 @@ public class PatientPortal{
 
           //Vertically alignment of header and text box
             VBox vertical1 = new VBox(10, header1, visitSummaryTxt);
-   
-
-          //Set the alignment of the HBox
-            //horizontal0.setAlignment(Pos.CENTER);
-
-          //Final Box for alignment
-            //HBox horizontal0 = new HBox(20, functContainer, vertical0);
-
+  
           //Final Adjustment VBox
             VBox vertical2 = new VBox(vertical0, vertical1);         
               //Set the alignment of the VBox
