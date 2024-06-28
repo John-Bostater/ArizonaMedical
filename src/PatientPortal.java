@@ -124,20 +124,11 @@ public class PatientPortal{
           patientCredentials = patientCreds;
 
 
-        //DEBUG!!
-          System.out.println("Patient Creds: " + patientCreds);
-
-
         //Break apart the patient's credentials to set the private data: fullName & dateOfBirth
-          //Use the delimeter stuff
-          //Break the string and then set the string to the substring...
-          //this might break some stuff
-
-          //YOU MUST USE INTEGER TO STORE "patientCreds.indexOf()" & the other indexes!!
-          //YOU MUST USE STRING TO STORE the substrings!/trimmed string
-
-        //Get the patients full name:
-          int delimeter = patientCreds.indexOf(",");
+        //Get the patients Full Name {first & last}
+          
+          //Delimeter used to break up the text
+            int delimeter = patientCreds.indexOf(",");
 
           //First Name
             fullName += patientCreds.substring(0, delimeter);
@@ -423,7 +414,6 @@ public class PatientPortal{
                 pharmacyTxt.setMaxSize(300, 40);
               //Set the size of the text in the text box
                 pharmacyTxt.setStyle("-fx-font-size: 18px;");
-
         //==============================================================================
 
 
@@ -1115,4 +1105,4 @@ public class PatientPortal{
         }
     }
   //-------------------------------------------------------------------------------------------------------
-}	
+}

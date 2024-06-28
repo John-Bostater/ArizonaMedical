@@ -91,6 +91,11 @@ public class Portals {
 	    private PatientPortal patientView;
 		private NursePortal nurseView;
 		private DoctorPortal doctorView;
+
+
+
+		//NEWW!!!
+		boolean accountCreated = false;
 	//-------------------------------------------------------------------------------------------
 
 
@@ -394,10 +399,14 @@ public class Portals {
 		}
 
 
-	  //Create Account	[Patient]
-		private void createAccount(String patientCredentials) {
+	  //Create Account	[Patient]		//UPDATED: og had just "patientCredentials" {1 parameter}
+		private void createAccount(String patientCredentials, String phoneNum, String insuranceProv, String pharmacyProv) {
 		  //Append the patients Credentials to the "PatientAccounts.txt"
 		
+		  //[DEBUG!!]	
+		  	System.out.println("All the other strings: \n" + "\t[Phone Number]: " + phoneNum);
+
+
 			try {
 			  //Load [PatientAccounts.txt] for writing		
 				FileWriter fileWriter = new FileWriter("PatientAccounts.txt", true);
@@ -449,6 +458,14 @@ public class Portals {
 		        //Set the Font of the Button's text
 		          newPatient.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 		    
+			
+			//NEW BUTTON
+			//This will create the new account with the inputted credentials
+			  Button confirmAccount = new Button("Confirm");
+				//Set the dimensions of the button
+				  //Code here
+
+
 		    //Go Back      
 		      Button goBack = new Button("Go back");
 				//Set the dimensions of the Buttons
@@ -458,6 +475,12 @@ public class Portals {
 					goBack.setMinSize(120, 45);
 				//Set the Font of the Button's text
 					goBack.setStyle("-fx-font-size: 24px; -fx-font-family: 'Times New Roman';");      
+
+
+			//NEW BUTTON TO EXIT THE PAGE (Leaves less ambiguity in language)
+			//REPLACE ALL goBack with our new Exit button & vice versa
+			  Button exitPage = new Button("Exit Page");
+
           //===============================================================================================================
 			  
 
@@ -498,7 +521,6 @@ public class Portals {
 				//Set the size of the text
 				  monthTxt.setStyle("-fx-font-size: 16px;");
 
-
 	          //Day
  		        TextArea dayTxt = new TextArea();
 		        //Set the dimensions of the text box
@@ -509,7 +531,6 @@ public class Portals {
 				//Set the size of the text
 				  dayTxt.setStyle("-fx-font-size: 16px;");
 
-
 	          //Year
  		        TextArea yearTxt = new TextArea();
 		        //Set the dimensions of the text box
@@ -519,6 +540,55 @@ public class Portals {
 		          yearTxt.setMinSize(100, 35);
 				//Set the size of the text
 				  yearTxt.setStyle("-fx-font-size: 16px;");
+
+
+          	//Phone Number
+			  //First three Digits
+				TextArea phoneNum0 = new TextArea("XXX");
+				  //Set the dimensions of the text area/box
+					phoneNum0.setPrefSize(60, 40);
+					phoneNum0.setMinSize(60, 40);
+					phoneNum0.setMaxSize(60, 40);
+					//Set the size of the text in the text box
+					phoneNum0.setStyle("-fx-font-size: 18px;");
+
+			  //Second three Digits
+				TextArea phoneNum1 = new TextArea("XXX");
+				  //Set the dimensions of the text area/box
+					phoneNum1.setPrefSize(60, 40);
+					phoneNum1.setMinSize(60, 40);
+					phoneNum1.setMaxSize(60, 40);
+				  //Set the size of the text in the text box
+					phoneNum1.setStyle("-fx-font-size: 18px;");
+
+			  //Final four Digits
+				TextArea phoneNum2 = new TextArea("XXXX");
+				  //Set the dimensions of the text area/box
+					phoneNum2.setPrefSize(70, 40);
+					phoneNum2.setMinSize(70, 40);
+					phoneNum2.setMaxSize(70, 40);
+				  //Set the size of the text in the text box
+					phoneNum2.setStyle("-fx-font-size: 18px;");
+
+
+        	//Insurance Provider
+              TextArea insuranceTxt = new TextArea("<Insurance Provider>");
+              //Set the dimensions of the text area/box
+                insuranceTxt.setPrefSize(250, 40);
+                insuranceTxt.setMinSize(250, 40);
+                insuranceTxt.setMaxSize(250, 40);
+              //Set the size of the text in the text box
+                insuranceTxt.setStyle("-fx-font-size: 18px;");
+
+
+          	//Pharmacy Provider
+              TextArea pharmacyTxt = new TextArea("<Pharmaceutical Provider>");
+            	//Set the dimensions of the text area/box
+                  pharmacyTxt.setPrefSize(300, 40);
+                  pharmacyTxt.setMinSize(300, 40);
+                  pharmacyTxt.setMaxSize(300, 40);
+                //Set the size of the text in the text box
+                  pharmacyTxt.setStyle("-fx-font-size: 18px;");
 	      //================================================================================
 		       
 	          
@@ -566,7 +636,22 @@ public class Portals {
 				Label dobFrmtLbl = new Label("\t\t\t(MM / DD / YYYY)");
 				dobFrmtLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold");
 				dobFrmtLbl.setAlignment(Pos.CENTER);
-			//-------------------------------------------------
+
+
+			  //NEW LABELS & HEADERS!! {Phone Num, Insurance, Pharmacy}
+			  //Phone Number
+            	Label phoneNumLbl = new Label("Phone Number:");
+              	  //Set font of Text
+                	phoneNumLbl.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+			  
+			  //Digit seperators for the phone number
+				Label phoneDash0 = new Label("-");
+				  //Set the font of the Label
+					phoneDash0.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+				
+				Label phoneDash1 = new Label("-");
+				  //Set the font of the Label
+					phoneDash1.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 	      //================================================================================      
 
 
@@ -601,11 +686,21 @@ public class Portals {
 	        //Functional Buttons Section:  [Login]  &  [New Account]
           	//-------------------------------------------------------------------------
           	  //Place all of the functionality buttons into a VBox		//NEW: include the notification message?
-          	  VBox buttonContainer = new VBox(10, patientLogin, accText, newPatient, goBack);
+          	  VBox buttonContainer = new VBox(10, patientLogin, accText, newPatient, exitPage);
           	    //Alignment
           	      buttonContainer.setAlignment(Pos.CENTER);
 				//Set the background color to gray??
 				   
+
+			  //NEW!!!	[If a new account has been created display the relevant message!]
+			    if(accountCreated){
+				  //Set the notification text notifying the user their account has been successfully created
+					notificationTxt = new Label("*Account Successfully Created.\n  You may proceed to login.");
+					//Set the color of the text
+						notificationTxt.setStyle("-fx-text-fill: white;");
+
+					buttonContainer.getChildren().add(notificationTxt);
+				}
 	        //-------------------------------------------------------------------------
           //===================================================================================================
 
@@ -627,7 +722,44 @@ public class Portals {
 	        			  					  + yearTxt.getText().replaceAll("\\s", "");
 	        	  //[Every String contains a regex for removing all whitespace (Makes program more Robust)]
 	        	  
-	        	  
+
+			  //UPDATE THE NOTIFCATION TEXT TO DISPLAY: Required text box missing or incorrect
+			  //if any of the text field are empty!!
+			  //Check that all textFields have an entry & their minimum text length is met 
+			  //Use this knowledge to construct a simple if-branch
+			  //The user has not entered the minimum amount of chars do not make an account
+				if(    firstNameTxt.getText().length() == 0  
+					|| lastNameTxt.getText().length() == 0
+					|| monthTxt.getText().length() != 2
+					|| dayTxt.getText().length() != 2
+					|| yearTxt.getText().length() != 4 
+				){
+				  //Update the flag so the user cannot proceed to making a new account
+				  //validEntry = false;
+
+				  //Notify the user of their mistake if they have not already been
+					if(!isNotified){
+					  //Notify user that their entry is invalid
+						notificationTxt = new Label("*Required text box is missing or invalid");
+						  //Set the color of the text
+							notificationTxt.setStyle("-fx-text-fill: white;");
+
+					  //Add the notification to the page
+						buttonContainer.getChildren().add(notificationTxt);
+					  
+					  //Update the flag (User will be notified only once)
+						isNotified = true;
+					}
+				}
+				else{
+				  //Remove the old notification if it exists
+					buttonContainer.getChildren().remove(notificationTxt);
+
+				  //Disable the notification??
+				    isNotified = false;
+				}
+
+
 	        	//[DEBUG PRINT] Delete when done
 	        	  //System.out.println("Creds: " + patientCredentials);
 	        
@@ -637,7 +769,7 @@ public class Portals {
 	        	  //Update global variables before proceeding to new Scene
 					isNotified = false;
 	        		
-		          //Create and Display the patient Portal		{NEW ADDITION TO ENDs}
+		          //Create and Display the patient Portal
 		        	PatientPortal patientPort = new PatientPortal(patientCredentials, primeStage, welcomePage);
 		        	patientPort.displayPortal();
 	            }
@@ -648,7 +780,7 @@ public class Portals {
 					//Add notification text to inform user
 					  notificationTxt = new Label("*Account does not exist");
 						//Set the color of the text
-						  notificationTxt.setStyle("-fx-font-weight: 16px; -fx-text-fill: white;");
+						  notificationTxt.setStyle("-fx-text-fill: white;");
 
 					//Add the notification text to the Page
 						buttonContainer.getChildren().add(notificationTxt);
@@ -666,6 +798,10 @@ public class Portals {
 	        	//HAVE TEXT THAT NOTIFIES THE USER OF THE NEW ACCOUNT CREATED AND HOW THEY 
 	        	//CAN ENTER HIT the LOGIN button TO proceed to the patient portal
 	        	
+
+				//NEW!!
+				//SEt the flag to false??
+				isNotified = false;
 
 				//[New Idea]
 				/*
@@ -687,22 +823,56 @@ public class Portals {
 				*/
 				//[This code would have to be implemented here...]
 
+			  //Make a "Create Account method that returns the Scene"
 
-	          //Compile the credentials entered by the Patient/User
-	        	//Compile into one string to be passed into PatientPortal Constructor 
-	        	  String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
+			  //Make the user text entry box bigger
+			  	credContainer.setPrefSize(500,400);
+			  	credContainer.setMinSize(500,400);
+			  	credContainer.setMaxSize(500,400);
+
+
+
+			  //Add the HBox(s) for the new account entry info!!
+			  	HBox phoneNumSection = new HBox(5, phoneNumLbl, phoneNum0, phoneDash0, phoneNum1, phoneDash1, phoneNum2);	//Move this up to its proper section above??
+
+
+			  //Add new text boxes to the credentials container
+			  	credContainer.getChildren().add(phoneNumSection);
+
+
+			  //Remove all of the buttons from the container & load the new one's relevant to the Login page
+			  	buttonContainer.getChildren().clear();
+
+			  //Add the relevant buttons for account creation to the container
+				buttonContainer.getChildren().add(confirmAccount);
+				buttonContainer.getChildren().add(goBack);
+	        });
+	      
+
+
+			//Confirm the Account data entered to be written to the PatientAccounts.txt
+			confirmAccount.setOnAction(e -> {
+			
+				//Add the no
+
+
+				//This might make my computer explode !!
+			  //Compile the credentials entered by the Patient/User
+			  //Compile into one string to be passed into PatientPortal Constructor 
+				String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
 	        			  					  + lastNameTxt.getText().replaceAll("\\s", "") + "," 
 	        			  					  + monthTxt.getText().replaceAll("\\s", "") + "/" 
 	        			  					  + dayTxt.getText().replaceAll("\\s", "") + "/" 
 	        			  					  + yearTxt.getText().replaceAll("\\s", "");
-	        	  //[Every String contains a regex for removing all whitespace via: ("\\s", "")
-				  //This helps to make the program more Robust
+			  //[Every String contains a regex for removing all whitespace via: ("\\s", "")
+			  //This helps to make the program more Robust
 
 			  
-			  //Patient Information String that will contain: phonenumber, insuranceInfo, pharmacyInfo
-			  //It will collect these from the new text fields/boxes you have added
-				String patientInfo = "Place Holder Text";
-
+			  //These String are passed to the new createAccount method!!!
+				String phoneNumber = phoneNum0.getText() + "-" + phoneNum1.getText() + "-" + phoneNum2.getText();
+				String insuranceProvider = insuranceTxt.getText();
+				String pharmacyProvider = pharmacyTxt.getText();
+				
 
 			  //Flag to make sure the user has correctly entered their data to the field
 			    boolean validEntry = true;
@@ -737,25 +907,43 @@ public class Portals {
 			  //			is notified which of the text fields/box(s) needs to be adjusted or filled out
 
 
-			  //If the credentials entered do not exist, then a new account is created
+			  //Create a New Account!
 	        	if(!checkCredentials(patientCredentials) && validEntry) {
 					//Remove any previous Notifications
-					  buttonContainer.getChildren().remove(notificationTxt);
+					  //buttonContainer.getChildren().remove(notificationTxt);
+
+
+					//[HERE!!]
+					//UPDATE THIS METHOD BELOW SO THAT IT ALSO TAKES our new text boxes we created: [Phone#: 3 text boxes] [Insurance: 1 text] [pharmacy: 1 text]
+					//NEW
+					  createAccount(patientCredentials, phoneNumber, insuranceProvider, pharmacyProvider);
+
 
 	        		//Account does not exist, create a new Patient Account with the credentials entered
-	        		  createAccount(patientCredentials);
-
-					//Notify the user that the account is already created
-					  notificationTxt = new Label("*Account Successfully Created.\n  You may proceed to login.");
-						//Set the color of the text
-						  notificationTxt.setStyle("-fx-text-fill: white;");
+	        		 //OLD!! createAccount(patientCredentials);
 
 
-					//Add the text to the page
-					  buttonContainer.getChildren().add(notificationTxt);
+					//REmove all of the buttosn again to add[Notifcation Txt] [Login] [Go Back]
+					  buttonContainer.getChildren().clear();
 
-					//Update notification flag
-					  isNotified = true;
+
+					//Set the notificationtext to something nEW!!
+					if(!isNotified){
+					  //Set the notification text and place it into the box
+						notificationTxt = new Label("*Account Successfully Created\nYou may Proceed to Login");
+						  //Set the style of the label
+						  	notificationTxt.setStyle("-fx-font-size: 18px; -fx-text-fill: white;");
+
+					  //Add the notification to page
+						buttonContainer.getChildren().add(notificationTxt);
+
+					  //Update the flag
+						isNotified = true;
+					}
+					
+					//Add the functionality to Login or go back
+					  buttonContainer.getChildren().add(patientLogin);
+					  buttonContainer.getChildren().add(goBack);
 	        	}
 	          //Account already exists
 	        	else {
@@ -765,10 +953,18 @@ public class Portals {
 					if(!isNotified){
 					  //Update the notification text/label and add it to the GUI Display
 						notificationTxt = new Label("*Account already exists, you may proceed to login.");
-						//Set the color of the text
-						  notificationTxt.setStyle("-fx-text-fill: white;");
+						  //Set the color of the text
+						  	notificationTxt.setStyle("-fx-text-fill: white;");
 
-	
+					  //Clear the functionality container & any other notifications
+					  	buttonContainer.getChildren().clear();
+					
+					  //Add the login button/function
+						buttonContainer.getChildren().add(patientLogin);
+
+					  //Add the button/function to go back to the login page
+						buttonContainer.getChildren().add(goBack);
+
 					  //Set the color of the text
 						buttonContainer.getChildren().add(notificationTxt);
 
@@ -776,12 +972,28 @@ public class Portals {
 					    isNotified = true;	
 					}
 	        	}        	
-	        });
-	      
-	        //Go back to the Welcome Page
+
+
+			});
+
+
+	        //Go back to the Patient Login Page (this button is used in "Create Account")
 	        goBack.setOnAction(e -> {
 			  //Update Notification Flag to false
 			    isNotified = false;
+
+	          //Go back to the Patient Login Page
+			  	patientLogin();
+	        });
+
+
+	        //Go back to the Welcome Page
+	        exitPage.setOnAction(e -> {
+			  //Update Notification Flag to false
+			    isNotified = false;
+
+			  //Update the Account creation flag
+			  	//accountCreated = false;
 
 	          //Go back to the Welcome Page from the 'Patient Login/New Account Page'
 	    	    runProgram();
