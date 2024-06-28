@@ -440,36 +440,48 @@ public class PatientPortal{
 
 
                   //Start collecting the patient's data & place it into the Text Boxes
-                    //if(patientFound){
-                      //Phone Number Collection
-                        if(line.contains("[Phone Number]: ") && patientFound){
-                          //Trim the String 
-                            String phoneStr = line.trim().substring(16, line.length() -1);
 
-                          //Set up delimeters for breaking up the Phone Number String
-                            int delimeter = phoneStr.indexOf("-");
+                  //Phone Number Collection
+                    if(line.contains("[Phone Number]: ") && patientFound){
+                      //Trim the String 
+                        String phoneStr = line.trim().substring(16, line.length() -1);
 
-                          //DEBUG
-                            System.out.println("First 3 numbers!!: " + phoneStr.substring(0, delimeter));
+                      //Set up delimeters for breaking up the Phone Number String
+                        int delimeter = phoneStr.indexOf("-");
 
-                          //Move the line forward!
-                            //line = fileReader.nextLine();
+                      //First 3 numbers
+                        phoneNum0.setText(phoneStr.substring(0, delimeter));
 
+                      //Update the trimmed string
+                        phoneStr = phoneStr.substring(delimeter+1, phoneStr.length());
+                      
+                      //Update the delimeter
+                        delimeter = phoneStr.indexOf("-");
 
-                        }
+                      //Second 3 numbers
+                        phoneNum1.setText(phoneStr.substring(0, delimeter));
 
-                      //Insurance Collection
-                      //  if(line.contains("[Insurance Provider]: ")){
-                          //Trim the string and
+                      //Update the trimmed string
+                        phoneStr = phoneStr.substring(delimeter+1, phoneStr.length());
+                      
+                      //Last 4 numbers
+                        phoneNum2.setText(phoneStr.substring(0, phoneStr.length()));
+                    }
 
-                      //  }
+                    //DEBUG!!
+                    //See what line looks like after allat mess
+                    System.out.println("Line: " + line);
 
-                      //Pharmacy Collection
-                      //  if(line.contains("[Pharmacy Provider]: ")){
+                  //Insurance Collection
+                  //  if(line.contains("[Insurance Provider]: ")){
+                      //Trim the string and
 
-                      //  }
-                    //}
+                  //  }
 
+                  //Pharmacy Collection
+                  //  if(line.contains("[Pharmacy Provider]: ")){
+
+                  //  }
                 }
 
               //Close the file Reader
@@ -892,7 +904,7 @@ public class PatientPortal{
 
 
           //Buttons
-          //=======================================================================
+          //=================================================================================================================
             //Send Message
               Button sendMessage = new Button("Send Message");
                 //Set the dimensions of the Button
@@ -900,7 +912,7 @@ public class PatientPortal{
                   sendMessage.setMinSize(150, 40);
                   sendMessage.setMaxSize(150, 40);
                 //Set the Font size of the text
-                  sendMessage.setStyle("-fx-font-size: 18px;");
+                  sendMessage.setStyle("-fx-font-size: 18px; -fx-font-family: 'Times New Roman'; -fx-font-weigtht: bold;");
 
 
             //Delete Message
@@ -911,7 +923,7 @@ public class PatientPortal{
                   deleteMessage.setMinSize(175, 40);
                   deleteMessage.setMaxSize(175, 40);
                 //Set the Font size of the text
-                  deleteMessage.setStyle("-fx-font-size: 18px;");
+                  deleteMessage.setStyle("-fx-font-size: 18px; -fx-font-family: 'Times New Roman'; -fx-font-weigtht: bold;");
 
 
             //Exit
@@ -921,8 +933,8 @@ public class PatientPortal{
                   goBack.setMinSize(100, 40);
                   goBack.setMaxSize(100, 40);
                 //Set the Font size of the text
-                  goBack.setStyle("-fx-font-size: 18px;");
-          //=======================================================================
+                  goBack.setStyle("-fx-font-size: 18px; -fx-font-family: 'Times New Roman'; -fx-font-weigtht: bold;");
+          //=================================================================================================================
 
 
           //Text Boxes
