@@ -304,26 +304,37 @@ public class NursePortal{
         //Select Patient  [Displayed next to or above the dropdown menu]
           Label patientSelectLbl = new Label("Select Patient:");
             //Set the dimension & style
+              patientSelectLbl.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
         //First Name
           Label firstNameLbl = new Label("First Name:");
             //Set the dimension & style
+              firstNameLbl.setStyle("-fx-font-size: 20px;");
 
         //Last Name
           Label lastNameLbl = new Label("Last Name:");
             //Set the dimension & style
+              lastNameLbl.setStyle("-fx-font-size: 20px;");
 
         //Date Of Birth
           Label dobLbl = new Label("Date of Birth:");
+            //Set the dimension & style
+              dobLbl.setStyle("-fx-font-size: 20px;");
 
         //(MM / DD / YYYY)
           Label dobAlignLbl = new Label("(MM/DD/YYYY)");
+            //Set the dimension & style
+              dobAlignLbl.setStyle("-fx-font-size: 18px;");
 
         //Date of birth Seperators "/"
-          Label dobSep0 = new Label("/");
-          
+//          Label dobSep0 = new Label("/");
+            //Set the dimension & style
+//              dobSep0.setStyle("-fx-font-size: 18px;");
+
         //Date of birth Seperators "/"
-          Label dobSep1 = new Label("/");
+//          Label dobSep1 = new Label("/");
+            //Set the dimension & style
+//              dobSep1.setStyle("-fx-font-size: 18px;");
       //===========================================================================
 
 
@@ -331,23 +342,30 @@ public class NursePortal{
       //===========================================================================
         //First Name Text Box
           TextArea firstNameTxt = new TextArea();
-            //Set the dimensions & style of the text box
+            //Set the dimensions
+              firstNameTxt.setPrefSize(100, 30);
+              firstNameTxt.setMinSize(100, 30);
+              firstNameTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              firstNameTxt.setStyle("-fx-font-size: 14px;");
 
         //Last Name Text Box
           TextArea lastNameTxt = new TextArea();
-            //Set the dimensions & style of the text box
+            //Set the dimensions
+              lastNameTxt.setPrefSize(100, 30);
+              lastNameTxt.setMinSize(100, 30);
+              lastNameTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              lastNameTxt.setStyle("-fx-font-size: 14px;");
 
-        //Month
-          TextArea monthTxt = new TextArea();
-            //Set the dimensions & style of the text box
-
-        //Day
-          TextArea dayTxt = new TextArea();
-            //Set the dimensions & style of the text box
-
-        //Year
-          TextArea yearTxt = new TextArea();
-            //Set the dimensions & style of the text box
+        //Date of Birth Text Box
+          TextArea dobTxt = new TextArea();
+            //Set the dimensions
+              dobTxt.setPrefSize(100, 30);
+              dobTxt.setMinSize(100, 30);
+              dobTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              dobTxt.setStyle("-fx-font-size: 14px;");
       //===========================================================================
 
 
@@ -355,6 +373,12 @@ public class NursePortal{
       //===========================================================================
         //Create the dropdown menu
           ComboBox<String> dropDown = new ComboBox<>();
+            //Set dimension of the dropdown menu??
+              dropDown.setPrefSize(175, 30);
+              dropDown.setMinSize(175, 30);
+              dropDown.setMaxSize(175, 30);
+            //Set the style
+              dropDown.setStyle("-fx-font-size: 14px;");
 
 
         //Collect all of the patient credentials and place them into the combo box
@@ -403,7 +427,7 @@ public class NursePortal{
                 //Add exam dates
                   if(allPatients[i] != ""){
                     //DEBUG
-                      System.out.println("Success!!");
+                      //System.out.println("Success!!");
 
                     //Add the Exam date to the box
                       dropDown.getItems().add(allPatients[i]);
@@ -427,13 +451,11 @@ public class NursePortal{
 
       //Action-Event Handling
       //===========================================================================
-        //Have dropdown menu 
+        //DropDown Menu Selection 
           dropDown.setOnAction(event -> {
             //Get the selected item and make sure that 
 
           });
-
-
       //===========================================================================
 
 
@@ -441,25 +463,34 @@ public class NursePortal{
       //===========================================================================
         //Horizontal Boxes
           //First Name
-            HBox horizontal0 = new HBox(10, firstNameLbl);
+            HBox horizontal0 = new HBox(5, firstNameLbl, firstNameTxt);
 
           //Last Name
-            HBox horizontal1 = new HBox(10, lastNameLbl);
+            HBox horizontal1 = new HBox(5, lastNameLbl, lastNameTxt);
 
           //Date of Birth
-            HBox horizontal2 = new HBox(10, dobLbl);
+            HBox horizontal2 = new HBox(5, dobLbl, dobTxt);
 
 
-        //2 VBox(s) credSection & then an ecapsulation of (patientCredsLbl, credSection)
+        //3 VBox(s) credSection & then an ecapsulation of (patientCredsLbl, credSection)
+        //DropDown 
+          VBox dropDownBox = new VBox(5, patientSelectLbl, dropDown);
+            //Set the alignment of the VBox
+              dropDownBox.setAlignment(Pos.CENTER);
+        
         //Credentials Section 
-          VBox credSection = new VBox(horizontal0, horizontal1, horizontal2);
+          VBox credSection = new VBox(5, dropDownBox, horizontal0, horizontal1, horizontal2);
             //Set the dimensions, style, & color
               credSection.setPrefSize(400, 400);
               credSection.setMinSize(400, 400);
               credSection.setMaxSize(400, 400);
+            //Set the alignment of the VBox
+              credSection.setAlignment(Pos.CENTER);
 
         //Encapsulating VBox that we will return
-          VBox mainLayout = new VBox(patientCredsLbl, credSection);
+          VBox mainLayout = new VBox(10, patientCredsLbl, credSection);
+            //Set the alignment of the VBox
+              mainLayout.setAlignment(Pos.CENTER);
       //===========================================================================
 
       //Return the VBox
