@@ -541,7 +541,9 @@ public class PatientPortal{
                       if(    line.contains("[Phone Number]: " + this.phoneNumber)   
                           && this.phoneNumber != totalPhoneNum 
                           && patientFound
-                        ){
+                      ){
+                        //Update the private variable!!
+                          this.phoneNumber = totalPhoneNum;
 
                         //Add the New Phone number into the editedText String! 
                           newText += "\t[Phone Number]: " + totalPhoneNum + "\n"; 
@@ -555,7 +557,9 @@ public class PatientPortal{
                       if(    line.contains("[Insurance Provider]: " + this.insuranceInfo)   
                           && this.insuranceInfo != insuranceTxt.getText()
                           && patientFound
-                        ){
+                      ){
+                        //Update the private variable!!
+                          this.insuranceInfo = insuranceTxt.getText();
 
                         //Add the New Insurance Provider into the editedText String! 
                           newText += "\t[Insurance Provider]: " + insuranceTxt.getText() + "\n"; 
@@ -566,27 +570,35 @@ public class PatientPortal{
 
 
                     //Update Pharmacy
-                      //if(!line.contains(pharmacyTxt) && patientFound){
-                        //Code here
+                      if(    line.contains("[Pharmacy Provider]: " + this.pharmacyInfo)   
+                          && this.pharmacyInfo != pharmacyTxt.getText()
+                          && patientFound
+                      ){
+                        //Update the private variable!!
+                          this.pharmacyInfo = pharmacyTxt.getText();
 
-                        //Skip the line
-                          //line = fileREader.nextLine();
-                      //}
+                        //Add the New Pharmacy Provider into the editedText String! 
+                          newText += "\t[Pharmacy Provider]: " + pharmacyTxt.getText() + "\n"; 
 
-                    //New!!!! {this could honestly go below the stuff we added}
-                    //if-branch that will set patientFound = false once the next patient is encountered!!!
-
-
+                        //Skip the line!!
+                          line = fileReader.nextLine();
+                      }
 
                     //Add the Line's contents
                       newText += line + "\n";
                   }
 
-                  //New!!
-                  //Print the new Text file's contents
-                    System.out.println("New File!!: \n" + newText);
+                  //Create File Writer
+                    FileWriter fileWriter = new FileWriter("PatientAccounts.txt");
 
+                  //Write the new Contents to the file
+                    fileWriter.write(newText);
 
+                  //Close the File Writer
+                    fileWriter.close();
+
+                  //Close the file reader!!
+                    fileReader.close();
                 }
                 //If the file DNE error will be caught
                 catch(IOException x){
