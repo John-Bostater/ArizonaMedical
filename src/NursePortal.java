@@ -64,222 +64,225 @@ import java.util.*;	//Scanner for file reading
 
 
 public class NursePortal{
-    //Private Data & Variables
-    //------------------------------------------
-      //Stage used to display the Scenes/Methods
-        private Stage primeStage;
+  //Private Data & Variables
+  //------------------------------------------
+    //Stage used to display the Scenes/Methods
+      private Stage primeStage;
 
-      //Welcome Page (Used upon logout)
-        private Scene welcomePage;
+    //Welcome Page (Used upon logout)
+      private Scene welcomePage;
 
-      //Since the Doctor portal extends the NursePortal we will need to use this ID to differentiate them
-        private String staffId;
-
-
-      //There may be no more??
-        //This is a new dumb idea but i want to try it out
-         // VBox vertical0;
-    //------------------------------------------
+    //Since the Doctor portal extends the NursePortal we will need to use this ID to differentiate them
+      private String staffId;
 
 
-    //Constructor
-    //------------------------------------------------------------------------------
-      public NursePortal(Stage primaryStage, Scene welcomeScene){
-        //Set the private variables...
-          primeStage = primaryStage;
-          welcomePage = welcomeScene;
-          staffId = "Nurse";
-      }
-    //------------------------------------------------------------------------------
+    //There may be no more??
+      //This is a new dumb idea but i want to try it out
+        // VBox vertical0;
+  //------------------------------------------
 
 
-    //[New Visit Form]      [Messages]      [Logout]
-
-    //Methods
-    //------------------------------------------------------------------------------
-      //Run the Main Portal page for the Nurse Portal & all of its functionality
-      public void displayPortal(){
-        //Create the scene: Buttons, Action-Event, Alignment, Scene...
-
-        //Labels/Headers
-        //===========================================================================
-          //Welcome
-            Label header0 = new Label("Welcome!");
-              //Set Font & size of text
-                header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: white;");
-
-          //What would you like to do today??
-            Label header1 = new Label("What would you like to do today?");
-              //Set Font & size of text
-                header1.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
-        //===========================================================================
+  //Constructor
+  //------------------------------------------------------------------------------
+    public NursePortal(Stage primaryStage, Scene welcomeScene){
+      //Set the private variables...
+        primeStage = primaryStage;
+        welcomePage = welcomeScene;
+        staffId = "Nurse";
+    }
+  //------------------------------------------------------------------------------
 
 
-        //Buttons
-        //===========================================================================
-          //New Visit Form
-            Button newVisitButton = new Button("New Visit Form");
-              newVisitButton = new Button("New Visit Form");
-              //Set the Dimensions of the Button
-                newVisitButton.setPrefSize(200, 45);
-                newVisitButton.setMinSize(200, 45);
-                newVisitButton.setMaxSize(200, 45);
-              //Set the Font size of the text
-                newVisitButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+  //[New Visit Form]      [Messages]      [Logout]
 
-          //Messages
-            Button messageButton = new Button("Messages");
-              //Set the Dimensions of the Button
-                messageButton.setPrefSize(150, 45);
-                messageButton.setMinSize(150, 45);
-                messageButton.setMaxSize(150, 45);
-              //Set the Font size of the text
-                messageButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+  //Methods
+  //------------------------------------------------------------------------------
+    //Run the Main Portal page for the Nurse Portal & all of its functionality
+    public void displayPortal(){
+      //Create the scene: Buttons, Action-Event, Alignment, Scene...
 
-          //Logout
-            Button logoutButton = new Button("Logout");
-              //Set the Dimensions of the Button
-                logoutButton.setPrefSize(110, 45);
-                logoutButton.setMinSize(110, 45);
-                logoutButton.setMaxSize(110, 45);
-              //Set the Font size of the text
-                logoutButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
-        //===========================================================================
+      //Labels/Headers
+      //===========================================================================
+        //Welcome
+          Label header0 = new Label("Welcome!");
+            //Set Font & size of text
+              header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: white;");
+
+        //What would you like to do today??
+          Label header1 = new Label("What would you like to do today?");
+            //Set Font & size of text
+              header1.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
+      //===========================================================================
 
 
-        //Action-Event Handling
-        //===========================================================================
-          //New Visit Form      [This will save to:  "PatientSummary.txt"  <-- rename this .txt file]
-            newVisitButton.setOnAction(e -> {
-              //stuff here
-                //code there
-            });
+      //Buttons
+      //===========================================================================
+        //New Visit Form
+          Button newVisitButton = new Button("New Visit Form");
+            newVisitButton = new Button("New Visit Form");
+            //Set the Dimensions of the Button
+              newVisitButton.setPrefSize(200, 45);
+              newVisitButton.setMinSize(200, 45);
+              newVisitButton.setMaxSize(200, 45);
+            //Set the Font size of the text
+              newVisitButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+
+        //Messages
+          Button messageButton = new Button("Messages");
+            //Set the Dimensions of the Button
+              messageButton.setPrefSize(150, 45);
+              messageButton.setMinSize(150, 45);
+              messageButton.setMaxSize(150, 45);
+            //Set the Font size of the text
+              messageButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+
+        //Logout
+          Button logoutButton = new Button("Logout");
+            //Set the Dimensions of the Button
+              logoutButton.setPrefSize(110, 45);
+              logoutButton.setMinSize(110, 45);
+              logoutButton.setMaxSize(110, 45);
+            //Set the Font size of the text
+              logoutButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+      //===========================================================================
 
 
-          //Messages
-            messageButton.setOnAction(e -> {
-              //stuff here
-                //code there
-            });
+      //Action-Event Handling
+      //===========================================================================
+        //New Visit Form      [This will save to:  "PatientSummary.txt"  <-- rename this .txt file]
+          newVisitButton.setOnAction(e -> {
+            //stuff here
+              //code there
+          });
 
 
-          //Logout
-            logoutButton.setOnAction(e -> {
-              //Load the welcome page and display it    [Side Note: deallocate items??]
-                primeStage.setScene(welcomePage);
-                primeStage.show();
-            });
-        //===========================================================================
+        //Messages
+          messageButton.setOnAction(e -> {
+            //stuff here
+              //code there
+          });
 
 
-        //Alignment
-        //===========================================================================================
-          //Vertically align the Buttons/Functionality of the Nurse Portal
-            VBox vertical0 = new VBox(20, header0, header1, newVisitButton, messageButton, logoutButton);
-              //Alignment
-                vertical0.setAlignment(Pos.CENTER);
-
-          //Horizontally align the Vertical alignment of buttons and labels/texts
-            HBox horizontal0 = new HBox(vertical0);
-              //Alignment
-                horizontal0.setAlignment(Pos.CENTER);
-              //Set the background color of the scene
-                horizontal0.setStyle("-fx-background-color: #3A3A3A;");
-        //===========================================================================================
+        //Logout
+          logoutButton.setOnAction(e -> {
+            //Load the welcome page and display it    [Side Note: deallocate items??]
+              primeStage.setScene(welcomePage);
+              primeStage.show();
+          });
+      //===========================================================================
 
 
-        //Build the Scene
-          Scene mainLayout = new Scene(horizontal0, 1024, 768);
+      //Alignment
+      //===========================================================================================
+        //Vertically align the Buttons/Functionality of the Nurse Portal
+          VBox vertical0 = new VBox(20, header0, header1, newVisitButton, messageButton, logoutButton);
+            //Alignment
+              vertical0.setAlignment(Pos.CENTER);
 
-        //Display the Scene
-          primeStage.setScene(mainLayout);
-          primeStage.show();
-      }
-
-
-      //New Visit Form
-      private Scene newVisitForm(){
-        //Labels, Buttons, TextBoxes, Action-Event Handling, Alignments, Scene
-          //Code here...
-
-        //Labels
-        //====================================================================
-          //Vitals
-            Label vitalsLbl = new Label("Vitals:");
-              //Set the Dimensions & Font style
-                //   vitalsLbl.setPrefSize();
-
-            //Weight
-              Label weightLbl = new Label("Weight:");
-                //Set the dimensions & font style
-                  //Code here
-
-            //Height
-              Label heightLbl = new Label("Height:");
-                //Set the dimensions & font style
-                  //Code here
-
-            //Feet/Inches
-              Label feetInchLbl = new Label("Feet/Inches:");
-                //Set the dimensions & font style
-                  //Code here
-
-            //Body Temperature
-              Label bodyTempLbl = new Label("Body Temperature:");
-                //Set the dimensions & font style
-
-                  //Code here
-
-            //Blood Pressure
-              Label bloodPressureLbl = new Label("Blood Pressure:");
-                //Set the dimensions & font style
-                  //Code here
+        //Horizontally align the Vertical alignment of buttons and labels/texts
+          HBox horizontal0 = new HBox(vertical0);
+            //Alignment
+              horizontal0.setAlignment(Pos.CENTER);
+            //Set the background color of the scene
+              horizontal0.setStyle("-fx-background-color: #3A3A3A;");
+      //===========================================================================================
 
 
-          //Patient Credentials
-            Label patientCredsLbl = new Label("Patient Credentials:");
-              //Set dimensions & font style
-                //Code here...
+      //Build the Scene
+        Scene mainLayout = new Scene(horizontal0, 1024, 768);
 
-            //First Name
-              Label firstNameLbl = new Label("First Name:");
-                //Set the dimensions & font style
-                  //Code here
-
-            //Last Name
-              Label lastNameLbl = new Label("Last Name:");
-                //Set the dimensions & font style
-                  //Code here
-
-            //Date Of Birth
-              Label dobLbl = new Label("Date of Birth:");
-                //Set the dimensions & font style
-                  //Code here
+      //Display the Scene
+        primeStage.setScene(mainLayout);
+        primeStage.show();
+    }
 
 
+    //New Visit Form
+    private Scene newVisitForm(){
+      //Labels, Buttons, TextBoxes, Action-Event Handling, Alignments, Scene
+        //Code here...
 
-          //Patient's Previous History
-            Label previousHistoryLbl = new Label("Patient's Previous History:");
+      //Labels
+      //====================================================================
+        //Vitals
+          Label vitalsLbl = new Label("Vitals:");
+            //Set the Dimensions & Font style
+              //   vitalsLbl.setPrefSize();
+
+          //Weight
+            Label weightLbl = new Label("Weight:");
               //Set the dimensions & font style
-                //Code here...
+                //Code here
+
+          //Height
+            Label heightLbl = new Label("Height:");
+              //Set the dimensions & font style
+                //Code here
+
+          //Feet/Inches
+            Label feetInchLbl = new Label("Feet/Inches:");
+              //Set the dimensions & font style
+                //Code here
+
+          //Body Temperature
+            Label bodyTempLbl = new Label("Body Temperature:");
+              //Set the dimensions & font style
+
+                //Code here
+
+          //Blood Pressure
+            Label bloodPressureLbl = new Label("Blood Pressure:");
+              //Set the dimensions & font style
+                //Code here
 
 
-          //Nurse's Notes
-            Label nurseNotesLbl = new Label("Nurse's Notes:");
-              //Set the dimension & font style
-                //Code here...
-        //====================================================================
+        //Patient Credentials
+          Label patientCredsLbl = new Label("Patient Credentials:");
+            //Set dimensions & font style
+              //Code here...
 
-        //Debug VBox
-         VBox debugBox = new VBox();
+          //First Name
+            Label firstNameLbl = new Label("First Name:");
+              //Set the dimensions & font style
+                //Code here
+
+          //Last Name
+            Label lastNameLbl = new Label("Last Name:");
+              //Set the dimensions & font style
+                //Code here
+
+          //Date Of Birth
+            Label dobLbl = new Label("Date of Birth:");
+              //Set the dimensions & font style
+                //Code here
 
 
-        //Build the Scene
-          Scene mainLayout = new Scene(debugBox, 1024,768);
-        //Return the Scene
-          return mainLayout;
-      }
 
+        //Patient's Previous History
+          Label previousHistoryLbl = new Label("Patient's Previous History:");
+            //Set the dimensions & font style
+              //Code here...
+
+
+        //Nurse's Notes
+          Label nurseNotesLbl = new Label("Nurse's Notes:");
+            //Set the dimension & font style
+              //Code here...
+      //====================================================================
+
+      //Debug VBox
+        VBox debugBox = new VBox();
+
+
+      //Build the Scene
+        Scene mainLayout = new Scene(debugBox, 1024,768);
+      //Return the Scene
+        return mainLayout;
+    }
+
+
+  //NEW!!!
+  //T
 
 
 
