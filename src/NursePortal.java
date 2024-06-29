@@ -153,6 +153,9 @@ public class NursePortal{
           newVisitButton.setOnAction(e -> {
             //stuff here
               //code there
+              //Call upon the method
+              primeStage.setScene(newVisitForm());
+              primeStage.show();
           });
 
 
@@ -270,19 +273,198 @@ public class NursePortal{
               //Code here...
       //====================================================================
 
-      //Debug VBox
-        VBox debugBox = new VBox();
+      //NEW!!!
+        //Call upon the method that returns the VBox
+        //patientCredsBox();
 
+
+      //Final Vertical Alignment
+        VBox finalLayout = new VBox(patientCredsBox());
 
       //Build the Scene
-        Scene mainLayout = new Scene(debugBox, 1024,768);
+        Scene mainLayout = new Scene(finalLayout, 1024,768);
       //Return the Scene
         return mainLayout;
     }
 
-
+  
+  //This will return something that has a dropdown menu that will load all of the 
   //NEW!!!
-  //T
+  //Make a VBox method that returns the "Patient Summary VBox", which is loaded via the String variable in the parameter
+    private VBox patientCredsBox(){
+      //Labels, Text Boxes{will load data from the DropDown}, DropDown, ActionEvent, Alignment, Return VBox
+
+      //Labels
+      //===========================================================================
+        //Patient Credentials:
+          Label patientCredsLbl = new Label("Patient Credentials:");
+            //Set the dimension & Style
+              patientCredsLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+
+        //Select Patient  [Displayed next to or above the dropdown menu]
+          Label patientSelectLbl = new Label("Select Patient:");
+            //Set the dimension & style
+
+        //First Name
+          Label firstNameLbl = new Label("First Name:");
+            //Set the dimension & style
+
+        //Last Name
+          Label lastNameLbl = new Label("Last Name:");
+            //Set the dimension & style
+
+        //Date Of Birth
+          Label dobLbl = new Label("Date of Birth:");
+
+        //(MM / DD / YYYY)
+          Label dobAlignLbl = new Label("(MM/DD/YYYY)");
+
+        //Date of birth Seperators "/"
+          Label dobSep0 = new Label("/");
+          
+        //Date of birth Seperators "/"
+          Label dobSep1 = new Label("/");
+      //===========================================================================
+
+
+      //Text Boxes
+      //===========================================================================
+        //First Name Text Box
+          TextArea firstNameTxt = new TextArea();
+            //Set the dimensions & style of the text box
+
+        //Last Name Text Box
+          TextArea lastNameTxt = new TextArea();
+            //Set the dimensions & style of the text box
+
+        //Month
+          TextArea monthTxt = new TextArea();
+            //Set the dimensions & style of the text box
+
+        //Day
+          TextArea dayTxt = new TextArea();
+            //Set the dimensions & style of the text box
+
+        //Year
+          TextArea yearTxt = new TextArea();
+            //Set the dimensions & style of the text box
+      //===========================================================================
+
+
+      //DropDown Menu
+      //===========================================================================
+        //Create the dropdown menu
+          ComboBox<String> dropDown = new ComboBox<>();
+
+
+        //Collect all of the patient credentials and place them into the combo box
+          try{
+            //Open 'PatientAccounts.txt' for reading!!
+              //Code here...
+              Scanner fileReader = new Scanner(new File("PatientAccounts.txt"));
+
+            //Counter for adding elements to the dropDown menu
+              short counter = 0;
+
+            //String array for holding all of the Exam Dates
+              String[] allPatients = new String[50];
+
+            //Instantiate the String
+              for(short i = 0; i < 50; i++){
+                //Add an empty String to the indexed value
+                  allPatients[i] = "";
+              }
+
+            //Read all of the file's contents
+              while(fileReader.hasNextLine()){
+                //Place the file being read into a String
+                  String line = fileReader.nextLine();
+
+                //Collect all of the patient credentials via this if statement
+                if( !line.contains("\t") 
+                      && !line.contains("\n") 
+                      && !line.contains("Patient Accounts:")
+                      && !line.isEmpty()
+                ){
+                  //DEBUG
+                    System.out.println("Line: " + line);
+
+                  //Add the line to the String
+                    //Code here...
+                    allPatients[counter] = line;
+
+                  //Increment the index/counter
+                    counter++;
+                }
+              }
+
+            //Add the String Array to the ComboBox
+              for(short i = 0; i < 50; i++){
+                //Add exam dates
+                  if(allPatients[i] != ""){
+                    //DEBUG
+                      System.out.println("Success!!");
+
+                    //Add the Exam date to the box
+                      dropDown.getItems().add(allPatients[i]);
+                  }
+                //Else, help the garbage collector
+                  else{
+                    //Set the empty slots to null
+                      allPatients[i] = null;
+                  }
+              }
+          }
+          catch(IOException e){
+            //Do nothing...
+          }
+
+
+        //Load the
+
+      //===========================================================================
+
+
+      //Action-Event Handling
+      //===========================================================================
+        //Have dropdown menu 
+          dropDown.setOnAction(event -> {
+            //Get the selected item and make sure that 
+
+          });
+
+
+      //===========================================================================
+
+
+      //Alignment
+      //===========================================================================
+        //Horizontal Boxes
+          //First Name
+            HBox horizontal0 = new HBox(10, firstNameLbl);
+
+          //Last Name
+            HBox horizontal1 = new HBox(10, lastNameLbl);
+
+          //Date of Birth
+            HBox horizontal2 = new HBox(10, dobLbl);
+
+
+        //2 VBox(s) credSection & then an ecapsulation of (patientCredsLbl, credSection)
+        //Credentials Section 
+          VBox credSection = new VBox(horizontal0, horizontal1, horizontal2);
+            //Set the dimensions, style, & color
+              credSection.setPrefSize(400, 400);
+              credSection.setMinSize(400, 400);
+              credSection.setMaxSize(400, 400);
+
+        //Encapsulating VBox that we will return
+          VBox mainLayout = new VBox(patientCredsLbl, credSection);
+      //===========================================================================
+
+      //Return the VBox
+        return mainLayout;
+    }
 
 
 
@@ -302,13 +484,12 @@ public class NursePortal{
         //Labels, Buttons, Text Box, Action-Event Handling, Scene
 
         //Labels
-        //=======================================================================
+        //=====================================================================================================
           //Message Board
             Label messageBrdLbl = new Label("Message Board:");
               //Set the Font & size of the text
                 messageBrdLbl.setStyle("-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: white;");
                 
-
           //Message
             Label messageLbl = new Label("Message:");
               //Set the size of the text
@@ -318,7 +499,17 @@ public class NursePortal{
             Label inboxLbl = new Label("Inbox:");
               //Set the size of the text
                 inboxLbl.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
-        //=======================================================================
+
+
+          //Select Patient [Drop Down Menu]
+            Label selectPatientLbl = new Label("Select Patient:");
+              //Set the Font and other features
+                //selectPatienLbl.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
+        
+          //Patient Contact Information
+            //Have the Phone Number Displayed in a text box next to this label!!!
+            Label contactInfoLbl = new Label("Patient Contact:");
+        //=====================================================================================================
 
 
         //Buttons
@@ -359,7 +550,7 @@ public class NursePortal{
         //=======================================================================
           //Message Text Box  {Anything written here will be posted to the board}
             TextArea messageTxt = new TextArea();
-              //Set the dimensions of the Button
+              //Set the dimensions of the text box
                 messageTxt.setPrefSize(300, 525);
                 messageTxt.setMinSize(300, 525);
                 messageTxt.setMaxSize(300, 525);
@@ -372,7 +563,7 @@ public class NursePortal{
 
           //Inbox Text Box
             TextArea inboxTxt = new TextArea();
-              //Set the dimensions of the Button
+              //Set the dimensions of the text box
                 inboxTxt.setPrefSize(600, 525);
                 inboxTxt.setMinSize(600, 525);
                 inboxTxt.setMaxSize(600, 525);
@@ -384,6 +575,11 @@ public class NursePortal{
 
           //Get the Messages from the unique Patients account
             inboxTxt.setText(getMessages());
+
+          //Phone Number Text Box [Will be next to contactInfoLbl]
+            TextArea phoneNumTxt = new TextArea();
+              //Set the dimensions of the the text box
+
         //=======================================================================
 
 
