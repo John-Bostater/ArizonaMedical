@@ -249,8 +249,18 @@ public class NursePortal{
                 bloodPressureLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
                 //Code here
 
+
           //Farenheit Label
             Label farenheitLbl = new Label("F°");
+            //Set the style of the text box
+              farenheitLbl.setStyle("-fx-font-size: 18px;");
+
+
+        //Pounds (lbs)
+          Label lblsLbl = new Label("lbs");
+            //Set the style of the text box
+              lblsLbl.setStyle("-fx-font-size: 18px;");
+
 
         //Patient's Previous History
           Label previousHistoryLbl = new Label("Patient's Previous History:");
@@ -336,14 +346,6 @@ public class NursePortal{
               bloodPressureTxt.setStyle("-fx-font-size: 14px;");
 
 
-        //Pounds (lbs)
-          TextArea lblsLbl = new TextArea();
-            //Set the dimension & style
-              lblsLbl.setPrefSize(100, 30);
-              lblsLbl.setMinSize(100, 30);
-              lblsLbl.setMaxSize(100, 30);
-            //Set the style of the text box
-              lblsLbl.setStyle("-fx-font-size: 14px;");
       //====================================================================
 
 
@@ -487,12 +489,19 @@ public class NursePortal{
 
         //Vitals Horizontal Alignments
           HBox horizontal0 = new HBox(5, weightTxt, lblsLbl);
+            //Set the alignment of the horizontal items
+              horizontal0.setAlignment(Pos.CENTER);
+
 
         //Vitals Horizontal Alignments
           HBox horizontal1 = new HBox(5, heightTxt, feetInchLbl);
+            //Set the alignment of the horizontal items
+              horizontal1.setAlignment(Pos.CENTER);
 
         //Vitals Horizontal Alignments
           HBox horizontal2 = new HBox(5, bodyTempTxt, farenheitLbl);
+            //Set the alignment of the horizontal items
+              horizontal2.setAlignment(Pos.CENTER);
 
 
         //Vertical alignment for the vitals entry box
@@ -503,7 +512,8 @@ public class NursePortal{
               vitalsBox.setMaxSize(300, 300);
             //Set the background color of the vitals box
               vitalsBox.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
-
+            //Set the alignment
+              //vitalsBox.setAlignment(Pos.CENTER);
 
         //Vitals Encapsulating Vertical Alignment
           VBox vitalsAlignBox = new VBox(5, vitalsLbl, vitalsBox);
@@ -550,17 +560,17 @@ public class NursePortal{
               patientSelectLbl.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
         //First Name
-          Label firstNameLbl = new Label("First Name:");
+          Label firstNameLbl = new Label("   First Name:");
             //Set the dimension & style
               firstNameLbl.setStyle("-fx-font-size: 20px;");
 
         //Last Name
-          Label lastNameLbl = new Label("Last Name:");
+          Label lastNameLbl = new Label("   Last Name:");
             //Set the dimension & style
               lastNameLbl.setStyle("-fx-font-size: 20px;");
 
         //Date Of Birth
-          Label dobLbl = new Label("Date of Birth:");
+          Label dobLbl = new Label("   Date of Birth:");
             //Set the dimension & style
               dobLbl.setStyle("-fx-font-size: 20px;");
 
@@ -568,16 +578,6 @@ public class NursePortal{
           Label dobAlignLbl = new Label("(MM/DD/YYYY)");
             //Set the dimension & style
               dobAlignLbl.setStyle("-fx-font-size: 18px;");
-
-        //Date of birth Seperators "/"
-//          Label dobSep0 = new Label("/");
-            //Set the dimension & style
-//              dobSep0.setStyle("-fx-font-size: 18px;");
-
-        //Date of birth Seperators "/"
-//          Label dobSep1 = new Label("/");
-            //Set the dimension & style
-//              dobSep1.setStyle("-fx-font-size: 18px;");
       //===========================================================================
 
 
@@ -617,9 +617,9 @@ public class NursePortal{
         //Create the dropdown menu
           ComboBox<String> dropDown = new ComboBox<>();
             //Set dimension of the dropdown menu??
-              dropDown.setPrefSize(175, 30);
-              dropDown.setMinSize(175, 30);
-              dropDown.setMaxSize(175, 30);
+              dropDown.setPrefSize(250, 30);
+              dropDown.setMinSize(250, 30);
+              dropDown.setMaxSize(250, 30);
             //Set the style
               dropDown.setStyle("-fx-font-size: 14px;");
 
@@ -701,18 +701,15 @@ public class NursePortal{
             //Load the patients data into the relevant TextBoxes
               String fullName = dropDown.getValue().substring(0, dropDown.getValue().indexOf("/")-3).replace(",", " ");
 
-            //NEW!!!
-              //DEbug
-              System.out.println("FullName: " + fullName);
 
-            //NEW!!!
-              //DEbug
-              System.out.println("First Name: " + fullName.substring(0, fullName.indexOf(" ")));
+            //First Name Text Box Set
+              firstNameTxt.setText(fullName.substring(0, fullName.indexOf(" ")));
 
-            //NEW!!!
-              //DEbug
-              System.out.println("First Name: " + fullName.substring(fullName.indexOf(" "), fullName.length()));
+            //First Name Text Box Set
+              lastNameTxt.setText(fullName.substring(fullName.indexOf(" "), fullName.length()));
 
+            //Date of Birth Text Box Set
+              dobTxt.setText(this.currentPatientCreds.substring(this.currentPatientCreds.indexOf("/")-2, this.currentPatientCreds.length()));
           });
       //===========================================================================
 
@@ -740,9 +737,9 @@ public class NursePortal{
         //Credentials Section 
           VBox credSection = new VBox(5, dropDownBox, horizontal0, horizontal1, horizontal2);
             //Set the dimensions, style, & color
-              credSection.setPrefSize(400, 400);
-              credSection.setMinSize(400, 400);
-              credSection.setMaxSize(400, 400);
+              credSection.setPrefSize(300, 200);
+              credSection.setMinSize(300, 200);
+              credSection.setMaxSize(300, 200);
             //Set the alignment of the VBox
               credSection.setAlignment(Pos.CENTER);
             //Set the background color of the VBox
