@@ -94,6 +94,7 @@ public class NursePortal{
         primeStage = primaryStage;
         welcomePage = welcomeScene;
         staffId = "Nurse";
+        currentPatientCreds = "";
     }
   //------------------------------------------------------------------------------
 
@@ -350,7 +351,7 @@ public class NursePortal{
 
 
         //Nurse's Notes:
-          TextArea nursesNotesTxt = new TextArea("<Insert Notes Here>");
+          TextArea nursesNotesTxt = new TextArea("<Know Allergies & Other Health Concerns>");
             //Set the dimension & style
               nursesNotesTxt.setPrefSize(100, 30);
               nursesNotesTxt.setMinSize(100, 30);
@@ -362,13 +363,43 @@ public class NursePortal{
         //Patient's Previous History:
 
         //Previous Medications 
-          TextArea previousMedsTxt = new TextArea("<Previous Medications>");
+          TextArea previousMedHistTxt = new TextArea("<Previously Prescribed Medications, Immunization History, Previous Health Issues>");
             //Set the dimension & style
-              previousMedsTxt.setPrefSize(100, 30);
-              previousMedsTxt.setMinSize(100, 30);
-              previousMedsTxt.setMaxSize(100, 30);
+              previousMedHistTxt.setPrefSize(100, 30);
+              previousMedHistTxt.setMinSize(100, 30);
+              previousMedHistTxt.setMaxSize(100, 30);
             //Set the style of the text box
-              previousMedsTxt.setStyle("-fx-font-size: 14px;");
+              previousMedHistTxt.setStyle("-fx-font-size: 14px;");
+
+
+        //
+        //See if the <Patient Name>VisitSummary.txt already exists (to load patient data for returning patients)
+          //
+
+        //Load any previously written date into the Text Boxes
+        //Open the file for reading to load all potential data
+        try{
+          //VisitSummary.txt file
+            File visitSummaryFile = new File(this.currentPatientCreds + "VisitSummary.txt");
+
+          //See if the file exists
+            if(visitSummaryFile.exists() && this.currentPatientCreds != ""){
+              //File Exists!, now load all of the data from the previous visit into the text boxes!
+              
+              //File Reader
+                Scanner fileReader = new Scanner(visitSummaryFile);
+
+              //Read line for line
+
+
+            }
+
+          //Else, do nothing...
+        }
+        catch(IOException k){
+          //Do Nothing
+        }
+
       //====================================================================
 
 
@@ -430,22 +461,27 @@ public class NursePortal{
                
 
               //Open File for Writing (If the .txt does not exist it will be created)
-                FileWriter fileWriter = new FileWriter(fullName.replaceAll(",", "") + "VisitSummarys.txt");
-
+                FileWriter fileWriter = new FileWriter(fullName.replaceAll(",", "") + "VisitSummarys.txt", true);
+                  //'true' is so we can append text to the file
 
               //Collect all of the information from the text boxes/areas 
               //then write it to the .txt file via appending
                 String physicalExam = "[Date]: " /*+ dobTxt*/ + "\n" + "\t[Vitals]" 
                   + "\n"
-                  + "\t\t[Weight]: " + weightTxt.getText() 
+                  + "\t\t[Weight]: " + weightTxt.getText().trim() + " lbs"
                   + "\n"
-                  + "\t\t[Height]: " + heightTxt.getText()
+                  + "\t\t[Height]: " + heightTxt.getText().trim() + " <ft>'<in>\""
                   + "\n"
-                  + "\t\t[Body Temperature]: " + bodyTempTxt.getText()
+                  + "\t\t[Body Temperature]: " + bodyTempTxt.getText().trim() + " F°"
                   + "\n"
-                  + "\t\t[Blood Pressure]: " + bloodPressureTxt.getText()
+                  + "\t\t[Blood Pressure]: " + bloodPressureTxt.getText().trim()
                   + "\n\n";
                 
+
+              //Append the Visit Form to the Patient's current visit Summary
+                fileWriter.append(physicalExam);
+
+
               //DEBUG
                 System.out.println("Physical exam summary: \n" + physicalExam);
 
@@ -459,13 +495,16 @@ public class NursePortal{
                 \n
                 \t[Vitals]:
                 \n
-                \t\t[Weight]: <Weight Here, loaded from weightTxt>
+                \t\t[Weight]: <Load from weightTxt>
                 \n
-                \t\t[Height]: <Height Here, loaded from heightTxt>
+                \t\t[Height]: <Load from heightTxt>
                 \n
-                \t\t[Body Temperature]:
+                \t\t[Body Temperature]: <Load from bodyTempTxt>
                 \n
-                \t\t[Blood Pressure]:
+                \t\t[Blood Pressure]: <>
+                \n
+                \t[Nurse's Notes]: <Load from bloodPressureTxt>
+
               */
 
 
@@ -540,6 +579,11 @@ public class NursePortal{
               vitalsBox.setPadding(new Insets(30));
               vitalsBox.setAlignment(Pos.CENTER);
             
+
+        //Horizonta
+
+
+
 
         //Vitals Encapsulating Vertical Alignment
           VBox vitalsAlignBox = new VBox(5, vitalsLbl, vitalsBox);
