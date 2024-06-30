@@ -347,6 +347,28 @@ public class NursePortal{
               bloodPressureTxt.setMaxSize(100, 30);
             //Set the style of the text box
               bloodPressureTxt.setStyle("-fx-font-size: 14px;");
+
+
+        //Nurse's Notes:
+          TextArea nursesNotesTxt = new TextArea("<Insert Notes Here>");
+            //Set the dimension & style
+              nursesNotesTxt.setPrefSize(100, 30);
+              nursesNotesTxt.setMinSize(100, 30);
+              nursesNotesTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              nursesNotesTxt.setStyle("-fx-font-size: 14px;");
+
+
+        //Patient's Previous History:
+
+        //Previous Medications 
+          TextArea previousMedsTxt = new TextArea("<Previous Medications>");
+            //Set the dimension & style
+              previousMedsTxt.setPrefSize(100, 30);
+              previousMedsTxt.setMinSize(100, 30);
+              previousMedsTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              previousMedsTxt.setStyle("-fx-font-size: 14px;");
       //====================================================================
 
 
