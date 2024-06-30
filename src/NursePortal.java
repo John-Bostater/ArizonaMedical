@@ -284,6 +284,56 @@ public class NursePortal{
               dobTxt.setMaxSize(100, 30);
             //Set the style of the text box
               dobTxt.setStyle("-fx-font-size: 14px;");
+
+
+        //Weight
+          TextArea weightTxt = new TextArea();
+            //Set the dimension & style
+              weightTxt.setPrefSize(100, 30);
+              weightTxt.setMinSize(100, 30);
+              weightTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              weightTxt.setStyle("-fx-font-size: 14px;");
+
+
+        //Height
+          TextArea heightTxt = new TextArea();
+            //Set the dimension & style
+              heightTxt.setPrefSize(100, 30);
+              heightTxt.setMinSize(100, 30);
+              heightTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              heightTxt.setStyle("-fx-font-size: 14px;");
+              
+
+        //Body Temperature
+          TextArea bodyTempTxt = new TextArea();
+            //Set the dimension & style
+              bodyTempTxt.setPrefSize(100, 30);
+              bodyTempTxt.setMinSize(100, 30);
+              bodyTempTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              bodyTempTxt.setStyle("-fx-font-size: 14px;");
+
+
+        //Blood Pressure:
+          TextArea bloodPressureTxt = new TextArea();
+            //Set the dimension & style
+              bloodPressureTxt.setPrefSize(100, 30);
+              bloodPressureTxt.setMinSize(100, 30);
+              bloodPressureTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              bloodPressureTxt.setStyle("-fx-font-size: 14px;");
+
+
+        //Pounds (lbs)
+          TextArea lblsLbl = new TextArea();
+            //Set the dimension & style
+              lblsLbl.setPrefSize(100, 30);
+              lblsLbl.setMinSize(100, 30);
+              lblsLbl.setMaxSize(100, 30);
+            //Set the style of the text box
+              lblsLbl.setStyle("-fx-font-size: 14px;");
       //====================================================================
 
 
@@ -291,20 +341,32 @@ public class NursePortal{
       //====================================================================
         //Submit For Physical {Nurse}
           Button submitPhysical = new Button("Submit for Physical");
-            //Set the dimensions & font of the button
-              //
+            //Button size
+              submitPhysical.setPrefSize(100, 30);
+              submitPhysical.setMinSize(100, 30);
+              submitPhysical.setMaxSize(100, 30);
+            //Set the style of the Button
+              submitPhysical.setStyle("-fx-font-size: 14px;");
 
 
         //Conduct Exam {Doctor}
           Button conductExam = new Button("Conduct Exam");
-           //Set the dimensions & font of the button
-              //
+            //Button size
+              conductExam.setPrefSize(100, 30);
+              conductExam.setMinSize(100, 30);
+              conductExam.setMaxSize(100, 30);
+            //Set the style of the Button
+              conductExam.setStyle("-fx-font-size: 14px;");
 
 
         //Exit  {Both}
           Button goBack = new Button("Exit");
-            //Set the dimensions & font of the button
-              //
+            //Button size
+              goBack.setPrefSize(100, 30);
+              goBack.setMinSize(100, 30);
+              goBack.setMaxSize(100, 30);
+            //Set the style of the Button
+              goBack.setStyle("-fx-font-size: 14px;");
       //====================================================================
 
 
@@ -318,14 +380,14 @@ public class NursePortal{
             //.txt file     [Search for patient {if they don't exist append a new entry}
             //               Look for the exam dates and ]
 
+            //
             try{
               //Open the patients correlating "<Patient Name>VisitSummarys.txt"
               //We will be appending All of the information entered in the "New Visit Form"
               //To the .txt file if it already exists
 
               //Break apart the this.currentPatientCreds to get the fullName 
-                String fullName = this.currentPatientCreds.substring(0, this.currentPatientCreds.indexOf("/")-3);
-
+                String fullName = this.currentPatientCreds.substring(0, this.currentPatientCreds.indexOf("/") - 3);
 
               //Open File for Writing (If the .txt does not exist it will be created)
                 FileWriter fileWriter = new FileWriter(fullName.replaceAll(",", "") + "VisitSummarys.txt");
@@ -333,8 +395,20 @@ public class NursePortal{
 
               //Collect all of the information from the text boxes/areas 
               //then write it to the .txt file via appending
-              
+                String physicalExam = "[Date]: " /*+ dobTxt*/ + "\n"
+                  + "\t[Vitals]" 
+                  + "\n"
+                  + "\t\t[Weight]: " + weightTxt 
+                  + "\n"
+                  + "\t\t[Height]: " + heightTxt
+                  + "\n"
+                  + "\t\t[Body Temperature]: " + bodyTempTxt
+                  + "\n"
+                  + "\t\t[Blood Pressure]: " + bloodPressureTxt;
 
+
+              //DEBUG
+                System.out.println("Physical exam summary: " + physicalExam);
 
 
               //Contents
@@ -342,21 +416,16 @@ public class NursePortal{
                 [Date]: <Date>
                 \n
                 \t[Vitals]:
-
+                \n
                 \t\t[Weight]: <Weight Here, loaded from weightTxt>
-
+                \n
                 \t\t[Height]: <Height Here, loaded from heightTxt>
-
+                \n
                 \t\t[Body Temperature]:
-
+                \n
                 \t\t[Blood Pressure]:
-                    
-
-                \t
-
-              
-              
               */
+
 
 
             }
@@ -405,6 +474,14 @@ public class NursePortal{
         //this method also updates the priv data holding the current/visiting patient's info)
           VBox vertical0 = new VBox(10, patientCredsBox(), buttonContainer);
             //^^Includes patients Vitals!!! VBox
+
+
+        //Vitals Horizontal Alignments
+          HBox horizontal0 = new HBox(5, weightTxt, lblsLbl);
+
+
+        //Vitals Vertical Alignments
+
 
           
         //Final Vertical Alignment
@@ -644,12 +721,11 @@ public class NursePortal{
     }
 
 
-    //Empty method that will be Overrided by the DoctorPortal!!
-      private Scene conductExam(){
-        //Return null, as the Nurse will NOT use this method
-          return null;
-      }
-
+  //Empty method that will be Overrided by the DoctorPortal!!
+    private Scene conductExam(){
+      //Return null, as the Nurse will NOT use this method
+        return null;
+    }
 
 
 
@@ -969,4 +1045,4 @@ public class NursePortal{
   
   //*/
   //------------------------------------------------------------------------------
-  }
+}

@@ -103,7 +103,7 @@ public class Portals {
 		//This will also make the "Logout" buttons within the Patient, Nurse & Doctor portal return us to the "Welcome Page"
 		//Initialize the welcomePage Scene (This will be "global" and can be referenced by the other Scene methods)
 	
-		  
+	
 		//Welcome Page Scene          
 		  //The 'Welcome Page' is the "Portal to the Portals", so to speak.
           //i.e.  We will navigate to the other portals from here {Patient, Nurse Doctor}
@@ -160,9 +160,9 @@ public class Portals {
            	    patientLogin.setMaxSize(120, 50);
            	    patientLogin.setMinSize(120, 50);
 	          //[Width x Height]
-           	    staffLogin.setPrefSize(120, 50);  
-           	    staffLogin.setMaxSize(120, 50);
-           	    staffLogin.setMinSize(120, 50);
+           	    staffLogin.setPrefSize(75, 50);  
+           	    staffLogin.setMaxSize(75, 50);
+           	    staffLogin.setMinSize(75, 50);
            	  //[Width x Height]
            	    exitProg.setPrefSize(80, 45);  
            	    exitProg.setMaxSize(80, 45);
