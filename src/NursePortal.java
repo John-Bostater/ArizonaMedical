@@ -75,6 +75,11 @@ public class NursePortal{
     //Since the Doctor portal extends the NursePortal we will need to use this ID to differentiate them
       private String staffId;
 
+    //NEW!!!
+    //String that holds the current patient's credentials, that the Nurse is viewing
+      private String currentPatientCreds;
+
+
 
     //There may be no more??
       //This is a new dumb idea but i want to try it out
@@ -238,29 +243,6 @@ public class NursePortal{
               //Set the dimensions & font style
                 //Code here
 
-
-        //Patient Credentials
-          Label patientCredsLbl = new Label("Patient Credentials:");
-            //Set dimensions & font style
-              //Code here...
-
-          //First Name
-            Label firstNameLbl = new Label("First Name:");
-              //Set the dimensions & font style
-                //Code here
-
-          //Last Name
-            Label lastNameLbl = new Label("Last Name:");
-              //Set the dimensions & font style
-                //Code here
-
-          //Date Of Birth
-            Label dobLbl = new Label("Date of Birth:");
-              //Set the dimensions & font style
-                //Code here
-
-
-
         //Patient's Previous History
           Label previousHistoryLbl = new Label("Patient's Previous History:");
             //Set the dimensions & font style
@@ -273,24 +255,178 @@ public class NursePortal{
               //Code here...
       //====================================================================
 
-      //NEW!!!
-        //Call upon the method that returns the VBox
-        //patientCredsBox();
+
+      //Text Boxes
+      //====================================================================
+        //First Name Text Box
+          TextArea firstNameTxt = new TextArea();
+            //Set the dimensions
+              firstNameTxt.setPrefSize(100, 30);
+              firstNameTxt.setMinSize(100, 30);
+              firstNameTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              firstNameTxt.setStyle("-fx-font-size: 14px;");
+
+        //Last Name Text Box
+          TextArea lastNameTxt = new TextArea();
+            //Set the dimensions
+              lastNameTxt.setPrefSize(100, 30);
+              lastNameTxt.setMinSize(100, 30);
+              lastNameTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              lastNameTxt.setStyle("-fx-font-size: 14px;");
+
+        //Date of Birth Text Box
+          TextArea dobTxt = new TextArea();
+            //Set the dimensions
+              dobTxt.setPrefSize(100, 30);
+              dobTxt.setMinSize(100, 30);
+              dobTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              dobTxt.setStyle("-fx-font-size: 14px;");
+      //====================================================================
 
 
-      //Final Vertical Alignment
-        VBox finalLayout = new VBox(patientCredsBox());
+      //Buttons
+      //====================================================================
+        //Submit For Physical {Nurse}
+          Button submitPhysical = new Button("Submit for Physical");
+            //Set the dimensions & font of the button
+              //
+
+
+        //Conduct Exam {Doctor}
+          Button conductExam = new Button("Conduct Exam");
+           //Set the dimensions & font of the button
+              //
+
+
+        //Exit  {Both}
+          Button goBack = new Button("Exit");
+            //Set the dimensions & font of the button
+              //
+      //====================================================================
+
+
+      //Action-Event Handling
+      //====================================================================
+        //Submit For Physical {Nurse}
+          submitPhysical.setOnAction(e -> {
+            //Submit the physical
+
+            //This will open the <PatientName>VisitSummarys.txt and add the new exam notes into the
+            //.txt file     [Search for patient {if they don't exist append a new entry}
+            //               Look for the exam dates and ]
+
+            try{
+              //Open the patients correlating "<Patient Name>VisitSummarys.txt"
+              //We will be appending All of the information entered in the "New Visit Form"
+              //To the .txt file if it already exists
+
+              //Break apart the this.currentPatientCreds to get the fullName 
+                String fullName = this.currentPatientCreds.substring(0, this.currentPatientCreds.indexOf("/")-3);
+
+
+              //Open File for Writing (If the .txt does not exist it will be created)
+                FileWriter fileWriter = new FileWriter(fullName.replaceAll(",", "") + "VisitSummarys.txt");
+
+
+              //Collect all of the information from the text boxes/areas 
+              //then write it to the .txt file via appending
+              
+
+
+
+              //Contents
+              /*
+                [Date]: <Date>
+                \n
+                \t[Vitals]:
+
+                \t\t[Weight]: <Weight Here, loaded from weightTxt>
+
+                \t\t[Height]: <Height Here, loaded from heightTxt>
+
+                \t\t[Body Temperature]:
+
+                \t\t[Blood Pressure]:
+                    
+
+                \t
+
+              
+              
+              */
+
+
+            }
+            catch(IOException n){
+              //Do nothing...
+            }
+
+
+
+          });
+
+
+        //Conduct Exam {Doctor}
+          conductExam.setOnAction(e -> {
+            //Call upon the conductExam Method
+              conductExam();
+          });
+
+
+        //Exit  {Both}
+          goBack.setOnAction(e -> {
+            //Call upon the Display portal method [Same for both]
+              displayPortal();
+          });
+      //====================================================================
+
+      //Alignments
+      //====================================================================
+        //VBox that stores the Buttons/Functionality of the Visit Form Page
+          VBox buttonContainer;
+
+        //If-statement that checks for which type of user is using the program & then
+        //The buttons will change depending on what is chosen
+          if(this.staffId == "Nurse"){
+            //[Submit for Physical] &&  [Exit]
+              buttonContainer = new VBox(10, submitPhysical, goBack);
+          }
+          //Else, Doctor is using Program   [Doctor's: 'Patient Visit Form' Method]
+          else{
+            //[Conduct Exam]  &&  [Exit]
+              buttonContainer = new VBox(10, conductExam, goBack);
+          }
+
+
+        //Patient Credentials (laoded via method, 
+        //this method also updates the priv data holding the current/visiting patient's info)
+          VBox vertical0 = new VBox(10, patientCredsBox(), buttonContainer);
+            //^^Includes patients Vitals!!! VBox
+
+          
+        //Final Vertical Alignment
+          HBox finalLayout = new HBox(10, vertical0);
+            //Set the final adjustments??
+              finalLayout.setAlignment(Pos.CENTER);
+            //Set the background color of the gui
+              finalLayout.setStyle("-fx-background-color: #3A3A3A;");
+      //====================================================================
+
 
       //Build the Scene
         Scene mainLayout = new Scene(finalLayout, 1024,768);
       //Return the Scene
         return mainLayout;
     }
-
+//}
   
   //This will return something that has a dropdown menu that will load all of the 
   //NEW!!!
   //Make a VBox method that returns the "Patient Summary VBox", which is loaded via the String variable in the parameter
+ // /*
     private VBox patientCredsBox(){
       //Labels, Text Boxes{will load data from the DropDown}, DropDown, ActionEvent, Alignment, Return VBox
 
@@ -299,7 +435,7 @@ public class NursePortal{
         //Patient Credentials:
           Label patientCredsLbl = new Label("Patient Credentials:");
             //Set the dimension & Style
-              patientCredsLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+              patientCredsLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");
 
         //Select Patient  [Displayed next to or above the dropdown menu]
           Label patientSelectLbl = new Label("Select Patient:");
@@ -442,10 +578,6 @@ public class NursePortal{
           catch(IOException e){
             //Do nothing...
           }
-
-
-        //Load the
-
       //===========================================================================
 
 
@@ -453,7 +585,19 @@ public class NursePortal{
       //===========================================================================
         //DropDown Menu Selection 
           dropDown.setOnAction(event -> {
-            //Get the selected item and make sure that 
+            //Get the selected item for setting up the test boxes with the patients information
+              //System.out.println(dropDown.getValue());
+
+            //Save the Selected patient's name to the current patient priv data string
+              this.currentPatientCreds = dropDown.getValue();
+
+            //Debug
+              System.out.println("Current Patient: " + this.currentPatientCreds);
+
+
+            //Place the selected string/credentials into private String that holds the
+            //this.currentPatientCreds
+            
 
           });
       //===========================================================================
@@ -486,6 +630,8 @@ public class NursePortal{
               credSection.setMaxSize(400, 400);
             //Set the alignment of the VBox
               credSection.setAlignment(Pos.CENTER);
+            //Set the background color of the VBox
+              credSection.setStyle("-fx-background-color: lightblue; -fx-border-radii: 10; -fx-background-radii: 10;");
 
         //Encapsulating VBox that we will return
           VBox mainLayout = new VBox(10, patientCredsLbl, credSection);
@@ -496,6 +642,13 @@ public class NursePortal{
       //Return the VBox
         return mainLayout;
     }
+
+
+    //Empty method that will be Overrided by the DoctorPortal!!
+      private Scene conductExam(){
+        //Return null, as the Nurse will NOT use this method
+          return null;
+      }
 
 
 
@@ -773,8 +926,7 @@ public class NursePortal{
         //Return the Scene
           return mainLayout;
       }
-
-
+    
 
   //Getters & Setters
   //-------------------------------------------------------------------------------------------------------
@@ -817,4 +969,4 @@ public class NursePortal{
   
   //*/
   //------------------------------------------------------------------------------
-}
+  }
