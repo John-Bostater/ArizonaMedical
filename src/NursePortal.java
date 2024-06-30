@@ -350,6 +350,16 @@ public class NursePortal{
               bloodPressureTxt.setStyle("-fx-font-size: 14px;");
 
 
+        //Date Display (Load the current date to be displayed within the text box (user can manipulate))
+          TextArea dateTxt = new TextArea();
+            //Set the dimension & style
+              dateTxt.setPrefSize(100, 30);
+              dateTxt.setMinSize(100, 30);
+              dateTxt.setMaxSize(100, 30);
+            //Set the style of the text box
+              dateTxt.setStyle("-fx-font-size: 14px;");
+
+
         //Nurse's Notes:
           TextArea nursesNotesTxt = new TextArea("<Know Allergies & Other Health Concerns>");
             //Set the dimension & style
@@ -380,7 +390,7 @@ public class NursePortal{
         //Open the file for reading to load all potential data
         try{
           //VisitSummary.txt file
-            File visitSummaryFile = new File(this.currentPatientCreds + "VisitSummary.txt");
+            File visitSummaryFile = new File(this.currentPatientCreds + "VisitSummarys.txt");
 
           //See if the file exists
             if(visitSummaryFile.exists() && this.currentPatientCreds != ""){
@@ -389,8 +399,31 @@ public class NursePortal{
               //File Reader
                 Scanner fileReader = new Scanner(visitSummaryFile);
 
-              //Read line for line
+              //Read text file line for line
+                while(fileReader.hasNextLine()){
+                  //String that holds the line being read
+                    String line = fileReader.nextLine();
 
+
+                  //Relevant Flag's for data collection
+                    //
+
+
+                  //Load the vitals {Doctor}
+                    if(this.staffId == "Doctor" && line.contains("\t[Vitals]:")){
+
+
+                    }
+
+
+                  //Load the Nurse's Notes  {Doctor}
+
+
+                  //Load the Previous History {Both}
+
+                }
+              //Close the file reader
+                fileReader.close();
 
             }
 
@@ -466,7 +499,7 @@ public class NursePortal{
 
               //Collect all of the information from the text boxes/areas 
               //then write it to the .txt file via appending
-                String physicalExam = "[Date]: " /*+ dobTxt*/ + "\n" + "\t[Vitals]" 
+                String physicalExam = "[Exam #" + (getTotalExams()+1) + "]:" /*+ dateTxt*/ + "\n" + "\t[Vitals]" 
                   + "\n"
                   + "\t\t[Weight]: " + weightTxt.getText().trim() + " lbs"
                   + "\n"
@@ -833,6 +866,79 @@ public class NursePortal{
     }
 
 
+  //Collect the total number of exam dates for a selected patient
+    private short getTotalExams(){
+      //Open the file for r
+
+      //Open file for reading & collecting the total number of examinations
+      try{
+        //Get the patients full Name
+          String fullName = this.currentPatientCreds.substring(0, this.currentPatientCreds.indexOf("/")-3).replaceAll(",", "");
+
+
+        //DEBUG!!
+          System.out.println("Full Name: " + fullName + "VisitSummarys.txt");
+
+
+        //Open <Patient Name>VisitSummary.txt for reading
+          File visitSummaryFile = new File(fullName.trim() + "VisitSummarys.txt");
+
+
+        //Holds count of the number of exam dates
+          short totalExams = 0;
+
+    
+        //If the file exists, start collecting
+          if(visitSummaryFile.exists()){
+            System.out.println("File Exists!!");
+
+
+            //File Reader
+              Scanner fileReader = new Scanner(visitSummaryFile);
+
+           //Start reading
+            while(fileReader.hasNextLine()){
+              //String for holding the line being read
+                String line = fileReader.nextLine();
+
+              //New exam encountered, increment the count
+                if(line.contains("[Exam #")){
+                  //Update count
+                    totalExams++;
+
+                  //DEBUG!!
+                    System.out.println("Exam Found!: " + totalExams);
+                }
+            }
+
+            //Close the file reader
+              fileReader.close();
+              //visitSummaryFile.close();        
+
+            //Return the total number of exams
+              return totalExams;
+          }
+        //File does not exist or this is the first entry
+          else{
+            //Return total number (0)
+              return totalExams;
+          }
+
+      }
+      catch(IOException a){
+        //Do nothing
+          return -1;
+      }
+
+    }
+
+
+
+
+
+
+  //[DOCTOR'S METHODS!!]
+  //
   //Empty method that will be Overrided by the DoctorPortal!!
     private Scene conductExam(){
       //Return null, as the Nurse will NOT use this method
