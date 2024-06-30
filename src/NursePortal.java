@@ -124,7 +124,7 @@ public class NursePortal{
       //===========================================================================
         //New Visit Form
           Button newVisitButton = new Button("New Visit Form");
-            newVisitButton = new Button("New Visit Form");
+            //newVisitButton = new Button("New Visit Form");
             //Set the Dimensions of the Button
               newVisitButton.setPrefSize(200, 45);
               newVisitButton.setMinSize(200, 45);
@@ -215,25 +215,27 @@ public class NursePortal{
         //Vitals
           Label vitalsLbl = new Label("Vitals:");
             //Set the Dimensions & Font style
-              vitalsLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
-             
-
+              vitalsLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 28px; -fx-text-fill: white;");
+  
           //Weight
-            Label weightLbl = new Label("Weight:");
+            Label weightLbl = new Label("Weight:\t\t\t ");
               //Set the dimensions & font weight
                 weightLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
                 //Code here
+              //NEW!!
+                //weightLbl.setPadding(0,0,30,0);
+                weightLbl.setAlignment(Pos.CENTER_LEFT);
 
           //Height
-            Label heightLbl = new Label("Height:");
+            Label heightLbl = new Label("Height:\t\t\t ");
               //Set the dimensions & font weight
                 heightLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
                 //Code here
 
           //Feet/Inches
-            Label feetInchLbl = new Label("<Ft>\'<In>\":");
+            Label feetInchLbl = new Label("<Ft>\'<In>\"");
               //Set the dimensions & font weight
-                feetInchLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
+                feetInchLbl.setStyle("-fx-font-size: 18px");
                 //Code here
 
           //Body Temperature
@@ -244,11 +246,10 @@ public class NursePortal{
                 //Code here
 
           //Blood Pressure
-            Label bloodPressureLbl = new Label("Blood Pressure:");
+            Label bloodPressureLbl = new Label("Blood Pressure:\t ");
               //Set the dimensions & font weight
                 bloodPressureLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
                 //Code here
-
 
           //Farenheit Label
             Label farenheitLbl = new Label("F°");
@@ -281,27 +282,27 @@ public class NursePortal{
         //First Name Text Box
           TextArea firstNameTxt = new TextArea();
             //Set the dimensions
-              firstNameTxt.setPrefSize(100, 30);
-              firstNameTxt.setMinSize(100, 30);
-              firstNameTxt.setMaxSize(100, 30);
+              firstNameTxt.setPrefSize(120, 30);
+              firstNameTxt.setMinSize(120, 30);
+              firstNameTxt.setMaxSize(120, 30);
             //Set the style of the text box
               firstNameTxt.setStyle("-fx-font-size: 14px;");
 
         //Last Name Text Box
           TextArea lastNameTxt = new TextArea();
             //Set the dimensions
-              lastNameTxt.setPrefSize(100, 30);
-              lastNameTxt.setMinSize(100, 30);
-              lastNameTxt.setMaxSize(100, 30);
+              lastNameTxt.setPrefSize(110, 30);
+              lastNameTxt.setMinSize(110, 30);
+              lastNameTxt.setMaxSize(110, 30);
             //Set the style of the text box
               lastNameTxt.setStyle("-fx-font-size: 14px;");
 
         //Date of Birth Text Box
           TextArea dobTxt = new TextArea();
             //Set the dimensions
-              dobTxt.setPrefSize(100, 30);
-              dobTxt.setMinSize(100, 30);
-              dobTxt.setMaxSize(100, 30);
+              dobTxt.setPrefSize(110, 30);
+              dobTxt.setMinSize(110, 30);
+              dobTxt.setMaxSize(110, 30);
             //Set the style of the text box
               dobTxt.setStyle("-fx-font-size: 14px;");
 
@@ -309,9 +310,9 @@ public class NursePortal{
         //Weight
           TextArea weightTxt = new TextArea();
             //Set the dimension & style
-              weightTxt.setPrefSize(100, 30);
-              weightTxt.setMinSize(100, 30);
-              weightTxt.setMaxSize(100, 30);
+              weightTxt.setPrefSize(45, 30);
+              weightTxt.setMinSize(45, 30);
+              weightTxt.setMaxSize(45, 30);
             //Set the style of the text box
               weightTxt.setStyle("-fx-font-size: 14px;");
 
@@ -319,19 +320,21 @@ public class NursePortal{
         //Height
           TextArea heightTxt = new TextArea();
             //Set the dimension & style
-              heightTxt.setPrefSize(100, 30);
-              heightTxt.setMinSize(100, 30);
-              heightTxt.setMaxSize(100, 30);
+              heightTxt.setPrefSize(55, 30);
+              heightTxt.setMinSize(55, 30);
+              heightTxt.setMaxSize(55, 30);
             //Set the style of the text box
               heightTxt.setStyle("-fx-font-size: 14px;");
+            //Set the padding
+             // heightTxt.setPadding(new Insets(0,0,20,0));
               
 
         //Body Temperature
           TextArea bodyTempTxt = new TextArea();
             //Set the dimension & style
-              bodyTempTxt.setPrefSize(100, 30);
-              bodyTempTxt.setMinSize(100, 30);
-              bodyTempTxt.setMaxSize(100, 30);
+              bodyTempTxt.setPrefSize(50, 30);
+              bodyTempTxt.setMinSize(50, 30);
+              bodyTempTxt.setMaxSize(50, 30);
             //Set the style of the text box
               bodyTempTxt.setStyle("-fx-font-size: 14px;");
 
@@ -344,8 +347,6 @@ public class NursePortal{
               bloodPressureTxt.setMaxSize(100, 30);
             //Set the style of the text box
               bloodPressureTxt.setStyle("-fx-font-size: 14px;");
-
-
       //====================================================================
 
 
@@ -358,7 +359,7 @@ public class NursePortal{
               submitPhysical.setMinSize(100, 30);
               submitPhysical.setMaxSize(100, 30);
             //Set the style of the Button
-              submitPhysical.setStyle("-fx-font-size: 14px;");
+              submitPhysical.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
 
         //Conduct Exam {Doctor}
@@ -368,7 +369,7 @@ public class NursePortal{
               conductExam.setMinSize(100, 30);
               conductExam.setMaxSize(100, 30);
             //Set the style of the Button
-              conductExam.setStyle("-fx-font-size: 14px;");
+              conductExam.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
 
         //Exit  {Both}
@@ -378,7 +379,7 @@ public class NursePortal{
               goBack.setMinSize(100, 30);
               goBack.setMaxSize(100, 30);
             //Set the style of the Button
-              goBack.setStyle("-fx-font-size: 14px;");
+              goBack.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
       //====================================================================
 
 
@@ -480,54 +481,62 @@ public class NursePortal{
           if(this.staffId == "Nurse"){
             //[Submit for Physical] &&  [Exit]
               buttonContainer = new VBox(10, submitPhysical, goBack);
+            //Set the alignment of the buttons
+              buttonContainer.setAlignment(Pos.CENTER);
           }
           //Else, Doctor is using Program   [Doctor's: 'Patient Visit Form' Method]
           else{
             //[Conduct Exam]  &&  [Exit]
               buttonContainer = new VBox(10, conductExam, goBack);
+            //Set the alignment of the buttons
+              buttonContainer.setAlignment(Pos.CENTER);
           }
 
-        //Vitals Horizontal Alignments
+        //Weight Horizontal Alignments
           HBox horizontal0 = new HBox(5, weightTxt, lblsLbl);
-            //Set the alignment of the horizontal items
-              horizontal0.setAlignment(Pos.CENTER);
-
-
-        //Vitals Horizontal Alignments
+    
+        //Height Horizontal Alignments
           HBox horizontal1 = new HBox(5, heightTxt, feetInchLbl);
-            //Set the alignment of the horizontal items
-              horizontal1.setAlignment(Pos.CENTER);
-
-        //Vitals Horizontal Alignments
+          
+        //Body Temperature Horizontal Alignments
           HBox horizontal2 = new HBox(5, bodyTempTxt, farenheitLbl);
-            //Set the alignment of the horizontal items
-              horizontal2.setAlignment(Pos.CENTER);
+            
+        //Blood Pressure Horizontal Alignments
+          HBox horizontal3 = new HBox(5, bloodPressureTxt, bloodPressureLbl);
 
 
         //Vertical alignment for the vitals entry box
-          VBox vitalsBox = new VBox(5, weightLbl, horizontal0, heightLbl, horizontal1, bodyTempLbl, horizontal2);
+          VBox vitalsBox = new VBox(5, weightLbl, horizontal0, heightLbl, horizontal1, bodyTempLbl, horizontal2, bloodPressureLbl, horizontal3);
             //Set the dimension of the vitals box
-              vitalsBox.setPrefSize(300, 300);
-              vitalsBox.setMinSize(300, 300);
-              vitalsBox.setMaxSize(300, 300);
+              vitalsBox.setPrefSize(225, 300);
+              vitalsBox.setMinSize(225, 300);
+              vitalsBox.setMaxSize(225, 300);
             //Set the background color of the vitals box
               vitalsBox.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
             //Set the alignment
-              //vitalsBox.setAlignment(Pos.CENTER);
+            //  vitalsBox.setAlignment(Pos.CENTER);
+              vitalsBox.setPadding(new Insets(30));
+              vitalsBox.setAlignment(Pos.CENTER);
+            
 
         //Vitals Encapsulating Vertical Alignment
           VBox vitalsAlignBox = new VBox(5, vitalsLbl, vitalsBox);
+            //Set Alignment
+              vitalsAlignBox.setPadding(new Insets(0,0,30,0));
+              //NEW
+                vitalsAlignBox.setAlignment(Pos.CENTER);
 
         //Patient Credentials (laoded via method, 
         //this method also updates the priv data holding the current/visiting patient's info)
-          VBox vertical0 = new VBox(10, patientCredsBox(), vitalsBox, buttonContainer);
-            //^^Includes patients Vitals!!! VBox
+          VBox vertical0 = new VBox(5, patientCredsBox(), vitalsAlignBox, buttonContainer);
+            //Set the alignment of the Encapsulating box
+              vertical0.setAlignment(Pos.CENTER);
 
 
         //Final Vertical Alignment
           HBox finalLayout = new HBox(10, vertical0);
             //Set the final adjustments??
-              finalLayout.setAlignment(Pos.CENTER);
+              //finalLayout.setAlignment(Pos.CENTER);
             //Set the background color of the gui
               finalLayout.setStyle("-fx-background-color: #3A3A3A;");
       //====================================================================
@@ -552,25 +561,25 @@ public class NursePortal{
         //Patient Credentials:
           Label patientCredsLbl = new Label("Patient Credentials:");
             //Set the dimension & Style
-              patientCredsLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");
+              patientCredsLbl.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;");
 
         //Select Patient  [Displayed next to or above the dropdown menu]
           Label patientSelectLbl = new Label("Select Patient:");
             //Set the dimension & style
-              patientSelectLbl.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+              patientSelectLbl.setStyle("-fx-font-size: 22px; -fx-font-weight: bold;");
 
         //First Name
-          Label firstNameLbl = new Label("   First Name:");
+          Label firstNameLbl = new Label("First Name:");
             //Set the dimension & style
               firstNameLbl.setStyle("-fx-font-size: 20px;");
 
         //Last Name
-          Label lastNameLbl = new Label("   Last Name:");
+          Label lastNameLbl = new Label("Last Name:");
             //Set the dimension & style
               lastNameLbl.setStyle("-fx-font-size: 20px;");
 
         //Date Of Birth
-          Label dobLbl = new Label("   Date of Birth:");
+          Label dobLbl = new Label("Date of Birth:");
             //Set the dimension & style
               dobLbl.setStyle("-fx-font-size: 20px;");
 
@@ -586,18 +595,18 @@ public class NursePortal{
         //First Name Text Box
           TextArea firstNameTxt = new TextArea();
             //Set the dimensions
-              firstNameTxt.setPrefSize(100, 30);
-              firstNameTxt.setMinSize(100, 30);
-              firstNameTxt.setMaxSize(100, 30);
+              firstNameTxt.setPrefSize(125, 30);
+              firstNameTxt.setMinSize(125, 30);
+              firstNameTxt.setMaxSize(125, 30);
             //Set the style of the text box
               firstNameTxt.setStyle("-fx-font-size: 14px;");
 
         //Last Name Text Box
           TextArea lastNameTxt = new TextArea();
             //Set the dimensions
-              lastNameTxt.setPrefSize(100, 30);
-              lastNameTxt.setMinSize(100, 30);
-              lastNameTxt.setMaxSize(100, 30);
+              lastNameTxt.setPrefSize(125, 30);
+              lastNameTxt.setMinSize(125, 30);
+              lastNameTxt.setMaxSize(125, 30);
             //Set the style of the text box
               lastNameTxt.setStyle("-fx-font-size: 14px;");
 
@@ -744,6 +753,8 @@ public class NursePortal{
               credSection.setAlignment(Pos.CENTER);
             //Set the background color of the VBox
               credSection.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
+            //Set the padding of the VBox
+              credSection.setPadding(new Insets(30));
 
         //Encapsulating VBox that we will return
           VBox mainLayout = new VBox(10, patientCredsLbl, credSection);
