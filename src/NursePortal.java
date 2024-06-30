@@ -215,40 +215,50 @@ public class NursePortal{
         //Vitals
           Label vitalsLbl = new Label("Vitals:");
             //Set the Dimensions & Font style
-              //   vitalsLbl.setPrefSize();
+              vitalsLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
+             
 
           //Weight
             Label weightLbl = new Label("Weight:");
-              //Set the dimensions & font style
+              //Set the dimensions & font weight
+                weightLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
                 //Code here
 
           //Height
             Label heightLbl = new Label("Height:");
-              //Set the dimensions & font style
+              //Set the dimensions & font weight
+                heightLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
                 //Code here
 
           //Feet/Inches
-            Label feetInchLbl = new Label("Feet/Inches:");
-              //Set the dimensions & font style
+            Label feetInchLbl = new Label("<Ft>\'<In>\":");
+              //Set the dimensions & font weight
+                feetInchLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
                 //Code here
 
           //Body Temperature
             Label bodyTempLbl = new Label("Body Temperature:");
-              //Set the dimensions & font style
+              //Set the dimensions & font weight
+                bodyTempLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
 
                 //Code here
 
           //Blood Pressure
             Label bloodPressureLbl = new Label("Blood Pressure:");
-              //Set the dimensions & font style
+              //Set the dimensions & font weight
+                bloodPressureLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
                 //Code here
+
+          //Farenheit Label
+            Label farenheitLbl = new Label("F°");
 
         //Patient's Previous History
           Label previousHistoryLbl = new Label("Patient's Previous History:");
-            //Set the dimensions & font style
+            //Set the dimensions & font weight
+              previousHistoryLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
               //Code here...
 
-
+      
         //Nurse's Notes
           Label nurseNotesLbl = new Label("Nurse's Notes:");
             //Set the dimension & font style
@@ -389,27 +399,34 @@ public class NursePortal{
               //Break apart the this.currentPatientCreds to get the fullName 
                 String fullName = this.currentPatientCreds.substring(0, this.currentPatientCreds.indexOf("/") - 3);
 
+
+              //TAKE INTO CONSIDERATION OR!! DO error Exception on this!!!
+              //If the DropDown menu is not activated throw an error notfication
+               
+
               //Open File for Writing (If the .txt does not exist it will be created)
                 FileWriter fileWriter = new FileWriter(fullName.replaceAll(",", "") + "VisitSummarys.txt");
 
 
               //Collect all of the information from the text boxes/areas 
               //then write it to the .txt file via appending
-                String physicalExam = "[Date]: " /*+ dobTxt*/ + "\n"
-                  + "\t[Vitals]" 
+                String physicalExam = "[Date]: " /*+ dobTxt*/ + "\n" + "\t[Vitals]" 
                   + "\n"
-                  + "\t\t[Weight]: " + weightTxt 
+                  + "\t\t[Weight]: " + weightTxt.getText() 
                   + "\n"
-                  + "\t\t[Height]: " + heightTxt
+                  + "\t\t[Height]: " + heightTxt.getText()
                   + "\n"
-                  + "\t\t[Body Temperature]: " + bodyTempTxt
+                  + "\t\t[Body Temperature]: " + bodyTempTxt.getText()
                   + "\n"
-                  + "\t\t[Blood Pressure]: " + bloodPressureTxt;
-
-
+                  + "\t\t[Blood Pressure]: " + bloodPressureTxt.getText()
+                  + "\n\n";
+                
               //DEBUG
-                System.out.println("Physical exam summary: " + physicalExam);
+                System.out.println("Physical exam summary: \n" + physicalExam);
 
+
+              //Close the file Writer
+                fileWriter.close(); 
 
               //Contents
               /*
@@ -425,7 +442,6 @@ public class NursePortal{
                 \n
                 \t\t[Blood Pressure]:
               */
-
 
 
             }
@@ -469,21 +485,35 @@ public class NursePortal{
               buttonContainer = new VBox(10, conductExam, goBack);
           }
 
-
-        //Patient Credentials (laoded via method, 
-        //this method also updates the priv data holding the current/visiting patient's info)
-          VBox vertical0 = new VBox(10, patientCredsBox(), buttonContainer);
-            //^^Includes patients Vitals!!! VBox
-
-
         //Vitals Horizontal Alignments
           HBox horizontal0 = new HBox(5, weightTxt, lblsLbl);
 
+        //Vitals Horizontal Alignments
+          HBox horizontal1 = new HBox(5, heightTxt, feetInchLbl);
 
-        //Vitals Vertical Alignments
+        //Vitals Horizontal Alignments
+          HBox horizontal2 = new HBox(5, bodyTempTxt, farenheitLbl);
 
 
-          
+        //Vertical alignment for the vitals entry box
+          VBox vitalsBox = new VBox(5, weightLbl, horizontal0, heightLbl, horizontal1, bodyTempLbl, horizontal2);
+            //Set the dimension of the vitals box
+              vitalsBox.setPrefSize(300, 300);
+              vitalsBox.setMinSize(300, 300);
+              vitalsBox.setMaxSize(300, 300);
+            //Set the background color of the vitals box
+              vitalsBox.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
+
+
+        //Vitals Encapsulating Vertical Alignment
+          VBox vitalsAlignBox = new VBox(5, vitalsLbl, vitalsBox);
+
+        //Patient Credentials (laoded via method, 
+        //this method also updates the priv data holding the current/visiting patient's info)
+          VBox vertical0 = new VBox(10, patientCredsBox(), vitalsBox, buttonContainer);
+            //^^Includes patients Vitals!!! VBox
+
+
         //Final Vertical Alignment
           HBox finalLayout = new HBox(10, vertical0);
             //Set the final adjustments??
@@ -668,13 +698,20 @@ public class NursePortal{
             //Save the Selected patient's name to the current patient priv data string
               this.currentPatientCreds = dropDown.getValue();
 
-            //Debug
-              System.out.println("Current Patient: " + this.currentPatientCreds);
+            //Load the patients data into the relevant TextBoxes
+              String fullName = dropDown.getValue().substring(0, dropDown.getValue().indexOf("/")-3).replace(",", " ");
 
+            //NEW!!!
+              //DEbug
+              System.out.println("FullName: " + fullName);
 
-            //Place the selected string/credentials into private String that holds the
-            //this.currentPatientCreds
-            
+            //NEW!!!
+              //DEbug
+              System.out.println("First Name: " + fullName.substring(0, fullName.indexOf(" ")));
+
+            //NEW!!!
+              //DEbug
+              System.out.println("First Name: " + fullName.substring(fullName.indexOf(" "), fullName.length()));
 
           });
       //===========================================================================
@@ -699,6 +736,7 @@ public class NursePortal{
             //Set the alignment of the VBox
               dropDownBox.setAlignment(Pos.CENTER);
         
+
         //Credentials Section 
           VBox credSection = new VBox(5, dropDownBox, horizontal0, horizontal1, horizontal2);
             //Set the dimensions, style, & color
@@ -708,7 +746,7 @@ public class NursePortal{
             //Set the alignment of the VBox
               credSection.setAlignment(Pos.CENTER);
             //Set the background color of the VBox
-              credSection.setStyle("-fx-background-color: lightblue; -fx-border-radii: 10; -fx-background-radii: 10;");
+              credSection.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
 
         //Encapsulating VBox that we will return
           VBox mainLayout = new VBox(10, patientCredsLbl, credSection);

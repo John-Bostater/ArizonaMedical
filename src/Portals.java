@@ -160,9 +160,9 @@ public class Portals {
            	    patientLogin.setMaxSize(120, 50);
            	    patientLogin.setMinSize(120, 50);
 	          //[Width x Height]
-           	    staffLogin.setPrefSize(75, 50);  
-           	    staffLogin.setMaxSize(75, 50);
-           	    staffLogin.setMinSize(75, 50);
+           	    staffLogin.setPrefSize(100, 50);  
+           	    staffLogin.setMaxSize(100, 50);
+           	    staffLogin.setMinSize(100, 50);
            	  //[Width x Height]
            	    exitProg.setPrefSize(80, 45);  
            	    exitProg.setMaxSize(80, 45);
