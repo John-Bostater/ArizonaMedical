@@ -151,7 +151,7 @@ public class PatientPortal{
     //[NEW NOTE: this method will be used for every "exit" button within the other methods below]
       public void displayPortal() {
         //Debug Print
-          System.out.println("Login Successful!!");
+          //System.out.println("Login Successful!!");
 
 
         //Buttons
@@ -783,7 +783,7 @@ public class PatientPortal{
             try{
               //NEW!!!
               //DEBUG!!!
-                System.out.println("FullName: " + this.fullName + "<White space check>");
+               // System.out.println("FullName: " + this.fullName + "<White space check>");
 
 
               //Open: PatientInfo.txt
@@ -796,21 +796,26 @@ public class PatientPortal{
               //Counter for: examDate[counter] = <Exam Date String> 
                 short counter = 0;
 
+              //Collect the String line by line
+                String line = "";
+
+
              //Read the file Line-by-Line and compare the strings for a match
                while(fileReader.hasNextLine()) {
-                 //Gather and store the 
-                   String line = fileReader.nextLine(); //Starts at the first line of text in .txt file
+                 //Gather and store the line being read
+                  line = fileReader.nextLine(); //Starts at the first line of text in .txt file
 
-                //DEBUG!!
-                  System.out.println("Line: " + line);
 
                  //Collect all of the exam dates
-                   if(line.contains("[Date]:") && !line.contains("[Date]: <PlaceHolder!>")){   
-                      //Collect the
+                   if(!dateFound && line.contains("[Date]:")){  
+                      //Add the exam # 
+                       visitSummary = "[Exam #" + (counter+1) + "]:\n";
+
+                      //Set the flag to true (corresponding date found)
                         dateFound = true;
                      
                       //Instantiate the visitSummary String 
-                        visitSummary = "[Date]: " + line.substring(8, line.length()).trim() + "\n";
+                        visitSummary += "[Date]: " + line.substring(8, line.length()).trim() + "\n";
 
                       //Collect the exam date
                         examDates[counter] += line.substring(8, line.length());
@@ -829,7 +834,7 @@ public class PatientPortal{
                    else{
                     //If the patient is found start collecting their data!!
                       if(dateFound && !line.contains("[Exam #")){
-                        //Collect the data
+                        //Collect the data!
                           visitSummary += line + "\n";
                       }
                       else if(dateFound && line.contains("[Exam #")){
@@ -1112,7 +1117,7 @@ public class PatientPortal{
                     if(getMessages() != "<Inbox Empty>"){
                       //DEBUG
                        //All messages in the .txt file
-                       System.out.println("Inbox: \n" + getMessages());
+                       //System.out.println("Inbox: \n" + getMessages());
       
                       //DEbug
                         //Print the last message sent/saved in the global variable

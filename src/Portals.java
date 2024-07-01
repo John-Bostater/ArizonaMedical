@@ -862,7 +862,7 @@ public class Portals {
 	        	//HAVE TEXT THAT NOTIFIES THE USER OF THE NEW ACCOUNT CREATED AND HOW THEY 
 	        	//CAN ENTER HIT the LOGIN button TO proceed to the patient portal
 			  //Update the flag
-				//isNotified = false;
+				isNotified = false;
 
 			  //Make the user text entry box bigger
 			  	credContainer.setPrefSize(600,375);
@@ -909,6 +909,9 @@ public class Portals {
 			  //Flag to make sure the user has correctly entered their data to the field
 			    boolean validEntry = true;
 
+			  //DEBUG!!
+			  	System.out.println("Here??");
+
 
 			  //Check that all textFields have an entry & their minimum text length is met 
   			  //Use this knowledge to construct a simple if-branch
@@ -918,7 +921,10 @@ public class Portals {
 					|| monthTxt.getText().length() != 2
 					|| dayTxt.getText().length() != 2
 					|| yearTxt.getText().length() != 4 
-				  ){
+				){
+					//DEBUG!!
+					  System.out.println("Login error!!!");
+
 					//Update the flag so the user cannot proceed to making a new account
 					  validEntry = false;
 
@@ -969,7 +975,7 @@ public class Portals {
 					  //Update the notification text/label and add it to the GUI Display
 						notificationTxt = new Label("*Account already exists, you may proceed to login.");
 						  //Set the color of the text
-						  	notificationTxt.setStyle("-fx-text-fill: white;");
+						  	notificationTxt.setStyle("-fx-text-fill: white; -fx-font-size: 16px;");
 
 					  //Clear the functionality container & any other notifications
 					  	buttonContainer.getChildren().clear();

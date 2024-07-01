@@ -518,7 +518,7 @@ public class NursePortal{
                       && !line.isEmpty()
                 ){
                   //DEBUG
-                    System.out.println("Line: " + line);
+                  //  System.out.println("Line: " + line);
 
                   //Add the line to the String
                     //Code here...
@@ -1048,6 +1048,7 @@ public class NursePortal{
             ){
               //DEBUG PRINT
               //  System.out.println("Weight is missing!!!");
+              
               //Remove any old notifications!
                 vertical1.getChildren().remove(this.notificationLbl);
 
@@ -1085,11 +1086,12 @@ public class NursePortal{
                 FileWriter fileWriter = new FileWriter(fullName.replaceAll(",", "") + "VisitSummarys.txt", true);
                   //'true' is so we can append text to the file
 
+
               //Collect all of the information from the text boxes/areas 
               //then write it to the .txt file via appending
                 String physicalExam = "[Exam #" + (getTotalExams()+1) + "]:"
                   + "\n"
-                  + "[Date]: " +  "<PlaceHolder!>"
+                  + "[Date]: " +  "12356"
                   + "\n\n" 
                   + "[Vitals]:" 
                   + "\n"
@@ -1112,7 +1114,6 @@ public class NursePortal{
               //Append the Visit Form to the Patient's current visit Summary
                 fileWriter.append(physicalExam);
 
-
               //Notify the user that they have successfully saved the exam form
                 if(!isNotified){
                   //Set up the notification label
@@ -1126,8 +1127,6 @@ public class NursePortal{
                   //Set the flag to true
                     isNotified = true;
                 }
-
-
 
               //DEBUG
                 System.out.println("Physical exam summary: \n" + physicalExam);
