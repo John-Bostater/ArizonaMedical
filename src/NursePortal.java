@@ -437,18 +437,7 @@ public class NursePortal{
             //Set the style of the Button
               conductExam.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
-
-        //NEW!!
-        //Load the Patients data from the dropdown menu!! {Doctor}
-          Button loadPatientData = new Button("NEW!!!!");
-            //Button size
-              loadPatientData.setPrefSize(150, 40);
-              loadPatientData.setMinSize(150, 40);
-              loadPatientData.setMaxSize(150, 40);
-            //Set the style of the Button
-              loadPatientData.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
           
-
         //Exit  {Both}
           Button goBack = new Button("Exit");
             //Button size
@@ -903,9 +892,8 @@ public class NursePortal{
           }
           //Else, Doctor is using Program   [Doctor's: 'Patient Visit Form' Method]
           else{ //{DOCTOR}
-
             //[Conduct Exam]  &&  [Exit]
-              buttonContainer = new VBox(10, loadPatientData, conductExam, goBack);
+              buttonContainer = new VBox(10, conductExam, goBack);
             //Set the alignment of the buttons
               buttonContainer.setAlignment(Pos.CENTER);
           }
