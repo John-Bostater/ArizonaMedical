@@ -450,7 +450,7 @@ public class NursePortal{
 
 
       //NEW!!!
-            //DropDown Menu
+      //DropDown Menu
       //===========================================================================
         //Create the dropdown menu
           ComboBox<String> dropDown = new ComboBox<>();
@@ -648,6 +648,9 @@ public class NursePortal{
 
                         //Nurse's Notes Flag [Doctor]
                           if(line.contains("[Nurse's Notes]:") && collectData && this.staffId == "Doctor"){
+                            //Turn off any proceeding flags
+                              vitalsCollect = false;
+                            
                             //Empty the default text from String(s)
                               nursesNotesStr = "";
                             
@@ -660,6 +663,10 @@ public class NursePortal{
 
                         //Previous History Flag [Both]
                           if(line.contains("[History]:") && collectData){
+                            //NEW!!
+                            //Turn off any preceeding flags
+                              nursesNotesCollect = false;
+
                             //Empty the default text from String(s)
                               prevHistStr = "";
 

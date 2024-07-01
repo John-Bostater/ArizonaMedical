@@ -793,26 +793,27 @@ public class PatientPortal{
                   // }
 
                  //Collect all of the exam dates
-                   if(line.contains("[Date]:")){
-                      patientFound = true;
-                    //DEBUG!!!
-                    System.out.println("Date found!!");
+                   if(line.contains("[Date]:")){   
+                      //
+                        patientFound = true;
+                      //DEBUG!!!
+                      System.out.println("Date found!!");
 
-                    //Set the visitSummary to "" 
-                      visitSummary = "";
+                      //Set the visitSummary to "" 
+                        visitSummary = "";
 
-                    //Collect the exam date
-                      examDates[counter] += line.substring(8, line.length());
+                      //Collect the exam date
+                        examDates[counter] += line.substring(8, line.length());
 
-                    //Strip the exam Date string for the numbers to be mapped into hashmap
-                      uniqueKeyStr = line.replaceAll("\\D", "");  
-                      //Using regex to replace all non digits with ""
+                      //Strip the exam Date string for the numbers to be mapped into hashmap
+                        uniqueKeyStr = line.replaceAll("\\D", "");  
+                        //Using regex to replace all non digits with ""
 
-                    //Add the stripped number to the Integer/Key
-                       uniqueKeyInt = Integer.parseInt(uniqueKeyStr);
-         
-                    //increment counter
-                      counter++;
+                      //Add the stripped number to the Integer/Key
+                        uniqueKeyInt = Integer.parseInt(uniqueKeyStr);
+          
+                      //increment counter
+                        counter++;
                     }
                  //Collect the visit summary or break the reading loop at next patient's data
                    else{
