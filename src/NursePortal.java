@@ -424,7 +424,7 @@ public class NursePortal{
 
 
         //Date Text Box
-          TextArea dateTxt = new TextArea("mm/dd/yyyy");
+          TextArea dateTxt = new TextArea("00/00/0000");
             //Set the dimension & style
               dateTxt.setPrefSize(110, 35);
               dateTxt.setMinSize(110, 35);
@@ -1079,7 +1079,7 @@ public class NursePortal{
               //then write it to the .txt file via appending
                 String physicalExam = "[Exam #" + (getTotalExams()+1) + "]:"
                   + "\n"
-                  + "[Date]: " +  "12356"
+                  + "[Date]: " +  dateTxt.getText()
                   + "\n\n" 
                   + "[Vitals]:" 
                   + "\n"
