@@ -757,7 +757,7 @@ public class PatientPortal{
             try{
               //Open: PatientInfo.txt
               //Read the File with a scanner (easier to get Line by Line)
-                Scanner fileReader = new Scanner(new File("VisitSummary.txt"));
+                Scanner fileReader = new Scanner(new File(this.fullName.replaceAll(" ", "") + "VisitSummary.txt"));
 
               //Flag that "puts on the brakes" of the fileReader so it will
                 boolean patientFound = false;
@@ -771,19 +771,19 @@ public class PatientPortal{
                    String line = fileReader.nextLine(); //Starts at the first line of text in .txt file
 
                  //If-branch will activate data collection once the patient is found via their credentials
-                   if(line.contains("Patient: " + patientCredentials) && !patientFound){
+                  // if(line.contains("Patient: " + patientCredentials) && !patientFound){
                      //Debug print
-                       System.out.println("Patient has been found!");
+                      // System.out.println("Patient has been found!");
 
                      //Move to the next line
-                       line = fileReader.nextLine();
+                     //  line = fileReader.nextLine();
 
                      //Activate the flag
-                       patientFound = true;
-                   }
+                    //   patientFound = true;
+                  // }
 
                  //Collect all of the exam dates
-                   if(line.contains("Date: ") && patientFound){
+                   if(line.contains("[Exam #")){
                     //Set the visitSummary to "" 
                       visitSummary = "";
 

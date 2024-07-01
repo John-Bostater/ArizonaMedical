@@ -310,6 +310,12 @@ public class NursePortal{
           Label dobAlignLbl = new Label("(MM/DD/YYYY)");
             //Set the dimension & style
               dobAlignLbl.setStyle("-fx-font-size: 18px;");
+
+
+        //Exam Date
+          Label examDateLbl = new Label("Visit Date:");
+            //Set the font & style of the label
+              examDateLbl.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
       //====================================================================
 
 
@@ -407,9 +413,9 @@ public class NursePortal{
         //Previous Medications 
           TextArea previousMedHistTxt = new TextArea("<Previously Prescribed Medications>\n<Immunization History>\n<Previous Health Issues>");
             //Set the dimension & style
-              previousMedHistTxt.setPrefSize(500, 300);
-              previousMedHistTxt.setMinSize(500, 300);
-              previousMedHistTxt.setMaxSize(500, 300);
+              previousMedHistTxt.setPrefSize(500, 150);
+              previousMedHistTxt.setMinSize(500, 150);
+              previousMedHistTxt.setMaxSize(500, 150);
             //Set the style of the text box
               previousMedHistTxt.setStyle("-fx-font-size: 16px;");
             //Clear the text box when the user clicks on it to enter new text!
@@ -622,16 +628,16 @@ public class NursePortal{
                   //Vitals
                   //--------------------------------------------
                   //Weight
-                    String weightStr = "<No Value>";
+                    String weightStr = "";
 
                   //Height
-                    String heightStr = "<No Value>";
+                    String heightStr = "";
 
                   //Body Temperature
-                    String bodyTempStr = "<No Value>";
+                    String bodyTempStr = "";
 
                   //Blood Pressure
-                    String bloodPressureStr = "<No Value>";
+                    String bloodPressureStr = "";
                   //--------------------------------------------
 
 
@@ -972,9 +978,9 @@ public class NursePortal{
         //Vertical Alignments for the Patient's Previous History Notes
           VBox patientHistoryBox = new VBox(previousMedHistTxt);
             //Set the size & font
-              patientHistoryBox.setPrefSize(525, 325);
-              patientHistoryBox.setMinSize(525, 325);
-              patientHistoryBox.setMaxSize(525, 325);
+              patientHistoryBox.setPrefSize(525, 175);
+              patientHistoryBox.setMinSize(525, 175);
+              patientHistoryBox.setMaxSize(525, 175);
             //Set the padding
               //patientHistoryBox.setpadding(new Insets(30));
 
@@ -982,7 +988,6 @@ public class NursePortal{
               patientHistoryBox.setAlignment(Pos.CENTER);
             //Set the background color
               patientHistoryBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
-
 
 
         //Patient Credentials Alignment
@@ -1031,7 +1036,7 @@ public class NursePortal{
 
         //Patient Credentials (laoded via method, 
         //this method also updates the priv data holding the current/visiting patient's info)
-          VBox vertical0 = new VBox(5, patientCredentialsBox, vitalsAlignBox, buttonContainer);
+          VBox vertical0 = new VBox(10, patientCredentialsBox, vitalsAlignBox, buttonContainer);
             //Set the alignment of the Encapsulating box
               vertical0.setAlignment(Pos.CENTER);
 
