@@ -1224,313 +1224,313 @@ public class NursePortal{
 //USE A HASHMAP TO MAP THE PATIENTS UNIQUE CREDS:    HASHMAP<STRING, STRING>
 //WHEN THE USER SELECTES PATIENT CREDS THROUGH THE DROPDOWN MENU (YOU)
 /*
-      //[DOCTOR WILL INHERIT THIS METHOD WITH NO CHANGES NEEDED TO BE MADE/NECESsARY!!]
-      //This method will display/load the Scene for sending & reading messages
-      //
-      //[This method looks like the patient portal but there is a dropdown menu for 
-      //                                  selecting which patients messages .txt file you want to open]
-      private Scene messagePage(){
-        //Labels, Buttons, Text Box, Action-Event Handling, Scene
+    //[DOCTOR WILL INHERIT THIS METHOD WITH NO CHANGES NEEDED TO BE MADE/NECESsARY!!]
+    //This method will display/load the Scene for sending & reading messages
+    //
+    //[This method looks like the patient portal but there is a dropdown menu for 
+    //                                  selecting which patients messages .txt file you want to open]
+    private Scene messagePage(){
+      //Labels, Buttons, Text Box, Action-Event Handling, Scene
 
-        //Labels
-        //=====================================================================================================
-          //Message Board
-            Label messageBrdLbl = new Label("Message Board:");
-              //Set the Font & size of the text
-                messageBrdLbl.setStyle("-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: white;");
-                
-          //Message
-            Label messageLbl = new Label("Message:");
-              //Set the size of the text
-                messageLbl.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
+      //Labels
+      //=====================================================================================================
+        //Message Board
+          Label messageBrdLbl = new Label("Message Board:");
+            //Set the Font & size of the text
+              messageBrdLbl.setStyle("-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: white;");
+              
+        //Message
+          Label messageLbl = new Label("Message:");
+            //Set the size of the text
+              messageLbl.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
 
-          //Inbox
-            Label inboxLbl = new Label("Inbox:");
-              //Set the size of the text
-                inboxLbl.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
-
-
-          //Select Patient [Drop Down Menu]
-            Label selectPatientLbl = new Label("Select Patient:");
-              //Set the Font and other features
-                //selectPatienLbl.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
-        
-          //Patient Contact Information
-            //Have the Phone Number Displayed in a text box next to this label!!!
-            Label contactInfoLbl = new Label("Patient Contact:");
-        //=====================================================================================================
+        //Inbox
+          Label inboxLbl = new Label("Inbox:");
+            //Set the size of the text
+              inboxLbl.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
 
 
-        //Buttons
-        //=======================================================================
-          //Send Message
-            Button sendMessage = new Button("Send Message");
-              //Set the dimensions of the Button
-                sendMessage.setPrefSize(150, 40);
-                sendMessage.setMinSize(150, 40);
-                sendMessage.setMaxSize(150, 40);
-              //Set the Font size of the text
-                sendMessage.setStyle("-fx-font-size: 18px;");
-
-
-          //Delete Message
-            Button deleteMessage = new Button("Delete Message");
-            //^^This will simply remove the lines of the .txt file after & including "Patient Name:"
-              //Set the dimensions of the Button
-                deleteMessage.setPrefSize(175, 40);
-                deleteMessage.setMinSize(175, 40);
-                deleteMessage.setMaxSize(175, 40);
-              //Set the Font size of the text
-                deleteMessage.setStyle("-fx-font-size: 18px;");
-
-
-          //Exit
-            Button goBack = new Button("Exit");
-              //Set the dimensions of the Button
-                goBack.setPrefSize(100, 40);
-                goBack.setMinSize(100, 40);
-                goBack.setMaxSize(100, 40);
-              //Set the Font size of the text
-                goBack.setStyle("-fx-font-size: 18px;");
-        //=======================================================================
-
-
-        //Text Boxes
-        //=======================================================================
-          //Message Text Box  {Anything written here will be posted to the board}
-            TextArea messageTxt = new TextArea();
-              //Set the dimensions of the text box
-                messageTxt.setPrefSize(300, 525);
-                messageTxt.setMinSize(300, 525);
-                messageTxt.setMaxSize(300, 525);
-              //Set the Font size of the text
-                messageTxt.setStyle("-fx-font-size: 18px;");
-              //Set text wrapping 
-                messageTxt.setWrapText(true);                
-                //[Note]: ^^ any text that exceeeds the width will fall to a new line
-
-
-          //Inbox Text Box
-            TextArea inboxTxt = new TextArea();
-              //Set the dimensions of the text box
-                inboxTxt.setPrefSize(600, 525);
-                inboxTxt.setMinSize(600, 525);
-                inboxTxt.setMaxSize(600, 525);
-              //Set the Font size of the text
-                inboxTxt.setStyle("-fx-font-size: 18px;");
-              //Set text wrapping 
-                inboxTxt.setWrapText(true);                
-                //[Note]: ^^ any text that exceeeds the width will fall to a new line
-
-          //Get the Messages from the unique Patients account
-            inboxTxt.setText(getMessages());
-
-          //Phone Number Text Box [Will be next to contactInfoLbl]
-            TextArea phoneNumTxt = new TextArea();
-              //Set the dimensions of the the text box
-
-        //=======================================================================
-
-
-        //Action-Event Handling
-        //=============================================================================
-          //Send Message
-            //This will open the "Messages.txt" file for reading & writing
-            sendMessage.setOnAction(e -> {
-              //Add/Append the message written in "Message: " to the Inbox/Current Conversation              
-              //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
-                try{
-                  //Open: <this.fullName>PatientInfo.txt
-                    File patientInbox = new File(this.fullName.replace(" ", "") + "Messages.txt");    
-
-                  //Open the File Writer for adding new messages to the file
-                    FileWriter fileWriter = new FileWriter(patientInbox, true);
-                      //[we set 'true' so that the fileWriter can append to the file]
-
-                  //If the File exists append the new message to the end
-                    if(patientInbox.exists() && !messageTxt.getText().isEmpty()){      
-                      //Save the message sent to the global variable [so it can be used in deletion]
-                      //Empty the global variable used for sending messages
-                        messageSent = "[" + this.fullName + "]: " + messageTxt.getText() + "\n\n";
-                
-                      //Append the new message to the "<FullName>Message.txt"
-                        fileWriter.append(messageSent);
-                
-                      //Empty the text area used for sending messages
-                        messageTxt.setText("");
-
-                      //Close the file writer
-                        fileWriter.close();
-                    }
-                  //Else, file does not exist
-                    else{
-                      //Create the file
-                        fileWriter.write("");
-
-                      //Close the File Reader
-                        fileWriter.close();
-                    }
-                }
-                catch(IOException n){
-                  //File doesn't exits do nothing
-                  //Might have to creat a new file???
-                }
-
-              //if [<Patient Name>]: does NOT exist, start the first comment [If while-loop finished without finding user]
-
-              //Update the inbox to show the new message added
-                inboxTxt.setText(getMessages());
-            });
-
-
-          //Delete Message
-            deleteMessage.setOnAction(e -> {
-              //Count the total number of messages sent by the user {i.e. count everytime we see: "[fullName]:"}
-
-              //Then reread the file and collect all of the text and stop once we see the last instance of [fullName]:
-              //Then use .write() to rewrite all of the text in the <fullName>Messages.txt NOT including the last message sent by the user
-
-              //JUst gonna get my brain spaghetti out !!!
-              try{
-                //Get the messages via our method...
-                  
-                  //If the message inbox is not empty...
-                  if(getMessages() != "<Inbox Empty>"){
-                    //DEBUG
-                      //All messages in the .txt file
-                      System.out.println("Inbox: \n" + getMessages());
-    
-                    //DEbug
-                      //Print the last message sent/saved in the global variable
-                        //System.out.println("Message sent: " + this.messageSent);
-
-                    //Write this into the <this.fullName>Messagest.txt
-                    String editedStr = getMessages().replace(this.messageSent, "");
-                    
-                    //Edit the <this.fullName>Messages.txt to have the new inbox displayed!
-                      File editedFile = new File(this.fullName.replaceAll(" ", "") + "Messages.txt");
-
-                    //Open a file writer for writing the new text into the .txt file
-                      FileWriter fileWriter0 = new FileWriter(this.fullName.replaceAll(" ", "") + "Messages.txt");
-
-                    //DEBUG STATEMENT
-                      //System.out.println("Edited TExt: \n" + editedStr);
-
-                    //If the string we made is not empty, update the .txt file
-                      if(this.messageSent != ("[" + this.fullName + "]: \n\n")){
-                        //Replace all of the text in the Messages.txt with the latest message deleted
-                          fileWriter0.write(editedStr);
-        
-                        //Place new text into inbox being displayed
-                          inboxTxt.setText(editedStr);
-
-                        //CLOSE THE FILE WRITER OMG
-                          fileWriter0.close();
-                      }
-                    
-                  }
-
-                //If the inbox is empty display the relevant text
-                  if(inboxTxt.getText().isEmpty()){
-                    //Set the inbox text
-                      inboxTxt.setText("<Inbox Empty>");
-                  }
-              }
-              catch(IOException l){
-                //File does not exist.. either do nothing? or create it...
-              }
-            });
-
-
-          //Exit
-            goBack.setOnAction(e-> {
-              //Call upon displayPortal()
-                displayPortal();
-            });
-        //=============================================================================
-
-
-        //Alignments
-        //==========================================================================================
-          //Message:
-            VBox messageSection = new VBox(5, messageLbl, messageTxt);
-            
-          //Inbox:
-            VBox inboxSection = new VBox(5, inboxLbl, inboxTxt);
-          
-          //HBox containing the text fields & their resepective labels (background color: lightblue)
-            HBox messageBoard = new HBox(10, messageSection, inboxSection); 
-              //Set Style, alignment, borders, & rounded edges
-                messageBoard.setStyle("-fx-border-color: black; -fx-border-width: 1px;  -fx-background-padding: 10; -fx-background-radius: 10; -fx-background-color: lightblue;");
-                messageBoard.setAlignment(Pos.CENTER);        
-              //Set the dimensions of the "Message Board"
-                messageBoard.setPrefSize(950, 600);
-                messageBoard.setMinSize(950, 600);
-                messageBoard.setMaxSize(950, 600);
-
-
-          //Horizontally Align the Buttons/Functionality
-            HBox buttonContainer = new HBox(30, sendMessage, deleteMessage, goBack);
-              //Set the alignment of the button container
-                buttonContainer.setAlignment(Pos.CENTER);
-                
-
-          //Vertically align all of the sections {Last VBox}
-            VBox finAlign = new VBox(20, messageBrdLbl, messageBoard, buttonContainer);
-              //Set the alignment of the VBox
-              //Maybe unecessary???
-                finAlign.setAlignment(Pos.CENTER);
-              //Set the background color of the entire page to gray
-                finAlign.setStyle("-fx-background-color: #3A3A3A;");
-        //==========================================================================================
-
-
-        //Build the Scene
-          Scene mainLayout = new Scene(finAlign, 1024, 768);
+        //Select Patient [Drop Down Menu]
+          Label selectPatientLbl = new Label("Select Patient:");
+            //Set the Font and other features
+              //selectPatienLbl.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
       
-        //Return the Scene
-          return mainLayout;
-      }
+        //Patient Contact Information
+          //Have the Phone Number Displayed in a text box next to this label!!!
+          Label contactInfoLbl = new Label("Patient Contact:");
+      //=====================================================================================================
+
+
+      //Buttons
+      //=======================================================================
+        //Send Message
+          Button sendMessage = new Button("Send Message");
+            //Set the dimensions of the Button
+              sendMessage.setPrefSize(150, 40);
+              sendMessage.setMinSize(150, 40);
+              sendMessage.setMaxSize(150, 40);
+            //Set the Font size of the text
+              sendMessage.setStyle("-fx-font-size: 18px;");
+
+
+        //Delete Message
+          Button deleteMessage = new Button("Delete Message");
+          //^^This will simply remove the lines of the .txt file after & including "Patient Name:"
+            //Set the dimensions of the Button
+              deleteMessage.setPrefSize(175, 40);
+              deleteMessage.setMinSize(175, 40);
+              deleteMessage.setMaxSize(175, 40);
+            //Set the Font size of the text
+              deleteMessage.setStyle("-fx-font-size: 18px;");
+
+
+        //Exit
+          Button goBack = new Button("Exit");
+            //Set the dimensions of the Button
+              goBack.setPrefSize(100, 40);
+              goBack.setMinSize(100, 40);
+              goBack.setMaxSize(100, 40);
+            //Set the Font size of the text
+              goBack.setStyle("-fx-font-size: 18px;");
+      //=======================================================================
+
+
+      //Text Boxes
+      //=======================================================================
+        //Message Text Box  {Anything written here will be posted to the board}
+          TextArea messageTxt = new TextArea();
+            //Set the dimensions of the text box
+              messageTxt.setPrefSize(300, 525);
+              messageTxt.setMinSize(300, 525);
+              messageTxt.setMaxSize(300, 525);
+            //Set the Font size of the text
+              messageTxt.setStyle("-fx-font-size: 18px;");
+            //Set text wrapping 
+              messageTxt.setWrapText(true);                
+              //[Note]: ^^ any text that exceeeds the width will fall to a new line
+
+
+        //Inbox Text Box
+          TextArea inboxTxt = new TextArea();
+            //Set the dimensions of the text box
+              inboxTxt.setPrefSize(600, 525);
+              inboxTxt.setMinSize(600, 525);
+              inboxTxt.setMaxSize(600, 525);
+            //Set the Font size of the text
+              inboxTxt.setStyle("-fx-font-size: 18px;");
+            //Set text wrapping 
+              inboxTxt.setWrapText(true);                
+              //[Note]: ^^ any text that exceeeds the width will fall to a new line
+  
+        //Get the Messages from the unique Patients account
+          inboxTxt.setText(getMessages());
+
+        //Phone Number Text Box [Will be next to contactInfoLbl]
+          TextArea phoneNumTxt = new TextArea();
+            //Set the dimensions of the the text box
+
+      //=======================================================================
+
+
+      //Action-Event Handling
+      //=============================================================================
+        //Send Message
+          //This will open the "Messages.txt" file for reading & writing
+          sendMessage.setOnAction(e -> {
+            //Add/Append the message written in "Message: " to the Inbox/Current Conversation              
+            //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
+              try{
+                //Open: <this.fullName>PatientInfo.txt
+                  File patientInbox = new File(this.fullName.replace(" ", "") + "Messages.txt");    
+
+                //Open the File Writer for adding new messages to the file
+                  FileWriter fileWriter = new FileWriter(patientInbox, true);
+                    //[we set 'true' so that the fileWriter can append to the file]
+
+                //If the File exists append the new message to the end
+                  if(patientInbox.exists() && !messageTxt.getText().isEmpty()){      
+                    //Save the message sent to the global variable [so it can be used in deletion]
+                    //Empty the global variable used for sending messages
+                      messageSent = "[" + this.fullName + "]: " + messageTxt.getText() + "\n\n";
+              
+                    //Append the new message to the "<FullName>Message.txt"
+                      fileWriter.append(messageSent);
+              
+                    //Empty the text area used for sending messages
+                      messageTxt.setText("");
+
+                    //Close the file writer
+                      fileWriter.close();
+                  }
+                //Else, file does not exist
+                  else{
+                    //Create the file
+                      fileWriter.write("");
+
+                    //Close the File Reader
+                      fileWriter.close();
+                  }
+              }
+              catch(IOException n){
+                //File doesn't exits do nothing
+                //Might have to creat a new file???
+              }
+
+            //if [<Patient Name>]: does NOT exist, start the first comment [If while-loop finished without finding user]
+
+            //Update the inbox to show the new message added
+              inboxTxt.setText(getMessages());
+          });
+
+
+        //Delete Message
+          deleteMessage.setOnAction(e -> {
+            //Count the total number of messages sent by the user {i.e. count everytime we see: "[fullName]:"}
+
+            //Then reread the file and collect all of the text and stop once we see the last instance of [fullName]:
+            //Then use .write() to rewrite all of the text in the <fullName>Messages.txt NOT including the last message sent by the user
+
+            //JUst gonna get my brain spaghetti out !!!
+            try{
+              //Get the messages via our method...
+                
+                //If the message inbox is not empty...
+                if(getMessages() != "<Inbox Empty>"){
+                  //DEBUG
+                    //All messages in the .txt file
+                    System.out.println("Inbox: \n" + getMessages());
+  
+                  //DEbug
+                    //Print the last message sent/saved in the global variable
+                      //System.out.println("Message sent: " + this.messageSent);
+
+                  //Write this into the <this.fullName>Messagest.txt
+                  String editedStr = getMessages().replace(this.messageSent, "");
+                  
+                  //Edit the <this.fullName>Messages.txt to have the new inbox displayed!
+                    File editedFile = new File(this.fullName.replaceAll(" ", "") + "Messages.txt");
+
+                  //Open a file writer for writing the new text into the .txt file
+                    FileWriter fileWriter0 = new FileWriter(this.fullName.replaceAll(" ", "") + "Messages.txt");
+
+                  //DEBUG STATEMENT
+                    //System.out.println("Edited TExt: \n" + editedStr);
+
+                  //If the string we made is not empty, update the .txt file
+                    if(this.messageSent != ("[" + this.fullName + "]: \n\n")){
+                      //Replace all of the text in the Messages.txt with the latest message deleted
+                        fileWriter0.write(editedStr);
+      
+                      //Place new text into inbox being displayed
+                        inboxTxt.setText(editedStr);
+
+                      //CLOSE THE FILE WRITER OMG
+                        fileWriter0.close();
+                    }
+                  
+                }
+
+              //If the inbox is empty display the relevant text
+                if(inboxTxt.getText().isEmpty()){
+                  //Set the inbox text
+                    inboxTxt.setText("<Inbox Empty>");
+                }
+            }
+            catch(IOException l){
+              //File does not exist.. either do nothing? or create it...
+            }
+          });
+
+
+        //Exit
+          goBack.setOnAction(e-> {
+            //Call upon displayPortal()
+              displayPortal();
+          });
+      //=============================================================================
+
+
+      //Alignments
+      //==========================================================================================
+        //Message:
+          VBox messageSection = new VBox(5, messageLbl, messageTxt);
+          
+        //Inbox:
+          VBox inboxSection = new VBox(5, inboxLbl, inboxTxt);
+        
+        //HBox containing the text fields & their resepective labels (background color: lightblue)
+          HBox messageBoard = new HBox(10, messageSection, inboxSection); 
+            //Set Style, alignment, borders, & rounded edges
+              messageBoard.setStyle("-fx-border-color: black; -fx-border-width: 1px;  -fx-background-padding: 10; -fx-background-radius: 10; -fx-background-color: lightblue;");
+              messageBoard.setAlignment(Pos.CENTER);        
+            //Set the dimensions of the "Message Board"
+              messageBoard.setPrefSize(950, 600);
+              messageBoard.setMinSize(950, 600);
+              messageBoard.setMaxSize(950, 600);
+
+
+        //Horizontally Align the Buttons/Functionality
+          HBox buttonContainer = new HBox(30, sendMessage, deleteMessage, goBack);
+            //Set the alignment of the button container
+              buttonContainer.setAlignment(Pos.CENTER);
+              
+
+        //Vertically align all of the sections {Last VBox}
+          VBox finAlign = new VBox(20, messageBrdLbl, messageBoard, buttonContainer);
+            //Set the alignment of the VBox
+            //Maybe unecessary???
+              finAlign.setAlignment(Pos.CENTER);
+            //Set the background color of the entire page to gray
+              finAlign.setStyle("-fx-background-color: #3A3A3A;");
+      //==========================================================================================
+
+
+      //Build the Scene
+        Scene mainLayout = new Scene(finAlign, 1024, 768);
     
-
-  //Getters & Setters
-  //-------------------------------------------------------------------------------------------------------
-    //Returns all of the text within: <this.fullName>Messages.txt
-      private String getMessages(String patientsCreds){
-        //Open the  File for reading and read every line and set the inboxTxt to it!!
-          try{
-            //Collect the Lines into a String variable
-              String messageStr = "";
-
-            //Open the file & if it exists post the text to the messageBoard
-              File inboxFile = new File(patientsCreds.replaceAll(" ", "") + "Messages.txt");
-
-            //Scanner that will read the file
-              Scanner fileReader = new Scanner(inboxFile);
-
-            //Read all of the text in the file and place it into the inbox
-              while(fileReader.hasNextLine()){
-                //Add the lines to the string
-                  messageStr += fileReader.nextLine() + "\n";
-              }
-
-            //Close the file reader
-              fileReader.close();
-
-            //If the Messagebox is empty set return empty notification
-              if(messageStr.isEmpty()){
-                //Return the notification
-                  return "<Inbox Empty>";
-              }
-
-            //Return the string
-              return messageStr;
-        }
-        catch(IOException m){
-          //Do nothing...
-            return "<Inbox Empty>";
-        }
+      //Return the Scene
+        return mainLayout;
     }
   
+
+//Getters & Setters
+//-------------------------------------------------------------------------------------------------------
+  //Returns all of the text within: <this.fullName>Messages.txt
+    private String getMessages(String patientsCreds){
+      //Open the  File for reading and read every line and set the inboxTxt to it!!
+        try{
+          //Collect the Lines into a String variable
+            String messageStr = "";
+
+          //Open the file & if it exists post the text to the messageBoard
+            File inboxFile = new File(patientsCreds.replaceAll(" ", "") + "Messages.txt");
+
+          //Scanner that will read the file
+            Scanner fileReader = new Scanner(inboxFile);
+
+          //Read all of the text in the file and place it into the inbox
+            while(fileReader.hasNextLine()){
+              //Add the lines to the string
+                messageStr += fileReader.nextLine() + "\n";
+            }
+
+          //Close the file reader
+            fileReader.close();
+
+          //If the Messagebox is empty set return empty notification
+            if(messageStr.isEmpty()){
+              //Return the notification
+                return "<Inbox Empty>";
+            }
+
+          //Return the string
+            return messageStr;
+      }
+      catch(IOException m){
+        //Do nothing...
+          return "<Inbox Empty>";
+      }
+  }
+
   //*/
   //------------------------------------------------------------------------------
