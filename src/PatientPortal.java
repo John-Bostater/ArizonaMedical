@@ -160,21 +160,21 @@ public class PatientPortal{
             Button changePatientInfo = new Button("Change Patient Information");
             //Set the dimensions of the Button
            	  //[Width x Height]
-           	    changePatientInfo.setPrefSize(325, 50);  
-           	    changePatientInfo.setMaxSize(325, 50);
-           	    changePatientInfo.setMinSize(325, 50);
+           	    changePatientInfo.setPrefSize(385, 50);  
+           	    changePatientInfo.setMaxSize(385, 50);
+           	    changePatientInfo.setMinSize(385, 50);
               //Set the Font of the Button's text
-                changePatientInfo.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+                changePatientInfo.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
           //View Previous Visits 
             Button viewPreviousVisits = new Button("View Previous Visits");
             //Set the dimensions of the Buttons
               //[Width x Height]
-                viewPreviousVisits.setPrefSize(275, 50);  
-                viewPreviousVisits.setMaxSize(275, 50);
-                viewPreviousVisits.setMinSize(275, 50);
+                viewPreviousVisits.setPrefSize(300, 50);  
+                viewPreviousVisits.setMaxSize(300, 50);
+                viewPreviousVisits.setMinSize(300, 50);
               //Set the Font of the Button's text
-                viewPreviousVisits.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+                viewPreviousVisits.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
           //Messages
             Button messageInbox = new Button("Messages");
@@ -184,7 +184,7 @@ public class PatientPortal{
                 messageInbox.setMaxSize(150, 50);
                 messageInbox.setMinSize(150, 50);
               //Set the Font of the Button's text
-                messageInbox.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+                messageInbox.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
           //Logout	
             Button signOut = new Button("Logout");	
@@ -194,7 +194,7 @@ public class PatientPortal{
                 signOut.setMaxSize(125, 50);
                 signOut.setMinSize(125, 50);
               //Set the Font of the Button's text
-                signOut.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+                signOut.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
         //====================================================================================================================
 
         //Labels/Text
@@ -202,12 +202,12 @@ public class PatientPortal{
           //Welcome!
             Label header0 = new Label("Welcome!");
              //Set the font of header
-               header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: white;");
+               header0.setStyle("-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: white;");
 
           //What would you  like to do today?
             Label text0 = new Label("What would you like to do today?");
               //Set the font of text
-                text0.setStyle("-fx-font-size: 18px; -fx-text-fill: white;");
+                text0.setStyle("-fx-font-size: 22px; -fx-text-fill: white;");
         //==================================================================
 
 
@@ -367,6 +367,11 @@ public class PatientPortal{
                 phoneNum0.setMaxSize(60, 40);
               //Set the size of the text in the text box
                 phoneNum0.setStyle("-fx-font-size: 18px;");
+              //Clear the text box when the user clicks on it
+                phoneNum0.setOnMouseClicked(event -> {
+                  //Clear the Text Box
+                    phoneNum0.clear();
+                });
 
             //Second three Digits
             TextArea phoneNum1 = new TextArea();
@@ -376,6 +381,11 @@ public class PatientPortal{
                 phoneNum1.setMaxSize(60, 40);
               //Set the size of the text in the text box
                 phoneNum1.setStyle("-fx-font-size: 18px;");
+              //Clear the text box when the user clicks on it
+                phoneNum1.setOnMouseClicked(event -> {
+                  //Clear the Text Box
+                    phoneNum1.clear();
+                });
 
             //Final four Digits
             TextArea phoneNum2 = new TextArea();
@@ -385,6 +395,11 @@ public class PatientPortal{
                 phoneNum2.setMaxSize(70, 40);
               //Set the size of the text in the text box
                 phoneNum2.setStyle("-fx-font-size: 18px;");
+              //Clear the text box when the user clicks on it
+                phoneNum2.setOnMouseClicked(event -> {
+                  //Clear the Text Box
+                    phoneNum2.clear();
+                });
 
 
           //Insurance Provider
@@ -395,6 +410,11 @@ public class PatientPortal{
                 insuranceTxt.setMaxSize(250, 40);
               //Set the size of the text in the text box
                 insuranceTxt.setStyle("-fx-font-size: 18px;");
+              //Clear the text box when the user clicks on it
+                insuranceTxt.setOnMouseClicked(event -> {
+                  //Clear the Text Box
+                    insuranceTxt.clear();
+                });
 
 
           //Pharmacy Provider
@@ -405,6 +425,12 @@ public class PatientPortal{
                 pharmacyTxt.setMaxSize(300, 40);
               //Set the size of the text in the text box
                 pharmacyTxt.setStyle("-fx-font-size: 18px;");
+              //Clear the text box when the user clicks on it
+                pharmacyTxt.setOnMouseClicked(event -> {
+                  //Clear the Text Box
+                    pharmacyTxt.clear();
+                });
+
 
           ///*
           //Open "PatientAccounts.txt" & Collect the information to be placed into the text boxes
@@ -757,7 +783,7 @@ public class PatientPortal{
             try{
               //NEW!!!
               //DEBUG!!!
-                //System.out.println("FullName: " + this.fullName + "<White space check>");
+                System.out.println("FullName: " + this.fullName + "<White space check>");
 
 
               //Open: PatientInfo.txt
@@ -765,7 +791,7 @@ public class PatientPortal{
                 Scanner fileReader = new Scanner(new File(this.fullName.replaceAll(" ", "") + "VisitSummarys.txt"));
 
               //Flag that "puts on the brakes" of the fileReader so it will
-                boolean patientFound = false;
+                boolean dateFound = false;
               
               //Counter for: examDate[counter] = <Exam Date String> 
                 short counter = 0;
@@ -775,32 +801,16 @@ public class PatientPortal{
                  //Gather and store the 
                    String line = fileReader.nextLine(); //Starts at the first line of text in .txt file
 
-
                 //DEBUG!!
                   System.out.println("Line: " + line);
 
-
-                 //If-branch will activate data collection once the patient is found via their credentials
-                  // if(line.contains("Patient: " + patientCredentials) && !patientFound){
-                     //Debug print
-                      // System.out.println("Patient has been found!");
-
-                     //Move to the next line
-                     //  line = fileReader.nextLine();
-
-                     //Activate the flag
-                    //   patientFound = true;
-                  // }
-
                  //Collect all of the exam dates
-                   if(line.contains("[Date]:")){   
-                      //
-                        patientFound = true;
-                      //DEBUG!!!
-                      System.out.println("Date found!!");
-
-                      //Set the visitSummary to "" 
-                        visitSummary = "";
+                   if(line.contains("[Date]:") && !line.contains("[Date]: <PlaceHolder!>")){   
+                      //Collect the
+                        dateFound = true;
+                     
+                      //Instantiate the visitSummary String 
+                        visitSummary = "[Date]: " + line.substring(8, line.length()).trim() + "\n";
 
                       //Collect the exam date
                         examDates[counter] += line.substring(8, line.length());
@@ -818,15 +828,14 @@ public class PatientPortal{
                  //Collect the visit summary or break the reading loop at next patient's data
                    else{
                     //If the patient is found start collecting their data!!
-                      if(patientFound && !line.isEmpty()){
-                        visitSummary += line + "\n";
+                      if(dateFound && !line.contains("[Exam #")){
+                        //Collect the data
+                          visitSummary += line + "\n";
                       }
-
-                    //Break the while loop once the next patient's information appears
-                     //if(line.contains("") && patientFound){
-                        //break the reading loop
-                       //   break;
-                     //}
+                      else if(dateFound && line.contains("[Exam #")){
+                        //Set the flag to false (new Exam encountered)
+                          dateFound = false;
+                      }
                    }
 
                  //Add the unique Integer [Visit Date] & visit String [Summary] to the hashmap

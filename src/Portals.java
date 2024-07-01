@@ -445,21 +445,21 @@ public class Portals {
 			  Button patientLogin = new Button("Log in");
 	  			//Set the dimensions of the Buttons
 		        //[Width x Height]
-			  	  patientLogin.setPrefSize(100, 45);  
-		          patientLogin.setMaxSize(100, 45);
-		          patientLogin.setMinSize(100, 45);
+			  	  patientLogin.setPrefSize(125, 50);  
+		          patientLogin.setMaxSize(125, 50);
+		          patientLogin.setMinSize(125, 50);
 	            //Set the Font of the Button's text
-		          patientLogin.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+		          patientLogin.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 			
 		    //Create Account
 			  Button newPatient = new Button("Create Account");
 	  			//Set the dimensions of the Buttons
 		        //[Width x Height]
-			  	  newPatient.setPrefSize(195, 45);  
-		          newPatient.setMaxSize(195, 45);
-		          newPatient.setMinSize(195, 45);
+			  	  newPatient.setPrefSize(225, 50);  
+		          newPatient.setMaxSize(225, 50);
+		          newPatient.setMinSize(225, 50);
 		        //Set the Font of the Button's text
-		          newPatient.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+		          newPatient.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 		    
 			
 			//NEW BUTTON
@@ -467,33 +467,33 @@ public class Portals {
 			  Button confirmAccount = new Button("Confirm");
 				//Set the dimensions of the button
 		        //[Width x Height]
-			  	  confirmAccount.setPrefSize(120, 45);  
-		          confirmAccount.setMaxSize(120, 45);
-		          confirmAccount.setMinSize(120, 45);
+			  	  confirmAccount.setPrefSize(135, 50);  
+		          confirmAccount.setMaxSize(135, 50);
+		          confirmAccount.setMinSize(135, 50);
 		        //Set the Font of the Button's text
-		          confirmAccount.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+		          confirmAccount.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
 
 		    //Go Back      
 		      Button goBack = new Button("Go back");
 				//Set the dimensions of the Buttons
 				//[Width x Height]
-					goBack.setPrefSize(115, 45);  
-					goBack.setMaxSize(115, 45);
-					goBack.setMinSize(115, 45);
+					goBack.setPrefSize(115, 40);  
+					goBack.setMaxSize(115, 40);
+					goBack.setMinSize(115, 40);
 				//Set the Font of the Button's text
-					goBack.setStyle("-fx-font-size: 24px; -fx-font-family: 'Times New Roman';");      
+					goBack.setStyle("-fx-font-size: 22px; -fx-font-family: 'Times New Roman';");      
 
 
 			//Exit the page [Goes to Welcome Page]
 			  Button exitPage = new Button("Exit");
 				//Set the dimensions of the Buttons
 				//[Width x Height]
-					exitPage.setPrefSize(75, 45);  
-					exitPage.setMaxSize(75, 45);
-					exitPage.setMinSize(75, 45);
+					exitPage.setPrefSize(85, 50);  
+					exitPage.setMaxSize(85, 50);
+					exitPage.setMinSize(85, 50);
 				//Set the Font of the Button's text
-					exitPage.setStyle("-fx-font-size: 24px; -fx-font-family: 'Times New Roman';");      
+					exitPage.setStyle("-fx-font-size: 26px; -fx-font-family: 'Times New Roman';");      
           //===============================================================================================================
 			  
 

@@ -99,14 +99,14 @@ public class DoctorPortal extends NursePortal{
 		  //Labels
 		  //========================================================================
 			//Welcome!
-			  Label welcomeLbl = new Label("Welcome!");
+			  Label header0= new Label("Welcome!");
 			  	//Set the style & font of the label
-				  //Code here..
+				  header0.setStyle("-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: white;");
 			
 			//What would you like to do today?
-			  Label header0 = new Label("What would you like to do today?");
+			  Label header1 = new Label("What would you like to do today?");
 			  	//Set the style & font of the label
-				  //Code here...
+				  header1.setStyle("-fx-font-size: 22px; -fx-text-fill: white;");
 		  //========================================================================
 
 
@@ -114,27 +114,42 @@ public class DoctorPortal extends NursePortal{
 		  //========================================================================
 			//Patient Visit Form
 			  Button patientVisitForm = new Button("Patient Visit Form");
-			  	//Set the dimension & font of the button
-				   //code here...
-			//The action - event handling for this button will call upon the newVisitForm() method
+				//Set the Dimensions of the Button
+				  patientVisitForm.setPrefSize(275, 50);
+				  patientVisitForm.setMinSize(275, 50);
+				  patientVisitForm.setMaxSize(275, 50);
+				//Set the Font size of the text
+				  patientVisitForm.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
+			//The action - event handling for this button will call upon the newVisitForm() method
 
 			//View Patient Records
 			  Button viewPatientRecords = new Button("View Patient Records");
-			  	//Set the dimension & font of the button
-				   //code here...
-
+				//Set the Dimensions of the Button
+				  viewPatientRecords.setPrefSize(300, 50);
+				  viewPatientRecords.setMinSize(300, 50);
+				  viewPatientRecords.setMaxSize(300, 50);
+				//Set the Font size of the text
+				  viewPatientRecords.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
 			//Messages
 			  Button messagesButton = new Button("Messages");
-			  	//Set the dimension & font of the button
-				   //code here...
+				//Set the Dimensions of the Button
+				  messagesButton.setPrefSize(150, 50);
+				  messagesButton.setMinSize(150, 50);
+				  messagesButton.setMaxSize(150, 50);
+				//Set the Font size of the text
+				  messagesButton.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
 
 			//Logout
 			  Button goBack = new Button("Logout");
-			  	//Set the dimension & font of the button
-				   //code here...
+				//Set the Dimensions of the Button
+				  goBack.setPrefSize(125, 50);
+				  goBack.setMinSize(125, 50);
+				  goBack.setMaxSize(125, 50);
+				//Set the Font size of the text
+				  goBack.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 		  //========================================================================
 
 
@@ -143,7 +158,7 @@ public class DoctorPortal extends NursePortal{
 			//Patient Visit Form
 			  patientVisitForm.setOnAction(e -> {
 				//Load the newVisitForm() method
-				  this.primeStage.setScene(this.newVisitForm());
+				  this.primeStage.setScene(newVisitForm());
 				
 				//Display the scene
 				  this.primeStage.show();
@@ -151,21 +166,49 @@ public class DoctorPortal extends NursePortal{
 
 
 			//View Patient Records
+			  viewPatientRecords.setOnAction(e -> {
+				//Call upon the method
+				  //this.primeStage.setScene();
+
+
+			  });
 
 
 			//Messages
+			  messagesButton.setOnAction(e -> {
+				//Call upon the SuperClass messages method
+				  //this.primeStage.setScene(this.messagePage());
+
+				//Display the Scene
+				 //  this.primeStage.show();
+			  });
 
 
 			//Logout
+			  goBack.setOnAction(e -> {
+				//Load & display the welcome page
+				  primeStage.setScene(this.welcomePage);
+
+				//Display the Scene
+				  primeStage.show();
+			  });
 		  //========================================================================
 
 
 		  //Alignment
 		  //========================================================================
+			//Vertical alignmnet of the buttons, labels & functionality
+			  VBox vertical0 = new VBox(20, header0, header1, patientVisitForm, viewPatientRecords, messagesButton, goBack);
+				//Set the alignment of the VBox
+				  vertical0.setAlignment(Pos.CENTER);
+
 		  	
 			//Final Horizontal Alignment
-				HBox finalHorizontal = new HBox(patientVisitForm);
-
+			  HBox finalHorizontal = new HBox(vertical0);
+				//Set the background color & other features
+				  finalHorizontal.setStyle("-fx-background-color: #3A3A3A;");
+				//Set the horizontal alignment
+				  finalHorizontal.setAlignment(Pos.CENTER);
 		  //========================================================================
 
 
@@ -180,7 +223,7 @@ public class DoctorPortal extends NursePortal{
 		}
 
 	
-
+	//Patient Visit Form
 	//Conduct Examination Page
 	  @Override
 	  protected Scene conductExam(String patientCredentials){
@@ -278,6 +321,24 @@ public class DoctorPortal extends NursePortal{
 		//Return the Conduct Exam Scene
 		  return examScene;
 	  }
+
+
+	//View Patient Records
+	  private Scene viewPatientRecords(){
+		//Labels, Buttons, Text Boxes, Alignment, Action-Event Handling, Scene
+
+		//Labels
+		//
+
+
+
+		//Build the Scene
+		  //Scene mainLayout = new Scene(1024, 768);
+
+		//Return the Scene
+		  return null;
+	  }
+
 
 
 

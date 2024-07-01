@@ -120,13 +120,13 @@ public class NursePortal{
       //===========================================================================
         //Welcome
           Label header0 = new Label("Welcome!");
-            //Set Font & size of text
-              header0.setStyle("-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: white;");
+	  		  	//Set the style & font of the label
+  	  			  header0.setStyle("-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: white;");
 
         //What would you like to do today??
           Label header1 = new Label("What would you like to do today?");
             //Set Font & size of text
-              header1.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
+              header1.setStyle("-fx-font-size: 22px; -fx-text-fill: white;");
       //===========================================================================
 
 
@@ -136,29 +136,29 @@ public class NursePortal{
           Button newVisitButton = new Button("New Visit Form");
             //newVisitButton = new Button("New Visit Form");
             //Set the Dimensions of the Button
-              newVisitButton.setPrefSize(200, 45);
-              newVisitButton.setMinSize(200, 45);
-              newVisitButton.setMaxSize(200, 45);
+              newVisitButton.setPrefSize(235, 50);
+              newVisitButton.setMinSize(235, 50);
+              newVisitButton.setMaxSize(235, 50);
             //Set the Font size of the text
-              newVisitButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+              newVisitButton.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
         //Messages
           Button messageButton = new Button("Messages");
             //Set the Dimensions of the Button
-              messageButton.setPrefSize(150, 45);
-              messageButton.setMinSize(150, 45);
-              messageButton.setMaxSize(150, 45);
+              messageButton.setPrefSize(150, 50);
+              messageButton.setMinSize(150, 50);
+              messageButton.setMaxSize(150, 50);
             //Set the Font size of the text
-              messageButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+              messageButton.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
         //Logout
           Button logoutButton = new Button("Logout");
             //Set the Dimensions of the Button
-              logoutButton.setPrefSize(110, 45);
-              logoutButton.setMinSize(110, 45);
-              logoutButton.setMaxSize(110, 45);
+              logoutButton.setPrefSize(125, 50);
+              logoutButton.setMinSize(125, 50);
+              logoutButton.setMaxSize(125, 50);
             //Set the Font size of the text
-              logoutButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+              logoutButton.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
       //=================================================================================================================
 
 
@@ -315,7 +315,7 @@ public class NursePortal{
         //Exam Date
           Label examDateLbl = new Label("Visit Date:");
             //Set the font & style of the label
-              examDateLbl.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;");
+              examDateLbl.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;");
       //====================================================================
 
 
@@ -390,7 +390,7 @@ public class NursePortal{
 
 
         //Nurse's Notes:
-          TextArea nursesNotesTxt = new TextArea("<Know Allergies & Other Health Concerns>");
+          TextArea nursesNotesTxt = new TextArea("<Known Allergies & Other Health Concerns>");
             //Set the dimension & style
               nursesNotesTxt.setPrefSize(500, 300);
               nursesNotesTxt.setMinSize(500, 300);
@@ -424,11 +424,11 @@ public class NursePortal{
 
 
         //Date Text Box
-          TextArea dateTxt = new TextArea("<MM/DD/YYYY>");
+          TextArea dateTxt = new TextArea("mm/dd/yyyy");
             //Set the dimension & style
-              dateTxt.setPrefSize(500, 150);
-              dateTxt.setMinSize(500, 150);
-              dateTxt.setMaxSize(500, 150);
+              dateTxt.setPrefSize(110, 35);
+              dateTxt.setMinSize(110, 35);
+              dateTxt.setMaxSize(110, 35);
             //Set the style of the text box
               dateTxt.setStyle("-fx-font-size: 16px;");
             //Clear the text box when the user clicks on it to enter new text!
@@ -436,6 +436,9 @@ public class NursePortal{
                 //Clear the text
                 dateTxt.clear();
               });
+            //NEW!!!
+            //Load the current date into the text box (user can still change it)
+            //Use the time library!
       //====================================================================
 
 
@@ -597,9 +600,31 @@ public class NursePortal{
               vitalsBox.setAlignment(Pos.CENTER);
             
 
+        //Vertical Alignments for the Visit Date
+          VBox visitDateBox = new VBox(dateTxt);
+            //Set the size
+              visitDateBox.setPrefSize(125, 45);
+              visitDateBox.setMinSize(125, 45);
+              visitDateBox.setMaxSize(125, 45);
+            //Set the padding
+              //visitDateBox.setpadding(new Insets(30));
+
+            //Set alignment
+              visitDateBox.setAlignment(Pos.CENTER);
+            //Set the background color
+              visitDateBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
+
+        //Horizontal alignment for the Visit Date Entrance
+          //HBox horizontalW = new HBox(5, examDateLbl, visitDateBox);
+            //Set the alignment
+              //horizontalW.setAlignment(Pos.CENTER);
+            //Set padding
+             // horizontalW.setPadding(new Insets(0,0,0,75));
+
+
         //Vertical Alignments for the Nurse's Notes
           VBox nurseNotesBox = new VBox(nursesNotesTxt);
-            //Set the size & font
+            //Set the size
               nurseNotesBox.setPrefSize(525, 325);
               nurseNotesBox.setMinSize(525, 325);
               nurseNotesBox.setMaxSize(525, 325);
@@ -614,7 +639,7 @@ public class NursePortal{
 
         //Vertical Alignments for the Patient's Previous History Notes
           VBox patientHistoryBox = new VBox(previousMedHistTxt);
-            //Set the size & font
+            //Set the size
               patientHistoryBox.setPrefSize(525, 175);
               patientHistoryBox.setMinSize(525, 175);
               patientHistoryBox.setMaxSize(525, 175);
@@ -626,7 +651,7 @@ public class NursePortal{
             //Set the background color
               patientHistoryBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
 
-
+        
         //Patient Credentials Alignment
         //Horizontal Boxes
           //First Name
@@ -672,12 +697,13 @@ public class NursePortal{
 
         //Patient Credentials (laoded via method, 
         //this method also updates the priv data holding the current/visiting patient's info)
-          VBox vertical0 = new VBox(10, patientCredentialsBox, vitalsAlignBox, buttonContainer);
+          VBox vertical0 = new VBox(10, patientCredentialsBox, examDateLbl, visitDateBox, vitalsAlignBox);
             //Set the alignment of the Encapsulating box
               vertical0.setAlignment(Pos.CENTER);
 
+
         //Vertical alignment for the nurseNotesBox & patientHistoryBox
-          VBox vertical1 = new VBox(5, nurseNotesLbl, nurseNotesBox, previousHistoryLbl, patientHistoryBox);
+          VBox vertical1 = new VBox(5, nurseNotesLbl, nurseNotesBox, previousHistoryLbl, patientHistoryBox, buttonContainer);
             //Set the alginment of vertical1
               vertical1.setAlignment(Pos.CENTER);
 
@@ -697,7 +723,6 @@ public class NursePortal{
           dropDown.setOnAction(event -> {
             //Remove any notifications relating to the misuse of the page
               vertical1.getChildren().remove(this.notificationLbl);
-
 
             //Save the Selected patient's name to the current patient priv data string
               this.currentPatientCreds = dropDown.getValue();
@@ -930,8 +955,7 @@ public class NursePortal{
                     }
                     //---------------------------------------------------------------------------
 
-                  //Add the Text box strings to their respective TextBoxes
-                  
+                  //Add the Text box strings to their respective TextBoxes            
                   //Weight
                     weightTxt.setText(weightStr);
 
@@ -945,11 +969,12 @@ public class NursePortal{
                     bloodPressureTxt.setText(bloodPressureStr);
 
                   //Nurse's Notes
-                    nursesNotesTxt.setText(nursesNotesStr);
+                    nursesNotesTxt.setText(nursesNotesStr.trim());
+                      //Trim any whitespace or \t
 
                   //Previous History
-                    previousMedHistTxt.setText(prevHistStr);
-
+                    previousMedHistTxt.setText(prevHistStr.trim());
+                      //Trim any whitespace or \t
 
                   //[Extra...]
                   //Help the Garbage Collector
@@ -1002,17 +1027,17 @@ public class NursePortal{
                       this.isNotified = true;
                   }
 
-                  //dont continue
+                  //Don't continue
                     return;
               }
               //the user has fixed their mistake
-              else if(dropDown.getValue() != null){
+             // else if(dropDown.getValue() != null){
                 //Remove any old notifications
-                  vertical1.getChildren().remove(this.notificationLbl);
+               //   vertical1.getChildren().remove(this.notificationLbl);
 
                 //Disable the notification
-                  this.isNotified = false;
-              }
+                 // this.isNotified = false;
+              //}
 
 
             //If any of the Text Boxes are empty or incorrect throw an error & skip below!!
@@ -1062,9 +1087,9 @@ public class NursePortal{
 
               //Collect all of the information from the text boxes/areas 
               //then write it to the .txt file via appending
-                String physicalExam = "[Date]: " + "<PlaceHolder!>"
-                  + "\n\n"
-                  + "[Exam #" + (getTotalExams()+1) + "]:"
+                String physicalExam = "[Exam #" + (getTotalExams()+1) + "]:"
+                  + "\n"
+                  + "[Date]: " +  "<PlaceHolder!>"
                   + "\n\n" 
                   + "[Vitals]:" 
                   + "\n"
@@ -1086,6 +1111,22 @@ public class NursePortal{
 
               //Append the Visit Form to the Patient's current visit Summary
                 fileWriter.append(physicalExam);
+
+
+              //Notify the user that they have successfully saved the exam form
+                if(!isNotified){
+                  //Set up the notification label
+                    notificationLbl = new Label("*Exam data has been saved.");
+                      //Set the font & size
+                        notificationLbl.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+
+                  //Add the notification label
+                    vertical1.getChildren().add(notificationLbl);
+   
+                  //Set the flag to true
+                    isNotified = true;
+                }
+
 
 
               //DEBUG
@@ -1118,8 +1159,6 @@ public class NursePortal{
               displayPortal();
           });
       //====================================================================
-
-
 
 
       //Build the Scene
