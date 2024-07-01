@@ -59,6 +59,8 @@ import java.util.*;	//Scanner for file reading
 public class NursePortal{
   //Private Data & Variables
   //------------------------------------------
+    //We use protected so the sub-class [Doctor] can gain access/have the same data
+
     //Stage used to display the Scenes/Methods
       protected Stage primeStage;
 
@@ -67,12 +69,17 @@ public class NursePortal{
 
     //Since the Doctor portal extends the NursePortal we will need to use this ID to differentiate them
       protected String staffId;
-      //Use protected so the sub-class [Doctor] can gain access/have the same data
 
-    //NEW!!!
     //String that holds the current patient's credentials, that the Nurse is viewing
       private String currentPatientCreds;
 
+    //NEW!!
+    //Notification Text
+      private Label notificationLbl;
+
+    //New!
+    //Notification Flag
+      private boolean isNotified;
 
 
     //There may be no more??
@@ -89,6 +96,7 @@ public class NursePortal{
         welcomePage = welcomeScene;
         staffId = "Nurse";
         currentPatientCreds = "";
+        isNotified = false;
     }
   //------------------------------------------------------------------------------
 
@@ -166,7 +174,7 @@ public class NursePortal{
 
         //Messages
           messageButton.setOnAction(e -> {
-            //stuff here
+            //Load the messages page & display it [Doctor Messages will be exactly the same]
               //code there
 
           });
@@ -307,7 +315,7 @@ public class NursePortal{
         //Exam Date
           Label examDateLbl = new Label("Visit Date:");
             //Set the font & style of the label
-              examDateLbl.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
+              examDateLbl.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;");
       //====================================================================
 
 
@@ -413,6 +421,21 @@ public class NursePortal{
               });
             //Set text wrapping
               previousMedHistTxt.setWrapText(true);
+
+
+        //Date Text Box
+          TextArea dateTxt = new TextArea("<MM/DD/YYYY>");
+            //Set the dimension & style
+              dateTxt.setPrefSize(500, 150);
+              dateTxt.setMinSize(500, 150);
+              dateTxt.setMaxSize(500, 150);
+            //Set the style of the text box
+              dateTxt.setStyle("-fx-font-size: 16px;");
+            //Clear the text box when the user clicks on it to enter new text!
+              dateTxt.setOnMouseClicked(event-> {
+                //Clear the text
+                dateTxt.clear();
+              });
       //====================================================================
 
 
@@ -526,12 +549,155 @@ public class NursePortal{
       //===========================================================================
 
 
+      //Alignments
+      //====================================================================
+        //VBox that stores the Buttons/Functionality of the Visit Form Page
+          VBox buttonContainer;
+
+        //If-statement that checks for which type of user is using the program & then
+        //The buttons will change depending on what is chosen
+          if(this.staffId == "Nurse"){
+            //[Submit for Physical] &&  [Exit]
+              buttonContainer = new VBox(10, submitPhysical, goBack);
+            //Set the alignment of the buttons
+              buttonContainer.setAlignment(Pos.CENTER);
+          }
+          //Else, Doctor is using Program   [Doctor's: 'Patient Visit Form' Method]
+          else{ //{DOCTOR}
+            //[Conduct Exam]  &&  [Exit]
+              buttonContainer = new VBox(10, conductExam, goBack);
+            //Set the alignment of the buttons
+              buttonContainer.setAlignment(Pos.CENTER);
+          }
+
+        //Weight Horizontal Alignments
+          HBox horizontal0 = new HBox(5, weightTxt, lblsLbl);
+    
+        //Height Horizontal Alignments
+          HBox horizontal1 = new HBox(5, heightTxt, feetInchLbl);
+          
+        //Body Temperature Horizontal Alignments
+          HBox horizontal2 = new HBox(5, bodyTempTxt, farenheitLbl);
+            
+        //Blood Pressure Horizontal Alignments
+          HBox horizontal3 = new HBox(5, bloodPressureTxt, bloodPressureLbl);
+
+
+        //Vertical alignment for the vitals entry box
+          VBox vitalsBox = new VBox(5, weightLbl, horizontal0, heightLbl, horizontal1, bodyTempLbl, horizontal2, bloodPressureLbl, horizontal3);
+            //Set the dimension of the vitals box
+              vitalsBox.setPrefSize(225, 300);
+              vitalsBox.setMinSize(225, 300);
+              vitalsBox.setMaxSize(225, 300);
+            //Set the background color of the vitals box
+              vitalsBox.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
+            //Set the alignment
+            //  vitalsBox.setAlignment(Pos.CENTER);
+              vitalsBox.setPadding(new Insets(30));
+              vitalsBox.setAlignment(Pos.CENTER);
+            
+
+        //Vertical Alignments for the Nurse's Notes
+          VBox nurseNotesBox = new VBox(nursesNotesTxt);
+            //Set the size & font
+              nurseNotesBox.setPrefSize(525, 325);
+              nurseNotesBox.setMinSize(525, 325);
+              nurseNotesBox.setMaxSize(525, 325);
+            //Set the padding
+              //nurseNotesBox.setpadding(new Insets(30));
+
+            //Set alignment
+              nurseNotesBox.setAlignment(Pos.CENTER);
+            //Set the background color
+              nurseNotesBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
+
+
+        //Vertical Alignments for the Patient's Previous History Notes
+          VBox patientHistoryBox = new VBox(previousMedHistTxt);
+            //Set the size & font
+              patientHistoryBox.setPrefSize(525, 175);
+              patientHistoryBox.setMinSize(525, 175);
+              patientHistoryBox.setMaxSize(525, 175);
+            //Set the padding
+              //patientHistoryBox.setpadding(new Insets(30));
+
+            //Set alignment
+              patientHistoryBox.setAlignment(Pos.CENTER);
+            //Set the background color
+              patientHistoryBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
+
+
+        //Patient Credentials Alignment
+        //Horizontal Boxes
+          //First Name
+            HBox horizontalX = new HBox(5, firstNameLbl, firstNameTxt);
+
+          //Last Name
+            HBox horizontalY = new HBox(5, lastNameLbl, lastNameTxt);
+
+          //Date of Birth
+            HBox horizontalZ = new HBox(5, dobLbl, dobTxt);
+
+
+        //DropDown 
+          VBox dropDownBox = new VBox(5, patientSelectLbl, dropDown);
+            //Set the alignment of the VBox
+              dropDownBox.setAlignment(Pos.CENTER);
+        
+
+        //Credentials Section 
+          VBox credSection = new VBox(5, dropDownBox, horizontalX, horizontalY, horizontalZ);
+            //Set the dimensions, style, & color
+              credSection.setPrefSize(300, 200);
+              credSection.setMinSize(300, 200);
+              credSection.setMaxSize(300, 200);
+            //Set the alignment of the VBox
+              credSection.setAlignment(Pos.CENTER);
+            //Set the background color of the VBox
+              credSection.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
+            //Set the padding of the VBox
+              credSection.setPadding(new Insets(30));
+
+
+        //Encapsulating VBox that we will return
+          VBox patientCredentialsBox = new VBox(10, patientCredsLbl, credSection);
+            //Set the alignment of the VBox
+              patientCredentialsBox.setAlignment(Pos.CENTER);
+
+
+        //Vitals Encapsulating Vertical Alignment
+          VBox vitalsAlignBox = new VBox(5, vitalsLbl, vitalsBox, ageNoteLbl);
+            //Set Alignment
+              vitalsAlignBox.setAlignment(Pos.CENTER);
+
+        //Patient Credentials (laoded via method, 
+        //this method also updates the priv data holding the current/visiting patient's info)
+          VBox vertical0 = new VBox(10, patientCredentialsBox, vitalsAlignBox, buttonContainer);
+            //Set the alignment of the Encapsulating box
+              vertical0.setAlignment(Pos.CENTER);
+
+        //Vertical alignment for the nurseNotesBox & patientHistoryBox
+          VBox vertical1 = new VBox(5, nurseNotesLbl, nurseNotesBox, previousHistoryLbl, patientHistoryBox);
+            //Set the alginment of vertical1
+              vertical1.setAlignment(Pos.CENTER);
+
+
+        //Final Vertical Alignment
+          HBox finalLayout = new HBox(20, vertical0, vertical1);
+            //Set the final adjustments??
+              finalLayout.setAlignment(Pos.CENTER);
+            //Set the background color of the gui
+              finalLayout.setStyle("-fx-background-color: #3A3A3A;");
+      //====================================================================
+
+
       //Action-Event Handling
       //====================================================================
         //DropDown Menu Selection 
           dropDown.setOnAction(event -> {
-            //Get the selected item for setting up the test boxes with the patients information
-              //System.out.println(dropDown.getValue());
+            //Remove any notifications relating to the misuse of the page
+              vertical1.getChildren().remove(this.notificationLbl);
+
 
             //Save the Selected patient's name to the current patient priv data string
               this.currentPatientCreds = dropDown.getValue();
@@ -691,46 +857,46 @@ public class NursePortal{
                               }
                             //Else, collect the data
                               else{
-                                  //Collect the Weight & place it into its proper .txt
-                                    if(line.contains("[Weight]: ")){
-                                      //Collect the weight (anything between ":" & "l")
-                                    
-                                      //If the weight is NOT empty, update the string
-                                        if(!line.replaceAll(" ", "").isEmpty()){
-                                          //Collect the weight via a substring
-                                            weightStr = line.substring(line.indexOf(":")+1, line.indexOf("l")-1);
-                                       }
-                                    }
+                                //Collect the Weight & place it into its proper .txt
+                                  if(line.contains("[Weight]: ")){
+                                    //Collect the weight (anything between ":" & "l")
+                                  
+                                    //If the weight is NOT empty, update the string
+                                      if(!line.replaceAll(" ", "").isEmpty()){
+                                        //Collect the weight via a substring
+                                          weightStr = line.substring(line.indexOf(":")+1, line.indexOf("l")-1);
+                                      }
+                                  }
 
 
-                                  //Collect the Height & place it into its proper .txt
-                                    if(line.contains("[Height]: ")){
-                                      //If the height is NOT empty, update the string
-                                        if(!line.replaceAll(" ", "").isEmpty()){
-                                          //Collect the height via a substring
-                                            heightStr = line.substring(line.indexOf(":")+1, line.indexOf("<")-1);
-                                        }
-                                    }
+                                //Collect the Height & place it into its proper .txt
+                                  if(line.contains("[Height]: ")){
+                                    //If the height is NOT empty, update the string
+                                      if(!line.replaceAll(" ", "").isEmpty()){
+                                        //Collect the height via a substring
+                                          heightStr = line.substring(line.indexOf(":")+1, line.indexOf("<")-1);
+                                      }
+                                  }
 
 
-                                  //Collect the Body Temp & place it into its proper .txt
-                                    if(line.contains("[Body Temperature]: ")){
-                                      //If the body temp is NOT empty, update the string
-                                        if(!line.replaceAll(" ", "").isEmpty()){
-                                          //Collect the body temp via a substring
-                                            bodyTempStr = line.substring(line.indexOf(":")+1, line.indexOf("F")-1);
-                                        }
-                                    }
+                                //Collect the Body Temp & place it into its proper .txt
+                                  if(line.contains("[Body Temperature]: ")){
+                                    //If the body temp is NOT empty, update the string
+                                      if(!line.replaceAll(" ", "").isEmpty()){
+                                        //Collect the body temp via a substring
+                                          bodyTempStr = line.substring(line.indexOf(":")+1, line.indexOf("F")-1);
+                                      }
+                                  }
 
 
-                                  //Collect the Blood Pressure & place it into its proper .txt
-                                    if(line.contains("[Blood Pressure]: ")){
-                                      //If the blood pressure is NOT empty, update the string
-                                        if(!line.replaceAll(" ", "").isEmpty()){
-                                          //Collect the blood pressure via a substring
-                                            bloodPressureStr = line.substring(line.indexOf(":")+1, line.length());
-                                        }
-                                    }
+                                //Collect the Blood Pressure & place it into its proper .txt
+                                  if(line.contains("[Blood Pressure]: ")){
+                                    //If the blood pressure is NOT empty, update the string
+                                      if(!line.replaceAll(" ", "").isEmpty()){
+                                        //Collect the blood pressure via a substring
+                                          bloodPressureStr = line.substring(line.indexOf(":")+1, line.length());
+                                      }
+                                  }
                             }
                           }
 
@@ -813,6 +979,73 @@ public class NursePortal{
             //.txt file     [Search for patient {if they don't exist append a new entry}
             //               Look for the exam dates and ]
 
+            //Before we can do all of the fun file writing stuff below, we need to make sure that
+            //all of the TextBoxes have been properly filled out first!!
+            //If not we will throw an error Notification
+            //"*Required Text Field is Incorrect or Missing"
+
+
+            //If the user has not selected a patient via the dropdown menu inform them via a notification
+              if(dropDown.getValue() == null){
+                
+                //Display the notification to the user that they have to use the dropdown box
+                  notificationLbl = new Label("*Select a Patient via the Drop Down Menu.");
+                    //Set the font & size
+                      notificationLbl.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+
+                //Notify the user once
+                  if(!this.isNotified){
+                    //Add the notification to the Scene
+                      vertical1.getChildren().add(notificationLbl);
+
+                    //Set the flag
+                      this.isNotified = true;
+                  }
+
+                  //dont continue
+                    return;
+              }
+              //the user has fixed their mistake
+              else if(dropDown.getValue() != null){
+                //Remove any old notifications
+                  vertical1.getChildren().remove(this.notificationLbl);
+
+                //Disable the notification
+                  this.isNotified = false;
+              }
+
+
+            //If any of the Text Boxes are empty or incorrect throw an error & skip below!!
+            if(     weightTxt.getText().isEmpty() 
+                ||  heightTxt.getText().isEmpty() 
+                ||  bodyTempTxt.getText().isEmpty()
+                ||  bloodPressureTxt.getText().isEmpty()
+            ){
+              //DEBUG PRINT
+              //  System.out.println("Weight is missing!!!");
+              //Remove any old notifications!
+                vertical1.getChildren().remove(this.notificationLbl);
+
+
+              //Update the notification
+                this.notificationLbl = new Label("*Required Input is Incorrect or Missing");
+                  //Set the style & font
+                    notificationLbl.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+              
+              //Notify the user only once
+                if(!this.isNotified){
+                  //Add the new Notification to vertical1
+                    vertical1.getChildren().add(this.notificationLbl);
+
+                  //Update the flag
+                    this.isNotified = true;
+                }
+
+              //Break the action-event!!
+                return;  
+            }
+
+
             //Open <Patient Name>VisitSummarys.txt
             try{
               //Open the patients correlating "<Patient Name>VisitSummarys.txt"
@@ -848,7 +1081,7 @@ public class NursePortal{
                   + "\n"
                   + "\n[History]: " 
                   + "\n" + previousMedHistTxt.getText()
-                  + "\n\n";
+                  + "\n\n\n";
                 
 
               //Append the Visit Form to the Patient's current visit Summary
@@ -878,153 +1111,15 @@ public class NursePortal{
 
         //Exit  {Both}
           goBack.setOnAction(e -> {
+            //Reupdate any flags before leaving
+              this.isNotified = false;
+
             //Call upon the Display portal method [Same for both]
               displayPortal();
           });
       //====================================================================
 
 
-      //Alignments
-      //====================================================================
-        //VBox that stores the Buttons/Functionality of the Visit Form Page
-          VBox buttonContainer;
-
-        //If-statement that checks for which type of user is using the program & then
-        //The buttons will change depending on what is chosen
-          if(this.staffId == "Nurse"){
-            //[Submit for Physical] &&  [Exit]
-              buttonContainer = new VBox(10, submitPhysical, goBack);
-            //Set the alignment of the buttons
-              buttonContainer.setAlignment(Pos.CENTER);
-          }
-          //Else, Doctor is using Program   [Doctor's: 'Patient Visit Form' Method]
-          else{ //{DOCTOR}
-            //[Conduct Exam]  &&  [Exit]
-              buttonContainer = new VBox(10, conductExam, goBack);
-            //Set the alignment of the buttons
-              buttonContainer.setAlignment(Pos.CENTER);
-          }
-
-        //Weight Horizontal Alignments
-          HBox horizontal0 = new HBox(5, weightTxt, lblsLbl);
-    
-        //Height Horizontal Alignments
-          HBox horizontal1 = new HBox(5, heightTxt, feetInchLbl);
-          
-        //Body Temperature Horizontal Alignments
-          HBox horizontal2 = new HBox(5, bodyTempTxt, farenheitLbl);
-            
-        //Blood Pressure Horizontal Alignments
-          HBox horizontal3 = new HBox(5, bloodPressureTxt, bloodPressureLbl);
-
-
-        //Vertical alignment for the vitals entry box
-          VBox vitalsBox = new VBox(5, weightLbl, horizontal0, heightLbl, horizontal1, bodyTempLbl, horizontal2, bloodPressureLbl, horizontal3);
-            //Set the dimension of the vitals box
-              vitalsBox.setPrefSize(225, 300);
-              vitalsBox.setMinSize(225, 300);
-              vitalsBox.setMaxSize(225, 300);
-            //Set the background color of the vitals box
-              vitalsBox.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
-            //Set the alignment
-            //  vitalsBox.setAlignment(Pos.CENTER);
-              vitalsBox.setPadding(new Insets(30));
-              vitalsBox.setAlignment(Pos.CENTER);
-            
-
-        //Vertical Alignments for the Nurse's Notes
-          VBox nurseNotesBox = new VBox(nursesNotesTxt);
-            //Set the size & font
-              nurseNotesBox.setPrefSize(525, 325);
-              nurseNotesBox.setMinSize(525, 325);
-              nurseNotesBox.setMaxSize(525, 325);
-            //Set the padding
-              //nurseNotesBox.setpadding(new Insets(30));
-
-            //Set alignment
-              nurseNotesBox.setAlignment(Pos.CENTER);
-            //Set the background color
-              nurseNotesBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
-
-
-        //Vertical Alignments for the Patient's Previous History Notes
-          VBox patientHistoryBox = new VBox(previousMedHistTxt);
-            //Set the size & font
-              patientHistoryBox.setPrefSize(525, 175);
-              patientHistoryBox.setMinSize(525, 175);
-              patientHistoryBox.setMaxSize(525, 175);
-            //Set the padding
-              //patientHistoryBox.setpadding(new Insets(30));
-
-            //Set alignment
-              patientHistoryBox.setAlignment(Pos.CENTER);
-            //Set the background color
-              patientHistoryBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
-
-
-        //Patient Credentials Alignment
-        //Horizontal Boxes
-          //First Name
-            HBox horizontalX = new HBox(5, firstNameLbl, firstNameTxt);
-
-          //Last Name
-            HBox horizontalY = new HBox(5, lastNameLbl, lastNameTxt);
-
-          //Date of Birth
-            HBox horizontalZ = new HBox(5, dobLbl, dobTxt);
-
-
-        //3 VBox(s) credSection & then an ecapsulation of (patientCredsLbl, credSection)
-        //DropDown 
-          VBox dropDownBox = new VBox(5, patientSelectLbl, dropDown);
-            //Set the alignment of the VBox
-              dropDownBox.setAlignment(Pos.CENTER);
-        
-
-        //Credentials Section 
-          VBox credSection = new VBox(5, dropDownBox, horizontalX, horizontalY, horizontalZ);
-            //Set the dimensions, style, & color
-              credSection.setPrefSize(300, 200);
-              credSection.setMinSize(300, 200);
-              credSection.setMaxSize(300, 200);
-            //Set the alignment of the VBox
-              credSection.setAlignment(Pos.CENTER);
-            //Set the background color of the VBox
-              credSection.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
-            //Set the padding of the VBox
-              credSection.setPadding(new Insets(30));
-
-
-        //Encapsulating VBox that we will return
-          VBox patientCredentialsBox = new VBox(10, patientCredsLbl, credSection);
-            //Set the alignment of the VBox
-              patientCredentialsBox.setAlignment(Pos.CENTER);
-
-
-        //Vitals Encapsulating Vertical Alignment
-          VBox vitalsAlignBox = new VBox(5, vitalsLbl, vitalsBox, ageNoteLbl);
-            //Set Alignment
-              vitalsAlignBox.setAlignment(Pos.CENTER);
-
-        //Patient Credentials (laoded via method, 
-        //this method also updates the priv data holding the current/visiting patient's info)
-          VBox vertical0 = new VBox(10, patientCredentialsBox, vitalsAlignBox, buttonContainer);
-            //Set the alignment of the Encapsulating box
-              vertical0.setAlignment(Pos.CENTER);
-
-        //Vertical alignment for the nurseNotesBox & patientHistoryBox
-          VBox vertical1 = new VBox(5, nurseNotesLbl, nurseNotesBox, previousHistoryLbl, patientHistoryBox);
-            //Set the alginment of vertical1
-              vertical1.setAlignment(Pos.CENTER);
-
-
-        //Final Vertical Alignment
-          HBox finalLayout = new HBox(20, vertical0, vertical1);
-            //Set the final adjustments??
-              finalLayout.setAlignment(Pos.CENTER);
-            //Set the background color of the gui
-              finalLayout.setStyle("-fx-background-color: #3A3A3A;");
-      //====================================================================
 
 
       //Build the Scene
