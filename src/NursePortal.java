@@ -55,13 +55,6 @@ import java.io.*;	//FileWriter for file writing
 import java.util.*;	//Scanner for file reading
 //-----------------------------------------------
 
-//[VERY IMPORTANT NOTE FOR THE FUTURE/LATER in writing this program]
-//  Consider making the buttons of the mainPage [New Visit Form] [Messages] [Logout]
-//  Private data of the NursePortal Object & instantiate them in the NursePortal Constructor
-//  This way they can be used later in the Doctor Portal Methods???
-//  This probably won't work but once you have a working program you are comfortable with plz consider it
-//  [It could also help create less allocations on the heap???]
-
 
 public class NursePortal{
   //Private Data & Variables
@@ -279,7 +272,6 @@ public class NursePortal{
               nurseNotesLbl.setStyle("-fx-font-size: 28px; -fx-text-fill: white; -fx-font-weight: bold;");
 
 
-        //NEW!!!
         //Bring the patientCredentials VBox method over here1!
            //Patient Credentials:
           Label patientCredsLbl = new Label("Patient Credentials:");
@@ -367,9 +359,7 @@ public class NursePortal{
               heightTxt.setMaxSize(55, 30);
             //Set the style of the text box
               heightTxt.setStyle("-fx-font-size: 14px;");
-            //Set the padding
-             // heightTxt.setPadding(new Insets(0,0,20,0));
-              
+    
 
         //Body Temperature
           TextArea bodyTempTxt = new TextArea();
@@ -408,9 +398,7 @@ public class NursePortal{
               nursesNotesTxt.setWrapText(true);
 
 
-        //Patient's Previous History:
-
-        //Previous Medications 
+        //Patient's Previous History
           TextArea previousMedHistTxt = new TextArea("<Previously Prescribed Medications>\n<Immunization History>\n<Previous Health Issues>");
             //Set the dimension & style
               previousMedHistTxt.setPrefSize(500, 150);
@@ -549,8 +537,6 @@ public class NursePortal{
       //===========================================================================
 
 
-
-
       //Action-Event Handling
       //====================================================================
         //DropDown Menu Selection 
@@ -581,17 +567,6 @@ public class NursePortal{
             try{
               //Update the fullName string before proceeding
                 fullName = fullName.replaceAll(" ", "");
-
-
-              //System.out.branchln
-
-              //YOOOO
-              //System.out.println("This should be working!! " + fullName);
-
-              //Branch for entrance
-              //if(this.currentPatientCreds != ""){
-              //Get the fullName from this.currenPatient Creds
-               // String fullName = this.currentPatientCreds.substring(0, this.currentPatientCreds.indexOf("/")-3).replaceAll(",", "");
 
               //VisitSummary.txt file
                 File visitSummaryFile = new File(fullName + "VisitSummarys.txt");
@@ -790,8 +765,8 @@ public class NursePortal{
                                   prevHistStr += line + "\n";
                               }
                           }                
-                      //---------------------------------------------------------------------------
                     }
+                    //---------------------------------------------------------------------------
 
                   //Add the Text box strings to their respective TextBoxes
                   
@@ -842,7 +817,7 @@ public class NursePortal{
             //.txt file     [Search for patient {if they don't exist append a new entry}
             //               Look for the exam dates and ]
 
-            //
+            //Open <Patient Name>VisitSummarys.txt
             try{
               //Open the patients correlating "<Patient Name>VisitSummarys.txt"
               //We will be appending All of the information entered in the "New Visit Form"
@@ -858,9 +833,11 @@ public class NursePortal{
 
               //Collect all of the information from the text boxes/areas 
               //then write it to the .txt file via appending
-                String physicalExam = "[Exam #" + (getTotalExams()+1) + "]:"
-                +"\n\n" 
-                + "[Vitals]:" 
+                String physicalExam = "[Date]: " + "<PlaceHolder!>"
+                  + "\n\n"
+                  + "[Exam #" + (getTotalExams()+1) + "]:"
+                  + "\n\n" 
+                  + "[Vitals]:" 
                   + "\n"
                   + "\t[Weight]: " + weightTxt.getText().trim() + " lbs"
                   + "\n"
@@ -871,11 +848,11 @@ public class NursePortal{
                   + "\t[Blood Pressure]: " + bloodPressureTxt.getText().trim()
                   + "\n"
                   + "\n[Nurse's Notes]: " 
-                  + "\n" + nursesNotesTxt.getText().trim()
+                  + "\n" + nursesNotesTxt.getText()
                   + "\n"
                   + "\n[History]: " 
-                  + "\n" + previousMedHistTxt.getText().trim()
-                  + "\n";
+                  + "\n" + previousMedHistTxt.getText()
+                  + "\n\n";
                 
 
               //Append the Visit Form to the Patient's current visit Summary

@@ -703,11 +703,11 @@ public class PatientPortal{
         //=========================================================================================================
           Button exitPage = new Button("Exit");
             //Set the Dimensions and text of the button
-              exitPage.setPrefSize(75, 40);
-              exitPage.setMinSize(75, 40);
-              exitPage.setMaxSize(75, 40);
+              exitPage.setPrefSize(75, 45);
+              exitPage.setMinSize(75, 45);
+              exitPage.setMaxSize(75, 45);
             //Set the font & size
-              exitPage.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+              exitPage.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
         //=========================================================================================================
 
 
@@ -721,9 +721,9 @@ public class PatientPortal{
             ComboBox<String> dropSelect = new ComboBox<>();
               //Set the Dimensions of the drop down menu
               //[Width x Height]
-                dropSelect.setPrefSize(200, 30);
-                dropSelect.setMinSize(200, 30);
-                dropSelect.setMaxSize(200, 30);
+                dropSelect.setPrefSize(200, 35);
+                dropSelect.setMinSize(200, 35);
+                dropSelect.setMaxSize(200, 35);
               //Set the font of the text within
                 dropSelect.setStyle("-fx-font-size: 16px;");
 
@@ -755,9 +755,14 @@ public class PatientPortal{
 
           //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
             try{
+              //NEW!!!
+              //DEBUG!!!
+                //System.out.println("FullName: " + this.fullName + "<White space check>");
+
+
               //Open: PatientInfo.txt
               //Read the File with a scanner (easier to get Line by Line)
-                Scanner fileReader = new Scanner(new File(this.fullName.replaceAll(" ", "") + "VisitSummary.txt"));
+                Scanner fileReader = new Scanner(new File(this.fullName.replaceAll(" ", "") + "VisitSummarys.txt"));
 
               //Flag that "puts on the brakes" of the fileReader so it will
                 boolean patientFound = false;
@@ -769,6 +774,11 @@ public class PatientPortal{
                while(fileReader.hasNextLine()) {
                  //Gather and store the 
                    String line = fileReader.nextLine(); //Starts at the first line of text in .txt file
+
+
+                //DEBUG!!
+                  System.out.println("Line: " + line);
+
 
                  //If-branch will activate data collection once the patient is found via their credentials
                   // if(line.contains("Patient: " + patientCredentials) && !patientFound){
@@ -783,12 +793,16 @@ public class PatientPortal{
                   // }
 
                  //Collect all of the exam dates
-                   if(line.contains("[Exam #")){
+                   if(line.contains("[Date]:")){
+                      patientFound = true;
+                    //DEBUG!!!
+                    System.out.println("Date found!!");
+
                     //Set the visitSummary to "" 
                       visitSummary = "";
 
                     //Collect the exam date
-                      examDates[counter] += line.substring(6, line.length());
+                      examDates[counter] += line.substring(8, line.length());
 
                     //Strip the exam Date string for the numbers to be mapped into hashmap
                       uniqueKeyStr = line.replaceAll("\\D", "");  
@@ -808,10 +822,10 @@ public class PatientPortal{
                       }
 
                     //Break the while loop once the next patient's information appears
-                     if(line.contains("Patient: ") && patientFound){
+                     //if(line.contains("") && patientFound){
                         //break the reading loop
-                          break;
-                     }
+                       //   break;
+                     //}
                    }
 
                  //Add the unique Integer [Visit Date] & visit String [Summary] to the hashmap
