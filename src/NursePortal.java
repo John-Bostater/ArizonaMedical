@@ -108,9 +108,9 @@ public class NursePortal{
     public void displayPortal(){
       //NEW!!
       //DEBUG!!
-      if(this.staffId == "Doctor"){
-        System.out.println("YOU ARE THE DOCTOR!!!!\n\n");
-      }
+      //if(this.staffId == "Doctor"){
+      //  System.out.println("YOU ARE THE DOCTOR!!!!\n\n");
+      //}
 
 
       //Create the scene: Buttons, Action-Event, Alignment, Scene...
@@ -165,9 +165,7 @@ public class NursePortal{
       //===========================================================================================
         //New Visit Form      [This will save to:  "PatientSummary.txt"  <-- rename this .txt file]
           newVisitButton.setOnAction(e -> {
-            //stuff here
-              //code there
-              //Call upon the method
+            //Call upon the method to load the scene & display it
               primeStage.setScene(newVisitForm());
               primeStage.show();
           });
@@ -215,10 +213,8 @@ public class NursePortal{
 
 
     //New Visit Form
-    private Scene newVisitForm(){
-      //Labels, Buttons, TextBoxes, Action-Event Handling, Alignments, Scene
-        //Code here...
-
+    protected Scene newVisitForm(){
+    
       //Labels
       //====================================================================
         //Vitals
@@ -230,40 +226,39 @@ public class NursePortal{
             Label weightLbl = new Label("Weight:\t\t\t ");
               //Set the dimensions & font weight
                 weightLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
-                //Code here
-              //NEW!!
-                //weightLbl.setPadding(0,0,30,0);
-                weightLbl.setAlignment(Pos.CENTER_LEFT);
 
           //Height
             Label heightLbl = new Label("Height:\t\t\t ");
               //Set the dimensions & font weight
                 heightLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
-                //Code here
 
           //Feet/Inches
-            Label feetInchLbl = new Label("<Ft>\'<In>\"");
+            Label feetInchLbl = new Label("<ft>\'<in>\"");
               //Set the dimensions & font weight
                 feetInchLbl.setStyle("-fx-font-size: 18px");
-                //Code here
 
           //Body Temperature
             Label bodyTempLbl = new Label("Body Temperature:");
               //Set the dimensions & font weight
                 bodyTempLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
 
-                //Code here
 
           //Blood Pressure
             Label bloodPressureLbl = new Label("Blood Pressure:\t ");
               //Set the dimensions & font weight
                 bloodPressureLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
-                //Code here
+              
 
           //Farenheit Label
             Label farenheitLbl = new Label("F°");
             //Set the style of the text box
               farenheitLbl.setStyle("-fx-font-size: 18px;");
+
+
+          //Age Notification
+            Label ageNoteLbl = new Label("*Patient vitals available for ages over 12.");
+            //Set the Style of the note
+              ageNoteLbl.setStyle("-fx-font-size: 14px; -fx-text-fill: white;");
 
 
         //Pounds (lbs)
@@ -276,47 +271,78 @@ public class NursePortal{
           Label previousHistoryLbl = new Label("Patient's Previous History:");
             //Set the dimensions & font weight
               previousHistoryLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 28px; -fx-text-fill: white;");
-              //Code here...
-
+              
       
         //Nurse's Notes
           Label nurseNotesLbl = new Label("Nurse's Notes:");
             //Set the dimension & font style
               nurseNotesLbl.setStyle("-fx-font-size: 28px; -fx-text-fill: white; -fx-font-weight: bold;");
-              //Code here...
+
+
+        //NEW!!!
+        //Bring the patientCredentials VBox method over here1!
+           //Patient Credentials:
+          Label patientCredsLbl = new Label("Patient Credentials:");
+            //Set the dimension & Style
+              patientCredsLbl.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;");
+
+        //Select Patient  [Displayed next to or above the dropdown menu]
+          Label patientSelectLbl = new Label("Select Patient:");
+            //Set the dimension & style
+              patientSelectLbl.setStyle("-fx-font-size: 22px; -fx-font-weight: bold;");
+
+        //First Name
+          Label firstNameLbl = new Label("First Name:");
+            //Set the dimension & style
+              firstNameLbl.setStyle("-fx-font-size: 20px;");
+
+        //Last Name
+          Label lastNameLbl = new Label("Last Name:");
+            //Set the dimension & style
+              lastNameLbl.setStyle("-fx-font-size: 20px;");
+
+        //Date Of Birth
+          Label dobLbl = new Label("Date of Birth:");
+            //Set the dimension & style
+              dobLbl.setStyle("-fx-font-size: 20px;");
+
+        //(MM / DD / YYYY)
+          Label dobAlignLbl = new Label("(MM/DD/YYYY)");
+            //Set the dimension & style
+              dobAlignLbl.setStyle("-fx-font-size: 18px;");
       //====================================================================
 
 
       //Text Boxes
       //====================================================================
+        //Patient Credentials TExt Boxes
         //First Name Text Box
           TextArea firstNameTxt = new TextArea();
             //Set the dimensions
-              firstNameTxt.setPrefSize(120, 30);
-              firstNameTxt.setMinSize(120, 30);
-              firstNameTxt.setMaxSize(120, 30);
+              firstNameTxt.setPrefSize(125, 30);
+              firstNameTxt.setMinSize(125, 30);
+              firstNameTxt.setMaxSize(125, 30);
             //Set the style of the text box
               firstNameTxt.setStyle("-fx-font-size: 14px;");
 
         //Last Name Text Box
           TextArea lastNameTxt = new TextArea();
             //Set the dimensions
-              lastNameTxt.setPrefSize(110, 30);
-              lastNameTxt.setMinSize(110, 30);
-              lastNameTxt.setMaxSize(110, 30);
+              lastNameTxt.setPrefSize(125, 30);
+              lastNameTxt.setMinSize(125, 30);
+              lastNameTxt.setMaxSize(125, 30);
             //Set the style of the text box
               lastNameTxt.setStyle("-fx-font-size: 14px;");
 
         //Date of Birth Text Box
           TextArea dobTxt = new TextArea();
             //Set the dimensions
-              dobTxt.setPrefSize(110, 30);
-              dobTxt.setMinSize(110, 30);
-              dobTxt.setMaxSize(110, 30);
+              dobTxt.setPrefSize(100, 30);
+              dobTxt.setMinSize(100, 30);
+              dobTxt.setMaxSize(100, 30);
             //Set the style of the text box
               dobTxt.setStyle("-fx-font-size: 14px;");
-
-
+   
         //Weight
           TextArea weightTxt = new TextArea();
             //Set the dimension & style
@@ -359,16 +385,6 @@ public class NursePortal{
               bloodPressureTxt.setStyle("-fx-font-size: 14px;");
 
 
-        //Date Display (Load the current date to be displayed within the text box (user can manipulate))
-          TextArea dateTxt = new TextArea();
-            //Set the dimension & style
-              dateTxt.setPrefSize(100, 30);
-              dateTxt.setMinSize(100, 30);
-              dateTxt.setMaxSize(100, 30);
-            //Set the style of the text box
-              dateTxt.setStyle("-fx-font-size: 14px;");
-
-
         //Nurse's Notes:
           TextArea nursesNotesTxt = new TextArea("<Know Allergies & Other Health Concerns>");
             //Set the dimension & style
@@ -377,6 +393,13 @@ public class NursePortal{
               nursesNotesTxt.setMaxSize(500, 300);
             //Set the style of the text box
               nursesNotesTxt.setStyle("-fx-font-size: 16px;");
+            //Clear the text box when the user clicks on it to enter new text!
+              nursesNotesTxt.setOnMouseClicked(event-> {
+                //Clear the text
+                nursesNotesTxt.clear();
+              });
+            //Enable text wrapping
+              nursesNotesTxt.setWrapText(true);
 
 
         //Patient's Previous History:
@@ -389,64 +412,13 @@ public class NursePortal{
               previousMedHistTxt.setMaxSize(500, 300);
             //Set the style of the text box
               previousMedHistTxt.setStyle("-fx-font-size: 16px;");
-
-
-        //
-        //See if the <Patient Name>VisitSummary.txt already exists (to load patient data for returning patients)
-          //
-
-        //Load any previously written date into the Text Boxes
-        //Open the file for reading to load all potential data
-        try{
-          //VisitSummary.txt file
-            File visitSummaryFile = new File(this.currentPatientCreds + "VisitSummarys.txt");
-
-          //See if the file exists
-            if(visitSummaryFile.exists() && this.currentPatientCreds != ""){
-              //File Exists!, now load all of the data from the previous visit into the text boxes!
-              
-              //File Reader
-                Scanner fileReader = new Scanner(visitSummaryFile);
-
-              //Read text file line for line
-                while(fileReader.hasNextLine()){
-                  //String that holds the line being read
-                    String line = fileReader.nextLine();
-
-
-                  //Relevant Flag's for data collection
-                    //
-
-
-                  //Load the vitals {Doctor}
-                    if(this.staffId == "Doctor" && line.contains("\t[Vitals]:")){
-
-
-                    }
-                  //Data collection for this specific event
-
-
-                  //Turn off the data collection
-                  
-
-
-                  //Load the Nurse's Notes  {Doctor}
-
-
-                  //Load the Previous History {Both}
-
-                }
-              //Close the file reader
-                fileReader.close();
-
-            }
-
-          //Else, do nothing...
-        }
-        catch(IOException k){
-          //Do Nothing
-        }
-
+            //Clear the text box when the user clicks on it to enter new text!
+              previousMedHistTxt.setOnMouseClicked(event-> {
+                //Clear the text
+                previousMedHistTxt.clear();
+              });
+            //Set text wrapping
+              previousMedHistTxt.setWrapText(true);
       //====================================================================
 
 
@@ -455,322 +427,47 @@ public class NursePortal{
         //Submit For Physical {Nurse}
           Button submitPhysical = new Button("Submit for Physical");
             //Button size
-              submitPhysical.setPrefSize(100, 30);
-              submitPhysical.setMinSize(100, 30);
-              submitPhysical.setMaxSize(100, 30);
+              submitPhysical.setPrefSize(200, 40);
+              submitPhysical.setMinSize(200, 40);
+              submitPhysical.setMaxSize(200, 40);
             //Set the style of the Button
-              submitPhysical.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+              submitPhysical.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
 
         //Conduct Exam {Doctor}
           Button conductExam = new Button("Conduct Exam");
             //Button size
-              conductExam.setPrefSize(100, 30);
-              conductExam.setMinSize(100, 30);
-              conductExam.setMaxSize(100, 30);
+              conductExam.setPrefSize(150, 40);
+              conductExam.setMinSize(150, 40);
+              conductExam.setMaxSize(150, 40);
             //Set the style of the Button
-              conductExam.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+              conductExam.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
+
+        //NEW!!
+        //Load the Patients data from the dropdown menu!! {Doctor}
+          Button loadPatientData = new Button("NEW!!!!");
+            //Button size
+              loadPatientData.setPrefSize(150, 40);
+              loadPatientData.setMinSize(150, 40);
+              loadPatientData.setMaxSize(150, 40);
+            //Set the style of the Button
+              loadPatientData.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+          
 
         //Exit  {Both}
           Button goBack = new Button("Exit");
             //Button size
-              goBack.setPrefSize(100, 30);
-              goBack.setMinSize(100, 30);
-              goBack.setMaxSize(100, 30);
+              goBack.setPrefSize(75, 40);
+              goBack.setMinSize(75, 40);
+              goBack.setMaxSize(75, 40);
             //Set the style of the Button
-              goBack.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+              goBack.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
       //====================================================================
 
 
-      //Action-Event Handling
-      //====================================================================
-        //Submit For Physical {Nurse}
-          submitPhysical.setOnAction(e -> {
-            //Submit the physical
-
-            //This will open the <PatientName>VisitSummarys.txt and add the new exam notes into the
-            //.txt file     [Search for patient {if they don't exist append a new entry}
-            //               Look for the exam dates and ]
-
-            //
-            try{
-              //Open the patients correlating "<Patient Name>VisitSummarys.txt"
-              //We will be appending All of the information entered in the "New Visit Form"
-              //To the .txt file if it already exists
-
-              //Break apart the this.currentPatientCreds to get the fullName 
-                String fullName = this.currentPatientCreds.substring(0, this.currentPatientCreds.indexOf("/") - 3);
-
-
-              //TAKE INTO CONSIDERATION OR!! DO error Exception on this!!!
-              //If the DropDown menu is not activated throw an error notfication
-               
-
-              //Open File for Writing (If the .txt does not exist it will be created)
-                FileWriter fileWriter = new FileWriter(fullName.replaceAll(",", "") + "VisitSummarys.txt", true);
-                  //'true' is so we can append text to the file
-
-              //Collect all of the information from the text boxes/areas 
-              //then write it to the .txt file via appending
-                String physicalExam = "[Exam #" + (getTotalExams()+1) + "]:" /*+ dateTxt*/ + "\n" + "\t[Vitals]" 
-                  + "\n"
-                  + "\t\t[Weight]: " + weightTxt.getText().trim() + " lbs"
-                  + "\n"
-                  + "\t\t[Height]: " + heightTxt.getText().trim() + " <ft>'<in>\""
-                  + "\n"
-                  + "\t\t[Body Temperature]: " + bodyTempTxt.getText().trim() + " F°"
-                  + "\n"
-                  + "\t\t[Blood Pressure]: " + bloodPressureTxt.getText().trim()
-                  + "\n"
-                  + "\n\t[Nurse's Notes]: " + nursesNotesTxt.getText().trim()
-                  + "\n"
-                  + "\t[History]: " + previousMedHistTxt.getText().trim()
-                  + "\n";
-                
-
-              //Append the Visit Form to the Patient's current visit Summary
-                fileWriter.append(physicalExam);
-
-
-              //DEBUG
-                System.out.println("Physical exam summary: \n" + physicalExam);
-
-
-              //Close the file Writer
-                fileWriter.close(); 
-
-              //Contents
-              /*
-                [Date]: <Date>
-                \n
-                \t[Vitals]:
-                \n
-                \t\t[Weight]: <Load from weightTxt>
-                \n
-                \t\t[Height]: <Load from heightTxt>
-                \n
-                \t\t[Body Temperature]: <Load from bodyTempTxt>
-                \n
-                \t\t[Blood Pressure]: <>
-                \n
-                \t[Nurse's Notes]: <Load from bloodPressureTxt>
-
-              */
-
-
-            }
-            catch(IOException n){
-              //Do nothing...
-            }
-
-
-
-          });
-
-
-        //Conduct Exam {Doctor}
-          conductExam.setOnAction(e -> {
-            //Call upon the conductExam Method
-              primeStage.setScene(conductExam(this.currentPatientCreds));
-              primeStage.show();
-          });
-
-
-        //Exit  {Both}
-          goBack.setOnAction(e -> {
-            //Call upon the Display portal method [Same for both]
-              displayPortal();
-          });
-      //====================================================================
-
-      //Alignments
-      //====================================================================
-        //VBox that stores the Buttons/Functionality of the Visit Form Page
-          VBox buttonContainer;
-
-        //If-statement that checks for which type of user is using the program & then
-        //The buttons will change depending on what is chosen
-          if(this.staffId == "Nurse"){
-            //[Submit for Physical] &&  [Exit]
-              buttonContainer = new VBox(10, submitPhysical, goBack);
-            //Set the alignment of the buttons
-              buttonContainer.setAlignment(Pos.CENTER);
-          }
-          //Else, Doctor is using Program   [Doctor's: 'Patient Visit Form' Method]
-          else{ //{DOCTOR}
-
-            //[Conduct Exam]  &&  [Exit]
-              buttonContainer = new VBox(10, conductExam, goBack);
-            //Set the alignment of the buttons
-              buttonContainer.setAlignment(Pos.CENTER);
-          }
-
-        //Weight Horizontal Alignments
-          HBox horizontal0 = new HBox(5, weightTxt, lblsLbl);
-    
-        //Height Horizontal Alignments
-          HBox horizontal1 = new HBox(5, heightTxt, feetInchLbl);
-          
-        //Body Temperature Horizontal Alignments
-          HBox horizontal2 = new HBox(5, bodyTempTxt, farenheitLbl);
-            
-        //Blood Pressure Horizontal Alignments
-          HBox horizontal3 = new HBox(5, bloodPressureTxt, bloodPressureLbl);
-
-
-        //Vertical alignment for the vitals entry box
-          VBox vitalsBox = new VBox(5, weightLbl, horizontal0, heightLbl, horizontal1, bodyTempLbl, horizontal2, bloodPressureLbl, horizontal3);
-            //Set the dimension of the vitals box
-              vitalsBox.setPrefSize(225, 300);
-              vitalsBox.setMinSize(225, 300);
-              vitalsBox.setMaxSize(225, 300);
-            //Set the background color of the vitals box
-              vitalsBox.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
-            //Set the alignment
-            //  vitalsBox.setAlignment(Pos.CENTER);
-              vitalsBox.setPadding(new Insets(30));
-              vitalsBox.setAlignment(Pos.CENTER);
-            
-
-        //Vertical Alignments for the Nurse's Notes
-          VBox nurseNotesBox = new VBox(nursesNotesTxt);
-            //Set the size & font
-              nurseNotesBox.setPrefSize(525, 325);
-              nurseNotesBox.setMinSize(525, 325);
-              nurseNotesBox.setMaxSize(525, 325);
-            //Set the padding
-              //nurseNotesBox.setpadding(new Insets(30));
-
-            //Set alignment
-              nurseNotesBox.setAlignment(Pos.CENTER);
-            //Set the background color
-              nurseNotesBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
-
-
-        //Vertical Alignments for the Patient's Previous History Notes
-          VBox patientHistoryBox = new VBox(previousMedHistTxt);
-            //Set the size & font
-              patientHistoryBox.setPrefSize(525, 325);
-              patientHistoryBox.setMinSize(525, 325);
-              patientHistoryBox.setMaxSize(525, 325);
-            //Set the padding
-              //patientHistoryBox.setpadding(new Insets(30));
-
-            //Set alignment
-              patientHistoryBox.setAlignment(Pos.CENTER);
-            //Set the background color
-              patientHistoryBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
-
-
-        //Vitals Encapsulating Vertical Alignment
-          VBox vitalsAlignBox = new VBox(5, vitalsLbl, vitalsBox);
-            //Set Alignment
-              vitalsAlignBox.setPadding(new Insets(0,0,30,0));
-              //NEW
-                vitalsAlignBox.setAlignment(Pos.CENTER);
-
-        //Patient Credentials (laoded via method, 
-        //this method also updates the priv data holding the current/visiting patient's info)
-          VBox vertical0 = new VBox(5, patientCredsBox(), vitalsAlignBox, buttonContainer);
-            //Set the alignment of the Encapsulating box
-              vertical0.setAlignment(Pos.CENTER);
-
-        //Vertical alignment for the nurseNotesBox & patientHistoryBox
-          VBox vertical1 = new VBox(5, nurseNotesLbl, nurseNotesBox, previousHistoryLbl, patientHistoryBox);
-            //Set the alginment of vertical1
-              vertical1.setAlignment(Pos.CENTER);
-
-
-        //Final Vertical Alignment
-          HBox finalLayout = new HBox(20, vertical0, vertical1);
-            //Set the final adjustments??
-              finalLayout.setAlignment(Pos.CENTER);
-            //Set the background color of the gui
-              finalLayout.setStyle("-fx-background-color: #3A3A3A;");
-      //====================================================================
-
-
-      //Build the Scene
-        Scene mainLayout = new Scene(finalLayout, 1024,768);
-      //Return the Scene
-        return mainLayout;
-    }
-//}
-  
-  //This will return something that has a dropdown menu that will load all of the 
-  //NEW!!!
-  //Make a VBox method that returns the "Patient Summary VBox", which is loaded via the String variable in the parameter
- // /*
-    private VBox patientCredsBox(){
-      //Labels, Text Boxes{will load data from the DropDown}, DropDown, ActionEvent, Alignment, Return VBox
-
-      //Labels
-      //===========================================================================
-        //Patient Credentials:
-          Label patientCredsLbl = new Label("Patient Credentials:");
-            //Set the dimension & Style
-              patientCredsLbl.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;");
-
-        //Select Patient  [Displayed next to or above the dropdown menu]
-          Label patientSelectLbl = new Label("Select Patient:");
-            //Set the dimension & style
-              patientSelectLbl.setStyle("-fx-font-size: 22px; -fx-font-weight: bold;");
-
-        //First Name
-          Label firstNameLbl = new Label("First Name:");
-            //Set the dimension & style
-              firstNameLbl.setStyle("-fx-font-size: 20px;");
-
-        //Last Name
-          Label lastNameLbl = new Label("Last Name:");
-            //Set the dimension & style
-              lastNameLbl.setStyle("-fx-font-size: 20px;");
-
-        //Date Of Birth
-          Label dobLbl = new Label("Date of Birth:");
-            //Set the dimension & style
-              dobLbl.setStyle("-fx-font-size: 20px;");
-
-        //(MM / DD / YYYY)
-          Label dobAlignLbl = new Label("(MM/DD/YYYY)");
-            //Set the dimension & style
-              dobAlignLbl.setStyle("-fx-font-size: 18px;");
-      //===========================================================================
-
-
-      //Text Boxes
-      //===========================================================================
-        //First Name Text Box
-          TextArea firstNameTxt = new TextArea();
-            //Set the dimensions
-              firstNameTxt.setPrefSize(125, 30);
-              firstNameTxt.setMinSize(125, 30);
-              firstNameTxt.setMaxSize(125, 30);
-            //Set the style of the text box
-              firstNameTxt.setStyle("-fx-font-size: 14px;");
-
-        //Last Name Text Box
-          TextArea lastNameTxt = new TextArea();
-            //Set the dimensions
-              lastNameTxt.setPrefSize(125, 30);
-              lastNameTxt.setMinSize(125, 30);
-              lastNameTxt.setMaxSize(125, 30);
-            //Set the style of the text box
-              lastNameTxt.setStyle("-fx-font-size: 14px;");
-
-        //Date of Birth Text Box
-          TextArea dobTxt = new TextArea();
-            //Set the dimensions
-              dobTxt.setPrefSize(100, 30);
-              dobTxt.setMinSize(100, 30);
-              dobTxt.setMaxSize(100, 30);
-            //Set the style of the text box
-              dobTxt.setStyle("-fx-font-size: 14px;");
-      //===========================================================================
-
-
-      //DropDown Menu
+      //NEW!!!
+            //DropDown Menu
       //===========================================================================
         //Create the dropdown menu
           ComboBox<String> dropDown = new ComboBox<>();
@@ -846,8 +543,10 @@ public class NursePortal{
       //===========================================================================
 
 
+
+
       //Action-Event Handling
-      //===========================================================================
+      //====================================================================
         //DropDown Menu Selection 
           dropDown.setOnAction(event -> {
             //Get the selected item for setting up the test boxes with the patients information
@@ -868,21 +567,364 @@ public class NursePortal{
 
             //Date of Birth Text Box Set
               dobTxt.setText(this.currentPatientCreds.substring(this.currentPatientCreds.indexOf("/")-2, this.currentPatientCreds.length()));
+          
+          
+            //NEW!!!
+                        //Load any previously written data into the Text Boxes
+            //Open the file for reading to load all potential data
+            try{
+              //Update the fullName string before proceeding
+                fullName = fullName.replaceAll(" ", "");
+
+
+              //System.out.branchln
+
+              //YOOOO
+              //System.out.println("This should be working!! " + fullName);
+
+              //Branch for entrance
+              //if(this.currentPatientCreds != ""){
+              //Get the fullName from this.currenPatient Creds
+               // String fullName = this.currentPatientCreds.substring(0, this.currentPatientCreds.indexOf("/")-3).replaceAll(",", "");
+
+              //VisitSummary.txt file
+                File visitSummaryFile = new File(fullName + "VisitSummarys.txt");
+
+              //See if the file exists
+                if(visitSummaryFile.exists()){
+                  //File Exists!, now load all of the data from the previous visit into the text boxes!
+                  
+                  //DEBUG!!
+                  //System.out.println("File Exists!!!\n\n");
+
+                  //File Reader
+                    Scanner fileReader = new Scanner(visitSummaryFile);
+
+                  //Relevant Flag for data collection
+                    boolean collectData = false;
+
+                  //Vitals Collection [Doctor]
+                    boolean vitalsCollect = false;
+
+                  //Nurse's Notes Collection [Doctor]
+                    boolean nursesNotesCollect = false;
+
+                  //Previous History Notes  [Nurse]
+                    boolean prevHistCollect = false;
+
+                  //Load the number of the Last exam to be added to the .txt file 
+                    short lastExamNum = getTotalExams();
+
+                  //Counter for # of "[Exam #" found
+                    short counter = 0;
+
+                  //Strings for collecting the data to be displayed in the Text Boxes
+                    
+
+                  //Nurse's Notes
+                    String nursesNotesStr = "<Known Allergies & Other Health Concerns>";
+
+                  //Previous History
+                    String prevHistStr = "<Previously Prescribed Medications>\n<Immunization History>\n<Previous Health Issues>";
+
+
+                  //Read text file line for line
+                    while(fileReader.hasNextLine()){
+                      //String that holds the line being read
+                        String line = fileReader.nextLine();
+
+
+                      //Increment the counter upon every Exam #
+                        if(line.contains("[Exam #")){
+                          //Increment
+                            counter++;
+                        }
+
+
+                      //Last Exam found!, load the data into the .txt files
+                        if(counter == lastExamNum){
+                          //Update the flag!
+                            collectData = true;
+                        }
+
+
+                      //Flag Activation 
+                      //---------------------------------------------------------------------------
+                        //Vitals Flag [Doctor]
+                          if(line.contains("[Vitals]:") && collectData && this.staffId == "Doctor"){
+                            //Empty Default text from String(s)
+                              //Code here...
+
+                            //Move the line forward!
+                              line = fileReader.nextLine();
+
+                            //Activate the flag to start collecting the Vitals
+                              vitalsCollect = true;
+                          }
+
+                        //Nurse's Notes Flag [Doctor]
+                          if(line.contains("[Nurse's Notes]:") && collectData && this.staffId == "Doctor"){
+                            //Empty the default text from String(s)
+                              nursesNotesStr = "";
+                            
+                            //Move the line forward!
+                              line = fileReader.nextLine();
+
+                            //Activate the flag to start collecting the Nurse's Notes
+                              nursesNotesCollect = true;
+                          }
+
+                        //Previous History Flag [Both]
+                          if(line.contains("[History]:") && collectData){
+                            //Empty the default text from String(s)
+                              prevHistStr = "";
+
+                            //Move the line forward!
+                              line = fileReader.nextLine();
+
+                            //Activate the flag to start collecting the Previous Exam History
+                              prevHistCollect = true;
+                          }
+                      //---------------------------------------------------------------------------
+
+
+                      //Data Collection {Flag response}
+                      //---------------------------------------------------------------------------
+                        //Collection
+                        //Vitals Flag [Doctor]
+                          if(vitalsCollect){
+                            //Statement to break the vitals collection!!!
+                              if(line.contains("[Nurse's Notes]:")){
+                                //Break the vitals collection
+                                  vitalsCollect = false;
+                              }
+                            //Else, collect the data
+                              else{
+                                //Collect the line
+                                  //vitalsStr += line + "\n";
+                              }
+                          }
+
+                        //Nurse's Notes Flag [Doctor]
+                          if(nursesNotesCollect){
+                            //Statement to break the data collection!!!
+                              if(line.contains("[History]:")){
+                                //Break the data collection
+                                  nursesNotesCollect = false;
+                              }
+                            //Else, collect the data
+                              else{
+                                //Collect the line
+                                  nursesNotesStr += line + "\n";
+                              }
+                          }
+
+                        //History Notes Collection
+                          if(prevHistCollect){
+                            //Statement to break the data collection!!!
+                              if(line.contains("[Exam #")){
+                                //Break the data collection
+                                  prevHistCollect = false;
+                              }
+                            //Else, collect the data
+                              else{
+                                //Collect the line
+                                  prevHistStr += line + "\n";
+                              }
+                          }                
+                      //---------------------------------------------------------------------------
+                    }
+
+                  //Add the Text box strings to their respective TextBoxes
+                    //Vitals
+
+
+                    //Nurse's Notes
+                      nursesNotesTxt.setText(nursesNotesStr);
+
+                    //Previous History
+                      previousMedHistTxt.setText(prevHistStr);
+
+
+                  //Close the file reader
+                    fileReader.close();
+                }
+              }
+              //Else, do nothing...
+           // }
+            catch(IOException k){
+              //Do Nothing
+            }
+        
           });
-      //===========================================================================
 
 
-      //Alignment
-      //===========================================================================
+        //Submit For Physical {Nurse}
+          submitPhysical.setOnAction(e -> {
+            //Submit the physical...
+            //This will open the <PatientName>VisitSummarys.txt and add the new exam notes into the
+            //.txt file     [Search for patient {if they don't exist append a new entry}
+            //               Look for the exam dates and ]
+
+            //
+            try{
+              //Open the patients correlating "<Patient Name>VisitSummarys.txt"
+              //We will be appending All of the information entered in the "New Visit Form"
+              //To the .txt file if it already exists
+
+              //Break apart the this.currentPatientCreds to get the fullName 
+                String fullName = this.currentPatientCreds.substring(0, this.currentPatientCreds.indexOf("/") - 3);
+
+
+              //Open File for Writing (If the .txt does not exist it will be created)
+                FileWriter fileWriter = new FileWriter(fullName.replaceAll(",", "") + "VisitSummarys.txt", true);
+                  //'true' is so we can append text to the file
+
+              //Collect all of the information from the text boxes/areas 
+              //then write it to the .txt file via appending
+                String physicalExam = "[Exam #" + (getTotalExams()+1) + "]:"
+                +"\n\n" 
+                + "[Vitals]:" 
+                  + "\n"
+                  + "\t[Weight]: " + weightTxt.getText().trim() + " lbs"
+                  + "\n"
+                  + "\t[Height]: " + heightTxt.getText().trim() + " <ft>'<in>\""
+                  + "\n"
+                  + "\t[Body Temperature]: " + bodyTempTxt.getText().trim() + " F°"
+                  + "\n"
+                  + "\t[Blood Pressure]: " + bloodPressureTxt.getText().trim()
+                  + "\n"
+                  + "\n[Nurse's Notes]: " 
+                  + "\n" + nursesNotesTxt.getText().trim()
+                  + "\n"
+                  + "\n[History]: " 
+                  + "\n" + previousMedHistTxt.getText().trim()
+                  + "\n";
+                
+
+              //Append the Visit Form to the Patient's current visit Summary
+                fileWriter.append(physicalExam);
+
+
+              //DEBUG
+                System.out.println("Physical exam summary: \n" + physicalExam);
+
+
+              //Close the file Writer
+                fileWriter.close(); 
+            }
+            catch(IOException n){
+              //Do nothing...
+            }
+          });
+
+
+        //Conduct Exam {Doctor}
+          conductExam.setOnAction(e -> {
+            //Call upon the conductExam Method
+              primeStage.setScene(conductExam(this.currentPatientCreds));
+              primeStage.show();
+          });
+
+
+        //Exit  {Both}
+          goBack.setOnAction(e -> {
+            //Call upon the Display portal method [Same for both]
+              displayPortal();
+          });
+      //====================================================================
+
+
+      //Alignments
+      //====================================================================
+        //VBox that stores the Buttons/Functionality of the Visit Form Page
+          VBox buttonContainer;
+
+        //If-statement that checks for which type of user is using the program & then
+        //The buttons will change depending on what is chosen
+          if(this.staffId == "Nurse"){
+            //[Submit for Physical] &&  [Exit]
+              buttonContainer = new VBox(10, submitPhysical, goBack);
+            //Set the alignment of the buttons
+              buttonContainer.setAlignment(Pos.CENTER);
+          }
+          //Else, Doctor is using Program   [Doctor's: 'Patient Visit Form' Method]
+          else{ //{DOCTOR}
+
+            //[Conduct Exam]  &&  [Exit]
+              buttonContainer = new VBox(10, loadPatientData, conductExam, goBack);
+            //Set the alignment of the buttons
+              buttonContainer.setAlignment(Pos.CENTER);
+          }
+
+        //Weight Horizontal Alignments
+          HBox horizontal0 = new HBox(5, weightTxt, lblsLbl);
+    
+        //Height Horizontal Alignments
+          HBox horizontal1 = new HBox(5, heightTxt, feetInchLbl);
+          
+        //Body Temperature Horizontal Alignments
+          HBox horizontal2 = new HBox(5, bodyTempTxt, farenheitLbl);
+            
+        //Blood Pressure Horizontal Alignments
+          HBox horizontal3 = new HBox(5, bloodPressureTxt, bloodPressureLbl);
+
+
+        //Vertical alignment for the vitals entry box
+          VBox vitalsBox = new VBox(5, weightLbl, horizontal0, heightLbl, horizontal1, bodyTempLbl, horizontal2, bloodPressureLbl, horizontal3);
+            //Set the dimension of the vitals box
+              vitalsBox.setPrefSize(225, 300);
+              vitalsBox.setMinSize(225, 300);
+              vitalsBox.setMaxSize(225, 300);
+            //Set the background color of the vitals box
+              vitalsBox.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
+            //Set the alignment
+            //  vitalsBox.setAlignment(Pos.CENTER);
+              vitalsBox.setPadding(new Insets(30));
+              vitalsBox.setAlignment(Pos.CENTER);
+            
+
+        //Vertical Alignments for the Nurse's Notes
+          VBox nurseNotesBox = new VBox(nursesNotesTxt);
+            //Set the size & font
+              nurseNotesBox.setPrefSize(525, 325);
+              nurseNotesBox.setMinSize(525, 325);
+              nurseNotesBox.setMaxSize(525, 325);
+            //Set the padding
+              //nurseNotesBox.setpadding(new Insets(30));
+
+            //Set alignment
+              nurseNotesBox.setAlignment(Pos.CENTER);
+            //Set the background color
+              nurseNotesBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
+
+
+        //Vertical Alignments for the Patient's Previous History Notes
+          VBox patientHistoryBox = new VBox(previousMedHistTxt);
+            //Set the size & font
+              patientHistoryBox.setPrefSize(525, 325);
+              patientHistoryBox.setMinSize(525, 325);
+              patientHistoryBox.setMaxSize(525, 325);
+            //Set the padding
+              //patientHistoryBox.setpadding(new Insets(30));
+
+            //Set alignment
+              patientHistoryBox.setAlignment(Pos.CENTER);
+            //Set the background color
+              patientHistoryBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
+
+
+
+        //Patient Credentials Alignment
         //Horizontal Boxes
           //First Name
-            HBox horizontal0 = new HBox(5, firstNameLbl, firstNameTxt);
+            HBox horizontalX = new HBox(5, firstNameLbl, firstNameTxt);
 
           //Last Name
-            HBox horizontal1 = new HBox(5, lastNameLbl, lastNameTxt);
+            HBox horizontalY = new HBox(5, lastNameLbl, lastNameTxt);
 
           //Date of Birth
-            HBox horizontal2 = new HBox(5, dobLbl, dobTxt);
+            HBox horizontalZ = new HBox(5, dobLbl, dobTxt);
 
 
         //3 VBox(s) credSection & then an ecapsulation of (patientCredsLbl, credSection)
@@ -893,7 +935,7 @@ public class NursePortal{
         
 
         //Credentials Section 
-          VBox credSection = new VBox(5, dropDownBox, horizontal0, horizontal1, horizontal2);
+          VBox credSection = new VBox(5, dropDownBox, horizontalX, horizontalY, horizontalZ);
             //Set the dimensions, style, & color
               credSection.setPrefSize(300, 200);
               credSection.setMinSize(300, 200);
@@ -905,34 +947,58 @@ public class NursePortal{
             //Set the padding of the VBox
               credSection.setPadding(new Insets(30));
 
-        //Encapsulating VBox that we will return
-          VBox mainLayout = new VBox(10, patientCredsLbl, credSection);
-            //Set the alignment of the VBox
-              mainLayout.setAlignment(Pos.CENTER);
-      //===========================================================================
 
-      //Return the VBox
+        //Encapsulating VBox that we will return
+          VBox patientCredentialsBox = new VBox(10, patientCredsLbl, credSection);
+            //Set the alignment of the VBox
+              patientCredentialsBox.setAlignment(Pos.CENTER);
+
+
+        //Vitals Encapsulating Vertical Alignment
+          VBox vitalsAlignBox = new VBox(5, vitalsLbl, vitalsBox, ageNoteLbl);
+            //Set Alignment
+              vitalsAlignBox.setAlignment(Pos.CENTER);
+
+        //Patient Credentials (laoded via method, 
+        //this method also updates the priv data holding the current/visiting patient's info)
+          VBox vertical0 = new VBox(5, patientCredentialsBox, vitalsAlignBox, buttonContainer);
+            //Set the alignment of the Encapsulating box
+              vertical0.setAlignment(Pos.CENTER);
+
+        //Vertical alignment for the nurseNotesBox & patientHistoryBox
+          VBox vertical1 = new VBox(5, nurseNotesLbl, nurseNotesBox, previousHistoryLbl, patientHistoryBox);
+            //Set the alginment of vertical1
+              vertical1.setAlignment(Pos.CENTER);
+
+
+        //Final Vertical Alignment
+          HBox finalLayout = new HBox(20, vertical0, vertical1);
+            //Set the final adjustments??
+              finalLayout.setAlignment(Pos.CENTER);
+            //Set the background color of the gui
+              finalLayout.setStyle("-fx-background-color: #3A3A3A;");
+      //====================================================================
+
+
+      //Build the Scene
+        Scene mainLayout = new Scene(finalLayout, 1024,768);
+      //Return the Scene
         return mainLayout;
     }
 
+  
 
   //Collect the total number of exam dates for a selected patient
     private short getTotalExams(){
-      //Open the file for r
+      //Open the Patient's total exam's file if it exists
 
       //Open file for reading & collecting the total number of examinations
       try{
         //Get the patients full Name
           String fullName = this.currentPatientCreds.substring(0, this.currentPatientCreds.indexOf("/")-3).replaceAll(",", "");
 
-
-        //DEBUG!!
-          System.out.println("Full Name: " + fullName + "VisitSummarys.txt");
-
-
         //Open <Patient Name>VisitSummary.txt for reading
           File visitSummaryFile = new File(fullName.trim() + "VisitSummarys.txt");
-
 
         //Holds count of the number of exam dates
           short totalExams = 0;
@@ -958,7 +1024,6 @@ public class NursePortal{
             //Close the file reader
               fileReader.close();
 
-
             //Return the total number of exams
               return totalExams;
           }
@@ -974,8 +1039,7 @@ public class NursePortal{
           return -1;
       }
     }
-
-
+  //-----------------------------------------------------------------------------------
 
 
   //[DoctorPortal Methods]  //return Null in Nurse Portal
@@ -986,8 +1050,6 @@ public class NursePortal{
         return null;
     }
   //-----------------------------------------------------------------------------------
-
-
 }
 
 //NEW METHODS THAT NEED TO BE EDITED/FORMED TO WORK ALONGSIDE A DROPDOWN MENU 

@@ -70,7 +70,7 @@ public class DoctorPortal extends NursePortal{
 
 	//Data of the Portals Object/Class
 	//-------------------------------------------------------------------------------------------
-	  //protected String staffId;
+	  //All of the 'protected' Data from the NursePortal Class is shared with the Doctor Class
 	//-------------------------------------------------------------------------------------------
 
 
@@ -92,41 +92,92 @@ public class DoctorPortal extends NursePortal{
 	  
 
 	  //Display the Main Page
-	  //@Override
-	    //public void displayPortal(){
+	  @Override
+	    public void displayPortal(){
 		  //Set the Buttons, Labels, Action-Event, etc.  [In the future this may be moved to the constructor?]
 
 		  //Labels
 		  //========================================================================
-
+			//Welcome!
+			  Label welcomeLbl = new Label("Welcome!");
+			  	//Set the style & font of the label
+				  //Code here..
+			
+			//What would you like to do today?
+			  Label header0 = new Label("What would you like to do today?");
+			  	//Set the style & font of the label
+				  //Code here...
 		  //========================================================================
 
 
 		  //Buttons
 		  //========================================================================
 			//Patient Visit Form
-			
+			  Button patientVisitForm = new Button("Patient Visit Form");
+			  	//Set the dimension & font of the button
+				   //code here...
 			//The action - event handling for this button will call upon the newVisitForm() method
 
-			
+
+			//View Patient Records
+			  Button viewPatientRecords = new Button("View Patient Records");
+			  	//Set the dimension & font of the button
+				   //code here...
 
 
+			//Messages
+			  Button messagesButton = new Button("Messages");
+			  	//Set the dimension & font of the button
+				   //code here...
+
+
+			//Logout
+			  Button goBack = new Button("Logout");
+			  	//Set the dimension & font of the button
+				   //code here...
 		  //========================================================================
 
 
 		  //Action-Event Handling
 		  //========================================================================
+			//Patient Visit Form
+			  patientVisitForm.setOnAction(e -> {
+				//Load the newVisitForm() method
+				  this.primeStage.setScene(this.newVisitForm());
+				
+				//Display the scene
+				  this.primeStage.show();
+			  });
 
+
+			//View Patient Records
+
+
+			//Messages
+
+
+			//Logout
 		  //========================================================================
 
 
 		  //Alignment
 		  //========================================================================
+		  	
+			//Final Horizontal Alignment
+				HBox finalHorizontal = new HBox(patientVisitForm);
+
 		  //========================================================================
 
 
 		  //Set the Scene & Display it
-		//}
+		
+		  //Build the Scene
+			Scene mainLayout = new Scene(finalHorizontal , 1024, 768);
+
+		  //Display the Scene
+		  	this.primeStage.setScene(mainLayout);
+			this.primeStage.show();
+		}
 
 	
 
@@ -163,7 +214,8 @@ public class DoctorPortal extends NursePortal{
 			//System.out.println("Patient Credentials for [Conduct Exam]: \n\t" + patientCredentials);
 
 
-		  Label debugLbl = new Label("It Worked!!!");
+		  //Debug Label
+			Label debugLbl = new Label("It Worked!!!");
 		//===========================================================================
 
 
@@ -171,8 +223,11 @@ public class DoctorPortal extends NursePortal{
 		//=================================================================================================
 		  //Submit Exam
 			Button submitExam = new Button("Submit Examination");
+			  //
 
 		  //Send Prescription
+		  	Button sendPrescription = new Button("Send Prescription");
+			  //
 
 
 		  //Exit
@@ -182,24 +237,43 @@ public class DoctorPortal extends NursePortal{
 		//=================================================================================================
 
 
+		//Action-Event Handling
+		//=================================================================================================
+		  //find the patient via the dropdown menu credentials &
+
+		  //Submit Exam
+			submitExam.setOnAction(e -> {
+			  //Code here...
+
+			});
+
+
+		  //Send Prescription
+
+
+
+		  //Exit
+		    goBack.setOnAction(e -> {
+			  //Call upon the "newVistForm" method 
+			
+			  //Set the Scene
+				this.primeStage.setScene(this.newVisitForm());
+			
+			  //Display the Scene
+			  	this.primeStage.show();
+			});
+		//=================================================================================================
+
 
 		//Alignments
 		//==========================================================================
-		  HBox debugAlign = new HBox(10, debugLbl);
+		  HBox debugAlign = new HBox(10, debugLbl, goBack);
 		  debugAlign.setAlignment(Pos.CENTER);
 		//==========================================================================
 
 
-		//Action-Event Handling
-		//find the patient via the dropdown menu credentials &
-
-
-
-
-
-
 		//Build the Conduct Exam Scene
-		  Scene examScene = new Scene(debugAlign, 900, 700);
+		  Scene examScene = new Scene(debugAlign, 1024, 768);
 
 		//Return the Conduct Exam Scene
 		  return examScene;
