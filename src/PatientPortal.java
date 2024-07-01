@@ -923,8 +923,21 @@ public class PatientPortal{
           //Vertically align the Header 0 Label and the button container box
             VBox vertical0 = new VBox(header0, functContainer);
 
+
+          //VBox for the messageTxt (this way we can apply background color)
+            VBox summaryBox = new VBox(visitSummaryTxt);
+              //Set the alignment of the Visit Summary text area
+                summaryBox.setAlignment(Pos.CENTER);
+
+              //Set the background color & other features
+                summaryBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
+              //Set the dimension of the summary box (slightly bigger than the Text Box)
+                summaryBox.setPrefSize(825, 575);
+                summaryBox.setMinSize(825, 575);
+                summaryBox.setMaxSize(825, 575);
+
           //Vertically alignment of header and text box
-            VBox vertical1 = new VBox(10, header1, visitSummaryTxt);
+            VBox vertical1 = new VBox(10, header1, summaryBox);
   
           //Final Adjustment VBox
             VBox vertical2 = new VBox(vertical0, vertical1);         
@@ -936,7 +949,7 @@ public class PatientPortal{
 
           //Horizontally align the VBox [Final box & adjustment]
             HBox horizontal0 = new HBox(vertical2);
-              //NEw
+              //Set the background color for the whole page
                 horizontal0.setStyle("-fx-background-color: #3A3A3A;");
 
           //Set the adjustment

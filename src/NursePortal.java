@@ -614,13 +614,6 @@ public class NursePortal{
             //Set the background color
               visitDateBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
 
-        //Horizontal alignment for the Visit Date Entrance
-          //HBox horizontalW = new HBox(5, examDateLbl, visitDateBox);
-            //Set the alignment
-              //horizontalW.setAlignment(Pos.CENTER);
-            //Set padding
-             // horizontalW.setPadding(new Insets(0,0,0,75));
-
 
         //Vertical Alignments for the Nurse's Notes
           VBox nurseNotesBox = new VBox(nursesNotesTxt);
