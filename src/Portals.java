@@ -156,9 +156,9 @@ public class Portals {
             
             //Set the dimensions of the Buttons
            	  //[Width x Height]
-           	    patientLogin.setPrefSize(120, 50);  
-           	    patientLogin.setMaxSize(120, 50);
-           	    patientLogin.setMinSize(120, 50);
+           	    patientLogin.setPrefSize(135, 50);  
+           	    patientLogin.setMaxSize(135, 50);
+           	    patientLogin.setMinSize(135, 50);
 	          //[Width x Height]
            	    staffLogin.setPrefSize(100, 50);  
            	    staffLogin.setMaxSize(100, 50);
@@ -169,9 +169,9 @@ public class Portals {
            	    exitProg.setMinSize(80, 45);          
 		          
               //Set text Size within buttons
-  	            patientLogin.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
-				staffLogin.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
-				exitProg.setStyle("-fx-font-size: 22px; -fx-font-family: 'Times New Roman';");
+  	            patientLogin.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+				staffLogin.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+				exitProg.setStyle("-fx-font-size: 24px; -fx-font-family: 'Times New Roman';");
               
               //Set padding
               	buttonsSection.setAlignment(Pos.CENTER);

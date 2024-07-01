@@ -1038,13 +1038,11 @@ public class NursePortal{
                 ||  heightTxt.getText().isEmpty() 
                 ||  bodyTempTxt.getText().isEmpty()
                 ||  bloodPressureTxt.getText().isEmpty()
+                ||  dateTxt.getText()isEmpty()
+                ||  dateTxt.
             ){
-              //DEBUG PRINT
-              //  System.out.println("Weight is missing!!!");
-              
               //Remove any old notifications!
                 vertical1.getChildren().remove(this.notificationLbl);
-
 
               //Update the notification
                 this.notificationLbl = new Label("*Required Input is Incorrect or Missing");

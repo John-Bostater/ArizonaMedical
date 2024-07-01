@@ -758,7 +758,7 @@ public class PatientPortal{
             String[] examDates = new String[10];   //We could either use the default
             //Max amount of exams per Patient is 10
 
-         //Do a hashmap to map the visit summary(s) {Strings} to a key {Visit Date as integer}
+          //Do a hashmap to map the visit summary(s) {Strings} to a key {Visit Date as integer}
             HashMap<Integer, String> summaryMap = new HashMap<>();
 
           //Integer that stores/uses the Date's numbers as a Key
@@ -769,7 +769,6 @@ public class PatientPortal{
 
           //String that stores the visit summary (all text below patient being found)
             String visitSummary = ""; //These will be added to the hashMap
-
           //We will be able to access these in constant time via the action event-handling
 
 
@@ -803,7 +802,7 @@ public class PatientPortal{
              //Read the file Line-by-Line and compare the strings for a match
                while(fileReader.hasNextLine()) {
                  //Gather and store the line being read
-                  line = fileReader.nextLine(); //Starts at the first line of text in .txt file
+                   line = fileReader.nextLine(); //Starts at the first line of text in .txt file
 
 
                  //Collect all of the exam dates
@@ -1052,14 +1051,7 @@ public class PatientPortal{
                   //[Note]: ^^ any text that exceeeds the width will fall to a new line
 
 
-            //NEW!!!
-            //Set the text box: "inboxTxt" to have the latest message(s) appear
-            //loaded from the .txt file "Messages.txt"
-            //Run a while loop until the Patient's name is hit (First & Last name)
-            //Do the flag method for starting to collect data 
-            //(Collect all text between Matched patient name & the next patient's name {when we will stop, i.e. set the flag to false})
-
-            //Use our new method we created!!
+            //Set the text of the inbox to the messsages correlating to the patient
               inboxTxt.setText(getMessages());
           //=======================================================================
 
