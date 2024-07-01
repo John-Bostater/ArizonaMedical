@@ -70,7 +70,7 @@ public class DoctorPortal extends NursePortal{
 
 	//Data of the Portals Object/Class
 	//-------------------------------------------------------------------------------------------
-	  private String staffId;
+	  //protected String staffId;
 	//-------------------------------------------------------------------------------------------
 
 
@@ -92,8 +92,8 @@ public class DoctorPortal extends NursePortal{
 	  
 
 	  //Display the Main Page
-	  @Override
-	    public void displayPortal(){
+	  //Override
+	    //public void displayPortal(){
 		  //Set the Buttons, Labels, Action-Event, etc.  [In the future this may be moved to the constructor?]
 
 		  //Labels
@@ -120,7 +120,80 @@ public class DoctorPortal extends NursePortal{
 
 
 		  //Set the Scene & Display it
-		}
+		//}
+
+	
+
+	//
+	  @Override
+	  protected Scene conductExam(){
+		//Labels
+		//===========================================================================
+		  //Doctor's Exam
+		  	Label doctorsExamLbl = new Label("Doctor's Exam:");
+			  //Set the size & font
+			  	doctorsExamLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");
+
+		  //Prescription
+			Label prescriptionLbl = new Label("Prescription");
+
+		  //Prescription Script
+		  	Label prescriptionScript = new Label("Prescription Script");
+			  //Set the size & font
+			  	prescriptionScript.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;")	
+
+
+		  //Current Patient Credentials (Maybe swtich this to "Patient Name??")
+			Label currentPatientCredsLbl = new Label("Current Patient:");
+			  //Set the size & font
+			  	currentPatientCredsLbl.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+		  //[NOTE!!!]
+		  //Next to this text label should be a text box with the patient's credentials loaded into it!!
+
+
+		   //Current Patients Pharmacy
+
+
+		  Label debugLbl = new Label("It Worked!!!");
+		//===========================================================================
+
+
+		//Buttons
+		//=================================================================================================
+		  //Submit Exam
+			Button submitExam = new Button("Submit Examination");
+
+		  //Send Prescription
+
+
+		  //Exit
+		  	Button goBack = new Button("Exit");
+			  //Set the dimension & font of the button
+
+		//=================================================================================================
+
+
+
+		//Alignments
+		//==========================================================================
+		  HBox debugAlign = new HBox(10, debugLbl);
+		  debugAlign.setAlignment(Pos.CENTER);
+		//==========================================================================
+
+
+
+
+
+
+
+
+		//Build the Conduct Exam Scene
+		  Scene examScene = new Scene(debugAlign, 900, 700);
+
+		//Return the Conduct Exam Scene
+		  return examScene;
+	  }
+
 
 
 	  //Methods you already have...  (these can be reference within the Action Event buttons you created)

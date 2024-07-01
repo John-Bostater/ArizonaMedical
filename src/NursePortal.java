@@ -73,7 +73,8 @@ public class NursePortal{
       private Scene welcomePage;
 
     //Since the Doctor portal extends the NursePortal we will need to use this ID to differentiate them
-      private String staffId;
+      protected String staffId;
+      //Use protected so the sub-class [Doctor] can gain access/have the same data
 
     //NEW!!!
     //String that holds the current patient's credentials, that the Nurse is viewing
@@ -105,6 +106,13 @@ public class NursePortal{
   //------------------------------------------------------------------------------
     //Run the Main Portal page for the Nurse Portal & all of its functionality
     public void displayPortal(){
+      //NEW!!
+      //DEBUG!!
+      if(this.staffId == "Doctor"){
+        System.out.println("YOU ARE THE DOCTOR!!!!\n\n");
+      }
+
+
       //Create the scene: Buttons, Action-Event, Alignment, Scene...
 
       //Labels/Headers
@@ -274,6 +282,7 @@ public class NursePortal{
         //Nurse's Notes
           Label nurseNotesLbl = new Label("Nurse's Notes:");
             //Set the dimension & font style
+              nurseNotesLbl.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;");
               //Code here...
       //====================================================================
 
@@ -375,9 +384,9 @@ public class NursePortal{
         //Previous Medications 
           TextArea previousMedHistTxt = new TextArea("<Previously Prescribed Medications, Immunization History, Previous Health Issues>");
             //Set the dimension & style
-              previousMedHistTxt.setPrefSize(100, 30);
-              previousMedHistTxt.setMinSize(100, 30);
-              previousMedHistTxt.setMaxSize(100, 30);
+              previousMedHistTxt.setPrefSize(500, 300);
+              previousMedHistTxt.setMinSize(500, 300);
+              previousMedHistTxt.setMaxSize(500, 300);
             //Set the style of the text box
               previousMedHistTxt.setStyle("-fx-font-size: 14px;");
 
@@ -414,6 +423,11 @@ public class NursePortal{
 
 
                     }
+                  //Data collection for this specific event
+
+
+                  //Turn off the data collection
+                  
 
 
                   //Load the Nurse's Notes  {Doctor}
@@ -508,7 +522,11 @@ public class NursePortal{
                   + "\t\t[Body Temperature]: " + bodyTempTxt.getText().trim() + " F°"
                   + "\n"
                   + "\t\t[Blood Pressure]: " + bloodPressureTxt.getText().trim()
-                  + "\n\n";
+                  + "\n"
+                  + "\n\t[Nurse's Notes]: " + nursesNotesTxt.getText().trim()
+                  + "\n"
+                  + "\t[History]: " + previousMedHistTxt.getText().trim()
+                  + "\n";
                 
 
               //Append the Visit Form to the Patient's current visit Summary
@@ -554,7 +572,8 @@ public class NursePortal{
         //Conduct Exam {Doctor}
           conductExam.setOnAction(e -> {
             //Call upon the conductExam Method
-              conductExam();
+              primeStage.setScene(conductExam());
+              primeStage.show();
           });
 
 
@@ -613,7 +632,8 @@ public class NursePortal{
               vitalsBox.setAlignment(Pos.CENTER);
             
 
-        //Horizonta
+        //Vertical Alignments for the Nurse's Notes
+          VBox nurseBox = new VBox(5, nurseNotesLbl, nursesNotesTxt);
 
 
 
@@ -890,9 +910,6 @@ public class NursePortal{
     
         //If the file exists, start collecting
           if(visitSummaryFile.exists()){
-            System.out.println("File Exists!!");
-
-
             //File Reader
               Scanner fileReader = new Scanner(visitSummaryFile);
 
@@ -901,19 +918,16 @@ public class NursePortal{
               //String for holding the line being read
                 String line = fileReader.nextLine();
 
-              //New exam encountered, increment the count
+              //Exam encountered, increment the count
                 if(line.contains("[Exam #")){
                   //Update count
                     totalExams++;
-
-                  //DEBUG!!
-                    System.out.println("Exam Found!: " + totalExams);
                 }
             }
 
             //Close the file reader
               fileReader.close();
-              //visitSummaryFile.close();        
+
 
             //Return the total number of exams
               return totalExams;
@@ -929,22 +943,17 @@ public class NursePortal{
         //Do nothing
           return -1;
       }
-
     }
-
-
-
-
 
 
   //[DOCTOR'S METHODS!!]
-  //
+  //-----------------------------------------------------------------------------------
   //Empty method that will be Overrided by the DoctorPortal!!
-    private Scene conductExam(){
+    protected Scene conductExam(){
       //Return null, as the Nurse will NOT use this method
         return null;
     }
-
+  //-----------------------------------------------------------------------------------
 
 
 //NEW METHODS THAT NEED TO BE EDITED/FORMED TO WORK ALONGSIDE A DROPDOWN MENU 
