@@ -570,7 +570,7 @@ public class NursePortal{
           
           
             //NEW!!!
-                        //Load any previously written data into the Text Boxes
+            //Load any previously written data into the Text Boxes
             //Open the file for reading to load all potential data
             try{
               //Update the fullName string before proceeding
@@ -618,8 +618,22 @@ public class NursePortal{
                   //Counter for # of "[Exam #" found
                     short counter = 0;
 
-                  //Strings for collecting the data to be displayed in the Text Boxes
-                    
+                  
+                  //Vitals
+                  //--------------------------------------------
+                  //Weight
+                    String weightStr = "<No Value>";
+
+                  //Height
+                    String heightStr = "<No Value>";
+
+                  //Body Temperature
+                    String bodyTempStr = "<No Value>";
+
+                  //Blood Pressure
+                    String bloodPressureStr = "<No Value>";
+                  //--------------------------------------------
+
 
                   //Nurse's Notes
                     String nursesNotesStr = "<Known Allergies & Other Health Concerns>";
@@ -700,9 +714,47 @@ public class NursePortal{
                               }
                             //Else, collect the data
                               else{
-                                //Collect the line
-                                  //vitalsStr += line + "\n";
-                              }
+                                  //Collect the Weight & place it into its proper .txt
+                                    if(line.contains("[Weight]: ")){
+                                      //Collect the weight (anything between ":" & "l")
+                                    
+                                      //If the weight is NOT empty, update the string
+                                        if(!line.replaceAll(" ", "").isEmpty()){
+                                          //Collect the weight via a substring
+                                            weightStr = line.substring(line.indexOf(":")+1, line.indexOf("l")-1);
+                                       }
+                                    }
+
+
+                                  //Collect the Height & place it into its proper .txt
+                                    if(line.contains("[Height]: ")){
+                                      //If the height is NOT empty, update the string
+                                        if(!line.replaceAll(" ", "").isEmpty()){
+                                          //Collect the height via a substring
+                                            heightStr = line.substring(line.indexOf(":")+1, line.indexOf("<")-1);
+                                        }
+                                    }
+
+
+                                  //Collect the Body Temp & place it into its proper .txt
+                                    if(line.contains("[Body Temperature]: ")){
+                                      //If the body temp is NOT empty, update the string
+                                        if(!line.replaceAll(" ", "").isEmpty()){
+                                          //Collect the body temp via a substring
+                                            bodyTempStr = line.substring(line.indexOf(":")+1, line.indexOf("F")-1);
+                                        }
+                                    }
+
+
+                                  //Collect the Blood Pressure & place it into its proper .txt
+                                    if(line.contains("[Blood Pressure]: ")){
+                                      //If the blood pressure is NOT empty, update the string
+                                        if(!line.replaceAll(" ", "").isEmpty()){
+                                          //Collect the blood pressure via a substring
+                                            bloodPressureStr = line.substring(line.indexOf(":")+1, line.length());
+                                        }
+                                    }
+                            }
                           }
 
                         //Nurse's Notes Flag [Doctor]
@@ -719,7 +771,7 @@ public class NursePortal{
                               }
                           }
 
-                        //History Notes Collection
+                        //History Notes Collection [Both]
                           if(prevHistCollect){
                             //Statement to break the data collection!!!
                               if(line.contains("[Exam #")){
@@ -736,14 +788,34 @@ public class NursePortal{
                     }
 
                   //Add the Text box strings to their respective TextBoxes
-                    //Vitals
+                  
+                  //Weight
+                    weightTxt.setText(weightStr);
+
+                  //Height
+                    heightTxt.setText(heightStr);
+
+                  //Body Temp
+                    bodyTempTxt.setText(bodyTempStr);
+
+                  //Blood Pressure
+                    bloodPressureTxt.setText(bloodPressureStr);
+
+                  //Nurse's Notes
+                    nursesNotesTxt.setText(nursesNotesStr);
+
+                  //Previous History
+                    previousMedHistTxt.setText(prevHistStr);
 
 
-                    //Nurse's Notes
-                      nursesNotesTxt.setText(nursesNotesStr);
-
-                    //Previous History
-                      previousMedHistTxt.setText(prevHistStr);
+                  //[Extra...]
+                  //Help the Garbage Collector
+                    weightStr = null;
+                    heightStr = null;
+                    bodyTempStr = null;
+                    bloodPressureStr = null;
+                    nursesNotesStr = null;
+                    prevHistStr = null;
 
 
                   //Close the file reader
@@ -751,11 +823,9 @@ public class NursePortal{
                 }
               }
               //Else, do nothing...
-           // }
             catch(IOException k){
               //Do Nothing
             }
-        
           });
 
 
@@ -986,7 +1056,6 @@ public class NursePortal{
         return mainLayout;
     }
 
-  
 
   //Collect the total number of exam dates for a selected patient
     private short getTotalExams(){

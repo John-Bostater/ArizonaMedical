@@ -181,7 +181,7 @@ public class DoctorPortal extends NursePortal{
 
 	
 
-	//
+	//Conduct Examination Page
 	  @Override
 	  protected Scene conductExam(String patientCredentials){
 		//Labels
