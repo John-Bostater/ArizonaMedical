@@ -67,10 +67,10 @@ public class NursePortal{
   //Private Data & Variables
   //------------------------------------------
     //Stage used to display the Scenes/Methods
-      private Stage primeStage;
+      protected Stage primeStage;
 
     //Welcome Page (Used upon logout)
-      private Scene welcomePage;
+      protected Scene welcomePage;
 
     //Since the Doctor portal extends the NursePortal we will need to use this ID to differentiate them
       protected String staffId;
@@ -130,7 +130,7 @@ public class NursePortal{
 
 
       //Buttons
-      //===========================================================================
+      //=================================================================================================================
         //New Visit Form
           Button newVisitButton = new Button("New Visit Form");
             //newVisitButton = new Button("New Visit Form");
@@ -158,11 +158,11 @@ public class NursePortal{
               logoutButton.setMaxSize(110, 45);
             //Set the Font size of the text
               logoutButton.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
-      //===========================================================================
+      //=================================================================================================================
 
 
       //Action-Event Handling
-      //===========================================================================
+      //===========================================================================================
         //New Visit Form      [This will save to:  "PatientSummary.txt"  <-- rename this .txt file]
           newVisitButton.setOnAction(e -> {
             //stuff here
@@ -177,6 +177,7 @@ public class NursePortal{
           messageButton.setOnAction(e -> {
             //stuff here
               //code there
+
           });
 
 
@@ -186,8 +187,7 @@ public class NursePortal{
               primeStage.setScene(welcomePage);
               primeStage.show();
           });
-      //===========================================================================
-
+      //===========================================================================================
 
       //Alignment
       //===========================================================================================
@@ -275,14 +275,14 @@ public class NursePortal{
         //Patient's Previous History
           Label previousHistoryLbl = new Label("Patient's Previous History:");
             //Set the dimensions & font weight
-              previousHistoryLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
+              previousHistoryLbl.setStyle("-fx-font-weight: bold; -fx-font-size: 28px; -fx-text-fill: white;");
               //Code here...
 
       
         //Nurse's Notes
           Label nurseNotesLbl = new Label("Nurse's Notes:");
             //Set the dimension & font style
-              nurseNotesLbl.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;");
+              nurseNotesLbl.setStyle("-fx-font-size: 28px; -fx-text-fill: white; -fx-font-weight: bold;");
               //Code here...
       //====================================================================
 
@@ -372,23 +372,23 @@ public class NursePortal{
         //Nurse's Notes:
           TextArea nursesNotesTxt = new TextArea("<Know Allergies & Other Health Concerns>");
             //Set the dimension & style
-              nursesNotesTxt.setPrefSize(100, 30);
-              nursesNotesTxt.setMinSize(100, 30);
-              nursesNotesTxt.setMaxSize(100, 30);
+              nursesNotesTxt.setPrefSize(500, 300);
+              nursesNotesTxt.setMinSize(500, 300);
+              nursesNotesTxt.setMaxSize(500, 300);
             //Set the style of the text box
-              nursesNotesTxt.setStyle("-fx-font-size: 14px;");
+              nursesNotesTxt.setStyle("-fx-font-size: 16px;");
 
 
         //Patient's Previous History:
 
         //Previous Medications 
-          TextArea previousMedHistTxt = new TextArea("<Previously Prescribed Medications, Immunization History, Previous Health Issues>");
+          TextArea previousMedHistTxt = new TextArea("<Previously Prescribed Medications>\n<Immunization History>\n<Previous Health Issues>");
             //Set the dimension & style
               previousMedHistTxt.setPrefSize(500, 300);
               previousMedHistTxt.setMinSize(500, 300);
               previousMedHistTxt.setMaxSize(500, 300);
             //Set the style of the text box
-              previousMedHistTxt.setStyle("-fx-font-size: 14px;");
+              previousMedHistTxt.setStyle("-fx-font-size: 16px;");
 
 
         //
@@ -572,7 +572,7 @@ public class NursePortal{
         //Conduct Exam {Doctor}
           conductExam.setOnAction(e -> {
             //Call upon the conductExam Method
-              primeStage.setScene(conductExam());
+              primeStage.setScene(conductExam(this.currentPatientCreds));
               primeStage.show();
           });
 
@@ -598,7 +598,8 @@ public class NursePortal{
               buttonContainer.setAlignment(Pos.CENTER);
           }
           //Else, Doctor is using Program   [Doctor's: 'Patient Visit Form' Method]
-          else{
+          else{ //{DOCTOR}
+
             //[Conduct Exam]  &&  [Exit]
               buttonContainer = new VBox(10, conductExam, goBack);
             //Set the alignment of the buttons
@@ -633,9 +634,33 @@ public class NursePortal{
             
 
         //Vertical Alignments for the Nurse's Notes
-          VBox nurseBox = new VBox(5, nurseNotesLbl, nursesNotesTxt);
+          VBox nurseNotesBox = new VBox(nursesNotesTxt);
+            //Set the size & font
+              nurseNotesBox.setPrefSize(525, 325);
+              nurseNotesBox.setMinSize(525, 325);
+              nurseNotesBox.setMaxSize(525, 325);
+            //Set the padding
+              //nurseNotesBox.setpadding(new Insets(30));
+
+            //Set alignment
+              nurseNotesBox.setAlignment(Pos.CENTER);
+            //Set the background color
+              nurseNotesBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
 
 
+        //Vertical Alignments for the Patient's Previous History Notes
+          VBox patientHistoryBox = new VBox(previousMedHistTxt);
+            //Set the size & font
+              patientHistoryBox.setPrefSize(525, 325);
+              patientHistoryBox.setMinSize(525, 325);
+              patientHistoryBox.setMaxSize(525, 325);
+            //Set the padding
+              //patientHistoryBox.setpadding(new Insets(30));
+
+            //Set alignment
+              patientHistoryBox.setAlignment(Pos.CENTER);
+            //Set the background color
+              patientHistoryBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
 
 
         //Vitals Encapsulating Vertical Alignment
@@ -651,11 +676,16 @@ public class NursePortal{
             //Set the alignment of the Encapsulating box
               vertical0.setAlignment(Pos.CENTER);
 
+        //Vertical alignment for the nurseNotesBox & patientHistoryBox
+          VBox vertical1 = new VBox(5, nurseNotesLbl, nurseNotesBox, previousHistoryLbl, patientHistoryBox);
+            //Set the alginment of vertical1
+              vertical1.setAlignment(Pos.CENTER);
+
 
         //Final Vertical Alignment
-          HBox finalLayout = new HBox(10, vertical0);
+          HBox finalLayout = new HBox(20, vertical0, vertical1);
             //Set the final adjustments??
-              //finalLayout.setAlignment(Pos.CENTER);
+              finalLayout.setAlignment(Pos.CENTER);
             //Set the background color of the gui
               finalLayout.setStyle("-fx-background-color: #3A3A3A;");
       //====================================================================
@@ -946,15 +976,19 @@ public class NursePortal{
     }
 
 
-  //[DOCTOR'S METHODS!!]
+
+
+  //[DoctorPortal Methods]  //return Null in Nurse Portal
   //-----------------------------------------------------------------------------------
   //Empty method that will be Overrided by the DoctorPortal!!
-    protected Scene conductExam(){
+    protected Scene conductExam(String patientCredentials){
       //Return null, as the Nurse will NOT use this method
         return null;
     }
   //-----------------------------------------------------------------------------------
 
+
+}
 
 //NEW METHODS THAT NEED TO BE EDITED/FORMED TO WORK ALONGSIDE A DROPDOWN MENU 
 //
@@ -1272,4 +1306,3 @@ public class NursePortal{
   
   //*/
   //------------------------------------------------------------------------------
-}

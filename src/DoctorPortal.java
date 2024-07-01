@@ -92,7 +92,7 @@ public class DoctorPortal extends NursePortal{
 	  
 
 	  //Display the Main Page
-	  //Override
+	  //@Override
 	    //public void displayPortal(){
 		  //Set the Buttons, Labels, Action-Event, etc.  [In the future this may be moved to the constructor?]
 
@@ -104,6 +104,12 @@ public class DoctorPortal extends NursePortal{
 
 		  //Buttons
 		  //========================================================================
+			//Patient Visit Form
+			
+			//The action - event handling for this button will call upon the newVisitForm() method
+
+			
+
 
 		  //========================================================================
 
@@ -126,7 +132,7 @@ public class DoctorPortal extends NursePortal{
 
 	//
 	  @Override
-	  protected Scene conductExam(){
+	  protected Scene conductExam(String patientCredentials){
 		//Labels
 		//===========================================================================
 		  //Doctor's Exam
@@ -140,7 +146,7 @@ public class DoctorPortal extends NursePortal{
 		  //Prescription Script
 		  	Label prescriptionScript = new Label("Prescription Script");
 			  //Set the size & font
-			  	prescriptionScript.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;")	
+			  	prescriptionScript.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");	
 
 
 		  //Current Patient Credentials (Maybe swtich this to "Patient Name??")
@@ -152,6 +158,9 @@ public class DoctorPortal extends NursePortal{
 
 
 		   //Current Patients Pharmacy
+
+			//DEBUG!!!
+			//System.out.println("Patient Credentials for [Conduct Exam]: \n\t" + patientCredentials);
 
 
 		  Label debugLbl = new Label("It Worked!!!");
@@ -181,6 +190,8 @@ public class DoctorPortal extends NursePortal{
 		//==========================================================================
 
 
+		//Action-Event Handling
+		//find the patient via the dropdown menu credentials &
 
 
 
