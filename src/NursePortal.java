@@ -175,7 +175,7 @@ public class NursePortal{
         //Messages
           messageButton.setOnAction(e -> {
             //Load the messages page & display it [Doctor Messages will be exactly the same]
-              //code there
+              //primeStage.setScene(messagePage());
 
           });
 
@@ -475,7 +475,6 @@ public class NursePortal{
       //====================================================================
 
 
-      //NEW!!!
       //DropDown Menu
       //===========================================================================
         //Create the dropdown menu
@@ -491,7 +490,6 @@ public class NursePortal{
         //Collect all of the patient credentials and place them into the combo box
           try{
             //Open 'PatientAccounts.txt' for reading!!
-              //Code here...
               Scanner fileReader = new Scanner(new File("PatientAccounts.txt"));
 
             //Counter for adding elements to the dropDown menu
@@ -1038,8 +1036,7 @@ public class NursePortal{
                 ||  heightTxt.getText().isEmpty() 
                 ||  bodyTempTxt.getText().isEmpty()
                 ||  bloodPressureTxt.getText().isEmpty()
-                ||  dateTxt.getText()isEmpty()
-                ||  dateTxt.
+                ||  dateTxt.getText().isEmpty()
             ){
               //Remove any old notifications!
                 vertical1.getChildren().remove(this.notificationLbl);
@@ -1121,7 +1118,6 @@ public class NursePortal{
 
               //DEBUG
                 System.out.println("Physical exam summary: \n" + physicalExam);
-
 
               //Close the file Writer
                 fileWriter.close(); 
