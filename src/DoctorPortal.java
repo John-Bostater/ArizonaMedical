@@ -239,7 +239,7 @@ public class DoctorPortal extends NursePortal{
 			  	doctorsExamLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");
 
 		  //Prescription
-			Label prescriptionLbl = new Label("Prescription");
+			Label prescriptionLbl = new Label("Prescription:");
 			  //Set the size & font
 			  	prescriptionLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");
 
@@ -343,6 +343,71 @@ public class DoctorPortal extends NursePortal{
 				});
 			  //Set the font size of the Text Box
 			  	signatureTxt.setStyle("-fx-font-size: 16px;");
+
+
+		  //NEW!!!
+		  //Load the Patient's insurance provider into the respective Text Box
+		  //To do this, open Patient Accounts, use the patient credentials as a flag, activate flag once patient found
+		  //Collect the line: \t[Insurance Provider]:	& then break the while loop (text file reading)
+		  //Close the Scanner too!!
+
+		  //Try-catch for any File IO Errors
+			try{
+			  //Open "PatientAccounts.txt"
+				File patientAccountsFile = new File("PatientAccounts.txt");
+
+			  //File reader (reads line-by-line)
+				Scanner fileReader = new Scanner(patientAccountsFile);
+			  
+			  //Flag for data collection
+			  	boolean patientFound = false;
+
+			  //String that save Pharmacy provider
+				String provStr = "Provider";
+
+			  //Read the file & collect the Pharmacy Provider
+			  	while(fileReader.hasNextLine()){
+				  //Place the line read into a variable for manipulation
+				  	String line = fileReader.nextLine();
+
+				  //Patient Found, Activate data collection flag
+					if(line.contains(patientCredentials)){
+					  //NEW!!!
+					  //DEBUG!!
+					  System.out.println("Patient Found!!");
+
+					  //NEW!!
+					  //Advance the line??
+					  	line = fileReader.nextLine();
+
+					  //Activate the flag for data collection
+						patientFound = true;
+					}
+
+				  //Pharmacy Provider found, collect information
+					if(line.contains("[Pharmacy Provider]: ") && patientFound){
+					  //Collect the Pharmacy Provider
+					  	provStr = line.substring(21, line.length());
+					}
+
+				  //Break the reading loop [data already collected]
+					if(!line.contains("\t") && patientFound){
+					  //Break the reading loop!
+						break;
+					}
+
+				}
+
+
+			  //Update the Text Box
+			  	currentProvTxt.setText(provStr.trim());
+
+			  //Close the file reader
+			  	fileReader.close();
+			}
+			catch(IOException w){
+			  //Do nothing
+			}
 		//=====================================================================================================
 
 
@@ -406,6 +471,12 @@ public class DoctorPortal extends NursePortal{
 
 
 		  //Send Prescription
+			sendPrescription.setOnAction(e -> {
+			  //Append the Prescription & all the other text fields to the <fullName>VisitSummarys.txt
+			
+
+
+			});
 
 
 
@@ -447,7 +518,7 @@ public class DoctorPortal extends NursePortal{
 
 
 		  //Doctors Exam
-			VBox vertical0 = new VBox(5, doctorsExamLbl, doctorsExamBox, horizontal0);
+			VBox vertical0 = new VBox(10, doctorsExamLbl, doctorsExamBox, horizontal0);
 			  //Set the Alignment
 			  	vertical0.setAlignment(Pos.CENTER);
 
@@ -465,7 +536,7 @@ public class DoctorPortal extends NursePortal{
 
 
 		  //Prescription
-		  	VBox vertical1 = new VBox(5, prescriptionLbl, prescriptionBox, sendPrescription);
+		  	VBox vertical1 = new VBox(10, prescriptionLbl, prescriptionBox, sendPrescription);
 			  //Set the alignment of the items within
 				vertical1.setAlignment(Pos.CENTER);
 		  
