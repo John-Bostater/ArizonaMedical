@@ -331,7 +331,7 @@ public class DoctorPortal extends NursePortal{
 
 
 		  //Digital Signature
-		  	TextArea signatureTxt = new TextArea();
+		  	TextArea signatureTxt = new TextArea("<Write Signature Here>");
 			  //Set the dimension & style of the text area
 			  	signatureTxt.setPrefSize(250, 35);
 			  	signatureTxt.setMinSize(250, 35);
