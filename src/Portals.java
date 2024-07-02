@@ -910,7 +910,7 @@ public class Portals {
 			    boolean validEntry = true;
 
 			  //DEBUG!!
-			  	System.out.println("Here??");
+			  //	System.out.println("Here??");
 
 
 			  //Check that all textFields have an entry & their minimum text length is met 
@@ -923,7 +923,7 @@ public class Portals {
 					|| yearTxt.getText().length() != 4 
 				){
 					//DEBUG!!
-					  System.out.println("Login error!!!");
+					 // System.out.println("Login error!!!");
 
 					//Update the flag so the user cannot proceed to making a new account
 					  validEntry = false;

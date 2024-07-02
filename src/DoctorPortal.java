@@ -227,6 +227,10 @@ public class DoctorPortal extends NursePortal{
 	//Conduct Examination Page
 	  @Override
 	  protected Scene conductExam(String patientCredentials){
+		//Break apart the patientCredentials String & derive a fullName from it
+		  String fullName = patientCredentials.substring(0, patientCredentials.indexOf("/")-3).replaceAll(",", "");
+			//^This string will be used a lot in here
+
 		//Labels
 		//===========================================================================
 		  //Doctor's Exam
@@ -238,9 +242,9 @@ public class DoctorPortal extends NursePortal{
 			Label prescriptionLbl = new Label("Prescription");
 
 		  //Prescription Script
-		  	Label prescriptionScript = new Label("Prescription Script");
+		  	Label prescriptionScriptLbl = new Label("Prescription Script");
 			  //Set the size & font
-			  	prescriptionScript.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");	
+			  	prescriptionScriptLbl.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");	
 
 
 		  //Current Patient Credentials (Maybe swtich this to "Patient Name??")
@@ -251,15 +255,71 @@ public class DoctorPortal extends NursePortal{
 		  //Next to this text label should be a text box with the patient's credentials loaded into it!!
 
 
-		   //Current Patients Pharmacy
-
-			//DEBUG!!!
-			//System.out.println("Patient Credentials for [Conduct Exam]: \n\t" + patientCredentials);
+		  //Patient's Pharmaceutical Provider
+			Label pharmacyProvLbl = new Label("Patient's Pharmaceutical Provider");
 
 
 		  //Debug Label
-			Label debugLbl = new Label("It Worked!!!");
+			//Label debugLbl = new Label("It Worked!!!");
 		//===========================================================================
+
+
+		//Text Boxes
+		//=====================================================================================================
+		  //Physical Exam & Other Notes
+			TextArea doctorsExamTxt = new TextArea("<Physical Examination & Other Notes>");
+			  //Set the style of the text within the box
+			  	doctorsExamTxt.setStyle("-fx-font-size: 16px;");
+
+			  //Set the dimension & style of the text area
+			  	doctorsExamTxt.setPrefSize(600, 500);
+			  	doctorsExamTxt.setMinSize(600, 500);
+			  	doctorsExamTxt.setMaxSize(600, 500);
+			  //Clear the Text Box upon the user clicking it for data entrance
+			  	doctorsExamTxt.setOnMouseClicked(event -> {
+				  //Clear the default text in the Text Box
+				  	doctorsExamTxt.clear();
+				});
+
+
+		  //Patient's Name
+		  //Display the current patient's name
+			TextArea patientNameTxt = new TextArea(fullName);
+			  //Set the dimension & style of the text area
+			  	patientNameTxt.setPrefSize(175, 50);
+			  	patientNameTxt.setMinSize(175, 50);
+			  	patientNameTxt.setMaxSize(175, 50);
+			  //Clear the Text Box upon the user clicking it for data entrance
+
+
+
+		  //Prescription Script
+			TextArea prescriptionScriptTxt = new TextArea();
+			  //Set the dimension & style of the text area
+			  	prescriptionScriptTxt.setPrefSize(175, 375);
+			  	prescriptionScriptTxt.setMinSize(175, 375);
+			  	prescriptionScriptTxt.setMaxSize(175, 375);
+			  //Clear the Text Box upon the user clicking it for data entrance
+			  	prescriptionScriptTxt.setOnMouseClicked(event -> {
+				  //Clear the default text in the Text Box
+				  	prescriptionScriptTxt.clear();
+				});
+			
+
+		  //Current Patient's Pharmacy (Load the text from \t\t[Insurance Provider] from "PatientAccounts".txt)
+			TextArea currentProvTxt = new TextArea("<Load from .txt file>");
+			  //Set the dimension & style of the text area
+			  	//doctorsExamTxt.setPrefSize();
+			  	//doctorsExamTxt.setPrefSize();
+			  	//doctorsExamTxt.setPrefSize();
+
+		  //Digital Signature
+		  	TextArea digitalSignatureTxt = new TextArea();
+			  //Set the dimension & style of the text area
+			  	//doctorsExamTxt.setPrefSize();
+			  	//doctorsExamTxt.setPrefSize();
+			  	//doctorsExamTxt.setPrefSize();
+		//=====================================================================================================
 
 
 		//Buttons
@@ -272,11 +332,9 @@ public class DoctorPortal extends NursePortal{
 		  	Button sendPrescription = new Button("Send Prescription");
 			  //
 
-
 		  //Exit
 		  	Button goBack = new Button("Exit");
 			  //Set the dimension & font of the button
-
 		//=================================================================================================
 
 
@@ -286,7 +344,22 @@ public class DoctorPortal extends NursePortal{
 
 		  //Submit Exam
 			submitExam.setOnAction(e -> {
-			  //Code here...
+				
+			  //Catch any IO Errors in file writing
+				try{
+				  //File Writer
+				  	FileWriter fileWriter = new FileWriter(fullName + "VisitSummarys.txt", true);
+
+				  //Append the text to the end of the .txt file
+					fileWriter.append("[Doctor's Exam]:\n" + doctorsExamTxt.getText().trim() + "\n\n");
+
+
+				  //Close the file writer
+				  	fileWriter.close();
+				}
+				catch(IOException a){
+				  //Do Nothing...
+				}
 
 			});
 
@@ -310,13 +383,61 @@ public class DoctorPortal extends NursePortal{
 
 		//Alignments
 		//==========================================================================
-		  HBox debugAlign = new HBox(10, debugLbl, goBack);
-		  debugAlign.setAlignment(Pos.CENTER);
+		  //Vertical aligments of Recording Exam [Update Summary] & [Exit]
+
+
+		  //Horizontal alignments of [Submit Exam] & [Exit]
+		  	HBox horizontal0 = new HBox(20, submitExam, goBack);
+
+
+		  //Doctors Exam Txt (Background color set)
+		  	VBox doctorsExamBox = new VBox(doctorsExamTxt);
+			  //Set the size of the Box (this way we can have a consistent formatting)
+			  	doctorsExamBox.setPrefSize(625, 525);
+			  	doctorsExamBox.setMinSize(625, 525);
+			  	doctorsExamBox.setMaxSize(625, 525);
+			  //Set the background color & dimension of the box
+			  	doctorsExamBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
+			  //NEW!!!
+			  //Set the alignment of the text box within??
+			  	doctorsExamBox.setAlignment(Pos.CENTER);
+
+
+		  //Doctors Exam
+			VBox vertical0 = new VBox(5, doctorsExamLbl, doctorsExamBox, horizontal0);
+			  //Set the Alignment
+			  	vertical0.setAlignment(Pos.CENTER);
+
+
+		  //Prescription Box
+			VBox prescriptionBox = new VBox(5, prescriptionScriptLbl, prescriptionScriptTxt, currentProvTxt);
+			  //Set the Alignment
+			  	prescriptionBox.setAlignment(Pos.CENTER);
+			  //Set the size of the Box (this way we can have a consistent formatting)
+			  	prescriptionBox.setPrefSize(200, 400);
+			  	prescriptionBox.setMinSize(200, 400);
+			  	prescriptionBox.setMaxSize(200, 400);
+			  //Set the background color & dimension of the box
+			  	prescriptionBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
+
+
+		  //Prescription
+		  	VBox vertical1 = new VBox(5, prescriptionLbl, prescriptionBox);
+			  //Set the alignment of the items within
+				vertical1.setAlignment(Pos.CENTER);
+		  
+
+		  //Encapsulating HBox (Contains: vertical0 & vertical1)
+			HBox finalHorizontal = new HBox(20, vertical0, vertical1);
+			  //Set the alignment of the HBox
+			  	finalHorizontal.setAlignment(Pos.CENTER);
+			  //Set the background color of the entire Scene/Page
+			  	finalHorizontal.setStyle("-fx-background-color: #3A3A3A;");
 		//==========================================================================
 
 
 		//Build the Conduct Exam Scene
-		  Scene examScene = new Scene(debugAlign, 1024, 768);
+		  Scene examScene = new Scene(finalHorizontal, 1024, 768);
 
 		//Return the Conduct Exam Scene
 		  return examScene;

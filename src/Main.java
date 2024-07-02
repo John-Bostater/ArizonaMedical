@@ -90,7 +90,7 @@ import javafx.stage.Stage;
 
 //Driver of program: "Arizona Medical"
 public class Main extends Application{
-	//Driver for our 'hw1' Class/Object
+	//Driver for our 'Main' Class/Object
   public static void main(String[] args) {
       launch(args);
   }

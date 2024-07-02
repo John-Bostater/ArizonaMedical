@@ -81,6 +81,12 @@ public class NursePortal{
     //Notification Flag
       private boolean isNotified;
 
+    //NEW!!
+    //Visit Form Saved Flag
+      private boolean formIsSaved;
+    //Flag to make sure the Nurse can only submit one physical at a time
+    //Set this flag to false everytime the dropDown menu is activated/a new patient is loaded
+
 
     //There may be no more??
       //This is a new dumb idea but i want to try it out
@@ -97,6 +103,7 @@ public class NursePortal{
         staffId = "Nurse";
         currentPatientCreds = "";
         isNotified = false;
+        formIsSaved = false;
     }
   //------------------------------------------------------------------------------
 
@@ -715,6 +722,11 @@ public class NursePortal{
             //Remove any notifications relating to the misuse of the page
               vertical1.getChildren().remove(this.notificationLbl);
 
+            //Set the "Save Vist Form" Flag to false
+              formIsSaved = false;
+            //[i.e. user can now Save new patient Exam]
+
+
             //Save the Selected patient's name to the current patient priv data string
               this.currentPatientCreds = dropDown.getValue();
 
@@ -731,8 +743,7 @@ public class NursePortal{
             //Date of Birth Text Box Set
               dobTxt.setText(this.currentPatientCreds.substring(this.currentPatientCreds.indexOf("/")-2, this.currentPatientCreds.length()));
           
-          
-            //NEW!!!
+   
             //Load any previously written data into the Text Boxes
             //Open the file for reading to load all potential data
             try{
@@ -1001,7 +1012,7 @@ public class NursePortal{
             //"*Required Text Field is Incorrect or Missing"
 
 
-            //If the user has not selected a patient via the dropdown menu inform them via a notification
+            //If the user has NOT selected a patient via the dropdown menu inform them via a notification
               if(dropDown.getValue() == null){
                 
                 //Display the notification to the user that they have to use the dropdown box
@@ -1022,12 +1033,12 @@ public class NursePortal{
                     return;
               }
               //the user has fixed their mistake
-             // else if(dropDown.getValue() != null){
+            //  else if(dropDown.getValue() != null){
                 //Remove any old notifications
-               //   vertical1.getChildren().remove(this.notificationLbl);
+              //    vertical1.getChildren().remove(this.notificationLbl);
 
                 //Disable the notification
-                 // this.isNotified = false;
+                //  this.isNotified = false;
               //}
 
 
@@ -1037,9 +1048,31 @@ public class NursePortal{
                 ||  bodyTempTxt.getText().isEmpty()
                 ||  bloodPressureTxt.getText().isEmpty()
                 ||  dateTxt.getText().isEmpty()
+                ||  this.formIsSaved
+
             ){
+              //If in regard to form being saved already display notification and break here
+              /*
+                if(this.formIsSaved && !isNotified){
+                  //Remove any old notifications
+                    vertical1.getChildren().remove(this.notificationLbl);
+
+                  //Build & Display the notification
+                    notificationLbl = new Label("*Visit Data has already been saved.");
+                  
+                  //Display the notification
+                    vertical1.getChildren().add(notificationLbl);
+
+                  //Set the Notification flag
+                    isNotified = true;
+
+                  //Break here
+                    return;
+                }
+                //*/
+
               //Remove any old notifications!
-                vertical1.getChildren().remove(this.notificationLbl);
+                //vertical1.getChildren().remove(this.notificationLbl);
 
               //Update the notification
                 this.notificationLbl = new Label("*Required Input is Incorrect or Missing");
@@ -1102,6 +1135,10 @@ public class NursePortal{
               //Append the Visit Form to the Patient's current visit Summary
                 fileWriter.append(physicalExam);
 
+              //Update flag that the form has been saved (we cannot save more than one Visit at a time)
+                this.formIsSaved = true;
+
+
               //Notify the user that they have successfully saved the exam form
                 if(!isNotified){
                   //Set up the notification label
@@ -1130,6 +1167,9 @@ public class NursePortal{
 
         //Conduct Exam {Doctor}
           conductExam.setOnAction(e -> {
+            //If the current Patient Credentials are NOT empty, continue
+            //Else, display a notification to the user!!
+
             //Call upon the conductExam Method
               primeStage.setScene(conductExam(this.currentPatientCreds));
               primeStage.show();
@@ -1140,6 +1180,7 @@ public class NursePortal{
           goBack.setOnAction(e -> {
             //Reupdate any flags before leaving
               this.isNotified = false;
+              this.formIsSaved = false;
 
             //Call upon the Display portal method [Same for both]
               displayPortal();
