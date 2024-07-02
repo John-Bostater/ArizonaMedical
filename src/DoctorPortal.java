@@ -240,9 +240,11 @@ public class DoctorPortal extends NursePortal{
 
 		  //Prescription
 			Label prescriptionLbl = new Label("Prescription");
+			  //Set the size & font
+			  	prescriptionLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");
 
 		  //Prescription Script
-		  	Label prescriptionScriptLbl = new Label("Prescription Script");
+		  	Label prescriptionScriptLbl = new Label("Prescription Script:");
 			  //Set the size & font
 			  	prescriptionScriptLbl.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");	
 
@@ -251,16 +253,20 @@ public class DoctorPortal extends NursePortal{
 			Label currentPatientCredsLbl = new Label("Current Patient:");
 			  //Set the size & font
 			  	currentPatientCredsLbl.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-		  //[NOTE!!!]
-		  //Next to this text label should be a text box with the patient's credentials loaded into it!!
+			  //[Note]:
+			  //	Next to this text label should be a text box with the patient's credentials loaded into it!!
 
 
 		  //Patient's Pharmaceutical Provider
-			Label pharmacyProvLbl = new Label("Patient's Pharmaceutical Provider");
+			Label pharmacyProvLbl = new Label("Patient's Pharmaceutical Provider:");
+			  //Set the size & font
+			  	pharmacyProvLbl.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
 
-		  //Debug Label
-			//Label debugLbl = new Label("It Worked!!!");
+		  //Doctor's Digital Signature
+		  	Label signatureLbl = new Label("Doctor Signature:");
+			  //Set the size & font
+			  	signatureLbl.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 		//===========================================================================
 
 
@@ -294,31 +300,49 @@ public class DoctorPortal extends NursePortal{
 
 
 		  //Prescription Script
-			TextArea prescriptionScriptTxt = new TextArea();
+			TextArea prescriptionScriptTxt = new TextArea("<Prescription Name and Dose>");
 			  //Set the dimension & style of the text area
-			  	prescriptionScriptTxt.setPrefSize(175, 375);
-			  	prescriptionScriptTxt.setMinSize(175, 375);
-			  	prescriptionScriptTxt.setMaxSize(175, 375);
+			  	prescriptionScriptTxt.setPrefSize(250, 300);
+			  	prescriptionScriptTxt.setMinSize(250, 300);
+			  	prescriptionScriptTxt.setMaxSize(250, 300);
 			  //Clear the Text Box upon the user clicking it for data entrance
 			  	prescriptionScriptTxt.setOnMouseClicked(event -> {
 				  //Clear the default text in the Text Box
 				  	prescriptionScriptTxt.clear();
 				});
+			  //Set the font size of the Text Box
+			  	prescriptionScriptTxt.setStyle("-fx-font-size: 16px;");
 			
+
 
 		  //Current Patient's Pharmacy (Load the text from \t\t[Insurance Provider] from "PatientAccounts".txt)
 			TextArea currentProvTxt = new TextArea("<Load from .txt file>");
 			  //Set the dimension & style of the text area
-			  	//doctorsExamTxt.setPrefSize();
-			  	//doctorsExamTxt.setPrefSize();
-			  	//doctorsExamTxt.setPrefSize();
+			  	currentProvTxt.setPrefSize(250, 35);
+			  	currentProvTxt.setMinSize(250, 35);
+			  	currentProvTxt.setMaxSize(250, 35);
+			  //Clear the Text Box upon the user clicking it for data entrance
+			  	currentProvTxt.setOnMouseClicked(event -> {
+				  //Clear the default text in the Text Box
+				  	currentProvTxt.clear();
+				});
+			  //Set the font size of the Text Box
+			  	currentProvTxt.setStyle("-fx-font-size: 16px;");
+
 
 		  //Digital Signature
-		  	TextArea digitalSignatureTxt = new TextArea();
+		  	TextArea signatureTxt = new TextArea();
 			  //Set the dimension & style of the text area
-			  	//doctorsExamTxt.setPrefSize();
-			  	//doctorsExamTxt.setPrefSize();
-			  	//doctorsExamTxt.setPrefSize();
+			  	signatureTxt.setPrefSize(250, 35);
+			  	signatureTxt.setMinSize(250, 35);
+			  	signatureTxt.setMaxSize(250, 35);
+			  //Clear the Text Box upon the user clicking it for data entrance
+			  	signatureTxt.setOnMouseClicked(event -> {
+				  //Clear the default text in the Text Box
+				  	signatureTxt.clear();
+				});
+			  //Set the font size of the Text Box
+			  	signatureTxt.setStyle("-fx-font-size: 16px;");
 		//=====================================================================================================
 
 
@@ -326,15 +350,32 @@ public class DoctorPortal extends NursePortal{
 		//=================================================================================================
 		  //Submit Exam
 			Button submitExam = new Button("Submit Examination");
-			  //
+			  //Set the dimensions & style of thee button
+				submitExam.setPrefSize(225, 45);  
+           	    submitExam.setMaxSize(225, 45);
+           	    submitExam.setMinSize(225, 45);
+			  //Set the style
+			  	submitExam.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+
 
 		  //Send Prescription
 		  	Button sendPrescription = new Button("Send Prescription");
-			  //
+			  //Set the dimensions & style of thee button
+				sendPrescription.setPrefSize(200, 45);  
+           	    sendPrescription.setMaxSize(200, 45);
+           	    sendPrescription.setMinSize(200, 45);
+			  //Set the style
+			  	sendPrescription.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+	
 
 		  //Exit
 		  	Button goBack = new Button("Exit");
-			  //Set the dimension & font of the button
+			  //Set the dimensions & style of thee button
+				goBack.setPrefSize(75, 45);  
+           	    goBack.setMaxSize(75, 45);
+           	    goBack.setMinSize(75, 45);
+			  //Set the style
+			  	goBack.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 		//=================================================================================================
 
 
@@ -388,6 +429,8 @@ public class DoctorPortal extends NursePortal{
 
 		  //Horizontal alignments of [Submit Exam] & [Exit]
 		  	HBox horizontal0 = new HBox(20, submitExam, goBack);
+			  //Set the alignment of the buttons!!
+			  	horizontal0.setAlignment(Pos.CENTER);
 
 
 		  //Doctors Exam Txt (Background color set)
@@ -410,19 +453,19 @@ public class DoctorPortal extends NursePortal{
 
 
 		  //Prescription Box
-			VBox prescriptionBox = new VBox(5, prescriptionScriptLbl, prescriptionScriptTxt, currentProvTxt);
+			VBox prescriptionBox = new VBox(10, prescriptionScriptLbl, prescriptionScriptTxt, pharmacyProvLbl, currentProvTxt, signatureLbl, signatureTxt);
 			  //Set the Alignment
 			  	prescriptionBox.setAlignment(Pos.CENTER);
 			  //Set the size of the Box (this way we can have a consistent formatting)
-			  	prescriptionBox.setPrefSize(200, 400);
-			  	prescriptionBox.setMinSize(200, 400);
-			  	prescriptionBox.setMaxSize(200, 400);
+			  	prescriptionBox.setPrefSize(275, 525);
+			  	prescriptionBox.setMinSize(275, 525);
+			  	prescriptionBox.setMaxSize(275, 525);
 			  //Set the background color & dimension of the box
 			  	prescriptionBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
 
 
 		  //Prescription
-		  	VBox vertical1 = new VBox(5, prescriptionLbl, prescriptionBox);
+		  	VBox vertical1 = new VBox(5, prescriptionLbl, prescriptionBox, sendPrescription);
 			  //Set the alignment of the items within
 				vertical1.setAlignment(Pos.CENTER);
 		  
