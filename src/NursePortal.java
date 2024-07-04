@@ -1395,17 +1395,15 @@ public class NursePortal{
         //Create a new Dropdown menu for selecting patients
           ComboBox<String> dropDown = new ComboBox<>();
             //Set the dimension & font size of the DropDown Menu
-              dropDown.setPrefSize(250,30);
-              dropDown.setMinSize(250,30);
-              dropDown.setMaxSize(250,30);
+              dropDown.setPrefSize(250,35);
+              dropDown.setMinSize(250,35);
+              dropDown.setMaxSize(250,35);
             //Set the font size
               dropDown.setStyle("-fx-font-size: 16px;");
 
      
         //Read the patient names from "Patient Accounts.txt"
         try{
-          //Open the File for reading
-          
           //File to read from
             File patientAccountsFile = new File("PatientAccounts.txt");
 
