@@ -753,7 +753,12 @@ public class PatientPortal{
               //Set the font of the text within
                 dropSelect.setStyle("-fx-font-size: 16px;");
 
-   
+          /*
+            REWRITE THIS CODE TO NOT HAVE THE STRING ARRAY (examDates) AND OTHER THINGS FOR ADDING VALUES
+            YOU CAN JUST DO IT DIRECTLY IN THE WHILE LOOP'S IF-BRANCH
+          */
+
+
           //String array that contains all of the exam dates
             String[] examDates = new String[10];   //We could either use the default
             //Max amount of exams per Patient is 10
@@ -780,12 +785,6 @@ public class PatientPortal{
 
           //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
             try{
-              /*
-                REWRITE THIS CODE TO NOT HAVE THE STRING ARRAY (examDates) AND OTHER THINGS FOR ADDING VALUES
-                YOU CAN JUST DO IT DIRECTLY IN THE WHILE LOOP'S IF-BRANCH
-              */
-
-
               //Open: PatientInfo.txt
               //Read the File with a scanner (easier to get Line by Line)
                 Scanner fileReader = new Scanner(new File(this.fullName.replaceAll(" ", "") + "VisitSummarys.txt"));

@@ -87,6 +87,10 @@ public class NursePortal{
     //Flag to make sure the Nurse can only submit one physical at a time
     //Set this flag to false everytime the dropDown menu is activated/a new patient is loaded
 
+    //NEW!!!
+    //String that holds the Last Message sent
+      private String messageSent;
+
 
     //There may be no more??
       //This is a new dumb idea but i want to try it out
@@ -1270,7 +1274,7 @@ public class NursePortal{
   //
   //[This method looks like the patient portal but there is a dropdown menu for 
   //                                  selecting which patients messages .txt file you want to open]
-    private Scene messagePage(){
+    protected Scene messagePage(){
       //Labels, Buttons, Text Box, Action-Event Handling, Scene
 
       //Labels
@@ -1363,9 +1367,7 @@ public class NursePortal{
               inboxTxt.setWrapText(true);                
               //[Note]: ^^ any text that exceeeds the width will fall to a new line
   
-        //Get the Messages from the unique Patients account
-         // inboxTxt.setText(getMessages(patientCredentials));
-
+    
         //Phone Number Text Box [Will be next to contactInfoLbl]
           TextArea phoneNumTxt = new TextArea();
             //Set the dimensions of the the text box
@@ -1430,7 +1432,8 @@ public class NursePortal{
           dropDown.setOnAction(event -> {
             //New
             //Clear any old notifications
-              
+            //
+
 
             //Get the value selected (Patient Credentials)  
             //Use the selected credentials to load the patient's messages via the HashMap
@@ -1456,15 +1459,17 @@ public class NursePortal{
             //Get the patient's fullname (used for sending message to correct .txt)
               String fullName = dropDown.getValue().substring(0, dropDown.getValue().indexOf("/")-3).replaceAll(",", "");
 
+           //Place the message sent into the Objects private variable
+             this.messageSent = messageTxt.getText();
 
 
-            /*
+           // /*
 
             //Add/Append the message written in "Message: " to the Inbox/Current Conversation              
             //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
               try{
                 //Open: <DropDown.getValue()>PatientInfo.txt
-                  File patientInbox = new File(this.fullName.replace(" ", "") + "Messages.txt");    
+                  File patientInbox = new File(fullName + "Messages.txt");    
 
                 //Open the File Writer for adding new messages to the file
                   FileWriter fileWriter = new FileWriter(patientInbox, true);
@@ -1474,10 +1479,10 @@ public class NursePortal{
                   if(patientInbox.exists() && !messageTxt.getText().isEmpty()){      
                     //Save the message sent to the global variable [so it can be used in deletion]
                     //Empty the global variable used for sending messages
-                      messageSent = "[" + this.staffId + "]: " + messageTxt.getText() + "\n\n";
+                      this.messageSent = "[" + this.staffId + "]: " + messageTxt.getText() + "\n\n";
               
                     //Append the new message to the "<FullName>Message.txt"
-                      fileWriter.append(messageSent);
+                      fileWriter.append(this.messageSent);
               
                     //Empty the text area used for sending messages
                       messageTxt.setText("");
@@ -1504,15 +1509,28 @@ public class NursePortal{
             //Update the inbox to show the new message added
               inboxTxt.setText(getMessages(dropDown.getValue()));
           
-            */
+            //*/
           
           });
 
 
-        /*
+        ///*
         //Delete Message
           deleteMessage.setOnAction(e -> {
             //Count the total number of messages sent by the user {i.e. count everytime we see: "[fullName]:"}
+
+            //If the Staff user has NOT selected a user from the DropDown menu (they CANNOT add the message)
+              if(dropDown.getSelectionModel().isEmpty()){
+                //Display notification to user
+                  messageTxt.setText("*Please Select a Patient via the Drop Down menu above to view and send messages.");
+              
+                //Stop the user here
+                  return;
+              }
+
+            //Get the patient's fullname (used for sending message to correct .txt)
+              String fullName = dropDown.getValue().substring(0, dropDown.getValue().indexOf("/")-3).replaceAll(",", "");
+
 
             //Then reread the file and collect all of the text and stop once we see the last instance of [fullName]:
             //Then use .write() to rewrite all of the text in the <fullName>Messages.txt NOT including the last message sent by the user
@@ -1522,29 +1540,29 @@ public class NursePortal{
               //Get the messages via our method...
                 
                 //If the message inbox is not empty...
-                if(getMessages() != "<Inbox Empty>"){
+                if(getMessages(dropDown.getValue()) != "<Inbox Empty>"){
                   //DEBUG
                     //All messages in the .txt file
-                    System.out.println("Inbox: \n" + getMessages());
+                    System.out.println("Inbox: \n" + getMessages(dropDown.getValue()));
   
                   //DEbug
                     //Print the last message sent/saved in the global variable
                       //System.out.println("Message sent: " + this.messageSent);
 
-                  //Write this into the <this.fullName>Messagest.txt
-                  String editedStr = getMessages().replace(this.messageSent, "");
+                  //Write this into the <fullName>Messagest.txt
+                  String editedStr = getMessages(dropDown.getValue()).replace(this.messageSent, "");
                   
-                  //Edit the <this.fullName>Messages.txt to have the new inbox displayed!
-                    File editedFile = new File(this.fullName.replaceAll(" ", "") + "Messages.txt");
+                  //Edit the <fullName>Messages.txt to have the new inbox displayed!
+                    File editedFile = new File(fullName.replaceAll(" ", "") + "Messages.txt");
 
                   //Open a file writer for writing the new text into the .txt file
-                    FileWriter fileWriter0 = new FileWriter(this.fullName.replaceAll(" ", "") + "Messages.txt");
+                    FileWriter fileWriter0 = new FileWriter(fullName.replaceAll(" ", "") + "Messages.txt");
 
                   //DEBUG STATEMENT
                     //System.out.println("Edited TExt: \n" + editedStr);
 
                   //If the string we made is not empty, update the .txt file
-                    if(this.messageSent != ("[" + this.fullName + "]: \n\n")){
+                    if(this.messageSent != ("[" + fullName + "]: \n\n")){
                       //Replace all of the text in the Messages.txt with the latest message deleted
                         fileWriter0.write(editedStr);
       
@@ -1567,7 +1585,7 @@ public class NursePortal{
               //File does not exist.. either do nothing? or create it...
             }
           });
-        */
+        //*/
 
         //Exit
           goBack.setOnAction(e-> {
@@ -1628,7 +1646,7 @@ public class NursePortal{
 
 //Getters & Setters
 //-------------------------------------------------------------------------------------------------------
-  //Returns all of the text within: <this.fullName>Messages.txt
+  //Returns all of the text within: <fullName>Messages.txt
     private String getMessages(String patientsCreds){
       //Get the user's Full Name via their credentials (used for <fullName>Message.txt)
         String fullName = patientsCreds.substring(0, patientsCreds.indexOf("/")-3).replaceAll(",", "");
@@ -1667,7 +1685,6 @@ public class NursePortal{
           return "<Inbox Empty>";
       }
   }
-
   //*/
   //------------------------------------------------------------------------------
 }

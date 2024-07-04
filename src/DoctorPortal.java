@@ -177,10 +177,10 @@ public class DoctorPortal extends NursePortal{
 			//Messages
 			  messagesButton.setOnAction(e -> {
 				//Call upon the SuperClass messages method
-				  //this.primeStage.setScene(this.messagePage());
+				  this.primeStage.setScene(this.messagePage());
 
 				//Display the Scene
-				 //  this.primeStage.show();
+				   this.primeStage.show();
 			  });
 
 
