@@ -774,15 +774,16 @@ public class PatientPortal{
 
           //Instantiate the string array
             for(short i = 0; i < 10; i++){
-              //New shit
+              //New stuff
                 examDates[i] = "";
             }
 
           //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
             try{
-              //NEW!!!
-              //DEBUG!!!
-               // System.out.println("FullName: " + this.fullName + "<White space check>");
+              /*
+                REWRITE THIS CODE TO NOT HAVE THE STRING ARRAY (examDates) AND OTHER THINGS FOR ADDING VALUES
+                YOU CAN JUST DO IT DIRECTLY IN THE WHILE LOOP'S IF-BRANCH
+              */
 
 
               //Open: PatientInfo.txt

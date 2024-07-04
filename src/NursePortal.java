@@ -182,8 +182,8 @@ public class NursePortal{
         //Messages
           messageButton.setOnAction(e -> {
             //Load the messages page & display it [Doctor Messages will be exactly the same]
-              //primeStage.setScene(messagePage());
-
+              primeStage.setScene(messagePage());
+              primeStage.show();
           });
 
 
@@ -1257,19 +1257,19 @@ public class NursePortal{
         return null;
     }
   //-----------------------------------------------------------------------------------
-}
+//}
 
 //NEW METHODS THAT NEED TO BE EDITED/FORMED TO WORK ALONGSIDE A DROPDOWN MENU 
 //
 
 //USE A HASHMAP TO MAP THE PATIENTS UNIQUE CREDS:    HASHMAP<STRING, STRING>
 //WHEN THE USER SELECTES PATIENT CREDS THROUGH THE DROPDOWN MENU (YOU)
-/*
-    //[DOCTOR WILL INHERIT THIS METHOD WITH NO CHANGES NEEDED TO BE MADE/NECESsARY!!]
-    //This method will display/load the Scene for sending & reading messages
-    //
-    //[This method looks like the patient portal but there is a dropdown menu for 
-    //                                  selecting which patients messages .txt file you want to open]
+///*
+  //[DOCTOR WILL INHERIT THIS METHOD WITH NO CHANGES NEEDED TO BE MADE/NECESsARY!!]
+  //This method will display/load the Scene for sending & reading messages
+  //
+  //[This method looks like the patient portal but there is a dropdown menu for 
+  //                                  selecting which patients messages .txt file you want to open]
     private Scene messagePage(){
       //Labels, Buttons, Text Box, Action-Event Handling, Scene
 
@@ -1298,7 +1298,7 @@ public class NursePortal{
       
         //Patient Contact Information
           //Have the Phone Number Displayed in a text box next to this label!!!
-          Label contactInfoLbl = new Label("Patient Contact:");
+          Label contactInfoLbl = new Label("Patient Contact Information:");
       //=====================================================================================================
 
 
@@ -1364,24 +1364,106 @@ public class NursePortal{
               //[Note]: ^^ any text that exceeeds the width will fall to a new line
   
         //Get the Messages from the unique Patients account
-          inboxTxt.setText(getMessages());
+         // inboxTxt.setText(getMessages(patientCredentials));
 
         //Phone Number Text Box [Will be next to contactInfoLbl]
           TextArea phoneNumTxt = new TextArea();
             //Set the dimensions of the the text box
-
       //=======================================================================
+
+
+      //DropDown Menu && HashMap
+      //=============================================================================
+        //Hash Map to be used for mapping Patient Credentials to their Specified <fullName>Messages.txt
+          HashMap<String, String> messagesMap = new HashMap<>();
+
+
+        //Create a new Dropdown menu for selecting patients
+          ComboBox<String> dropDown = new ComboBox<>();
+
+     
+        //Read the patient names from "Patient Accounts.txt"
+        try{
+          //Open the File for reading
+          
+          //File to read from
+            File patientAccountsFile = new File("PatientAccounts.txt");
+
+          //File reader
+            Scanner fileReader = new Scanner(patientAccountsFile);
+
+          //Read file & collect data
+            while(fileReader.hasNextLine()){
+              //Place the line read into a String variable for manip
+                String line = fileReader.nextLine();
+
+              //If the line does NOT contain a "\t" throw dont collect the line??
+                if(!line.contains("\t") && !line.contains("Patient Accounts:") && !line.isEmpty()){ 
+                  //[Idea] use the fullName instead to be "cleaner"??
+                  
+                  //Add the Patient's Credentials to the HashMap (key) & their Messages (value)
+                    messagesMap.put(line, getMessages(line));
+
+                  //Add the patient's Credentials to the Dropdown menu
+                    dropDown.getItems().add(line);
+                }
+            }
+
+          //Close file reader
+            fileReader.close();
+        }
+        catch(IOException p1){
+          //Do nothing
+        }
+      //=============================================================================
+
+      //This String variable is used to store the
+
+
+      //If you want to save computing process, you can use a hashmap to map the patientsCreds to their messages
+      //HashMap<String, String> map0 = new HashMap<>();
 
 
       //Action-Event Handling
       //=============================================================================
+        //DropDown menu, selecting a Patient
+          dropDown.setOnAction(event -> {
+            //New
+            //Clear any old notifications
+              
+
+            //Get the value selected (Patient Credentials)  
+            //Use the selected credentials to load the patient's messages via the HashMap
+            
+            //Set the text of the inbox to that of the patient selected via the dropdown menu
+              inboxTxt.setText(messagesMap.get(dropDown.getValue()));
+          });
+
+
+        ///*
         //Send Message
           //This will open the "Messages.txt" file for reading & writing
           sendMessage.setOnAction(e -> {
+            //If the Staff user has NOT selected a user from the DropDown menu (they CANNOT add the message)
+              if(dropDown.getSelectionModel().isEmpty()){
+                //Display notification to user
+                  messageTxt.setText("*Please Select a Patient via the Drop Down menu above to view and send messages.");
+              
+                //Stop the user here
+                  return;
+              }
+
+            //Get the patient's fullname (used for sending message to correct .txt)
+              String fullName = dropDown.getValue().substring(0, dropDown.getValue().indexOf("/")-3).replaceAll(",", "");
+
+
+
+            /*
+
             //Add/Append the message written in "Message: " to the Inbox/Current Conversation              
             //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
               try{
-                //Open: <this.fullName>PatientInfo.txt
+                //Open: <DropDown.getValue()>PatientInfo.txt
                   File patientInbox = new File(this.fullName.replace(" ", "") + "Messages.txt");    
 
                 //Open the File Writer for adding new messages to the file
@@ -1392,7 +1474,7 @@ public class NursePortal{
                   if(patientInbox.exists() && !messageTxt.getText().isEmpty()){      
                     //Save the message sent to the global variable [so it can be used in deletion]
                     //Empty the global variable used for sending messages
-                      messageSent = "[" + this.fullName + "]: " + messageTxt.getText() + "\n\n";
+                      messageSent = "[" + this.staffId + "]: " + messageTxt.getText() + "\n\n";
               
                     //Append the new message to the "<FullName>Message.txt"
                       fileWriter.append(messageSent);
@@ -1420,10 +1502,14 @@ public class NursePortal{
             //if [<Patient Name>]: does NOT exist, start the first comment [If while-loop finished without finding user]
 
             //Update the inbox to show the new message added
-              inboxTxt.setText(getMessages());
+              inboxTxt.setText(getMessages(dropDown.getValue()));
+          
+            */
+          
           });
 
 
+        /*
         //Delete Message
           deleteMessage.setOnAction(e -> {
             //Count the total number of messages sent by the user {i.e. count everytime we see: "[fullName]:"}
@@ -1481,7 +1567,7 @@ public class NursePortal{
               //File does not exist.. either do nothing? or create it...
             }
           });
-
+        */
 
         //Exit
           goBack.setOnAction(e-> {
@@ -1493,6 +1579,11 @@ public class NursePortal{
 
       //Alignments
       //==========================================================================================
+        //Select Patient:
+          VBox selectPatientSection = new VBox(selectPatientLbl, dropDown);
+            //Set the alignment of the box??
+              //selectPatientSection.setAlignment(Pos.CENTER);
+
         //Message:
           VBox messageSection = new VBox(5, messageLbl, messageTxt);
           
@@ -1517,7 +1608,7 @@ public class NursePortal{
               
 
         //Vertically align all of the sections {Last VBox}
-          VBox finAlign = new VBox(20, messageBrdLbl, messageBoard, buttonContainer);
+          VBox finAlign = new VBox(20, selectPatientSection, messageBrdLbl, messageBoard, buttonContainer);
             //Set the alignment of the VBox
             //Maybe unecessary???
               finAlign.setAlignment(Pos.CENTER);
@@ -1534,17 +1625,21 @@ public class NursePortal{
     }
   
 
+
 //Getters & Setters
 //-------------------------------------------------------------------------------------------------------
   //Returns all of the text within: <this.fullName>Messages.txt
     private String getMessages(String patientsCreds){
+      //Get the user's Full Name via their credentials (used for <fullName>Message.txt)
+        String fullName = patientsCreds.substring(0, patientsCreds.indexOf("/")-3).replaceAll(",", "");
+
       //Open the  File for reading and read every line and set the inboxTxt to it!!
         try{
           //Collect the Lines into a String variable
             String messageStr = "";
 
           //Open the file & if it exists post the text to the messageBoard
-            File inboxFile = new File(patientsCreds.replaceAll(" ", "") + "Messages.txt");
+            File inboxFile = new File(fullName + "Messages.txt");
 
           //Scanner that will read the file
             Scanner fileReader = new Scanner(inboxFile);
@@ -1575,3 +1670,4 @@ public class NursePortal{
 
   //*/
   //------------------------------------------------------------------------------
+}
