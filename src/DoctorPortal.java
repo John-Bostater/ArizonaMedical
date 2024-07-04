@@ -1,6 +1,6 @@
 /****************************************************************************************
 [Contributors]:
-	- John Bostater
+    - John Bostater
  	  
     - Tristan Andrade
 
