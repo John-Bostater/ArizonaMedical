@@ -1142,7 +1142,6 @@ public class NursePortal{
               //Update flag that the form has been saved (we cannot save more than one Visit at a time)
                 this.formIsSaved = true;
 
-
               //Notify the user that they have successfully saved the exam form
                 if(!isNotified){
                   //Set up the notification label
@@ -1283,7 +1282,10 @@ public class NursePortal{
           Label messageBrdLbl = new Label("Message Board:");
             //Set the Font & size of the text
               messageBrdLbl.setStyle("-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: white;");
-              
+            //NEW!!
+            //Set padding
+             // messageBrdLbl.setPadding(new Insets(0,0,20,0));
+
         //Message
           Label messageLbl = new Label("Message:");
             //Set the size of the text
@@ -1298,11 +1300,13 @@ public class NursePortal{
         //Select Patient [Drop Down Menu]
           Label selectPatientLbl = new Label("Select Patient:");
             //Set the Font and other features
-              //selectPatienLbl.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
+              selectPatientLbl.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;");
       
         //Patient Contact Information
           //Have the Phone Number Displayed in a text box next to this label!!!
           Label contactInfoLbl = new Label("Patient Contact Information:");
+            //Set the Font and other features
+              contactInfoLbl.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");     
       //=====================================================================================================
 
 
@@ -1358,19 +1362,28 @@ public class NursePortal{
         //Inbox Text Box
           TextArea inboxTxt = new TextArea();
             //Set the dimensions of the text box
-              inboxTxt.setPrefSize(600, 525);
-              inboxTxt.setMinSize(600, 525);
-              inboxTxt.setMaxSize(600, 525);
+              inboxTxt.setPrefSize(600, 485);
+              inboxTxt.setMinSize(600, 485);
+              inboxTxt.setMaxSize(600, 485);
             //Set the Font size of the text
               inboxTxt.setStyle("-fx-font-size: 18px;");
             //Set text wrapping 
               inboxTxt.setWrapText(true);                
               //[Note]: ^^ any text that exceeeds the width will fall to a new line
   
-    
+
         //Phone Number Text Box [Will be next to contactInfoLbl]
-          TextArea phoneNumTxt = new TextArea();
+          TextArea phoneNumTxt = new TextArea("000-000-0000");
             //Set the dimensions of the the text box
+              phoneNumTxt.setPrefSize(120, 35);
+              phoneNumTxt.setMinSize(120, 35);
+              phoneNumTxt.setMaxSize(120, 35);
+            //Set the font size of the text within
+              phoneNumTxt.setStyle("-fx-font-size: 16px;");
+            //Set the text box so it CANNOT be deleted or manipluated
+              phoneNumTxt.setEditable(false);
+
+            //Place this text below the inboxTxt
       //=======================================================================
 
 
@@ -1379,9 +1392,14 @@ public class NursePortal{
         //Hash Map to be used for mapping Patient Credentials to their Specified <fullName>Messages.txt
           HashMap<String, String> messagesMap = new HashMap<>();
 
-
         //Create a new Dropdown menu for selecting patients
           ComboBox<String> dropDown = new ComboBox<>();
+            //Set the dimension & font size of the DropDown Menu
+              dropDown.setPrefSize(250,30);
+              dropDown.setMinSize(250,30);
+              dropDown.setMaxSize(250,30);
+            //Set the font size
+              dropDown.setStyle("-fx-font-size: 16px;");
 
      
         //Read the patient names from "Patient Accounts.txt"
@@ -1434,7 +1452,6 @@ public class NursePortal{
             //Clear any old notifications
             //
 
-
             //Get the value selected (Patient Credentials)  
             //Use the selected credentials to load the patient's messages via the HashMap
             
@@ -1448,9 +1465,9 @@ public class NursePortal{
           //This will open the "Messages.txt" file for reading & writing
           sendMessage.setOnAction(e -> {
             //If the Staff user has NOT selected a user from the DropDown menu (they CANNOT add the message)
-              if(dropDown.getSelectionModel().isEmpty()){
+              if(dropDown.getValue() == null){
                 //Display notification to user
-                  messageTxt.setText("*Please Select a Patient via the Drop Down menu above to view and send messages.");
+                  inboxTxt.setText("*Please Select a Patient via the Drop Down menu above to view and send messages.");
               
                 //Stop the user here
                   return;
@@ -1464,7 +1481,6 @@ public class NursePortal{
 
 
            // /*
-
             //Add/Append the message written in "Message: " to the Inbox/Current Conversation              
             //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
               try{
@@ -1569,7 +1585,7 @@ public class NursePortal{
                       //Place new text into inbox being displayed
                         inboxTxt.setText(editedStr);
 
-                      //CLOSE THE FILE WRITER OMG
+                      //Close the file writer
                         fileWriter0.close();
                     }
                   
@@ -1600,14 +1616,28 @@ public class NursePortal{
         //Select Patient:
           VBox selectPatientSection = new VBox(selectPatientLbl, dropDown);
             //Set the alignment of the box??
-              //selectPatientSection.setAlignment(Pos.CENTER);
+              selectPatientSection.setAlignment(Pos.CENTER);
+            //Set the padding!
+              selectPatientSection.setPadding(new Insets(-25,0,0,0));
+
+
+        //Horizontal Aligment of the Label & DropDown Menu
+          HBox horizontal0 = new HBox(150, messageBrdLbl, selectPatientSection);
+            //Set the padding
+              horizontal0.setPadding(new Insets(0,0,0,50));
+
 
         //Message:
           VBox messageSection = new VBox(5, messageLbl, messageTxt);
-          
+
+        //Patient Phone Number Horizontal Alignment
+          HBox horizontal1 = new HBox(5, contactInfoLbl, phoneNumTxt);
+
+
         //Inbox:
-          VBox inboxSection = new VBox(5, inboxLbl, inboxTxt);
-        
+          VBox inboxSection = new VBox(5, inboxLbl, inboxTxt, horizontal1);
+
+
         //HBox containing the text fields & their resepective labels (background color: lightblue)
           HBox messageBoard = new HBox(10, messageSection, inboxSection); 
             //Set Style, alignment, borders, & rounded edges
@@ -1626,9 +1656,9 @@ public class NursePortal{
               
 
         //Vertically align all of the sections {Last VBox}
-          VBox finAlign = new VBox(20, selectPatientSection, messageBrdLbl, messageBoard, buttonContainer);
+//          VBox finAlign = new VBox(20, selectPatientSection, messageBrdLbl, messageBoard, buttonContainer);
+          VBox finAlign = new VBox(10, horizontal0, messageBoard, buttonContainer);
             //Set the alignment of the VBox
-            //Maybe unecessary???
               finAlign.setAlignment(Pos.CENTER);
             //Set the background color of the entire page to gray
               finAlign.setStyle("-fx-background-color: #3A3A3A;");
