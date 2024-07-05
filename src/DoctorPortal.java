@@ -587,7 +587,7 @@ public class DoctorPortal extends NursePortal{
 
 //Edit this code to conform with the doctor...
 /*
-		//This will have a dropwn down menu and only one button for exiting
+		//This will have a drop down menu and only one button for exiting
 
         //Labels
         //============================================================================================
