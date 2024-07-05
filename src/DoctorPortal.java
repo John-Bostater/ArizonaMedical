@@ -459,7 +459,6 @@ public class DoctorPortal extends NursePortal{
 				  //Append the text to the end of the .txt file
 					fileWriter.append("[Doctor's Exam]:\n" + doctorsExamTxt.getText().trim() + "\n\n");
 
-
 				  //Close the file writer
 				  	fileWriter.close();
 				}
@@ -474,6 +473,22 @@ public class DoctorPortal extends NursePortal{
 			sendPrescription.setOnAction(e -> {
 			  //Append the Prescription & all the other text fields to the <fullName>VisitSummarys.txt
 			
+			  //Catch any errors in the file writing
+				try{
+				  //File Writer
+					FileWriter fileWriter = new FileWriter(fullName + "VisitSummarys.txt", true);
+					  //We set 'true' so the text can be appended to any existing file!	
+
+				  //Append the text to the end of the .txt file
+					fileWriter.append("[Prescription]:\n" + prescriptionScriptTxt.getText().trim() + "\n[Pharmaceutical Provider]: " + currentProvTxt.getText().trim() + "\n[Signature]: " + signatureTxt.getText());
+
+				  //Close the file writer
+				  	fileWriter.close();
+				}
+				catch(IOException a0){
+				  //Do Nothing...
+				}
+
 
 
 			});
@@ -563,6 +578,13 @@ public class DoctorPortal extends NursePortal{
 		//Labels, Buttons, Text Boxes, Alignment, Action-Event Handling, Scene
 
 
+		//YOU WILL HAVE 2 DROPDOWN MENUS:
+		//		- Select Patient		(dropDown0)
+		//		- Select Visit to view	(dropDown1)
+
+		//Select Patient (dropDown0) will store all of the patient's names
+
+
 //Edit this code to conform with the doctor...
 /*
 		//This will have a dropwn down menu and only one button for exiting
@@ -614,11 +636,6 @@ public class DoctorPortal extends NursePortal{
             //YOU CAN JUST DO IT DIRECTLY IN THE WHILE LOOP'S IF-BRANCH
           
 
-		  //NEW!!
-		  //Get the Patient's fullName from the String selected in the DropDown menu
-		  	String fullName = dropSelect.getValue().substring(0, dropSelect.getValue().indexOf("/")-3).replaceAll(",", "");
-
-
           //Do a hashmap to map the visit summary(s) {Strings} to a key {Visit Date as integer}
             HashMap<Integer, String> summaryMap = new HashMap<>();
 
@@ -630,14 +647,14 @@ public class DoctorPortal extends NursePortal{
 
           //String that stores the visit summary (all text below patient being found)
             String visitSummary = ""; //These will be added to the hashMap
-          //We will be able to access these in constant time via the action event-handling
+         	 //We will be able to access these in constant time via the action event-handling
 
 
           //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
             try{
               //Open: PatientInfo.txt
               //Read the File with a scanner (easier to get Line by Line)
-                Scanner fileReader = new Scanner(new File(this.fullName.replaceAll(" ", "") + "VisitSummarys.txt"));
+                Scanner fileReader = new Scanner(new File(fullName.replaceAll(" ", "") + "VisitSummarys.txt"));
 
               //Flag that "puts on the brakes" of the fileReader so it will
                 boolean dateFound = false;
