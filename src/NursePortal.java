@@ -73,28 +73,19 @@ public class NursePortal{
     //String that holds the current patient's credentials, that the Nurse is viewing
       private String currentPatientCreds;
 
-    //NEW!!
     //Notification Text
       private Label notificationLbl;
 
-    //New!
     //Notification Flag
       private boolean isNotified;
 
-    //NEW!!
     //Visit Form Saved Flag
       private boolean formIsSaved;
-    //Flag to make sure the Nurse can only submit one physical at a time
-    //Set this flag to false everytime the dropDown menu is activated/a new patient is loaded
+      //Flag to make sure the Nurse can only submit one physical at a time
+      //Set this flag to false everytime the dropDown menu is activated/a new patient is loaded
 
-    //NEW!!!
     //String that holds the Last Message sent
       private String messageSent;
-
-
-    //There may be no more??
-      //This is a new dumb idea but i want to try it out
-        // VBox vertical0;
   //------------------------------------------
 
 
@@ -118,13 +109,6 @@ public class NursePortal{
   //------------------------------------------------------------------------------
     //Run the Main Portal page for the Nurse Portal & all of its functionality
     public void displayPortal(){
-      //NEW!!
-      //DEBUG!!
-      //if(this.staffId == "Doctor"){
-      //  System.out.println("YOU ARE THE DOCTOR!!!!\n\n");
-      //}
-
-
       //Create the scene: Buttons, Action-Event, Alignment, Scene...
 
       //Labels/Headers
@@ -503,18 +487,6 @@ public class NursePortal{
             //Open 'PatientAccounts.txt' for reading!!
               Scanner fileReader = new Scanner(new File("PatientAccounts.txt"));
 
-            //Counter for adding elements to the dropDown menu
-              short counter = 0;
-
-            //String array for holding all of the Exam Dates
-              String[] allPatients = new String[50];
-
-            //Instantiate the String
-              for(short i = 0; i < 50; i++){
-                //Add an empty String to the indexed value
-                  allPatients[i] = "";
-              }
-
             //Read all of the file's contents
               while(fileReader.hasNextLine()){
                 //Place the file being read into a String
@@ -526,33 +498,9 @@ public class NursePortal{
                       && !line.contains("Patient Accounts:")
                       && !line.isEmpty()
                 ){
-                  //DEBUG
-                  //  System.out.println("Line: " + line);
-
-                  //Add the line to the String
-                    //Code here...
-                    allPatients[counter] = line;
-
-                  //Increment the index/counter
-                    counter++;
+                  //Add the patient(s) credentials to the Drop Down menu
+                    dropDown.getItems().add(line);
                 }
-              }
-
-            //Add the String Array to the ComboBox
-              for(short i = 0; i < 50; i++){
-                //Add exam dates
-                  if(allPatients[i] != ""){
-                    //DEBUG
-                      //System.out.println("Success!!");
-
-                    //Add the Exam date to the box
-                      dropDown.getItems().add(allPatients[i]);
-                  }
-                //Else, help the garbage collector
-                  else{
-                    //Set the empty slots to null
-                      allPatients[i] = null;
-                  }
               }
           }
           catch(IOException e){
@@ -1375,9 +1323,9 @@ public class NursePortal{
         //Phone Number Text Box [Will be next to contactInfoLbl]
           TextArea phoneNumTxt = new TextArea("000-000-0000");
             //Set the dimensions of the the text box
-              phoneNumTxt.setPrefSize(120, 35);
-              phoneNumTxt.setMinSize(120, 35);
-              phoneNumTxt.setMaxSize(120, 35);
+              phoneNumTxt.setPrefSize(130, 35);
+              phoneNumTxt.setMinSize(130, 35);
+              phoneNumTxt.setMaxSize(130, 35);
             //Set the font size of the text within
               phoneNumTxt.setStyle("-fx-font-size: 16px;");
             //Set the text box so it CANNOT be deleted or manipluated
@@ -1455,6 +1403,39 @@ public class NursePortal{
             
             //Set the text of the inbox to that of the patient selected via the dropdown menu
               inboxTxt.setText(messagesMap.get(dropDown.getValue()));
+
+            //Start file Reading to collect the Patients Contact Information (Phone Number)
+              try{
+                //File Reader for PatientAccounts.txt
+                  Scanner fileReader = new Scanner(new File("PatientAccounts.txt"));
+
+                //Flag used for data collection 
+                  boolean patientFound = false;
+
+                //Start reading the file looking for the Patient's contact information
+                  while(fileReader.hasNext()){
+                    //Save the line read into a String to be manipulated
+                      String line = fileReader.nextLine();                    
+
+                    //Activate flag for data collection (Patient has been found)
+                      if(line.contains(dropDown.getValue())){
+                        //Activate the data collection flag
+                          patientFound = true;
+                      }
+
+                    //Collect the Line containing the Patient's contact information
+                      if(line.contains("[Phone Number]:") && patientFound){
+                        //Place the phone number into the Text Box!!
+                          phoneNumTxt.setText(line.substring(line.indexOf("-")-3, line.length()));
+                    
+                        //Break the loop
+                          break;
+                      }
+                  }
+              }
+              catch(IOException e3){
+                //Do nothing...
+              }
           });
 
 
@@ -1546,10 +1527,7 @@ public class NursePortal{
               String fullName = dropDown.getValue().substring(0, dropDown.getValue().indexOf("/")-3).replaceAll(",", "");
 
 
-            //Then reread the file and collect all of the text and stop once we see the last instance of [fullName]:
-            //Then use .write() to rewrite all of the text in the <fullName>Messages.txt NOT including the last message sent by the user
-
-            //JUst gonna get my brain spaghetti out !!!
+          //Open the .txt file to delete the last message sent
             try{
               //Get the messages via our method...
                 

@@ -13,10 +13,6 @@
 
 [Description]:
   //Text here describing the whole program
-  // Ideas:
-  	// Explain what the code is for (it's for a doctor's office)
-   	// List and explain each actor and object
-    	// Show how each actor/object comes together and interacts with each other in the main program
 
 
 [Library/JavaFX Info]:

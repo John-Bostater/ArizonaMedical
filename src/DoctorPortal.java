@@ -168,9 +168,10 @@ public class DoctorPortal extends NursePortal{
 			//View Patient Records
 			  viewPatientRecords.setOnAction(e -> {
 				//Call upon the method
-				  //this.primeStage.setScene();
-
-
+				  this.primeStage.setScene(viewPatientRecords());
+				
+				//Display the Scene
+				  this.primeStage.show();
 			  });
 
 
@@ -441,6 +442,8 @@ public class DoctorPortal extends NursePortal{
            	    goBack.setMinSize(75, 45);
 			  //Set the style
 			  	goBack.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+			  //Set the padding
+			  	goBack.setPadding(new Insets(-50,0,0,0));
 		//=================================================================================================
 
 
@@ -488,9 +491,6 @@ public class DoctorPortal extends NursePortal{
 				catch(IOException a0){
 				  //Do Nothing...
 				}
-
-
-
 			});
 
 
@@ -527,8 +527,7 @@ public class DoctorPortal extends NursePortal{
 			  	doctorsExamBox.setMaxSize(625, 525);
 			  //Set the background color & dimension of the box
 			  	doctorsExamBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
-			  //NEW!!!
-			  //Set the alignment of the text box within??
+			  //Set the alignment of the text box within
 			  	doctorsExamBox.setAlignment(Pos.CENTER);
 
 
@@ -586,20 +585,25 @@ public class DoctorPortal extends NursePortal{
 
 
 //Edit this code to conform with the doctor...
-/*
-		//This will have a drop down menu and only one button for exiting
+///*
+		//This will have a dropwn down menu and only one button for exiting
 
         //Labels
         //============================================================================================
-          //Select visit to view
-            Label header0 = new Label("Select Visit to view:");
-              //Set size of text
-                header0.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: white;");
+		  //Select Patient
+		  	Label header0 = new Label("Select Patient:");
+			  //Set the size & font
+			  	header0.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: white;");
 
-          //Visit summary
-            Label header1 = new Label("Visit Summary:");
+          //Select visit to view
+            Label header1 = new Label("Select Visit to view:");
               //Set size of text
                 header1.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: white;");
+
+          //Visit summary
+            Label header2 = new Label("Visit Summary:");
+              //Set size of text
+                header2.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: white;");
         //============================================================================================
 
 
@@ -612,6 +616,9 @@ public class DoctorPortal extends NursePortal{
               exitPage.setMaxSize(75, 45);
             //Set the font & size
               exitPage.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
+			//Set the padding
+//			  exitPage.setPadding(new Insets(,0,0,0));
+			  exitPage.setAlignment(Pos.CENTER);
         //=========================================================================================================
 
 
@@ -619,118 +626,59 @@ public class DoctorPortal extends NursePortal{
           //uniqueKeyInt = Integer.parseInt(uniqueKeyStr);
          // System.out.println("Unique Key Integer: " + uniqueKeyInt);
 
-        //DropDown Menu 
+
+        //DropDown #1 [Select Patient]
         //==========================================================================================
-          //Create the dropDown menu object
-            ComboBox<String> dropSelect = new ComboBox<>();
+		  //Drop Down for selecting a patient
+			ComboBox<String> dropDown0 = new ComboBox<>();
               //Set the Dimensions of the drop down menu
               //[Width x Height]
-                dropSelect.setPrefSize(200, 35);
-                dropSelect.setMinSize(200, 35);
-                dropSelect.setMaxSize(200, 35);
+                dropDown0.setPrefSize(200, 35);
+                dropDown0.setMinSize(200, 35);
+                dropDown0.setMaxSize(200, 35);
               //Set the font of the text within
-                dropSelect.setStyle("-fx-font-size: 16px;");
+                dropDown0.setStyle("-fx-font-size: 16px;");
+
+		  //Collect all of the Patient Names and place them into the ComboBox
+			try{
+			  //File Reader for collecting all of the patient Names
+			  	Scanner fileReader0 = new Scanner(new File("PatientAccounts.txt"));
+
+			  //Start reading the file
+			  	while(fileReader0.hasNext()){
+				  //Collect the line read and place it into a String
+				  	String line = fileReader0.nextLine();
+
+				  //Place the patient credentials into the dropDown menu
+				  	if(!line.contains("Patient Accounts:") && !line.contains("\t") && !line.isEmpty()){
+					  //Save the Patient Credentials
+					  	dropDown0.getItems().add(line);
+					}
+				}
+
+			  //Close the file reader
+			  	fileReader0.close();
+			}
+			catch(IOException h1){
+			  //Do nothing
+			}
+
+		  //NOTE!!!
+		  //Drop down #2 cannot operate without Drop Down #1!!
+        //==========================================================================================
 
 
-            //REWRITE THIS CODE TO NOT HAVE THE STRING ARRAY (examDates) AND OTHER THINGS FOR ADDING VALUES
-            //YOU CAN JUST DO IT DIRECTLY IN THE WHILE LOOP'S IF-BRANCH
-          
-
-          //Do a hashmap to map the visit summary(s) {Strings} to a key {Visit Date as integer}
-            HashMap<Integer, String> summaryMap = new HashMap<>();
-
-          //Integer that stores/uses the Date's numbers as a Key
-            Integer uniqueKeyInt = null; 
-        
-          //String that stores the unique key Integer stripped from: "Date: <date here>"
-            String uniqueKeyStr = "";
-
-          //String that stores the visit summary (all text below patient being found)
-            String visitSummary = ""; //These will be added to the hashMap
-         	 //We will be able to access these in constant time via the action event-handling
-
-
-          //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
-            try{
-              //Open: PatientInfo.txt
-              //Read the File with a scanner (easier to get Line by Line)
-                Scanner fileReader = new Scanner(new File(fullName.replaceAll(" ", "") + "VisitSummarys.txt"));
-
-              //Flag that "puts on the brakes" of the fileReader so it will
-                boolean dateFound = false;
-    
-              //Collect the String line by line
-                String line = "";
-
-
-             //Read the file Line-by-Line and compare the strings for a match
-               while(fileReader.hasNextLine()) {
-                 //Gather and store the line being read
-                   line = fileReader.nextLine(); //Starts at the first line of text in .txt file
-
-
-                 //Collect all of the exam dates
-                   if(!dateFound && line.contains("[Date]:")){  
-                      //Add the exam # 
-                       visitSummary = "[Exam #" + (counter+1) + "]:\n";
-
-                      //Set the flag to true (corresponding date found)
-                        dateFound = true;
-                     
-                      //Instantiate the visitSummary String 
-                        visitSummary += "[Date]: " + line.substring(8, line.length()).trim() + "\n";
-
-                      //Collect the exam date
-                        examDates[counter] += line.substring(8, line.length());
-
-                      //Strip the exam Date string for the numbers to be mapped into hashmap
-                        uniqueKeyStr = line.replaceAll("\\D", "");  
-                        //Using regex to replace all non digits with ""
-
-                      //Add the stripped number to the Integer/Key
-                        uniqueKeyInt = Integer.parseInt(uniqueKeyStr);
-          
-                      //increment counter
-                        counter++;
-                    }
-                 //Collect the visit summary or break the reading loop at next patient's data
-                   else{
-                    //If the patient is found start collecting their data!!
-                      if(dateFound && !line.contains("[Exam #")){
-                        //Collect the data!
-                          visitSummary += line + "\n";
-                      }
-                      else if(dateFound && line.contains("[Exam #")){
-                        //Set the flag to false (new Exam encountered)
-                          dateFound = false;
-                      }
-                   }
-
-                 //Add the unique Integer [Visit Date] & visit String [Summary] to the hashmap
-                   summaryMap.put(uniqueKeyInt, visitSummary);
-                }
-
-              //Close the fileReader
-                fileReader.close();
-            }
-            catch(IOException e){
-              //Error Print
-                System.out.println("File Not Found!!");
-            }
-
-          //Add all of the exam Dates to the ComboBox
-            for(int i = 0; i < 10; i++){
-              //Add exam dates
-                if(examDates[i] != ""){
-                  //Add the Exam date to the box
-                    dropSelect.getItems().add(examDates[i]);
-                }
-              //Else, help the garbage collector
-                else{
-                  //Set the empty slots to null
-                    examDates[i] = null;
-                }
-            }
+        //DropDown #2 [Select Visit]
+        //==========================================================================================
+          //Create the dropDown menu object
+            ComboBox<String> dropDown1 = new ComboBox<>();
+              //Set the Dimensions of the drop down menu
+              //[Width x Height]
+                dropDown1.setPrefSize(200, 35);
+                dropDown1.setMinSize(200, 35);
+                dropDown1.setMaxSize(200, 35);
+              //Set the font of the text within
+                dropDown1.setStyle("-fx-font-size: 16px;");
         //==========================================================================================
 
 
@@ -752,20 +700,159 @@ public class DoctorPortal extends NursePortal{
 
         //Action-Event Handling
         //=====================================================
-          //Add action event handling for changes in the drop down selector!
-          //This will access the hash map via stripping the strings inserted into the examDates[i]
-          //STRIP THE STRINGS IN examDates[i] TO GET THE UNIQUE CORRESPONDING ID FOR THE HASHMAP
-          //PLACE THE STRING INTO THE visitSummart (text box)
-            
+		  //Hash Map used for storing Visit Summarys to each visit date
+		  	HashMap<Integer, String> summaryMap = new HashMap<>();
+
           //User select's an exam date from the dropdown menu
-            dropSelect.setOnAction(event -> { 
+            dropDown0.setOnAction(event -> { 
               //Get the Date String that is currently selected by the user
               //Then strip the String 
-              //This gets the unique integer Id that will load the summary via the hashMap
-                visitSummaryTxt.setText(summaryMap.get(Integer.parseInt(dropSelect.getValue().replaceAll("\\D", ""))));
-              //Do it all in one line of code!!
 
+			  //Set the HashMap to null (i.e. empty any previous input!)
+			  	summaryMap.clear();
+
+			  //Clear the old Summary from the text
+			  	visitSummaryTxt.clear();	//Kind of redundant 
+
+			  //Deselect the selected items in the "Select Visit" DropDown menu
+			  	dropDown1.setValue(null);
+			  //Clear all of the old strings from the DropDown Menu
+				dropDown1.getItems().clear();
+			
+			  //Get the Patient's FullName via their credentials (to be used later)
+				String fullName = dropDown0.getValue().substring(0, dropDown0.getValue().indexOf("/")-3).replaceAll(",", "");
+
+			  //Integer that stores/uses the Date's numbers as a Key
+				Integer uniqueKeyInt = null; 
+			
+			  //String that stores the unique key Integer stripped from: "Date: <date here>"
+				String uniqueKeyStr = "";
+
+			  //String that stores the visit summary (all text below patient being found)
+				String visitSummary = ""; //These will be added to the hashMap
+				//We will be able to access these in constant time via the action event-handling
+
+			  //String array for the exam dates (this will be useful for)
+				String[] examDates = new String[50];
+
+
+			  //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
+				try{
+				  //File that contains the Patient's Visit Summarys
+				  	File visitSummarysFile = new File(fullName + "VisitSummarys.txt");
+
+				  //See if the file exists, if it doesn't then display message and skip
+				  	if(!visitSummarysFile.exists()){
+					  //Display the error message
+						visitSummaryTxt.setText("<This Patient has no Visits>");
+
+					  //Return to "break"
+						return;
+					}
+
+				  //Read the File with a scanner (easier to get Line by Line)
+					Scanner fileReader = new Scanner(visitSummarysFile);
+
+
+
+				  //Flag that "puts on the brakes" of the fileReader so it will
+					boolean dateFound = false;
+		
+				  //Collect the String line by line
+					String line = "";
+
+				  //Instantiate the String array 
+					for(short i = 0; i < 50; i++){
+					  //Place the empty string "" into the indexed position
+						examDates[i] = "";
+					}
+
+				  //Counter for getting the exam number
+					short counter = 0;
+
+				  //Read the file Line-by-Line and compare the strings for a match
+					while(fileReader.hasNextLine()) {
+					  //Gather and store the line being read
+						line = fileReader.nextLine(); //Starts at the first line of text in .txt file
+
+
+					  //Collect all of the exam dates
+						if(!dateFound && line.contains("[Date]:")){  
+						  //Add the exam # 
+							visitSummary = "[Exam #" + (counter+1) + "]:\n";
+
+						  //Set the flag to true (corresponding date found)
+							dateFound = true;
+						
+						  //Instantiate the visitSummary String 
+							visitSummary += "[Date]: " + line.substring(8, line.length()).trim() + "\n";
+
+						  //Collect the exam date
+							examDates[counter] += line.substring(8, line.length());
+
+						  //Strip the exam Date string for the numbers to be mapped into hashmap
+							uniqueKeyStr = line.replaceAll("\\D", "");  
+							//Using regex to replace all non digits with ""
+
+						  //Add the stripped number to the Integer/Key
+							uniqueKeyInt = Integer.parseInt(uniqueKeyStr);
+			
+						  //increment counter
+							counter++;
+						}
+					  //Collect the visit summary or break the reading loop at next patient's data
+						else{
+						  //If the patient is found start collecting their data!!
+							if(dateFound && !line.contains("[Exam #")){
+							  //Collect the data!
+								visitSummary += line + "\n";
+							}
+							else if(dateFound && line.contains("[Exam #")){
+							  //Set the flag to false (new Exam encountered)
+								dateFound = false;
+							}
+						}
+					
+					  //If the key does not exist skip
+						if(uniqueKeyStr != ""){
+					      //Add the unique Integer [Visit Date] & visit String [Summary] to the hashmap
+							summaryMap.put(uniqueKeyInt, visitSummary);
+						}
+					}	
+
+				  //Close the fileReader
+					fileReader.close();
+				}
+				catch(IOException e2){
+				//Error Print
+					System.out.println("File Not Found!!");
+				}
+
+
+			  //Add all of the exam Dates to the ComboBox
+				for(int i = 0; i < 50; i++){
+				  //Add exam dates
+					if(examDates[i] != ""){
+					  //Add the Exam date to the box
+						dropDown1.getItems().add(examDates[i]);
+					}
+				  //Else, help the garbage collector
+					//else{
+					  //Set the indexed value to null
+						examDates[i] = null;
+					//}
+				}
+
+			  //DEBUG
+			  //System.out.println("WE MADE IT HERE!!");
             });
+
+
+		  //Load the text upon the Selection of a Visit date by the Doctor
+		  	dropDown1.setOnAction(event -> {
+			  //This gets the unique integer Id that will load the summary via the hashMap
+                visitSummaryTxt.setText(summaryMap.get(Integer.parseInt(dropDown1.getValue().replaceAll("\\D", ""))));
+			});
 
 
           //Exit
@@ -778,13 +865,26 @@ public class DoctorPortal extends NursePortal{
 
         //Alignment
         //=================================================================
-          //So far this alignment is concurrent with that of Phase1
+		  //NEW!!
+		  //Make a horzionatal space for all of the headers 
+
+		  //Make a horizontal space for the Drop Down 
+
+
+		  //Select Patient vertical alignment
+			VBox vertical0 = new VBox(header0, dropDown0);	
+
+		  //Select Visit
+		  	VBox vertical1 = new VBox(header1, dropDown1);
 
           //Horizontally align the Dropdown select & Exit button
-            HBox functContainer = new HBox(525, dropSelect, exitPage);
+            HBox functContainer = new HBox(50, vertical0, vertical1, exitPage);
+			//NEW!!
+			  //Set the padding
+				//functContainer.setPadding(new Insets(0,20,0,0));
 
           //Vertically align the Header 0 Label and the button container box
-            VBox vertical0 = new VBox(header0, functContainer);
+           // VBox vertical0 = new VBox(header0, functContainer);
 
 
           //VBox for the messageTxt (this way we can apply background color)
@@ -800,12 +900,12 @@ public class DoctorPortal extends NursePortal{
                 summaryBox.setMaxSize(825, 575);
 
           //Vertically alignment of header and text box
-            VBox vertical1 = new VBox(10, header1, summaryBox);
+            VBox vertical2 = new VBox(10, functContainer, header2, summaryBox);
   
           //Final Adjustment VBox
-            VBox vertical2 = new VBox(vertical0, vertical1);         
+          //  VBox vertical2 = new VBox(vertical0, vertical1);         
               //Set the alignment of the VBox
-                vertical2.setAlignment(Pos.CENTER);
+            //    vertical2.setAlignment(Pos.CENTER);
 
           //Set the alignment of the final box to be concurrent with the center of the page
             //vertical2.setAlignment(Pos.CENTER);
@@ -825,20 +925,6 @@ public class DoctorPortal extends NursePortal{
 
         //Return Scene
           return mainLayout;
-
-//*/
-
-
-		//Build the Scene
-		  //Scene mainLayout = new Scene(1024, 768);
-
-		//Return the Scene
-		  return null;
 	  }
-
-
-	  //Methods you already have...  (these can be reference within the Action Event buttons you created)
-		//	[Messages]
-		//	[Logout]
 	//-------------------------------------------------------------------------------------------
 }
