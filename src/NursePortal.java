@@ -6,7 +6,7 @@
 
   - Austin Mayhew
 
-  - Ryan Clark
+	- Ryan Clark
 
   - Juan Rosas Jr.
 
