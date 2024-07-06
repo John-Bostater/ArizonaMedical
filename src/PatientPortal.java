@@ -156,7 +156,7 @@ public class PatientPortal{
 
         //Buttons
         //====================================================================================================================
-          //Change Patient Information
+          //Change or update Patient Information
             Button changePatientInfo = new Button("Change Patient Information");
             //Set the dimensions of the Button
            	  //[Width x Height]
