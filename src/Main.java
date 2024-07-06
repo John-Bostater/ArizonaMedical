@@ -99,7 +99,7 @@ public class Main extends Application{
   public void start(Stage primaryStage) {
     //Program Loop: 
     //-------------------------------------------------------------------------------------------------------
-      //Title of the program
+      //Title of the program on maim screen
         primaryStage.setTitle("Arizona Medical");
     
       //Load the Welcome Page of the program and continue from there...
