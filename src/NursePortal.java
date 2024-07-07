@@ -6,7 +6,7 @@
 
   - Austin Mayhew
 
-	- Ryan Clark
+  - Ryan Clark
 
   - Juan Rosas Jr.
 
@@ -35,7 +35,7 @@
 	 
 	
 [Files Created/Used within the program for storing/loading data]:	  
-  - //here...
+  - <Patient's Name>VisitSummarys.txt
 ***************************************************************************************/
 
 
@@ -74,7 +74,7 @@ public class NursePortal{
       private String currentPatientCreds;
 
     //Notification Text
-      private Label notificationLbl;
+      protected Label notificationLbl;
 
     //Notification Flag
       private boolean isNotified;
@@ -431,9 +431,6 @@ public class NursePortal{
                 //Clear the text
                 dateTxt.clear();
               });
-            //NEW!!!
-            //Load the current date into the text box (user can still change it)
-            //Use the time library!
       //====================================================================
 
 
@@ -552,7 +549,6 @@ public class NursePortal{
             //Set the background color of the vitals box
               vitalsBox.setStyle("-fx-background-color: lightblue; -fx-border-radius: 10; -fx-background-radius: 10;");
             //Set the alignment
-            //  vitalsBox.setAlignment(Pos.CENTER);
               vitalsBox.setPadding(new Insets(30));
               vitalsBox.setAlignment(Pos.CENTER);
             
@@ -563,9 +559,6 @@ public class NursePortal{
               visitDateBox.setPrefSize(125, 45);
               visitDateBox.setMinSize(125, 45);
               visitDateBox.setMaxSize(125, 45);
-            //Set the padding
-              //visitDateBox.setpadding(new Insets(30));
-
             //Set alignment
               visitDateBox.setAlignment(Pos.CENTER);
             //Set the background color
@@ -578,8 +571,6 @@ public class NursePortal{
               nurseNotesBox.setPrefSize(525, 325);
               nurseNotesBox.setMinSize(525, 325);
               nurseNotesBox.setMaxSize(525, 325);
-            //Set the padding
-              //nurseNotesBox.setpadding(new Insets(30));
 
             //Set alignment
               nurseNotesBox.setAlignment(Pos.CENTER);
@@ -651,9 +642,13 @@ public class NursePortal{
             //Set the alignment of the Encapsulating box
               vertical0.setAlignment(Pos.CENTER);
 
+        //Notification Container
+          HBox notificationContainer = new HBox();
+            //Set the alignment of the text
+              notificationContainer.setAlignment(Pos.CENTER);
 
         //Vertical alignment for the nurseNotesBox & patientHistoryBox
-          VBox vertical1 = new VBox(5, nurseNotesLbl, nurseNotesBox, previousHistoryLbl, patientHistoryBox, buttonContainer);
+          VBox vertical1 = new VBox(5, nurseNotesLbl, nurseNotesBox, previousHistoryLbl, patientHistoryBox, notificationContainer, buttonContainer);
             //Set the alginment of vertical1
               vertical1.setAlignment(Pos.CENTER);
 
@@ -671,8 +666,19 @@ public class NursePortal{
       //====================================================================
         //DropDown Menu Selection 
           dropDown.setOnAction(event -> {
-            //Remove any notifications relating to the misuse of the page
-              vertical1.getChildren().remove(this.notificationLbl);
+            //Remove any previous notfications
+              notificationContainer.getChildren().remove(this.notificationLbl);
+
+
+            //Remove any previous text from the text boxes
+              dateTxt.clear();
+              weightTxt.clear();
+              heightTxt.clear();
+              bodyTempTxt.clear();
+              bloodPressureTxt.clear();
+              nursesNotesTxt.clear();
+              previousMedHistTxt.clear();
+
 
             //Set the "Save Vist Form" Flag to false
               formIsSaved = false;
@@ -709,14 +715,14 @@ public class NursePortal{
                 if(visitSummaryFile.exists()){
                   //File Exists!, now load all of the data from the previous visit into the text boxes!
                   
-                  //DEBUG!!
-                  //System.out.println("File Exists!!!\n\n");
-
                   //File Reader
                     Scanner fileReader = new Scanner(visitSummaryFile);
 
                   //Relevant Flag for data collection
                     boolean collectData = false;
+
+                  //Date Collection [Doctor]
+                    boolean dateCollect = false;
 
                   //Vitals Collection [Doctor]
                     boolean vitalsCollect = false;
@@ -732,22 +738,6 @@ public class NursePortal{
 
                   //Counter for # of "[Exam #" found
                     short counter = 0;
-
-                  
-                  //Vitals
-                  //--------------------------------------------
-                  //Weight
-                    String weightStr = "";
-
-                  //Height
-                    String heightStr = "";
-
-                  //Body Temperature
-                    String bodyTempStr = "";
-
-                  //Blood Pressure
-                    String bloodPressureStr = "";
-                  //--------------------------------------------
 
 
                   //Nurse's Notes
@@ -779,11 +769,17 @@ public class NursePortal{
 
                       //Flag Activation 
                       //---------------------------------------------------------------------------
+                        //Date collection [Doctor]
+                          if(line.contains("[Date]:") && collectData && this.staffId == "Doctor"){
+                            //Move the line forward!
+                             // line = fileReader.nextLine();
+
+                            //Activate the flag to start collecting the Vitals
+                              dateCollect = true;
+                          }
+
                         //Vitals Flag [Doctor]
                           if(line.contains("[Vitals]:") && collectData && this.staffId == "Doctor"){
-                            //Empty Default text from String(s)
-                              //Code here...
-
                             //Move the line forward!
                               line = fileReader.nextLine();
 
@@ -808,7 +804,6 @@ public class NursePortal{
 
                         //Previous History Flag [Both]
                           if(line.contains("[History]:") && collectData){
-                            //NEW!!
                             //Turn off any preceeding flags
                               nursesNotesCollect = false;
 
@@ -827,6 +822,16 @@ public class NursePortal{
                       //Data Collection {Flag response}
                       //---------------------------------------------------------------------------
                         //Collection
+                        //Date Flag
+                          if(dateCollect){
+                            //Set the text in the date string                         
+                              dateTxt.setText(line.substring(line.indexOf(":")+1, line.length()-1));
+                            
+                            //Break the date collection
+                              dateCollect = false;
+                          }
+
+
                         //Vitals Flag [Doctor]
                           if(vitalsCollect){
                             //Statement to break the vitals collection!!!
@@ -843,7 +848,7 @@ public class NursePortal{
                                     //If the weight is NOT empty, update the string
                                       if(!line.replaceAll(" ", "").isEmpty()){
                                         //Collect the weight via a substring
-                                          weightStr = line.substring(line.indexOf(":")+1, line.indexOf("l")-1);
+                                          weightTxt.setText(line.substring(line.indexOf(":")+1, line.indexOf("l")-1));
                                       }
                                   }
 
@@ -853,7 +858,7 @@ public class NursePortal{
                                     //If the height is NOT empty, update the string
                                       if(!line.replaceAll(" ", "").isEmpty()){
                                         //Collect the height via a substring
-                                          heightStr = line.substring(line.indexOf(":")+1, line.indexOf("<")-1);
+                                          heightTxt.setText(line.substring(line.indexOf(":")+1, line.indexOf("<")-1));
                                       }
                                   }
 
@@ -863,7 +868,7 @@ public class NursePortal{
                                     //If the body temp is NOT empty, update the string
                                       if(!line.replaceAll(" ", "").isEmpty()){
                                         //Collect the body temp via a substring
-                                          bodyTempStr = line.substring(line.indexOf(":")+1, line.indexOf("F")-1);
+                                          bodyTempTxt.setText(line.substring(line.indexOf(":")+1, line.indexOf("F")-1));
                                       }
                                   }
 
@@ -873,7 +878,7 @@ public class NursePortal{
                                     //If the blood pressure is NOT empty, update the string
                                       if(!line.replaceAll(" ", "").isEmpty()){
                                         //Collect the blood pressure via a substring
-                                          bloodPressureStr = line.substring(line.indexOf(":")+1, line.length());
+                                          bloodPressureTxt.setText(line.substring(line.indexOf(":")+1, line.length()));
                                       }
                                   }
                             }
@@ -910,18 +915,6 @@ public class NursePortal{
                     //---------------------------------------------------------------------------
 
                   //Add the Text box strings to their respective TextBoxes            
-                  //Weight
-                    weightTxt.setText(weightStr);
-
-                  //Height
-                    heightTxt.setText(heightStr);
-
-                  //Body Temp
-                    bodyTempTxt.setText(bodyTempStr);
-
-                  //Blood Pressure
-                    bloodPressureTxt.setText(bloodPressureStr);
-
                   //Nurse's Notes
                     nursesNotesTxt.setText(nursesNotesStr.trim());
                       //Trim any whitespace or \t
@@ -929,16 +922,6 @@ public class NursePortal{
                   //Previous History
                     previousMedHistTxt.setText(prevHistStr.trim());
                       //Trim any whitespace or \t
-
-                  //[Extra...]
-                  //Help the Garbage Collector
-                    weightStr = null;
-                    heightStr = null;
-                    bodyTempStr = null;
-                    bloodPressureStr = null;
-                    nursesNotesStr = null;
-                    prevHistStr = null;
-
 
                   //Close the file reader
                     fileReader.close();
@@ -958,40 +941,22 @@ public class NursePortal{
             //.txt file     [Search for patient {if they don't exist append a new entry}
             //               Look for the exam dates and ]
 
-            //Before we can do all of the fun file writing stuff below, we need to make sure that
-            //all of the TextBoxes have been properly filled out first!!
-            //If not we will throw an error Notification
-            //"*Required Text Field is Incorrect or Missing"
+            //Remove any previous notfications
+              notificationContainer.getChildren().remove(this.notificationLbl);
 
 
             //If the user has NOT selected a patient via the dropdown menu inform them via a notification
               if(dropDown.getValue() == null){
-                
                 //Display the notification to the user that they have to use the dropdown box
-                  notificationLbl = new Label("*Select a Patient via the Drop Down Menu.");
+                  this.notificationLbl = new Label("*Select a Patient via the Drop Down Menu.");
                     //Set the font & size
-                      notificationLbl.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+                      this.notificationLbl.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+                //Add the notification to the container
+                  notificationContainer.getChildren().add(this.notificationLbl);
 
-                //Notify the user once
-                  if(!this.isNotified){
-                    //Add the notification to the Scene
-                      vertical1.getChildren().add(notificationLbl);
-
-                    //Set the flag
-                      this.isNotified = true;
-                  }
-
-                  //Don't continue
-                    return;
+                //Don't continue
+                  return;
               }
-              //the user has fixed their mistake
-            //  else if(dropDown.getValue() != null){
-                //Remove any old notifications
-              //    vertical1.getChildren().remove(this.notificationLbl);
-
-                //Disable the notification
-                //  this.isNotified = false;
-              //}
 
 
             //If any of the Text Boxes are empty or incorrect throw an error & skip below!!
@@ -1001,44 +966,30 @@ public class NursePortal{
                 ||  bloodPressureTxt.getText().isEmpty()
                 ||  dateTxt.getText().isEmpty()
                 ||  this.formIsSaved
-
             ){
               //If in regard to form being saved already display notification and break here
-              /*
-                if(this.formIsSaved && !isNotified){
+                if(this.formIsSaved){
                   //Remove any old notifications
-                    vertical1.getChildren().remove(this.notificationLbl);
+                    notificationContainer.getChildren().remove(this.notificationLbl);
 
                   //Build & Display the notification
-                    notificationLbl = new Label("*Visit Data has already been saved.");
+                    this.notificationLbl = new Label("*Visit Data has already been saved.");
                   
                   //Display the notification
-                    vertical1.getChildren().add(notificationLbl);
-
-                  //Set the Notification flag
-                    isNotified = true;
+                    notificationContainer.getChildren().add(this.notificationLbl);
 
                   //Break here
                     return;
                 }
-                //*/
 
-              //Remove any old notifications!
-                //vertical1.getChildren().remove(this.notificationLbl);
 
               //Update the notification
                 this.notificationLbl = new Label("*Required Input is Incorrect or Missing");
                   //Set the style & font
                     notificationLbl.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
-              
-              //Notify the user only once
-                if(!this.isNotified){
-                  //Add the new Notification to vertical1
-                    vertical1.getChildren().add(this.notificationLbl);
-
-                  //Update the flag
-                    this.isNotified = true;
-                }
+                
+                //Add the new notification to the container
+                  notificationContainer.getChildren().add(this.notificationLbl);
 
               //Break the action-event!!
                 return;  
@@ -1090,22 +1041,14 @@ public class NursePortal{
               //Update flag that the form has been saved (we cannot save more than one Visit at a time)
                 this.formIsSaved = true;
 
-              //Notify the user that they have successfully saved the exam form
-                if(!isNotified){
-                  //Set up the notification label
-                    notificationLbl = new Label("*Exam data has been saved.");
-                      //Set the font & size
-                        notificationLbl.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+  
+              //Set up the notification label
+                this.notificationLbl = new Label("*Exam data has been saved.");
+              //Set the font & size
+                notificationLbl.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+              //Add the new notficiation to the notification box
+                notificationContainer.getChildren().add(this.notificationLbl);
 
-                  //Add the notification label
-                    vertical1.getChildren().add(notificationLbl);
-   
-                  //Set the flag to true
-                    isNotified = true;
-                }
-
-              //DEBUG
-                System.out.println("Physical exam summary: \n" + physicalExam);
 
               //Close the file Writer
                 fileWriter.close(); 
@@ -1118,7 +1061,22 @@ public class NursePortal{
 
         //Conduct Exam {Doctor}
           conductExam.setOnAction(e -> {
-            //If the current Patient Credentials are NOT empty, continue
+            //Remove any previous notfications
+              notificationContainer.getChildren().remove(this.notificationLbl);
+
+            //If the user has NOT selected a patient via the dropdown menu inform them via a notification
+              if(dropDown.getValue() == null){
+                //Display the notification to the user that they have to use the dropdown box
+                  this.notificationLbl = new Label("*Select a Patient via the Drop Down Menu.");
+                    //Set the font & size
+                      notificationLbl.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+                //Add the notification to the container
+                  notificationContainer.getChildren().add(this.notificationLbl);
+
+                //Don't continue
+                  return;
+              }
+    
             //Else, display a notification to the user!!
 
             //Call upon the conductExam Method
@@ -1154,6 +1112,13 @@ public class NursePortal{
       try{
         //Get the patients full Name
           String fullName = this.currentPatientCreds.substring(0, this.currentPatientCreds.indexOf("/")-3).replaceAll(",", "");
+
+        //Make sure the file isn't being created to read from
+          if(fullName.isEmpty()){
+            //Break
+              return 0;
+          }
+
 
         //Open <Patient Name>VisitSummary.txt for reading
           File visitSummaryFile = new File(fullName.trim() + "VisitSummarys.txt");
@@ -1208,15 +1173,8 @@ public class NursePortal{
         return null;
     }
   //-----------------------------------------------------------------------------------
-//}
 
-//NEW METHODS THAT NEED TO BE EDITED/FORMED TO WORK ALONGSIDE A DROPDOWN MENU 
-//
 
-//USE A HASHMAP TO MAP THE PATIENTS UNIQUE CREDS:    HASHMAP<STRING, STRING>
-//WHEN THE USER SELECTES PATIENT CREDS THROUGH THE DROPDOWN MENU (YOU)
-///*
-  //[DOCTOR WILL INHERIT THIS METHOD WITH NO CHANGES NEEDED TO BE MADE/NECESsARY!!]
   //This method will display/load the Scene for sending & reading messages
   //
   //[This method looks like the patient portal but there is a dropdown menu for 
@@ -1383,20 +1341,14 @@ public class NursePortal{
         }
       //=============================================================================
 
-      //This String variable is used to store the
-
-
-      //If you want to save computing process, you can use a hashmap to map the patientsCreds to their messages
-      //HashMap<String, String> map0 = new HashMap<>();
-
 
       //Action-Event Handling
       //=============================================================================
         //DropDown menu, selecting a Patient
           dropDown.setOnAction(event -> {
-            //New
-            //Clear any old notifications
-            //
+            //Clear the text boxes of any previous data/text
+              messageTxt.clear();
+              inboxTxt.clear();
 
             //Get the value selected (Patient Credentials)  
             //Use the selected credentials to load the patient's messages via the HashMap
@@ -1439,7 +1391,6 @@ public class NursePortal{
           });
 
 
-        ///*
         //Send Message
           //This will open the "Messages.txt" file for reading & writing
           sendMessage.setOnAction(e -> {
@@ -1452,14 +1403,11 @@ public class NursePortal{
                   return;
               }
 
+
             //Get the patient's fullname (used for sending message to correct .txt)
               String fullName = dropDown.getValue().substring(0, dropDown.getValue().indexOf("/")-3).replaceAll(",", "");
 
-           //Place the message sent into the Objects private variable
-             this.messageSent = messageTxt.getText();
 
-
-           // /*
             //Add/Append the message written in "Message: " to the Inbox/Current Conversation              
             //Fill the ComboBox with all of the Visit Dates via: PatientSummary.txt
               try{
@@ -1509,19 +1457,33 @@ public class NursePortal{
           });
 
 
-        ///*
         //Delete Message
           deleteMessage.setOnAction(e -> {
             //Count the total number of messages sent by the user {i.e. count everytime we see: "[fullName]:"}
 
             //If the Staff user has NOT selected a user from the DropDown menu (they CANNOT add the message)
-              if(dropDown.getSelectionModel().isEmpty()){
+              if(dropDown.getValue() == null){
                 //Display notification to user
                   messageTxt.setText("*Please Select a Patient via the Drop Down menu above to view and send messages.");
               
                 //Stop the user here
                   return;
               }
+
+
+            //If the last message sent is empty catch error
+              if(this.messageSent == "" 
+                  || this.messageSent == "*Please Select a Patient via the Drop Down menu above to view and send messages."
+              ){
+                //Stop code from progressing 
+                  System.out.println("HeRE!");
+                //Display notification to user
+                  messageTxt.setText("*Can only delete the last message sent.");
+              
+                //Stop the user here
+                  return;
+              }
+
 
             //Get the patient's fullname (used for sending message to correct .txt)
               String fullName = dropDown.getValue().substring(0, dropDown.getValue().indexOf("/")-3).replaceAll(",", "");
@@ -1533,25 +1495,14 @@ public class NursePortal{
                 
                 //If the message inbox is not empty...
                 if(getMessages(dropDown.getValue()) != "<Inbox Empty>"){
-                  //DEBUG
-                    //All messages in the .txt file
-                    System.out.println("Inbox: \n" + getMessages(dropDown.getValue()));
-  
-                  //DEbug
-                    //Print the last message sent/saved in the global variable
-                      //System.out.println("Message sent: " + this.messageSent);
-
                   //Write this into the <fullName>Messagest.txt
-                  String editedStr = getMessages(dropDown.getValue()).replace(this.messageSent, "");
+                    String editedStr = getMessages(dropDown.getValue()).replace(this.messageSent, "");
                   
                   //Edit the <fullName>Messages.txt to have the new inbox displayed!
                     File editedFile = new File(fullName.replaceAll(" ", "") + "Messages.txt");
 
                   //Open a file writer for writing the new text into the .txt file
                     FileWriter fileWriter0 = new FileWriter(fullName.replaceAll(" ", "") + "Messages.txt");
-
-                  //DEBUG STATEMENT
-                    //System.out.println("Edited TExt: \n" + editedStr);
 
                   //If the string we made is not empty, update the .txt file
                     if(this.messageSent != ("[" + fullName + "]: \n\n")){
@@ -1608,8 +1559,7 @@ public class NursePortal{
 
         //Patient Phone Number Horizontal Alignment
           HBox horizontal1 = new HBox(5, contactInfoLbl, phoneNumTxt);
-
-
+          
         //Inbox:
           VBox inboxSection = new VBox(5, inboxLbl, inboxTxt, horizontal1);
 
@@ -1632,7 +1582,6 @@ public class NursePortal{
               
 
         //Vertically align all of the sections {Last VBox}
-//          VBox finAlign = new VBox(20, selectPatientSection, messageBrdLbl, messageBoard, buttonContainer);
           VBox finAlign = new VBox(10, horizontal0, messageBoard, buttonContainer);
             //Set the alignment of the VBox
               finAlign.setAlignment(Pos.CENTER);
@@ -1647,7 +1596,6 @@ public class NursePortal{
       //Return the Scene
         return mainLayout;
     }
-  
 
 
 //Getters & Setters
@@ -1691,6 +1639,5 @@ public class NursePortal{
           return "<Inbox Empty>";
       }
   }
-  //*/
   //------------------------------------------------------------------------------
 }

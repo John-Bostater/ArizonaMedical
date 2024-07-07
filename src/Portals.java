@@ -282,14 +282,12 @@ public class Portals {
 		  //The 'Login Page' will take the User to the respective Portal
 		  //If the user is to Logout 
 
-		  //[New Idea]:
 		  //Update all of the other portal objects to null 
 		  //This will [deconstruct our old objects]
 			patientView = null;
 			nurseView = null;
 			doctorView = null;			
-			//azMedLogo = null;
-
+	
 		  //Set the Scene of the Stage & Display it
 			primeStage.setScene(welcomePage);
 			primeStage.show();
@@ -399,9 +397,7 @@ public class Portals {
 		private void createAccount(String patientCredentials, String phoneNum, String insuranceProv, String pharmacyProv) {
 		  //Append the patients Credentials to the "PatientAccounts.txt"
 		
-		  //[DEBUG!!]	
-		  	System.out.println("All the other strings: \n" + "\t[Phone Number]: " + phoneNum);
-		
+				
 		  //try catch in case of file I/O errors
 			try {
 			  //Load [PatientAccounts.txt] for writing		
@@ -764,9 +760,6 @@ public class Portals {
 					notificationTxt = new Label("*Account Successfully Created.\n  You may proceed to login.");
 					//Set the color of the text
 						notificationTxt.setStyle("-fx-text-fill: white;");
-
-				  //Add the notification to the container
-					//buttonContainer.getChildren().add(notificationTxt);
 				}
 	        //-------------------------------------------------------------------------
           //===================================================================================================
@@ -858,12 +851,6 @@ public class Portals {
 		          
 		  //Create a new Account
 	        newPatient.setOnAction(e -> {
-	          //This will Create a new Account with the credentials the user has entered
-	        	//HAVE TEXT THAT NOTIFIES THE USER OF THE NEW ACCOUNT CREATED AND HOW THEY 
-	        	//CAN ENTER HIT the LOGIN button TO proceed to the patient portal
-			  //Update the flag
-				isNotified = false;
-
 			  //Make the user text entry box bigger
 			  	credContainer.setPrefSize(600,375);
 			  	credContainer.setMinSize(600,375);
@@ -888,6 +875,10 @@ public class Portals {
 
 			//Confirm the Account data entered to be written to the PatientAccounts.txt
 			confirmAccount.setOnAction(e -> {
+				//Check that the data eneterded is valid
+
+
+
 
 			  //Compile the credentials entered by the Patient/User
 			  //Compile into one string to be passed into PatientPortal Constructor 
@@ -918,12 +909,11 @@ public class Portals {
 			  //The user has not entered the minimum amount of chars do not make an account
 			    if(    firstNameTxt.getText().length() == 0  
 					|| lastNameTxt.getText().length() == 0
-					|| monthTxt.getText().length() != 2
-					|| dayTxt.getText().length() != 2
-					|| yearTxt.getText().length() != 4 
+					|| monthTxt.getText().length() != 2 || !monthTxt.getText().matches("\\d+")
+					|| dayTxt.getText().length() != 2 || !dayTxt.getText().matches("\\d+")
+					|| yearTxt.getText().length() != 4  || !yearTxt.getText().matches("\\d+")
 				){
-					//DEBUG!!
-					 // System.out.println("Login error!!!");
+					//We use regex to check that the text field does contain numbers
 
 					//Update the flag so the user cannot proceed to making a new account
 					  validEntry = false;

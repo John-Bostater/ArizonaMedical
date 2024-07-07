@@ -36,10 +36,6 @@
 [Aspect Ratio/Dimension of Graphical User Interface]: 
 
 	- [4:3]	-->   [1024 x 768]	--	{Width x Height}
-	 
-	
-[Files Created/Used within the program for storing/loading data]:	  
-	- //here...
 ***************************************************************************************/
 
 
@@ -59,18 +55,20 @@ import java.io.*;	//FileWriter for file writing
 import java.util.*;	//Scanner for file reading
 //-----------------------------------------------
 
-
-//NEW IDEA!!
-//  This class extends the NursePortal?? since they have somewhat similar functions???
-//  [You can overload & overwrite methods]
-
+//Object/Class, sub-class of NursePortal
 public class DoctorPortal extends NursePortal{
 	//This object contains: 
 	//  [Patient Visit Form]    [View Patient Records]  [Messages]  [Logout]
 
-	//Data of the Portals Object/Class
+	//Data of the Object/Class
 	//-------------------------------------------------------------------------------------------
 	  //All of the 'protected' Data from the NursePortal Class is shared with the Doctor Class
+	
+	  //Flag for saving form
+	  	private boolean examSaved;
+
+	  //Flag for saving prescription
+		private boolean prescriptionSaved;
 	//-------------------------------------------------------------------------------------------
 
 
@@ -80,6 +78,10 @@ public class DoctorPortal extends NursePortal{
 		//Call upon the same constructor of the NursePortal (since they act similar)
 		  super(primaryStage, welcomeScene);
 		  this.staffId = "Doctor";
+
+		//Set the flags
+		  examSaved = false;
+		  prescriptionSaved = false;
 	  }
 	//-------------------------------------------------------------------------------------------
 
@@ -299,7 +301,6 @@ public class DoctorPortal extends NursePortal{
 			  //Clear the Text Box upon the user clicking it for data entrance
 
 
-
 		  //Prescription Script
 			TextArea prescriptionScriptTxt = new TextArea("<Prescription Name and Dose>");
 			  //Set the dimension & style of the text area
@@ -375,10 +376,9 @@ public class DoctorPortal extends NursePortal{
 					if(line.contains(patientCredentials)){
 					  //NEW!!!
 					  //DEBUG!!
-					  System.out.println("Patient Found!!");
+					  //System.out.println("Patient Found!!");
 
-					  //NEW!!
-					  //Advance the line??
+					  //Advance the line
 					  	line = fileReader.nextLine();
 
 					  //Activate the flag for data collection
@@ -442,69 +442,6 @@ public class DoctorPortal extends NursePortal{
            	    goBack.setMinSize(75, 45);
 			  //Set the style
 			  	goBack.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
-			  //Set the padding
-			  	goBack.setPadding(new Insets(-50,0,0,0));
-		//=================================================================================================
-
-
-		//Action-Event Handling
-		//=================================================================================================
-		  //find the patient via the dropdown menu credentials &
-
-		  //Submit Exam
-			submitExam.setOnAction(e -> {
-				
-			  //Catch any IO Errors in file writing
-				try{
-				  //File Writer
-				  	FileWriter fileWriter = new FileWriter(fullName + "VisitSummarys.txt", true);
-
-				  //Append the text to the end of the .txt file
-					fileWriter.append("[Doctor's Exam]:\n" + doctorsExamTxt.getText().trim() + "\n\n");
-
-				  //Close the file writer
-				  	fileWriter.close();
-				}
-				catch(IOException a){
-				  //Do Nothing...
-				}
-
-			});
-
-
-		  //Send Prescription
-			sendPrescription.setOnAction(e -> {
-			  //Append the Prescription & all the other text fields to the <fullName>VisitSummarys.txt
-			
-			  //Catch any errors in the file writing
-				try{
-				  //File Writer
-					FileWriter fileWriter = new FileWriter(fullName + "VisitSummarys.txt", true);
-					  //We set 'true' so the text can be appended to any existing file!	
-
-				  //Append the text to the end of the .txt file
-					fileWriter.append("[Prescription]:\n" + prescriptionScriptTxt.getText().trim() + "\n[Pharmaceutical Provider]: " + currentProvTxt.getText().trim() + "\n[Signature]: " + signatureTxt.getText());
-
-				  //Close the file writer
-				  	fileWriter.close();
-				}
-				catch(IOException a0){
-				  //Do Nothing...
-				}
-			});
-
-
-
-		  //Exit
-		    goBack.setOnAction(e -> {
-			  //Call upon the "newVistForm" method 
-			
-			  //Set the Scene
-				this.primeStage.setScene(this.newVisitForm());
-			
-			  //Display the Scene
-			  	this.primeStage.show();
-			});
 		//=================================================================================================
 
 
@@ -512,11 +449,10 @@ public class DoctorPortal extends NursePortal{
 		//==========================================================================
 		  //Vertical aligments of Recording Exam [Update Summary] & [Exit]
 
-
 		  //Horizontal alignments of [Submit Exam] & [Exit]
-		  	HBox horizontal0 = new HBox(20, submitExam, goBack);
+		  	HBox buttonContainer = new HBox(20, submitExam, goBack);
 			  //Set the alignment of the buttons!!
-			  	horizontal0.setAlignment(Pos.CENTER);
+			  	buttonContainer.setAlignment(Pos.CENTER);
 
 
 		  //Doctors Exam Txt (Background color set)
@@ -531,8 +467,14 @@ public class DoctorPortal extends NursePortal{
 			  	doctorsExamBox.setAlignment(Pos.CENTER);
 
 
+		  //Notification Container
+		  	HBox notificationContainer = new HBox();
+			  //Set the alignment of the text within the box
+			  	notificationContainer.setAlignment(Pos.CENTER);
+
+
 		  //Doctors Exam
-			VBox vertical0 = new VBox(10, doctorsExamLbl, doctorsExamBox, horizontal0);
+			VBox vertical0 = new VBox(10, doctorsExamLbl, doctorsExamBox, notificationContainer, buttonContainer);
 			  //Set the Alignment
 			  	vertical0.setAlignment(Pos.CENTER);
 
@@ -564,6 +506,89 @@ public class DoctorPortal extends NursePortal{
 		//==========================================================================
 
 
+		//Action-Event Handling
+		//=================================================================================================
+		  //find the patient via the dropdown menu credentials &
+
+		  //Submit Exam
+			submitExam.setOnAction(e -> {
+				
+			  //Catch any IO Errors in file writing
+				try{
+				  //File Writer
+				  	FileWriter fileWriter = new FileWriter(fullName + "VisitSummarys.txt", true);
+
+				  //If the form is not already saved, save it!
+				  	if(!examSaved){
+					  //Remove
+
+					  //Add notification that the Exam has been successfully recorded
+					  	//notificationContainer.getChildren().add(this.notificationLbl);
+
+					  //Append the text to the end of the .txt file
+						fileWriter.append("[Doctor's Exam]:\n" + doctorsExamTxt.getText().trim() + "\n\n");
+					
+					  //Set the flag
+					  	examSaved = true;
+					}
+
+				  //Close the file writer
+				  	fileWriter.close();
+				}
+				catch(IOException a){
+				  //Do Nothing...
+				}
+
+			});
+
+
+		  //Send Prescription
+			sendPrescription.setOnAction(e -> {
+			  //Append the Prescription & all the other text fields to the <fullName>VisitSummarys.txt
+			
+			  //Catch any errors in the file writing
+				try{
+				  //File Writer
+					FileWriter fileWriter = new FileWriter(fullName + "VisitSummarys.txt", true);
+					  //We set 'true' so the text can be appended to any existing file!	
+
+
+				  //Save The prescription data only once
+					if(!prescriptionSaved){
+				 	  //Append the text to the end of the .txt file
+						fileWriter.append("[Prescription]:" + prescriptionScriptTxt.getText().trim() 
+							+ "\n[Pharmaceutical Provider]: " + currentProvTxt.getText().trim() 
+							+ "\n[Signature]: " + signatureTxt.getText() 
+							+ "\n\n");
+
+					  //Set the flag
+					  	prescriptionSaved = true;
+					}
+
+				  //Close the file writer
+				  	fileWriter.close();
+				}
+				catch(IOException a0){
+				  //Do Nothing...
+				}
+			});
+
+
+
+		  //Exit
+		    goBack.setOnAction(e -> {
+			  //Call upon the "newVistForm" method 
+			
+			  //Set the Scene
+				this.primeStage.setScene(this.newVisitForm());
+			
+			  //Display the Scene
+			  	this.primeStage.show();
+			});
+		//=================================================================================================
+
+
+
 		//Build the Conduct Exam Scene
 		  Scene examScene = new Scene(finalHorizontal, 1024, 768);
 
@@ -576,17 +601,10 @@ public class DoctorPortal extends NursePortal{
 	  private Scene viewPatientRecords(){
 		//Labels, Buttons, Text Boxes, Alignment, Action-Event Handling, Scene
 
-
-		//YOU WILL HAVE 2 DROPDOWN MENUS:
+		//2 DROPDOWN MENUS:
 		//		- Select Patient		(dropDown0)
 		//		- Select Visit to view	(dropDown1)
 
-		//Select Patient (dropDown0) will store all of the patient's names
-
-
-//Edit this code to conform with the doctor...
-///*
-		//This will have a dropwn down menu and only one button for exiting
 
         //Labels
         //============================================================================================
@@ -617,14 +635,9 @@ public class DoctorPortal extends NursePortal{
             //Set the font & size
               exitPage.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 			//Set the padding
-//			  exitPage.setPadding(new Insets(,0,0,0));
 			  exitPage.setAlignment(Pos.CENTER);
         //=========================================================================================================
 
-
-        //It works!!
-          //uniqueKeyInt = Integer.parseInt(uniqueKeyStr);
-         // System.out.println("Unique Key Integer: " + uniqueKeyInt);
 
 
         //DropDown #1 [Select Patient]
@@ -633,9 +646,9 @@ public class DoctorPortal extends NursePortal{
 			ComboBox<String> dropDown0 = new ComboBox<>();
               //Set the Dimensions of the drop down menu
               //[Width x Height]
-                dropDown0.setPrefSize(200, 35);
-                dropDown0.setMinSize(200, 35);
-                dropDown0.setMaxSize(200, 35);
+                dropDown0.setPrefSize(300, 35);
+                dropDown0.setMinSize(300, 35);
+                dropDown0.setMaxSize(300, 35);
               //Set the font of the text within
                 dropDown0.setStyle("-fx-font-size: 16px;");
 
@@ -707,18 +720,33 @@ public class DoctorPortal extends NursePortal{
             dropDown0.setOnAction(event -> { 
               //Get the Date String that is currently selected by the user
               //Then strip the String 
+			 // System.out.println("the culprit");
 
+			  //NEW!
+			  	//dropDown1.setValue("");
+				if(dropDown1.getValue() != null){
+					//Set the value to null?
+					
+					//dropDown1.setValue(null);
+
+					//return;
+				}
+
+
+
+
+			
+			  //Clear all of the old strings from the DropDown Menu
+				dropDown1.getItems().clear();
+			  //Deselect the selected items in the "Select Visit" DropDown menu
 			  //Set the HashMap to null (i.e. empty any previous input!)
 			  	summaryMap.clear();
 
 			  //Clear the old Summary from the text
 			  	visitSummaryTxt.clear();	//Kind of redundant 
 
-			  //Deselect the selected items in the "Select Visit" DropDown menu
-			  	dropDown1.setValue(null);
-			  //Clear all of the old strings from the DropDown Menu
-				dropDown1.getItems().clear();
-			
+
+
 			  //Get the Patient's FullName via their credentials (to be used later)
 				String fullName = dropDown0.getValue().substring(0, dropDown0.getValue().indexOf("/")-3).replaceAll(",", "");
 
@@ -750,9 +778,9 @@ public class DoctorPortal extends NursePortal{
 						return;
 					}
 
+
 				  //Read the File with a scanner (easier to get Line by Line)
 					Scanner fileReader = new Scanner(visitSummarysFile);
-
 
 
 				  //Flag that "puts on the brakes" of the fileReader so it will
@@ -824,7 +852,7 @@ public class DoctorPortal extends NursePortal{
 					fileReader.close();
 				}
 				catch(IOException e2){
-				//Error Print
+				  //Error Print
 					System.out.println("File Not Found!!");
 				}
 
@@ -842,16 +870,15 @@ public class DoctorPortal extends NursePortal{
 						examDates[i] = null;
 					//}
 				}
-
-			  //DEBUG
-			  //System.out.println("WE MADE IT HERE!!");
             });
 
 
 		  //Load the text upon the Selection of a Visit date by the Doctor
 		  	dropDown1.setOnAction(event -> {
-			  //This gets the unique integer Id that will load the summary via the hashMap
-                visitSummaryTxt.setText(summaryMap.get(Integer.parseInt(dropDown1.getValue().replaceAll("\\D", ""))));
+				if(!dropDown0.getValue().isEmpty()){
+				  //This gets the unique integer Id that will load the summary via the hashMap
+					visitSummaryTxt.setText(summaryMap.get(Integer.parseInt(dropDown1.getValue().replaceAll("\\D", ""))));
+				}
 			});
 
 
@@ -865,26 +892,14 @@ public class DoctorPortal extends NursePortal{
 
         //Alignment
         //=================================================================
-		  //NEW!!
+		  //Button Container
+		  	HBox buttonContainer = new HBox(exitPage);
+
 		  //Make a horzionatal space for all of the headers 
-
-		  //Make a horizontal space for the Drop Down 
-
-
-		  //Select Patient vertical alignment
-			VBox vertical0 = new VBox(header0, dropDown0);	
-
-		  //Select Visit
-		  	VBox vertical1 = new VBox(header1, dropDown1);
-
-          //Horizontally align the Dropdown select & Exit button
-            HBox functContainer = new HBox(50, vertical0, vertical1, exitPage);
-			//NEW!!
-			  //Set the padding
-				//functContainer.setPadding(new Insets(0,20,0,0));
-
-          //Vertically align the Header 0 Label and the button container box
-           // VBox vertical0 = new VBox(header0, functContainer);
+		  	HBox horizontal0 = new HBox(150, header0, header1, buttonContainer);
+				
+		  //Make a horizontal space for the Drop Downs & exit button
+			HBox horizontal1 = new HBox(50, dropDown0, dropDown1, exitPage);
 
 
           //VBox for the messageTxt (this way we can apply background color)
@@ -900,28 +915,20 @@ public class DoctorPortal extends NursePortal{
                 summaryBox.setMaxSize(825, 575);
 
           //Vertically alignment of header and text box
-            VBox vertical2 = new VBox(10, functContainer, header2, summaryBox);
-  
-          //Final Adjustment VBox
-          //  VBox vertical2 = new VBox(vertical0, vertical1);         
-              //Set the alignment of the VBox
-            //    vertical2.setAlignment(Pos.CENTER);
-
-          //Set the alignment of the final box to be concurrent with the center of the page
-            //vertical2.setAlignment(Pos.CENTER);
+            VBox vertical2 = new VBox(10, horizontal0, horizontal1, header2, summaryBox);
 
           //Horizontally align the VBox [Final box & adjustment]
-            HBox horizontal0 = new HBox(vertical2);
+            HBox horizontal2 = new HBox(vertical2);
               //Set the background color for the whole page
-                horizontal0.setStyle("-fx-background-color: #3A3A3A;");
+                horizontal2.setStyle("-fx-background-color: #3A3A3A;");
 
           //Set the adjustment
-            horizontal0.setAlignment(Pos.CENTER);        
+            horizontal2.setAlignment(Pos.CENTER);        
         //=================================================================
 
 
         //Setup Scene
-          Scene mainLayout = new Scene(horizontal0, 1024, 768);
+          Scene mainLayout = new Scene(horizontal2, 1024, 768);
 
         //Return Scene
           return mainLayout;
