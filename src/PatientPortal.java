@@ -21,20 +21,13 @@
 
 [Functionality]: 
 
-  [Change Patient Information]:
-    This functional feature of the Patient Portal is 
-
+  [Change Patient Information]
   
-  [View Previous Visits]:
+  [View Previous Visits]
 
-
-
-  [Messages]:
-
-
+  [Messages]
   
-  [Logout]:
-
+  [Logout]
   
 	
 [Aspect Ratio/Dimension of Graphical User Interface]: 

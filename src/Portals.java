@@ -19,11 +19,8 @@
 [Functionality]:
 
 	[Patient]
-		//Description here
-
 
 	[Staff]
-		//Description here
 
 
 [Aspect Ratio/Dimension of Graphical User Interface]: 

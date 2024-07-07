@@ -12,25 +12,19 @@
 
  	
 [Description]:
-	//Write description here...
-
+	This Class/Object extends the functionality of the NursePortal.
+	We extend since both Staff [Nurse & Doctor] have similar functions
+	
 
 [Functionality]:
 
-  [Patient Visit Form]:
-    //Text here...
-
+  [Patient Visit Form]
 
   [View Patient Records]
-	//Text here...
 
-
-  [Messages]:
-    //Text here...
+  [Messages]
   
-
-  [Logout]:
-    //This will load the welcomePage scene
+  [Logout]
   
 	
 [Aspect Ratio/Dimension of Graphical User Interface]: 
@@ -316,21 +310,17 @@ public class DoctorPortal extends NursePortal{
 			  	prescriptionScriptTxt.setStyle("-fx-font-size: 16px;");
 			
 
-
 		  //Current Patient's Pharmacy (Load the text from \t\t[Insurance Provider] from "PatientAccounts".txt)
 			TextArea currentProvTxt = new TextArea("<Load from .txt file>");
 			  //Set the dimension & style of the text area
 			  	currentProvTxt.setPrefSize(250, 35);
 			  	currentProvTxt.setMinSize(250, 35);
 			  	currentProvTxt.setMaxSize(250, 35);
-			  //Clear the Text Box upon the user clicking it for data entrance
-			  	currentProvTxt.setOnMouseClicked(event -> {
-				  //Clear the default text in the Text Box
-				  	currentProvTxt.clear();
-				});
 			  //Set the font size of the Text Box
 			  	currentProvTxt.setStyle("-fx-font-size: 16px;");
-
+			  //Make the text NOT editable
+			  	currentProvTxt.setEditable(false);
+			
 
 		  //Digital Signature
 		  	TextArea signatureTxt = new TextArea("<Write Signature Here>");
@@ -720,20 +710,15 @@ public class DoctorPortal extends NursePortal{
             dropDown0.setOnAction(event -> { 
               //Get the Date String that is currently selected by the user
               //Then strip the String 
-			 // System.out.println("the culprit");
-
-			  //NEW!
-			  	//dropDown1.setValue("");
-				if(dropDown1.getValue() != null){
+			 
+			  //Debug
+				//if(dropDown1.getValue() != null){
 					//Set the value to null?
 					
 					//dropDown1.setValue(null);
 
 					//return;
-				}
-
-
-
+				//}
 
 			
 			  //Clear all of the old strings from the DropDown Menu

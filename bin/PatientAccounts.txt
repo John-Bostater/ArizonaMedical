@@ -1,7 +1,12 @@
 Patient Accounts:
 
-aa,aa,11/11/1111
-	[Phone Number]: XXX-XXX-XXXX
-	[Insurance Provider]: <Insurance Provider>
-	[Pharmacy Provider]: <Pharmaceutical Provider>
+John,Doe,01/01/2001
+	[Phone Number]: 123-311-3111
+	[Insurance Provider]: OKA
+	[Pharmacy Provider]: AAA
+
+Jane,Doe,02/02/2002
+	[Phone Number]: 211-111-1121
+	[Insurance Provider]: aaaa
+	[Pharmacy Provider]: wdaw
 

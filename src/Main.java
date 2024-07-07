@@ -12,7 +12,8 @@
 
 
 [Description]:
-  //Text here describing the whole program
+  Driver File or Class/Object of the entire program "ArizonaMedical"
+  It makes use of the other object that contain the data and methods of their respective file names.
 
 
 [Library/JavaFX Info]:

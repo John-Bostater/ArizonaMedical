@@ -12,22 +12,17 @@
 
  	
 [Description]:
-  //Write description here...
+  This Object/Class contains all of the functionality for the Nurse
+  This includes creating new visit forms and sending messages.
 
 
 [Functionality]:
 
-  [New Visit Form]:
-    //Text here...
-  
+  [New Visit Form]
 
-  [Messages]:
-    //Text here...
-  
+  [Messages]
 
-  [Logout]:
-    //This will load the welcomePage scene
-  
+  [Logout]s
 	
 [Aspect Ratio/Dimension of Graphical User Interface]: 
 
@@ -825,7 +820,7 @@ public class NursePortal{
                         //Date Flag
                           if(dateCollect){
                             //Set the text in the date string                         
-                              dateTxt.setText(line.substring(line.indexOf(":")+1, line.length()-1));
+                              dateTxt.setText(line.substring(line.indexOf(":")+1, line.length()));
                             
                             //Break the date collection
                               dateCollect = false;
@@ -1225,7 +1220,7 @@ public class NursePortal{
               sendMessage.setMinSize(150, 40);
               sendMessage.setMaxSize(150, 40);
             //Set the Font size of the text
-              sendMessage.setStyle("-fx-font-size: 18px;");
+              sendMessage.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
 
         //Delete Message
@@ -1236,7 +1231,7 @@ public class NursePortal{
               deleteMessage.setMinSize(175, 40);
               deleteMessage.setMaxSize(175, 40);
             //Set the Font size of the text
-              deleteMessage.setStyle("-fx-font-size: 18px;");
+              deleteMessage.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
 
 
         //Exit
@@ -1246,7 +1241,7 @@ public class NursePortal{
               goBack.setMinSize(100, 40);
               goBack.setMaxSize(100, 40);
             //Set the Font size of the text
-              goBack.setStyle("-fx-font-size: 18px;");
+              goBack.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-font-family: 'Times New Roman';");
       //=======================================================================
 
 
