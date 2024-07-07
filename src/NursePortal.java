@@ -1276,7 +1276,9 @@ public class NursePortal{
             //Set text wrapping 
               inboxTxt.setWrapText(true);                
               //[Note]: ^^ any text that exceeeds the width will fall to a new line
-  
+            //Make the text uneditable
+              inboxTxt.setEditable(false);
+
 
         //Phone Number Text Box [Will be next to contactInfoLbl]
           TextArea phoneNumTxt = new TextArea("000-000-0000");

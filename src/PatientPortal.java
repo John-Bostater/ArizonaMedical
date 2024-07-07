@@ -1049,6 +1049,8 @@ public class PatientPortal{
                 //Set text wrapping 
                   inboxTxt.setWrapText(true);                
                   //[Note]: ^^ any text that exceeeds the width will fall to a new line
+                //Make the Text inacessible for editing
+                  inboxTxt.setEditable(false);
 
 
             //Set the text of the inbox to the messsages correlating to the patient

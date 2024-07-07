@@ -221,38 +221,22 @@ public class Portals {
 			try {
 				//List all of the required files for the system to run
 				  File patientAccounts = new File("PatientAccounts.txt");
-				  File visitSummary = new File("VisitSummary.txt");
-				  File messages = new File("Messages.txt");
-
-				//TO DO!!!!
-				//THere is an error with the if-branch below where if one of the files already exists
-				//It is still overwritten by the 'else-branch' we need to prevent this!!!
-				//OR!!!
-				//	It won't be an issue because you are using the run.bat which is automatically
-				//	Deleting the "PatientAccounts.txt" upon running of the batch script
-
+			
 				//Check to see if the file already exists and if it does not, create it
-				if(patientAccounts.exists() && visitSummary.exists()) {
-					//File Already exists, do nothing
-					System.out.println("Both File Exists!");
+				if(patientAccounts.exists()) {
+				  //File Already exists, do nothing
+					//System.out.println("File Exists!");
 				}
 				//Files do not exist
 				else {
 				  //Create the files if they do not exist
 				  	FileWriter fileWriter0 = new FileWriter("PatientAccounts.txt");
-					FileWriter fileWriter1 =  new FileWriter("VisitSummary.txt");
-					//FileWriter fileWriter2 = new FileWriter("Messages.txt");
-
+				
 				  //Write the Leading text(s) to the respective files
 				  	fileWriter0.write("Patient Accounts:\n\n");
-					fileWriter1.write("");
-					//fileWriter2.write("");
-
-
+			
 				  //Close the fileWriter(s)
 				  	fileWriter0.close();
-					fileWriter1.close();
-					//fileWriter2.close();
 				}
 			}
 			//Catch any File I/O errors
@@ -396,8 +380,8 @@ public class Portals {
 	  //Create Account	[Patient]		//UPDATED: og had just "patientCredentials" {1 parameter}
 		private void createAccount(String patientCredentials, String phoneNum, String insuranceProv, String pharmacyProv) {
 		  //Append the patients Credentials to the "PatientAccounts.txt"
-		
-				
+
+
 		  //try catch in case of file I/O errors
 			try {
 			  //Load [PatientAccounts.txt] for writing		
@@ -875,11 +859,6 @@ public class Portals {
 
 			//Confirm the Account data entered to be written to the PatientAccounts.txt
 			confirmAccount.setOnAction(e -> {
-				//Check that the data eneterded is valid
-
-
-
-
 			  //Compile the credentials entered by the Patient/User
 			  //Compile into one string to be passed into PatientPortal Constructor 
 				String patientCredentials =   firstNameTxt.getText().replaceAll("\\s", "") + "," 
@@ -899,9 +878,6 @@ public class Portals {
 
 			  //Flag to make sure the user has correctly entered their data to the field
 			    boolean validEntry = true;
-
-			  //DEBUG!!
-			  //	System.out.println("Here??");
 
 
 			  //Check that all textFields have an entry & their minimum text length is met 
@@ -931,8 +907,9 @@ public class Portals {
 					    isNotified = true;
 					}
  			    }
-			  //[Note for later]: If you want to make this more verbose you can write it out so the user
-			  //			is notified which of the text fields/box(s) needs to be adjusted or filled out
+			  //[Note for later]: 
+			  //	If you want to make this more verbose you can write it out so the user
+			  //	is notified which of the text fields/box(s) needs to be adjusted or filled out
 
 
 			  //Create a New Account!
@@ -940,7 +917,7 @@ public class Portals {
 				  //Create the New account 
 					createAccount(patientCredentials, phoneNumber, insuranceProvider, pharmacyProvider);
 
-				  //Remove all of the buttosn again to add[Notifcation Txt] [Login] [Go Back]
+				  //Remove all of the buttons again to add: [Notifcation Txt] [Login] [Go Back]
 					buttonContainer.getChildren().clear();
 
 

@@ -1,0 +1,7 @@
+Patient Accounts:
+
+aa,aa,11/11/1111
+	[Phone Number]: XXX-XXX-XXXX
+	[Insurance Provider]: <Insurance Provider>
+	[Pharmacy Provider]: <Pharmaceutical Provider>
+
